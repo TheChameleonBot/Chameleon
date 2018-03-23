@@ -1,0 +1,18 @@
+{
+  "standard": [
+    "Food",
+    "Cities"
+  ],
+  "Food": [
+    "Hamburger",
+    "Banana",
+    "Apple",
+    "Poop"
+  ],
+  "Cities": [
+    "Hamburg",
+    "Berlin",
+    "New York",
+    "Karlsruhe"
+  ]
+}
