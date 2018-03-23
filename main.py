@@ -13,7 +13,7 @@ topics = {
 }
 
 # This function chooses random topic and returns object of Result class. Class has 2 attributes: topic and words
-
+#added comment in 16th line
 
 def get():
 
