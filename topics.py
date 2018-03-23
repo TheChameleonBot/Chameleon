@@ -1,31 +1,16 @@
-"""
-This file contains collection of topics
-Don't look for something important, just topics ;)
-"""
-
+import json
 import random
-# Here we have a dict holding a whole collection of topics, we'll expand it
-
-topics = {
-    'cities': ['New York', 'Berlin', 'Tashkent', 'Mexiko', 'Pekin', 'Tunis'],
-    'fruits': ['Apple', 'Banana', 'Orange', 'Mango'],
-    'colors': ['White', 'Black', 'Blue', 'Red', 'Green', 'Yellow', 'Pink']
-}
-
-# This function chooses random topic and returns object of Result class. Class has 2 attributes: topic and words
-
 
 def get():
-
-    global topics
-
     class Result:
-        def __init__(self, topic, words):
+        def __init__(self, topic, words, secret_word):
             self.topic = topic
             self.words = words
-
-    random_topic = random.choice(list(topics.keys()))
-    word_list = topics[random_topic]
-
-    result = Result(random_topic, word_list)
+            self.secret_word = secret_word
+    data_file = open('./list.json')
+    data = json.load(data_file)
+    random_topic = random.choice(data["standard"])
+    word_list = data[random_topic]
+    word_secret = random.choice(data[random_topic])
+    result = Result(random_topic, word_list, word_secret)
     return result
