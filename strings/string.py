@@ -16,11 +16,10 @@ class String:
         return self.languages["en"][string]
 
     def reload_strings(self):
-        for filename in os.listdir(r"C:\Users\user\PycharmProjects\chameleon\strings"):
+        for filename in os.listdir(r"./strings"):
             if filename.endswith(".yaml"):
                 language_name = filename[:-5]
-                self.languages[language_name] = yaml.safe_load(open(r"C:\Users\user\PycharmProjects\chameleon\strings\\"
-                                                                    + filename))
+                self.languages[language_name] = yaml.safe_load(open(r"./strings/" + filename))
 
     def get_languages(self):
         to_return = {}
