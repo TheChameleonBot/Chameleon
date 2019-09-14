@@ -1,0 +1,3 @@
+TIME = 30
+MAX_PLAYERS = 8
+BOT_TOKEN = ""
