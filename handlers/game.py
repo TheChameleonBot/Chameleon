@@ -226,7 +226,7 @@ def who_wins(context, chat_id, unmasked_id):
             if player["user_id"] == unmasked_id:
                 vote_mention = mention_html(unmasked_id, player["first_name"])
                 break
-        text = text.format(vote_mention, chameleon_mention)
+        text = text.format(vote_mention, chameleon_mention, chat_data["secret"])
         game_end(context, text, chat_id, chameleon_id, [chameleon_id], lang)
 
 
@@ -246,7 +246,7 @@ def guess(update: Update, context: CallbackContext):
         game_end(context, text, update.effective_chat.id, chameleon_id, [chameleon_id], lang)
     else:
         if chat_data["guesses"] == 1:
-            text = get_string(lang, "chameleon_guess_wrong").format(chameleon_mention)
+            text = get_string(lang, "chameleon_guess_wrong").format(chameleon_mention, chat_data["secret"])
             players = []
             for player in chat_data["players"]:
                 players.append(player["user_id"])
