@@ -60,7 +60,7 @@ draw: "{0}, a draw happened. Since you had a disadvantage as you had to say the 
 not_starter: "You did not say the first word, did you really think that would work? :("
 # if the chameleon wasn't found
 # {0} mention of the player unmasks, {1} mention of the chameleon, {2} secret word
-chameleon_not_found: "{0} was unmasked and they are <b>not</b> the Chameleon, {1} is! The Chameleon wins the game! The secret word was {2}."
+chameleon_not_found: "{0} was unmasked and they are <b>not</b> the Chameleon, {1} is! The Chameleon wins the game! The secret word was <b>{2}</b>."
 # if the chameleon was found
 # {0} mention of the chameleon
 chameleon_found: "{0} was unmasked and they are the Chameleon! You can try to guess the secret word now"
@@ -75,7 +75,7 @@ chameleon_found_more: "{0} was unmasked and they are the Chameleon! Since there 
 chameleon_guess_wrong_fewer: "Sorry {0}, this was wrong guess. Try again ;)"
 # if the chameleon guesses wrong
 # {0} mention of the chameleon, {1} secret word
-chameleon_guess_wrong: "Sorry {0}, this was the wrong guess, {1} would have been it. The Chameleon loses, the players win!"
+chameleon_guess_wrong: "Sorry {0}, this was the wrong guess, <b>{1}</b> would have been it. The Chameleon loses, the players win!"
 # if the chameleon guesses correctly
 # {0} mention of the chameleon
 chameleon_guess_right: "Good job {0}, this was the right guess! The Chameleon wins, the players lose!"
