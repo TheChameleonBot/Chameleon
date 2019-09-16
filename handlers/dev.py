@@ -6,6 +6,7 @@ from threading import Timer
 from constants import TRANSLATION_CHANNEL_ID
 from database import database
 from strings import get_string, new_strings
+from utils.helpers import is_admin
 
 
 def shutdown(update: Update, context: CallbackContext, updater: Updater):
@@ -33,7 +34,16 @@ def real_shutdown(args):
 
 
 def yaml_file(update: Update, context: CallbackContext):
-    file = update.message.document
+    if not is_admin(context.bot, update.effective_user, update.effective_chat):
+        update.effective_message.reply_text("Sorry, admins only ;P")
+        return
+    if not update.effective_message.reply_to_message:
+        update.effective_message.reply_text("You need to reply to a file... idiot")
+        return
+    file = update.effective_message.reply_to_message.document
+    if file.mime_type != "application/x-yaml":
+        update.effective_message.reply_text("You need to reply to a .yaml file... idiot")
+        return
     file_name = file.file_name
     file.get_file().download("./strings/" + file_name)
     returned = new_strings(file_name)

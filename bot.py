@@ -3,7 +3,7 @@ import functools
 import logging
 
 from config import BOT_TOKEN
-from constants import TRANSLATION_CHAT_ID
+from constants import TRANSLATION_CHAT_ID, ADMINS
 from handlers import group, game, dev, group_settings
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -49,8 +49,8 @@ def main():
     dp.add_handler(CommandHandler("id", dev.reply_id))
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),
                                   Filters.user(208589966)))
-    dp.add_handler(CommandHandler("/translation", dev.yaml_file, Filters.chat(TRANSLATION_CHAT_ID)))
-    dp.add_handler(MessageHandler(Filters.document.mime_type("text/plain") & Filters.user(admins), dev.json_file))
+    dp.add_handler(CommandHandler("translation", dev.yaml_file, Filters.chat(TRANSLATION_CHAT_ID)))
+    dp.add_handler(MessageHandler(Filters.document.mime_type("text/plain") & Filters.user(ADMINS), dev.json_file))
     # start bot
     updater.start_polling()
     updater.idle()
