@@ -2,7 +2,8 @@ from telegram.ext import (Updater, CommandHandler, CallbackQueryHandler, Filters
 import functools
 import logging
 
-from constants import BOT_TOKEN
+from config import BOT_TOKEN
+from constants import TRANSLATION_CHAT_ID
 from handlers import group, game, dev, group_settings
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -45,11 +46,10 @@ def main():
     # group hardcore
     dp.add_handler(CallbackQueryHandler(group_settings.hardcore_game, pattern=r"(?=.*groupsetting)(?=.*hardcore)"))
     # dev tools
-    admins = [208589966]
+    dp.add_handler(CommandHandler("id", dev.reply_id))
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),
                                   Filters.user(208589966)))
-    dp.add_handler(MessageHandler(Filters.document.mime_type("application/x-yaml") & Filters.user(admins),
-                                  dev.yaml_file))
+    dp.add_handler(CommandHandler("/translation", dev.yaml_file, Filters.chat(TRANSLATION_CHAT_ID)))
     dp.add_handler(MessageHandler(Filters.document.mime_type("text/plain") & Filters.user(admins), dev.json_file))
     # start bot
     updater.start_polling()

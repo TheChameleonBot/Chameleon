@@ -2,8 +2,10 @@ from telegram import Update, ParseMode
 from telegram.ext import CallbackContext, Updater
 from telegram.utils.helpers import mention_html
 from threading import Timer
+
+from constants import TRANSLATION_CHANNEL_ID
 from database import database
-from strings import get_string, reload_strings
+from strings import get_string, new_strings
 
 
 def shutdown(update: Update, context: CallbackContext, updater: Updater):
@@ -30,11 +32,36 @@ def real_shutdown(args):
     updater.stop()
 
 
-def yaml_file(update: Update, _):
+def yaml_file(update: Update, context: CallbackContext):
     file = update.message.document
-    file.get_file().download("./strings/" + file.file_name)
-    reload_strings()
-    update.effective_message.reply_text("Done")
+    file_name = file.file_name
+    file.get_file().download("./strings/" + file_name)
+    returned = new_strings(file_name)
+    if "error" in returned:
+        update.effective_message.reply_text(f"An error happened with this file: {returned['error']}")
+    elif file_name[:-5] == "en":
+        text = "Hello translators. The english file received an update.\n"
+        if returned["new_strings"]:
+            new = "<code>{}</code>\n".format('\n'.join(returned['new_strings']))
+            text += f"Those are the new strings:\n{new}"
+        if returned["new_arguments"]:
+            new = "<code>{}</code>\n".format('\n'.join(returned['new_arguments']))
+            text += f"Those are the strings which got new arguments (those weird brackets with numbers in them):\n{new}"
+        if text != "Hello translators. The english file received an update.\n":
+            text += "\nThe bot will fallback to the english original in those cases until you update your file"
+            context.bot.send_message(TRANSLATION_CHANNEL_ID, text, parse_mode=ParseMode.HTML)
+            update.effective_message.forward(TRANSLATION_CHANNEL_ID, disable_notification=True)
+    else:
+        text = "Hey there, thanks for submitting your file\n"
+        if returned["missing_strings"]:
+            missing = "<code>{}</code>".format('\n'.join(returned['missing_strings']))
+            text += f"Those are the strings which are missing:\n{missing}"
+        if returned["missing_arguments"]:
+            missing = "<code>{}</code>".format('\n'.join(returned['missing_arguments']))
+            text += f"Those are the strings which are missing arguments (those weird brackets):\n{missing}"
+        if text == "Hey there, thanks for submitting your file\n":
+            text += "No errors in your file, good job!"
+        update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
 
 def json_file(update: Update, _):
@@ -76,3 +103,7 @@ def error_handler(update: Update, context: CallbackContext):
            f"<code>{chat.type}</code>. The current user data is <code>{context.user_data}<c/ode>, the chat data " \
            f"<code>{context.chat_data}</code>."
     context.bot.send_message(-1001179994444, text, parse_mode=ParseMode.HTML)
+
+
+def reply_id(update, _):
+    update.effective_message.reply_text(f"{update.effective_chat.id}")
