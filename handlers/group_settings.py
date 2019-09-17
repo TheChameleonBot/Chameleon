@@ -76,6 +76,13 @@ def start(update: Update, context: CallbackContext):
                              reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
 
 
+def reload_admins(update: Update, context: CallbackContext):
+    chat_id = update.effective_chat.id
+    helpers.get_admin_ids(context.bot, chat_id, True)
+    lang = database.get_language_chat(chat_id)
+    update.effective_message.reply_html(get_string(lang, "reload_admins"))
+
+
 @admins_only
 def change_language(update: Update, context: CallbackContext):
     query = update.callback_query

@@ -27,14 +27,16 @@ class MWT(object):
 
         def func(*args, **kwargs):
             kw = sorted(kwargs.items())
-            key = (args, tuple(kw))
+            tempkey = (args, tuple(kw))
+            key = tempkey[0][1]
             try:
                 v = self.cache[key]
-                # print("cache")
                 if (time.time() - v[1]) > self.timeout:
                     raise KeyError
+                # self implemented reload
+                if tempkey[0][2]:
+                    raise KeyError
             except KeyError:
-                # print("new")
                 v = self.cache[key] = f(*args, **kwargs), time.time()
             return v[0]
         func.func_name = f.__name__

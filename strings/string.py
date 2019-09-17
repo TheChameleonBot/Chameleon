@@ -62,7 +62,7 @@ class String:
                 else:
                     translated_argument = [tup[1] for tup in Formatter().parse(translated_string) if tup[1] is not None]
                     original_argument = [tup[1] for tup in Formatter().parse(original_string) if tup[1] is not None]
-                    if translated_argument !=- original_argument:
+                    if translated_argument != original_argument:
                         missing_arguments.append(string)
                         new_language.pop(string, None)
             except KeyError:

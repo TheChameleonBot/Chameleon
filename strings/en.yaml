@@ -100,7 +100,9 @@ run_shutdown: "The 5 minutes are over, I am sorry that you all lost your progres
 # when a shutdown is initiated and players want to start a new game
 group_start_shutdown: "I'm sorry for the inconvenience, but I need to shutdown. Please head over to @TheChameleon for more information."
 # when a non admin tries to change group settings
-no_admin_settings: "You need to be an admin to change group settings"
+no_admin_settings: "You need to be an admin to change group settings. If you are an admin and get this message, run /admins_reload."
+# when a cache reload is issued
+reload_admins: "The admin list has been reloaded!"
 # when an admin has not PMed the bot yet
 no_pm_settings: "You need to start me in private in order to change the group settings. Just press the button below"
 # the button mentioned above

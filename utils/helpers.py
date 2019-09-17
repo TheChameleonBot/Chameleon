@@ -10,13 +10,15 @@ def build_menu(buttons, n_cols, header_buttons=None, footer_buttons=None):
     return menu
 
 
-def is_admin(bot, user_id, chat):
-    if user_id not in get_admin_ids(bot, chat.id):
+def is_admin(bot, user_id, chat, reload=False):
+    if chat.type == "group":
+        return True
+    if user_id not in get_admin_ids(bot, chat.id, reload):
         return False
     return True
 
 
 @MWT(timeout=60*60)
-def get_admin_ids(bot, chat_id):
+def get_admin_ids(bot, chat_id, reload):
     """Returns a list of admin IDs for a given chat. Results are cached for 1 hour."""
     return [admin.user.id for admin in bot.get_chat_administrators(chat_id)]
