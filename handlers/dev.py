@@ -34,7 +34,7 @@ def real_shutdown(args):
 
 
 def yaml_file(update: Update, context: CallbackContext):
-    if not is_admin(context.bot, update.effective_user, update.effective_chat):
+    if not is_admin(context.bot, update.effective_user.id, update.effective_chat):
         update.effective_message.reply_text("Sorry, admins only ;P")
         return
     if not update.effective_message.reply_to_message:
@@ -61,8 +61,7 @@ def yaml_file(update: Update, context: CallbackContext):
             text += "\nThe bot will fallback to the english original in those cases until you update your file"
         else:
             text += "Nothing special happened :)"
-        context.bot.send_message(TRANSLATION_CHANNEL_ID, text, parse_mode=ParseMode.HTML)
-        update.effective_message.forward(TRANSLATION_CHANNEL_ID, disable_notification=True)
+        context.bot.send_document(TRANSLATION_CHANNEL_ID, file.file_id, caption=text, parse_mode=ParseMode.HTML)
     else:
         text = "Hey there, thanks for submitting your file\n"
         if returned["missing_strings"]:
