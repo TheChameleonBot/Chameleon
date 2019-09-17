@@ -240,6 +240,8 @@ def guess(update: Update, context: CallbackContext):
         return
     lang = chat_data["lang"]
     word = update.effective_message.text
+    if word.startswith("!"):
+        return
     chameleon_mention = mention_html(chameleon_id, chat_data["chameleon"]["first_name"])
     if word.lower() == chat_data["secret"].lower():
         text = get_string(lang, "chameleon_guess_right").format(chameleon_mention)

@@ -63,7 +63,7 @@ not_starter: "You did not say the first word, did you really think that would wo
 chameleon_not_found: "{0} was unmasked and they are <b>not</b> the Chameleon, {1} is! The Chameleon wins the game! The secret word was <b>{2}</b>."
 # if the chameleon was found
 # {0} mention of the chameleon
-chameleon_found: "{0} was unmasked and they are the Chameleon! You can try to guess the secret word now"
+chameleon_found: "{0} was unmasked and they are the Chameleon! You can try to guess the secret word now, finish your current conversation with adding ! to the beginning of your message, I won't count this as a guess then."
 # if the chameleon was found and only three players are there (and this is activated in the setting)
 # {0} mention of the chameleon
 chameleon_found_fewer: "{0} was unmasked and they are the Chameleon! Since there are ony three players right now, you get two guesses (group admins can turn that off in the settings)."

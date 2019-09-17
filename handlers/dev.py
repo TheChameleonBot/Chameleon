@@ -59,8 +59,10 @@ def yaml_file(update: Update, context: CallbackContext):
             text += f"Those are the strings which got new arguments (those weird brackets with numbers in them):\n{new}"
         if text != "Hello translators. The english file received an update.\n":
             text += "\nThe bot will fallback to the english original in those cases until you update your file"
-            context.bot.send_message(TRANSLATION_CHANNEL_ID, text, parse_mode=ParseMode.HTML)
-            update.effective_message.forward(TRANSLATION_CHANNEL_ID, disable_notification=True)
+        else:
+            text += "Nothing special happened :)"
+        context.bot.send_message(TRANSLATION_CHANNEL_ID, text, parse_mode=ParseMode.HTML)
+        update.effective_message.forward(TRANSLATION_CHANNEL_ID, disable_notification=True)
     else:
         text = "Hey there, thanks for submitting your file\n"
         if returned["missing_strings"]:
