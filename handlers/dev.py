@@ -112,7 +112,7 @@ def error_handler(update: Update, context: CallbackContext):
     text = f"Oh no. The error <code>{context.error}</code> happened{payload}. The type of the chat is " \
            f"<code>{chat.type}</code>. The current user data is <code>{context.user_data}<c/ode>, the chat data " \
            f"<code>{context.chat_data}</code>."
-    context.bot.send_message(-1001179994444, text, parse_mode=ParseMode.HTML)
+    context.bot.send_message(208589966, text, parse_mode=ParseMode.HTML)
 
 
 def reply_id(update, _):
