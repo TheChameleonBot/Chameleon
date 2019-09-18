@@ -61,7 +61,7 @@ def yaml_file(update: Update, context: CallbackContext):
         if returned["changed_strings"]:
             new = "<code>{}</code>\n".format('\n'.join(returned['changed_strings']))
             text += f"\nThose are strings which changed significantly from the old ones:\n{new}"
-        if text != "Hello translators. The english file received an update.\n":
+        if text != "Hello translators. The english file received an update.":
             text += "\nThe bot will fallback to the english original in those cases until you update your file"
         else:
             text += "Nothing special happened :)"
@@ -74,7 +74,7 @@ def yaml_file(update: Update, context: CallbackContext):
         if returned["missing_arguments"]:
             missing = "<code>{}</code>".format('\n'.join(returned['missing_arguments']))
             text += f"\nThose are the strings which are missing arguments (those weird brackets):\n{missing}"
-        if text == "Hey there, thanks for submitting your file\n":
+        if text == "Hey there, thanks for submitting your file":
             text += "No errors in your file, good job!"
         update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -115,7 +115,7 @@ def error_handler(update: Update, context: CallbackContext):
     if update.poll:
         payload += f' with the poll id {update.poll.id}.'
     text = f"Oh no. The error <code>{context.error}</code> happened{payload}. The type of the chat is " \
-           f"<code>{chat.type}</code>. The current user data is <code>{context.user_data}<c/ode>, the chat data " \
+           f"<code>{chat.type}</code>. The current user data is <code>{context.user_data}</code>, the chat data " \
            f"<code>{context.chat_data}</code>."
     context.bot.send_message(208589966, text, parse_mode=ParseMode.HTML)
 

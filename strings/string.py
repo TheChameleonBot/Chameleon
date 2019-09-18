@@ -38,7 +38,7 @@ class String:
                     if old_string != new_string:
                         changed_strings.append(string)
                         pop_string = True
-                    elif not isinstance(new_string, str):
+                    elif isinstance(new_string, str):
                         old_argument = [tup[1] for tup in Formatter().parse(old_string) if tup[1] is not None]
                         new_argument = [tup[1] for tup in Formatter().parse(new_string) if tup[1] is not None]
                         if new_argument != old_argument:

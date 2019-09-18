@@ -120,6 +120,7 @@ group_setting_text: "Hey, you want to change the settings of how I work in your 
 <b>Restricting</b>: Once activated, I will restrict everyone from writing except the person whose turn it is during the word saying phase. Everyone can write again after this phase is over. In order for this to work, I will promote those users to admins with add member rights, since admins aren't restricted. The original chat permissions are restored after the phase. In order to activate this setting, you need to make me an admin with add new admins and add members privileges."
 # the buttons for group settings. Only translate the strings!
 group_setting_buttons:
+  refresh: "Refresh"
   language: "Language"
   deck: "Deck"
   fewer: "Fewer"
@@ -129,6 +130,8 @@ group_setting_buttons:
   hardcore_game: "Restricting"
 # the back button, used in settings to get back to the previous menu
 settings_back_button: "Back"
+# shown to the user when he presses refresh in the settings
+group_setting_refresh: "The settings have been refreshed!"
 # change language of a group
 # {0} is the current language, {1} is the invitation link to the translation group
 group_setting_languages: "The current language of your group is <b>{0}</b>. Select the one you want it to change to or hit back.\n\nIn case you want to translate a language or report a typo, join us here: {1}"
