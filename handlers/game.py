@@ -64,7 +64,9 @@ def message(update: Update, context: CallbackContext):
         text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").format(
             vote_text(chat_data["players"]))
         buttons = vote_buttons(chat_data["players"], chat_data["game_id"])
-        update.effective_message.reply_html(text, reply_markup=InlineKeyboardMarkup(buttons), quote=False)
+        v_message = update.effective_message.reply_html(text, reply_markup=InlineKeyboardMarkup(buttons), quote=False)
+        if chat_data["pin"]:
+            context.bot.pin_chat_message(chat_id, v_message.message_id, True)
 
 
 def secret_word(update: Update, context: CallbackContext):
