@@ -46,10 +46,11 @@ class String:
                             pop_string = True
                     if pop_string:
                         for language in self.languages:
-                            self.languages[language].pop(string, None)
-                            with open(r"./strings/" + language + ".yaml", 'w') as outfile:
-                                yaml.dump(self.languages[language], outfile, default_flow_style=False,
-                                          sort_keys=False)
+                            if not language == "en":
+                                self.languages[language].pop(string, None)
+                                with open(r"./strings/" + language + ".yaml", 'w') as outfile:
+                                    yaml.dump(self.languages[language], outfile, default_flow_style=False,
+                                              sort_keys=False)
                 except KeyError:
                     new_strings.append(string)
             self.reload_strings()
