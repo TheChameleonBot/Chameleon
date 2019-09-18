@@ -61,10 +61,10 @@ class String:
             try:
                 translated_string = new_language[string]
                 original_string = self.languages["en"][string]
-                if not isinstance(original_string, str):
-                    if original_string != translated_string:
+                if isinstance(original_string, dict):
+                    if set(original_string) != set(translated_string):
                         missing_strings.append(string)
-                else:
+                elif isinstance(original_string, str):
                     translated_argument = [tup[1] for tup in Formatter().parse(translated_string) if tup[1] is not None]
                     original_argument = [tup[1] for tup in Formatter().parse(original_string) if tup[1] is not None]
                     if translated_argument != original_argument:
