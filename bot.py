@@ -7,7 +7,7 @@ from constants import TRANSLATION_CHAT_ID
 from handlers import group, game, dev, group_settings
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+                    level=logging.INFO, filename="log.log")
 
 
 def main():

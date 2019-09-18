@@ -41,35 +41,36 @@ def yaml_file(update: Update, context: CallbackContext):
         update.effective_message.reply_text("You need to reply to a file... idiot")
         return
     file = update.effective_message.reply_to_message.document
-    if file.mime_type != "application/x-yaml":
+    file_name = file.file_name
+    if not file_name.endswith(".yaml"):
         update.effective_message.reply_text("You need to reply to a .yaml file... idiot")
         return
-    file_name = file.file_name
     file.get_file().download("./strings/" + file_name)
     returned = new_strings(file_name)
     if "error" in returned:
         update.effective_message.reply_text(f"An error happened with this file: {returned['error']}")
     elif file_name[:-5] == "en":
-        text = "Hello translators. The english file received an update.\n"
+        text = "Hello translators. The english file received an update."
         if returned["new_strings"]:
             new = "<code>{}</code>\n".format('\n'.join(returned['new_strings']))
-            text += f"Those are the new strings:\n{new}"
+            text += f"\nThose are the new strings:\n{new}"
         if returned["new_arguments"]:
             new = "<code>{}</code>\n".format('\n'.join(returned['new_arguments']))
-            text += f"Those are the strings which got new arguments (those weird brackets with numbers in them):\n{new}"
+            text += f"\nThose are the strings which got new arguments (those weird brackets with numbers in them):" \
+                    f"\n{new}"
         if text != "Hello translators. The english file received an update.\n":
             text += "\nThe bot will fallback to the english original in those cases until you update your file"
         else:
             text += "Nothing special happened :)"
         context.bot.send_document(TRANSLATION_CHANNEL_ID, file.file_id, caption=text, parse_mode=ParseMode.HTML)
     else:
-        text = "Hey there, thanks for submitting your file\n"
+        text = "Hey there, thanks for submitting your file"
         if returned["missing_strings"]:
             missing = "<code>{}</code>".format('\n'.join(returned['missing_strings']))
-            text += f"Those are the strings which are missing:\n{missing}"
+            text += f"\nThose are the strings which are missing:\n{missing}"
         if returned["missing_arguments"]:
             missing = "<code>{}</code>".format('\n'.join(returned['missing_arguments']))
-            text += f"Those are the strings which are missing arguments (those weird brackets):\n{missing}"
+            text += f"\nThose are the strings which are missing arguments (those weird brackets):\n{missing}"
         if text == "Hey there, thanks for submitting your file\n":
             text += "No errors in your file, good job!"
         update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
