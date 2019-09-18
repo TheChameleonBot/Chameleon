@@ -111,6 +111,7 @@ no_pm_settings_button: "Start"
 admin_blocked_bot: "I can't send you a private message, since you blocked me. Please unblock me and try again."
 # the setting message admins of groups greet greeted with in PM
 group_setting_text: "Hey, you want to change the settings of how I work in your group, great. Let me explain the settings:\n\n
+<b>Refresh</b>: Refresh these settings. Use it in case you think another admin changed them.
 <b>Language</b>: Change the language of me in your group. If you want to learn more about how you can add your own language, go to @TheChameleonSupport\n\n
 <b>Deck</b>: The deck of cards I use in your group. You can add your own, head over to @TheChameleonSupport to learn how.\n\n
 <b>Fewer</b>: If only three players are playing (and this is activated), the chameleon, if caught, gets two guesses.\n\n
