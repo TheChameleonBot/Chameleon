@@ -58,6 +58,9 @@ def yaml_file(update: Update, context: CallbackContext):
             new = "<code>{}</code>\n".format('\n'.join(returned['new_arguments']))
             text += f"\nThose are the strings which got new arguments (those weird brackets with numbers in them):" \
                     f"\n{new}"
+        if returned["changed_strings"]:
+            new = "<code>{}</code>\n".format('\n'.join(returned['changed_strings']))
+            text += f"\nThose are strings which changed significantly from the old ones:\n{new}"
         if text != "Hello translators. The english file received an update.\n":
             text += "\nThe bot will fallback to the english original in those cases until you update your file"
         else:

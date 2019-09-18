@@ -29,27 +29,31 @@ class String:
         if filename[:-5] == "en":
             new_strings = []
             new_arguments = []
+            changed_strings = []
             for string in new_language:
                 try:
                     old_string = self.languages["en"][string]
                     new_string = new_language[string]
-                    if not isinstance(new_string, str):
-                        if old_string != new_string:
-                            new_strings.append(string)
-                    else:
+                    pop_string = False
+                    if old_string != new_string:
+                        changed_strings.append(string)
+                        pop_string = True
+                    elif not isinstance(new_string, str):
                         old_argument = [tup[1] for tup in Formatter().parse(old_string) if tup[1] is not None]
                         new_argument = [tup[1] for tup in Formatter().parse(new_string) if tup[1] is not None]
                         if new_argument != old_argument:
                             new_arguments.append(string)
-                            for language in self.languages:
-                                self.languages[language].pop(string, None)
-                                with open(r"./strings/" + language + ".yaml", 'w') as outfile:
-                                    yaml.dump(self.languages[language], outfile, default_flow_style=False,
-                                              sort_keys=False)
+                            pop_string = True
+                    if pop_string:
+                        for language in self.languages:
+                            self.languages[language].pop(string, None)
+                            with open(r"./strings/" + language + ".yaml", 'w') as outfile:
+                                yaml.dump(self.languages[language], outfile, default_flow_style=False,
+                                          sort_keys=False)
                 except KeyError:
                     new_strings.append(string)
             self.reload_strings()
-            return {"new_strings": new_strings, "new_arguments": new_arguments}
+            return {"new_strings": new_strings, "new_arguments": new_arguments, "changed_strings": changed_strings}
         missing_strings = []
         missing_arguments = []
         for string in self.languages["en"]:
