@@ -64,6 +64,7 @@ class String:
                 if isinstance(original_string, dict):
                     if set(original_string) != set(translated_string):
                         missing_strings.append(string)
+                        new_language.pop(string, None)
                 elif isinstance(original_string, str):
                     translated_argument = [tup[1] for tup in Formatter().parse(translated_string) if tup[1] is not None]
                     original_argument = [tup[1] for tup in Formatter().parse(original_string) if tup[1] is not None]
