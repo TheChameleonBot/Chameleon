@@ -27,15 +27,27 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
     user_id = update.effective_user.id
     button = [[InlineKeyboardButton(get_string(lang, "start_button"), callback_data="join")]]
     mention = mention_html(user_id, first_name)
-    message = update.message.reply_html(get_string(lang, "start_game").format(mention, mention),
+    group_settings = database.get_all_settings(chat_id)
+    wanted_settings = []
+    for setting in group_settings:
+        if setting == "lang":
+            continue
+        if setting == "deck":
+            wanted_settings.append(group_settings[setting])
+        elif group_settings[setting]:
+            wanted_settings.append(get_string(lang, "activated"))
+        else:
+            wanted_settings.append(get_string(lang, "deactivated"))
+    text = get_string(lang, "start_game").format(mention, mention, *wanted_settings)
+    message = update.message.reply_html(text,
                                         reply_markup=InlineKeyboardMarkup(button))
     payload = {"bot": context.bot, "dp": dp, "players": [{"user_id": user_id, "first_name": first_name}],
                "message": message.message_id, "lang": lang, "chat_id": chat_id, "known_players": [],
-               "starter": {"user_id": user_id, "first_name": first_name}}
+               "starter": {"user_id": user_id, "first_name": first_name}, "group_settings": group_settings}
     context.job_queue.run_repeating(timer, TIME, context=payload, name=chat_id)
     payload = {"starter": {"user_id": user_id, "first_name": first_name},
                "players": [{"user_id": user_id, "first_name": first_name}], "lang": lang, "message": message.message_id,
-               "left_players": {}}
+               "left_players": {}, "settings": wanted_settings}
     chat_data.update(payload)
 
 
@@ -70,9 +82,9 @@ def player_join(update: Update, context: CallbackContext):
     job = context.job_queue.get_jobs_by_name(chat_id)[0]
     job.context["players"] = chat_data["players"]
     job.context["left_players"] = chat_data["left_players"]
+    text = get_string(chat_data["lang"], "start_game").format(starter, players, *chat_data["settings"])
     if len(chat_data["players"]) == MAX_PLAYERS:
-        query.edit_message_text(get_string(chat_data["lang"], "start_game").format(starter, players),
-                                parse_mode=ParseMode.HTML)
+        query.edit_message_text(text, parse_mode=ParseMode.HTML)
         payload = job.context
         job.schedule_removal()
         new_context = context
@@ -80,8 +92,7 @@ def player_join(update: Update, context: CallbackContext):
         timer(context)
         return
     button = [[InlineKeyboardButton(get_string(chat_data["lang"], "start_button"), callback_data="join")]]
-    query.edit_message_text(get_string(chat_data["lang"], "start_game").format(starter, players),
-                            parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(button))
+    query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(button))
 
 
 def timer(context):
@@ -131,7 +142,7 @@ def timer(context):
     if not len(data["players"]) == MAX_PLAYERS:
         bot.edit_message_reply_markup(chat_id, data["message"], reply_markup=None)
     if len(data["players"]) >= 3:
-        group_settings = database.get_all_settings(chat_id)
+        group_settings = data["group_settings"]
         deck = Deck(group_settings["deck"])
         chameleon = random.choice(list(data["players"]))
         random.shuffle(data["players"])

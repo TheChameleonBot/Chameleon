@@ -28,9 +28,7 @@ def message(update: Update, context: CallbackContext):
     players = chat_data["players"]
     done = False
     for index, player in enumerate(players):
-        if "word" in player:
-            pass
-        else:
+        if "word" not in player:
             if user_id == player["user_id"]:
                 word = update.effective_message.text
                 players[index]["word"] = word

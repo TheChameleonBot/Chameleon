@@ -45,7 +45,7 @@ class Database:
         if not group:
             self.db["groups"].insert_one(vars(objects.Group(chat_id)))
             group = vars(objects.Group(chat_id))
-        entries_to_remove = {"id", "games_played"}
+        entries_to_remove = {"id", "games_played", "_id"}
         for k in entries_to_remove:
             group.pop(k, None)
         return group
