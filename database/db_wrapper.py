@@ -144,6 +144,9 @@ class Database:
     def insert_player_pm(self, user_id):
         self.db["players"].update_one({"id": user_id}, {"$set": {"pm": True}})
 
+    def insert_player_lang(self, user_id, lang):
+        self.db["players"].update_one({"id": user_id}, {"$set": {"lang": lang}})
+
     def init_shutdown(self):
         self.shutdown = True
 

@@ -4,7 +4,7 @@ import logging
 
 from config import BOT_TOKEN, ADMINS
 from constants import TRANSLATION_CHAT_ID
-from handlers import group, game, dev, group_settings
+from handlers import group, game, dev, group_settings, private
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO, filename="log.log")
@@ -47,6 +47,9 @@ def main():
     dp.add_handler(CallbackQueryHandler(group_settings.pin, pattern=r"(?=.*groupsetting)(?=.*pin)"))
     # group hardcore
     dp.add_handler(CallbackQueryHandler(group_settings.hardcore_game, pattern=r"(?=.*groupsetting)(?=.*hardcore)"))
+    # change private language of a user
+    dp.add_handler(CommandHandler("language", private.change_language, Filters.private))
+    dp.add_handler(CallbackQueryHandler(private.selected_language, pattern="privatelanguage"))
     # dev tools
     dp.add_handler(CommandHandler("id", dev.reply_id))
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),
