@@ -17,7 +17,7 @@ from utils.specific_helpers.group_helpers import no_game
 def message(update: Update, context: CallbackContext):
     chat_data = context.chat_data
     # check if a game is running, could also be game_id or smth else
-    if "chameleon" not in chat_data:
+    if "chameleon" not in chat_data or "voted" in chat_data:
         return
     if not chat_data["hardcore_game"]:
         if update.message.text.startswith("!"):
