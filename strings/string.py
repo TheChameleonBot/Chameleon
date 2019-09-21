@@ -35,15 +35,15 @@ class String:
                     old_string = self.languages["en"][string]
                     new_string = new_language[string]
                     pop_string = False
-                    if old_string != new_string:
-                        changed_strings.append(string)
-                        pop_string = True
-                    elif isinstance(new_string, str):
+                    if isinstance(new_string, str):
                         old_argument = [tup[1] for tup in Formatter().parse(old_string) if tup[1] is not None]
                         new_argument = [tup[1] for tup in Formatter().parse(new_string) if tup[1] is not None]
                         if new_argument != old_argument:
                             new_arguments.append(string)
                             pop_string = True
+                    if old_string != new_string and not pop_string:
+                        changed_strings.append(string)
+                        pop_string = True
                     if pop_string:
                         for language in self.languages:
                             if not language == "en":
