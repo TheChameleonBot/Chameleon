@@ -25,9 +25,7 @@ def change_language(update: Update, context: CallbackContext):
 def selected_language(update: Update, context: CallbackContext):
     query = update.callback_query
     data = query.data.split("_")
-    print(query.data)
     selected_lang = data[1]
-    print(selected_lang)
     context.user_data["lang"] = selected_lang
     database.insert_player_lang(update.effective_user.id, selected_lang)
     languages = get_languages()

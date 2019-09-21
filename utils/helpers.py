@@ -18,7 +18,7 @@ def is_admin(bot, user_id, chat, reload=False):
     return True
 
 
-@MWT(timeout=60*60)
+@MWT(timeout=60 * 60)
 def get_admin_ids(bot, chat_id, reload):
-    """Returns a list of admin IDs for a given chat. Results are cached for 1 hour."""
+    """Return a list of admin IDs for a given chat. Results are cached for 1 hour."""
     return [admin.user.id for admin in bot.get_chat_administrators(chat_id)]

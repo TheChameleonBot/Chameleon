@@ -17,7 +17,7 @@ def shutdown(update: Update, context: CallbackContext, updater: Updater):
             lang = database.get_language_chat(chat_id)
             context.bot.send_message(chat_id, get_string(lang, "init_shutdown"))
     update.message.reply_text("Shutdown initiated, see you in t-5 min")
-    t = Timer(5*60, real_shutdown, [[updater, update.effective_user.id]])
+    t = Timer(5 * 60, real_shutdown, [[updater, update.effective_user.id]])
     t.start()
 
 

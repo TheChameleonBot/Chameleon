@@ -27,16 +27,16 @@ def vote_text(players):
 def vote_buttons(players, game_id):
     buttons = []
     for player in players:
-        buttons.append(InlineKeyboardButton(player["first_name"], callback_data="vote" + game_id +
-                                                                                str(player["user_id"])))
+        buttons.append(InlineKeyboardButton(player["first_name"],
+                                            callback_data="vote" + game_id + str(player["user_id"])))
     return build_menu(buttons, 3)
 
 
 def draw_buttons(same_voters, game_id):
     buttons = []
     for same_voter in same_voters:
-        buttons.append(InlineKeyboardButton(same_voter["first_name"], callback_data="draw" + game_id +
-                                                                                    str(same_voter["user_id"])))
+        buttons.append(InlineKeyboardButton(same_voter["first_name"],
+                                            callback_data="draw" + game_id + str(same_voter["user_id"])))
     return build_menu(buttons, 3)
 
 
