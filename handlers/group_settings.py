@@ -209,7 +209,7 @@ def hardcore_game(update: Update, context: CallbackContext):
     lang = context.user_data["lang"]
     if not database.get_hardcore_game_setting(chat_id):
         chat_member = context.bot.get_chat_member(chat_id, context.bot.id)
-        if chat_member.can_invite_users and chat_member.can_promote_members:
+        if chat_member.can_invite_users and chat_member.can_promote_members and chat_member.can_restrict_members:
             database.insert_group_hardcore_game(chat_id)
             query.answer(get_string(lang, "group_setting_hardcore_activate"))
         else:

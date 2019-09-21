@@ -50,8 +50,11 @@ def message(update: Update, context: CallbackContext):
                         context.bot.set_chat_permissions(chat_id, chat_data["hardcore_game"]["initial_permissions"])
                     break
                 words = wordlist(players)
-                text = get_string(lang, "more_players_say_word").format(mention_html(next_player["user_id"],
-                                                                                     next_player["first_name"]), words)
+                restricted = ""
+                if not chat_data["hardcore_game"]:
+                    restricted = "\n\n" + get_string(lang, "say_word_not_restricted")
+                text = get_string(lang, "more_players_say_word")\
+                    .format(mention_html(next_player["user_id"], next_player["first_name"]), words, restricted)
                 update.effective_message.reply_html(text)
                 return
             else:
@@ -351,6 +354,8 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
                 context.bot.pin_chat_message(chat_id, send_message.message_id, True)
             user = chat_data["players"][0]
             text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
+            if not chat_data["hardcore_game"]:
+                text += "\n\n" + get_string(lang, "say_word_not_restricted")
             context.bot.send_message(chat_id, text, reply_to_message_id=send_message.message_id,
                                      parse_mode=ParseMode.HTML)
             if chat_data["hardcore_game"]:

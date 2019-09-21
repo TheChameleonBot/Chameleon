@@ -132,7 +132,10 @@ def timer(context):
             # we can do that, cause otherwise we wouldn't be here
             else:
                 text = get_string(lang, "player_leaves_text").format(players_mentions(left_player).replace("\n", ", "))
-            text += get_string(lang, "player_action_text")
+            if len(data["players"]) >= 3:
+                text += get_string(lang, "player_action_text").format(get_string(lang, "start"))
+            else:
+                text += get_string(lang, "player_action_text").format(get_string(lang, "fail"))
             bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
             data["known_players"] = known_players
             return
@@ -165,6 +168,8 @@ def timer(context):
             context.bot.pin_chat_message(chat_id, message.message_id, True)
         user = data["players"][0]
         text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
+        if not group_settings["hardcore_game"]:
+            text += "\n\n" + get_string(lang, "say_word_not_restricted")
         bot.send_message(chat_id, text, reply_to_message_id=message.message_id, parse_mode=ParseMode.HTML)
         if group_settings["hardcore_game"]:
             chat = context.bot.get_chat(chat_id)

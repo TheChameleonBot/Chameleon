@@ -22,7 +22,11 @@ join_no_game_running: "I am sorry, somehow this button is here when it is not su
 player_joins_text: "{0} joined the game. "
 player_leaves_text: "{0} left the game. "
 # the text in addition to the one above
-player_action_text: "If no one joins or leaves in 30 seconds, the timer runs out and the game starts or fails :)"
+# {0} if more then three players, start from below; otherwise fail
+player_action_text: "If no one joins or leaves in 30 seconds, the timer runs out and the game {0}"
+# see above
+start: "starts :)"
+fail: "fails :("
 # the message when someone presses /start while a game is running
 game_running: "A game is already running, please wait until it's finished."
 # the message when a game failed (30 second timer runs out and not three people joined)
@@ -41,10 +45,12 @@ secret_word: "The secret word is {0}"
 wrong_game: "I am sorry, your current game seems to be a different one then this. Please find the latest message from me with this button(s) and press it there :)"
 # the message appearing after the message above, asking for the first word
 # {0} mention of the player
-first_player_say_word: "{0}, you are the first one to give me a word. Please do this.\n\nIf this game is not in restricted mode, you can continue the conversation you may having right now with adding ! to the beginning of your message, I won't count it as your entry then"
+first_player_say_word: "{0}, you are the first one to give me a word. Please do this."
 # the message asking every player to send a message, one after another
-# {0} mention of the player, {1} word list, consisting of the player name: players word(s)
-more_players_say_word: "Thanks. Now, its your turn, {0}.\n\nIf this game is not in restricted mode, you can continue the conversation you may having right now with adding ! to the beginning of your message, I won't count it as your entry then.\n\nCurrent word list:\n{1}"
+# {0} mention of the player, {1} word list, consisting of the player name: players word(s), {2} the message below or nothing
+more_players_say_word: "Thanks. Now, its your turn, {0}.{2}\n\nCurrent word list:\n{1}"
+# this will get attached to the previous two messages in case the game is not in restricted mote
+say_word_not_restricted: "You can continue the conversation you may having right now with adding ! to the beginning of your message, I won't count it as your entry then"
 # the message before the voting, showing the final word list
 # {0} final word list
 final_word_list: "Final word list, we have to go to vote whose role (Chameleon or not) is to unmask then:\n\n{0}"
@@ -166,7 +172,7 @@ group_setting_hardcore_activate: "The restrict mode is activated!"
 # deactivate restrict mode of group
 group_setting_hardcore_deactivate: "The restrict mode is deactivated!"
 # being an admin which can restrict member is required
-group_setting_hardcore_required: "I need to be an admin which can add members and promote admins in order to activate this mode"
+group_setting_hardcore_required: "I need to be an admin which can add members, promote admins and restrict members in order to activate this mode"
 # if an error happens somewhere, we tell the user about it
 error: "Hey. I regret to inform you that an error happened while I tried to handle your update. My developers will be notified."
 # if a user wants to change their language
