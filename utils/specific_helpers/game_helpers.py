@@ -16,11 +16,7 @@ def wordlist(players):
 def vote_text(players):
     text = ""
     for player in players:
-        if "votes" in player:
-            number = player["votes"]
-        else:
-            number = 0
-        text += f"{mention_html(player['user_id'], player['first_name'])}: {number}\n"
+        text += f"{mention_html(player['user_id'], player['first_name'])}" + "\n"
     return text
 
 

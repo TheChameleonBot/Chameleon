@@ -58,7 +58,7 @@ say_word_not_restricted: "You can continue the conversation you may having right
 final_word_list: "Final word list, we have to go to vote whose role (Chameleon or not) is to unmask then:\n\n{0}"
 # the message asking to vote, buttons with the names beneath
 # {0} vote list, consisting of mentions of the players: number of votes
-vote_list: "Remember, you can only vote once and you can't correct your vote.\nVote list:\n\n{0}"
+vote_list: "Remember, you can only vote once and you can't correct your vote.\nPeople who haven't voted yet:\n\n{0}"
 # the pop-up for a successful vote
 voted: "Your vote is registered :)"
 # the pop-up for someone trying to vote again

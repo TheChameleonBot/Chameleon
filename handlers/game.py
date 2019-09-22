@@ -123,16 +123,21 @@ def vote(update: Update, context: CallbackContext):
             break
     chat_data["voted"].append(user_id)
     query.answer(get_string(lang, "voted"))
+    voters = players.copy()
+    for voter_id in chat_data["voted"]:
+        for index, voter in enumerate(voters):
+            if voter["user_id"] == voter_id:
+                del voters[index]
     if len(players) is not len(chat_data["voted"]):
         buttons = vote_buttons(players, chat_data["game_id"])
         words = wordlist(players)
         text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").\
-            format(vote_text(players))
+            format(vote_text(voters))
         query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
     else:
         words = wordlist(players)
         text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").\
-            format(vote_text(players))
+            format(vote_text(voters))
         query.edit_message_text(text, parse_mode=ParseMode.HTML)
         votes = []
         for player in players:
