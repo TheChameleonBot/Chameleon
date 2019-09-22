@@ -64,7 +64,7 @@ def yaml_file(update: Update, context: CallbackContext):
         if text != "Hello translators. The english file received an update.":
             text += "\nThe bot will fallback to the english original in those cases until you update your file"
         else:
-            text += "Nothing special happened :)"
+            text += "\nNothing special happened :)"
         context.bot.send_document(TRANSLATION_CHANNEL_ID, file.file_id, caption=text, parse_mode=ParseMode.HTML)
     else:
         text = "Hey there, thanks for submitting your file"
@@ -75,7 +75,7 @@ def yaml_file(update: Update, context: CallbackContext):
             missing = "<code>{}</code>".format('\n'.join(returned['missing_arguments']))
             text += f"\nThose are the strings which are missing arguments (those weird brackets):\n{missing}"
         if text == "Hey there, thanks for submitting your file":
-            text += "No errors in your file, good job!"
+            text += "\nNo errors in your file, good job!"
         update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
 
