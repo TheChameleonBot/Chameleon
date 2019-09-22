@@ -29,20 +29,16 @@ def group_settings_buttons(settings, chat_id, refresh_id=0):
     return build_menu(buttons, 2, header_buttons=refresh_button)
 
 
-def language_buttons(languages, chat_id, back):
+def language_buttons(languages, chat_id):
     buttons = []
     for language in languages:
         buttons.append(InlineKeyboardButton(languages[language],
                                             callback_data=f"grouplanguage_{str(chat_id)}_{language}"))
-    return build_menu(buttons, 3, footer_buttons=[group_back(chat_id, back)])
+    return build_menu(buttons, 3)
 
 
-def group_back(chat_id, back):
-    return InlineKeyboardButton(back, callback_data=f"groupback_{str(chat_id)}")
-
-
-def deck_buttons(deck, chat_id, back):
+def deck_buttons(deck, chat_id):
     buttons = []
     for deck_name in deck:
         buttons.append(InlineKeyboardButton(deck_name, callback_data=f"deck_{str(chat_id)}_{deck_name}"))
-    return build_menu(buttons, 3, footer_buttons=[group_back(chat_id, back)])
+    return build_menu(buttons, 3)

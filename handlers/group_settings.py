@@ -91,7 +91,7 @@ def change_language(update: Update, context: CallbackContext):
     languages = get_languages()
     current_language = languages[current_lang]
     lang = context.user_data["lang"]
-    buttons = group_settings_helpers.language_buttons(languages, chat_id, get_string(lang, "settings_back_button"))
+    buttons = group_settings_helpers.language_buttons(languages, chat_id)
     query.edit_message_text(get_string(lang, "group_setting_languages").format(current_language, TRANSLATION_CHAT_LINK),
                             reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
 
@@ -117,7 +117,7 @@ def change_deck(update: Update, context: CallbackContext):
     lang = context.user_data["lang"]
     current_deck = database.get_deck_chat(chat_id)
     deck = list(database.cards.keys())
-    buttons = group_settings_helpers.deck_buttons(deck, chat_id, get_string(lang, "settings_back_button"))
+    buttons = group_settings_helpers.deck_buttons(deck, chat_id)
     text = get_string(lang, "group_setting_decks").format(current_deck, TRANSLATION_CHAT_LINK)
     query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
 

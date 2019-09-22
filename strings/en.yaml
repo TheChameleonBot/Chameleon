@@ -141,16 +141,14 @@ group_setting_buttons:
   tournament: "Tournament"
   pin: "Pin"
   hardcore_game: "Restricting"
-# the back button, used in settings to get back to the previous menu
-settings_back_button: "Back"
 # shown to the user when he presses refresh in the settings
 group_setting_refresh: "The settings have been refreshed!"
 # change language of a group
 # {0} is the current language, {1} is the invitation link to the translation group
-group_setting_languages: "The current language of your group is <b>{0}</b>. Select the one you want it to change to or hit back.\n\nIn case you want to translate a language or report a typo, join us here: {1}"
+group_setting_languages: "The current language of your group is <b>{0}</b>. Select the one you want it to change to.\n\nIn case you want to translate a language or report a typo, join us here: {1}"
 # change deck of a group
 # {0} is the current deck, {1} is the invitation link to the translation group
-group_setting_decks: "The current deck of your group is <b>{0}</b>. Select the one you want it to change to or hit back\n\nIn case you want to create a deck or report a typo, join us here: {1}"
+group_setting_decks: "The current deck of your group is <b>{0}</b>. Select the one you want it to change to.\n\nIn case you want to create a deck or report a typo, join us here: {1}"
 # activate fewer setting of group
 group_setting_fewer_activate: "The fewer setting is activated!"
 # deactivate fewer setting of group
