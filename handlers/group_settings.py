@@ -66,6 +66,8 @@ def start(update: Update, context: CallbackContext):
         user_data["lang"] = lang
     else:
         lang = user_data["lang"]
+    if not context.args:
+        return
     chat_id = int(context.args[0])
     chat = context.bot.get_chat(chat_id)
     if not helpers.is_admin(context.bot, update.effective_user.id, chat):
