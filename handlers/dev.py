@@ -97,7 +97,7 @@ def error_handler(update: Update, context: CallbackContext):
         if "lang" not in context.chat_data:
             lang = database.get_language_chat(update.effective_chat.id)
         else:
-            lang = context.user_data["lang"]
+            lang = context.chat_data["lang"]
     if update.callback_query:
         update.callback_query.answer(get_string(lang, "error"), show_alert=True)
     else:
