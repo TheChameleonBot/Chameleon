@@ -23,6 +23,8 @@ def message(update: Update, context: CallbackContext):
         if update.message.text.startswith("!"):
             return
     user_id = update.effective_user.id
+    if user_id not in [user["user_id"] for user in chat_data["players"]]:
+        return
     chat_id = update.effective_chat.id
     lang = chat_data["lang"]
     players = chat_data["players"]
@@ -84,6 +86,9 @@ def secret_word(update: Update, context: CallbackContext):
         no_game(update, context, "wrong_game")
         return
     lang = chat_data["lang"]
+    if user_id not in [user["user_id"] for user in chat_data["players"]]:
+        query.answer(get_string(lang, "user_not_in_game"), show_alert=True)
+        return
     if chat_data["chameleon"]["user_id"] == user_id:
         query.answer(get_string(lang, "player_is_chameleon"), show_alert=True)
     else:
@@ -105,6 +110,9 @@ def vote(update: Update, context: CallbackContext):
         return
     vote_id = int(query.data[14:])
     lang = chat_data["lang"]
+    if user_id not in [user["user_id"] for user in chat_data["players"]]:
+        query.answer(get_string(lang, "user_not_in_game"), show_alert=True)
+        return
     players = chat_data["players"]
     if user_id in chat_data["voted"]:
         query.answer(get_string(lang, "already_voted"), show_alert=True)

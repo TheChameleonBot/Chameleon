@@ -175,3 +175,5 @@ private_language: "Hallo! Aktuell spreche ich {0}. Über die Buttons unten lerne
 # if a user changed their language
 # {0} name of their selected language
 private_language_selected: "Okay, from now an spreche ich {0} mit dir"
+# if a random idiot presses buttons
+user_not_in_game: "Hey, du musst in dem Spiel sein, um das zu tun. Ja, auch du, Phillip! Vielleicht in der nächsten Runde?"

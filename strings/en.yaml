@@ -181,3 +181,5 @@ private_language: "Hey. Your current language is {0}, select the one you want fr
 # if a user changed their language
 # {0} name of their selected language
 private_language_selected: "Great, {0} it is from now on!"
+# if a random idiot presses buttons
+user_not_in_game: "Hey, you have to be in the game to do this. Maybe next round?"
