@@ -54,7 +54,7 @@ more_players_say_word: "Danke! und nun {0} bitte.{2}\n\nBisher haben wir diese B
 final_word_list: "Die endgültige Liste. Wir sollten jetzt das Chanmäleon demaskieren.\n\n{0}"
 # the message asking to vote, buttons with the names beneath
 # {0} vote list, consisting of mentions of the players: number of votes
-vote_list: "Denk dran: du kannst einmal wählen. Mit Permanentmarker!\nDie Wahl:\n\n{0}"
+vote_list: "Denk dran: du kannst einmal wählen. Mit Permanentmarker!\nDie Leute, die (immer) noch nicht gewählt haben:\n\n{0}"
 # the pop-up for a successful vote
 voted: "Deine Stimme wurde gezählt :)"
 # the pop-up for someone trying to vote again
