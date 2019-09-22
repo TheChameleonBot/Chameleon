@@ -3,6 +3,8 @@ authors:
   - "@poolitzer"
 # put the name of your language here, in their native translation
 language: "English"
+# send when the bot gets added to a group
+greeting: "Hello there. I am The Chameleon bot, a telegram bot which brings the game The Chameleon in your group! In order to change my settings, you can run /settings (admin restricted in bigger groups). Or just hit /start to start a game with me :)"
 # when a game is started with /start in a group.
 # {0} mention of the player who started the game, {1} list of mentions for joined player, {2-7} settings, either the deck name or activate or deactivate (see below)
 start_game: "{0} started a game. You are playing with the following settings:\n\n<b>Deck:</b> {2}\n<b>Fewer:</b> {3}\n<b>More: </b>{4}\n<b>Pin: </b>{5}\n<b>Tournament: </b>{6}\n<b>Restricting: </b>{7}\n\nLet's join!\n\n#Players:\n{1}"

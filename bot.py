@@ -15,6 +15,10 @@ def main():
     updater = Updater(token=BOT_TOKEN, use_context=True,
                       request_kwargs={'read_timeout': 10, 'connect_timeout': 10})
     dp = updater.dispatcher
+    # bot gets added to group
+    dp.add_handler(MessageHandler(Filters.group & (Filters.status_update.chat_created | Filters.status_update.
+                                                   new_chat_members),
+                                  group.greeting))
     # a group starts a game
     dp.add_handler(CommandHandler("start", functools.partial(group.start, dp=dp), filters=Filters.group))
     dp.add_handler(CallbackQueryHandler(group.player_join, pattern="join"))

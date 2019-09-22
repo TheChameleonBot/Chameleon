@@ -15,8 +15,11 @@ from constants import TIME, MAX_PLAYERS
 
 def start(update: Update, context: CallbackContext, dp: Dispatcher):
     chat_id = update.effective_chat.id
-    lang = database.get_language_chat(chat_id)
     chat_data = context.chat_data
+    if "lang" not in chat_data:
+        lang = database.get_language_chat(chat_id)
+    else:
+        lang = chat_data["lang"]
     if database.shutdown:
         update.effective_message.reply_text(get_string(lang, "group_start_shutdown"))
         return
@@ -185,3 +188,13 @@ def timer(context):
     else:
         text = get_string(lang, "game_failed")
         bot.send_message(chat_id, text, reply_to_message_id=data["message"])
+
+
+def greeting(update: Update, context: CallbackContext):
+    new_chat_members = update.effective_message.new_chat_members
+    if new_chat_members:
+        if context.bot.id not in [user.id for user in new_chat_members]:
+            return
+    lang = database.get_language_chat(update.effective_chat.id)
+    context.chat_data["lang"] = lang
+    update.effective_message.reply_text(get_string(lang, "greeting"))
