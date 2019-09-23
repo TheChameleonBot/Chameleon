@@ -183,3 +183,11 @@ private_language: "Hey. Your current language is {0}, select the one you want fr
 private_language_selected: "Great, {0} it is from now on!"
 # if a random idiot presses buttons
 user_not_in_game: "Hey, you have to be in the game to do this. Maybe next round?"
+# tutorial message
+tutorial: "Hello players. It looks like you have got one or more new player(s) here. Do you want to have a tutorial run? I will explain what is going on, but it will count as a valid game and I won't destroy the game itself, I promise :)"
+# buttons to the message above
+yes: "Yes!"
+no: "No!"
+# will get attached to the message above
+# {0} number of players who voted, {1} total number of players
+tutorial_voters: "{0}/{1} have voted already."
