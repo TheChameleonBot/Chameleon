@@ -1,14 +1,10 @@
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update, ChatPermissions
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, Dispatcher, Job
-import random
-import string
 
-from objects import Deck
 from strings import get_string
 from telegram.utils.helpers import mention_html
 
-from utils.helpers import is_admin
-from utils.specific_helpers.group_helpers import players_mentions, no_game
+from utils.specific_helpers import group_helpers
 from database import database
 from constants import TIME, MAX_PLAYERS
 
@@ -44,8 +40,8 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
     text = get_string(lang, "start_game").format(mention, mention, *wanted_settings)
     message = update.message.reply_html(text,
                                         reply_markup=InlineKeyboardMarkup(button))
-    payload = {"bot": context.bot, "dp": dp, "players": [{"user_id": user_id, "first_name": first_name}],
-               "message": message.message_id, "lang": lang, "chat_id": chat_id, "known_players": [],
+    payload = {"dp": dp, "players": [{"user_id": user_id, "first_name": first_name}], "message": message.message_id,
+               "lang": lang, "chat_id": chat_id, "known_players": [], "tutorial": False,
                "starter": {"user_id": user_id, "first_name": first_name}, "group_settings": group_settings}
     context.job_queue.run_repeating(timer, TIME, context=payload, name=chat_id)
     payload = {"starter": {"user_id": user_id, "first_name": first_name},
@@ -62,7 +58,7 @@ def player_join(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
     # somehow, this callback button is there, but we aren't in join mode, so we handle this now :D
     if "message" not in chat_data:
-        no_game(update, context, "join_no_game_running")
+        group_helpers.no_game(update, context, "join_no_game_running")
         return
     starter = mention_html(chat_data["starter"]["user_id"], chat_data["starter"]["first_name"])
     remove = False
@@ -81,7 +77,7 @@ def player_join(update: Update, context: CallbackContext):
         chat_data["left_players"].pop(user_id, None)
         chat_data["players"].append({"user_id": user_id, "first_name": first_name})
         query.answer(get_string(chat_data["lang"], "player_joins_query"))
-    players = players_mentions(chat_data["players"])
+    players = group_helpers.players_mentions(chat_data["players"])
     job = context.job_queue.get_jobs_by_name(chat_id)[0]
     job.context["players"] = chat_data["players"]
     job.context["left_players"] = chat_data["left_players"]
@@ -101,7 +97,6 @@ def player_join(update: Update, context: CallbackContext):
 def timer(context):
     data = context.job.context
     chat_id = context.job.name
-    bot = data["bot"]
     lang = data["lang"]
     dp = data["dp"]
     # repeated join/leave timer
@@ -128,66 +123,40 @@ def timer(context):
         # yes, this replace is stupid. stupider then copying the function though. Fuck you.
         else:
             if joined_player:
-                text = get_string(lang, "player_joins_text").format(players_mentions(joined_player).replace("\n", ", "))
+                text = get_string(lang, "player_joins_text")\
+                    .format(group_helpers.players_mentions(joined_player).replace("\n", ", "))
                 if left_player:
-                    text += "\n\n" + get_string(lang, "player_leaves_text").format(players_mentions(left_player)
-                                                                                   .replace("\n", ", "))
+                    text += "\n\n" + get_string(lang, "player_leaves_text")\
+                        .format(group_helpers.players_mentions(left_player).replace("\n", ", "))
             # we can do that, cause otherwise we wouldn't be here
             else:
-                text = get_string(lang, "player_leaves_text").format(players_mentions(left_player).replace("\n", ", "))
+                text = get_string(lang, "player_leaves_text")\
+                    .format(group_helpers.players_mentions(left_player).replace("\n", ", "))
             if len(data["players"]) >= 3:
                 text += get_string(lang, "player_action_text").format(get_string(lang, "start"))
             else:
                 text += get_string(lang, "player_action_text").format(get_string(lang, "fail"))
-            bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
+            context.bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
             data["known_players"] = known_players
             return
     # game either ends/starts
     dp.chat_data[chat_id].clear()
     context.job.schedule_removal()
     if not len(data["players"]) == MAX_PLAYERS:
-        bot.edit_message_reply_markup(chat_id, data["message"], reply_markup=None)
+        context.bot.edit_message_reply_markup(chat_id, data["message"], reply_markup=None)
     if len(data["players"]) >= 3:
-        group_settings = data["group_settings"]
-        deck = Deck(group_settings["deck"])
-        chameleon = random.choice(list(data["players"]))
-        random.shuffle(data["players"])
-        game_id = ''.join(random.choices(string.ascii_lowercase, k=10))
-        dp.chat_data[chat_id].update({"chameleon": chameleon, "secret": deck.secret, "players": data["players"],
-                                      "lang": lang, "starter": data["starter"], "words": deck.words,
-                                      "game_id": game_id, "fewer": group_settings["fewer"],
-                                      "tournament": group_settings["tournament"],
-                                      "more": group_settings["more"], "pin": group_settings["pin"],
-                                      "hardcore_game": {}, "deck": group_settings["deck"]})
-        text = get_string(lang, "game_succeed").format(deck.topic, deck.word_list)
-        button = InlineKeyboardMarkup([[InlineKeyboardButton(get_string(lang, "play_button"),
-                                                             callback_data="word" + game_id)]])
-        message = bot.send_message(chat_id, text, reply_to_message_id=data["message"], reply_markup=button,
-                                   parse_mode=ParseMode.HTML)
-        if group_settings["pin"]:
-            pinned_message = context.bot.get_chat(chat_id).pinned_message
-            if pinned_message:
-                dp.chat_data[chat_id]["pin"] = pinned_message.message_id
-            context.bot.pin_chat_message(chat_id, message.message_id, True)
-        user = data["players"][0]
-        text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
-        if not group_settings["hardcore_game"]:
-            text += "\n\n" + get_string(lang, "say_word_not_restricted")
-        bot.send_message(chat_id, text, reply_to_message_id=message.message_id, parse_mode=ParseMode.HTML)
-        if group_settings["hardcore_game"]:
-            chat = context.bot.get_chat(chat_id)
-            dp.chat_data[chat_id]["hardcore_game"]["initial_permissions"] = chat.permissions
-            context.bot.set_chat_permissions(chat_id, ChatPermissions(can_send_messages=False))
-            if not is_admin(bot, user["user_id"], chat):
-                context.bot.promote_chat_member(chat_id, user["user_id"], can_invite_users=True)
-                dp.chat_data[chat_id]["hardcore_game"]["skip"] = False
-            else:
-                dp.chat_data[chat_id]["hardcore_game"]["skip"] = True
-        dp.chat_data[chat_id]["word_list"] = message.message_id
-
+        if database.get_new_player([all_player["user_id"] for all_player in data["players"]]):
+            context.bot.send_message(chat_id, get_string(lang, "rules"), parse_mode=ParseMode.HTML)
+            context.job_queue.run_once(delay, 15, [context, data, chat_id, dp])
+        else:
+            group_helpers.yes_game(context, data, chat_id, dp)
     else:
         text = get_string(lang, "game_failed")
-        bot.send_message(chat_id, text, reply_to_message_id=data["message"])
+        context.bot.send_message(chat_id, text, reply_to_message_id=data["message"])
+
+
+def delay(context: CallbackContext):
+    group_helpers.yes_game(*context.job.context)
 
 
 def greeting(update: Update, context: CallbackContext):

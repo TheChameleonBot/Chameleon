@@ -71,10 +71,10 @@ not_starter: "Du hast nicht das erste Wort gesagt! Aber man kann es ja mal versu
 chameleon_not_found: "{0} wurde demaskiert und war <b>nicht</b> das Chamäleon, sondern {1}! Das Chamäleon gewinnt das Spiel! Das geheime Wort war <b>{2}</b>."
 # if the chameleon was found
 # {0} mention of the chameleon
-chameleon_found: "{0} wurde demaskiert und ist das Chamäleon und darf jetzt das geheime Wort sagen! Nicht verzagen, es sind immerhin 6,25%!"
+chameleon_found: "{0} wurde demaskiert und ist das Chamäleon und darf jetzt das geheime Wort sagen! Nicht verzagen, es gibt eine kleine Chance."
 # if the chameleon was found and only three players are there (and this is activated in the setting)
 # {0} mention of the chameleon
-chameleon_found_fewer: "{0} wurde als Chamäleon demaskiert. Aber hat sich gut geschlagen alleine unter drei! Darum bekommt das Chamäleon zwei Versuche, das geheime Wort zu erraten! 100% mehr :-)"
+chameleon_found_fewer: "{0} wurde als Chamäleon demaskiert. Aber hat sich gut geschlagen alleine unter drei! Darum bekommt das Chamäleon zwei Versuche, das geheime Wort zu erraten! Es wird aber eh 2-mal daneben liegen..."
 # if the chameleon was found and 7 or 8 players are there
 # {0} mention of the chameleon
 chameleon_found_more: "{0} wurde demaskiert und war Chamäleon. Aber bei mehr als 6 Spielern weißt du ja, was das Wort ist, jetzt musst du es nur noch korrekt und ohne Liste schreiben. Haha!"
@@ -83,7 +83,7 @@ chameleon_found_more: "{0} wurde demaskiert und war Chamäleon. Aber bei mehr al
 chameleon_guess_wrong_fewer: "Ähm, nein {0}! Das war falsch! Ich gebe dir ausnahmsweise noch eine Chance!"
 # if the chameleon guesses wrong
 # {0} mention of the chameleon
-chameleon_guess_wrong: "Gratulation {0}! Du hast die 87,5% der falschen Wörter genommen und verlierst, <b>{1}</b> wären die richtigen 6% gewesen. Die anderen Spieler gewinnen!"
+chameleon_guess_wrong: "Gratulation {0}! Das hätte JEDER besser gekonnt! <b>{1}</b> war korrekt. Und sonst nichts!"
 # if the chameleon guesses correctly
 # {0} mention of the chameleon
 chameleon_guess_right: "Sehr gut gemacht {0}! Das war richtig! Das Chamäleon gewinnt und die Loos.., ich meine anderen Spieler, verlieren!"
@@ -119,12 +119,12 @@ no_pm_settings_button: "Start"
 admin_blocked_bot: "Solange du mich blockierst, weigere ich mich strikt!"
 # the setting message admins of groups greet greeted with in PM
 group_setting_text: "Hallo! Du möchtest die Einstellungen füe die Gruppe ändern? Klingt gut! Lass mich dir \"kurz\" erklären, was was ist:\n\n
-<b>Aktualisieren</b>: Aktualisiere diese Einstellunge. Kann man benutzen, wenn man vermutet, dass andere Admins die Einstellungen verändert haben. Muss man aber nicht.\n\nn
+<b>Aktualisieren</b>: Aktualisiere diese Einstellungen. Kann man benutzen, wenn man vermutet, dass andere Admins die Einstellungen verändert haben. Muss man aber nicht.\n\nn
 <b>Sprache</b>: Ändere meine Sprache. Du spricht eine tolle Sprache und möchtest die Sprache mir beibringen? Okay, schau mal im @TheChameleonSupport vorbei\n\n
 <b>Stapel</b>: Der Stapel an Themen, die ich verwende. Du hast einen Themenvorschlag? Gut, schau in @TheChameleonSupport vorbei.\n\n
 <b>Weniger</b>: Bei drei Spielern bekommt das Chamäleon 2 Möglichkeiten, das Wort zu erraten. Wenn aktiv.\n\n
 <b>Mehr</b>: Bei 7 oder 8 Spielern wird, wenn aktiv, die Wortliste verschwinden, wenn jeder seinen Tipp abgegeben hat. Das Chamäleon hat es dann schwerer, das korrekte Wort zu erraten\n\n
-<b>Wettbewerb</b>: Wenn aktiv endet das Spiel nicht nach einer Runde, sondern wir machen einen Tournier.\n• Chamäleon wird nicht demaskiert: 2 Punkte für das Chamäleon\n• Chamäleon wird entdeckt, aber errät das Wort: 1 Punkt für das Chamäleon\n• Chamäleon wird demaskiert und errät das Wort nicht: 2 Punkte für die anderen Spieler\n\n
+<b>Wettbewerb</b>: Wenn aktiv endet das Spiel nicht nach einer Runde, sondern wir machen einen Turnier.\n• Chamäleon wird nicht demaskiert: 2 Punkte für das Chamäleon\n• Chamäleon wird entdeckt, aber errät das Wort: 1 Punkt für das Chamäleon\n• Chamäleon wird demaskiert und errät das Wort nicht: 2 Punkte für die anderen Spieler\n\n
 <b>Anheften</b>: Wenn aktiv werde ich die Wörterliste leise anheften, sodass sie leichter zu finden ist. Natürlich hefte ich nach dem Spiel etwaige Nachrichten wieder an. Dafür möchte ich bitte Admin mit der Lizenz zum töt... äh anheften haben.\n\n
 <b>Beschränkt(er Modus)</b>: Wenn aktiv werde ich alle Spieler, die gerade nicht an der Reihe sind, am schreiben hindern. Dazu wird der jeweilige Spieler Admin und kann Spieler hinzufügen. Ist die Raterunde zuende, darf jeder schreiben, um zu diskutieren, dabei werden die vorherigen Rechte wiederhergestellt. Damit das alles klappt, benötige ich Adminrechte und muss neue Admins ernennen, neue Nutzer hinzufügen und bannen dürfen."
 # the buttons for group settings. Only translate the strings!
@@ -177,3 +177,15 @@ private_language: "Hallo! Aktuell spreche ich {0}. Über die Buttons unten lerne
 private_language_selected: "Okay, from now an spreche ich {0} mit dir"
 # if a random idiot presses buttons
 user_not_in_game: "Hey, du musst in dem Spiel sein, um das zu tun. Ja, auch du, Phillip! Vielleicht in der nächsten Runde?"
+# the rules, presented when someone hasen't played the game yet
+rules: "Oh hey, wir haben neue Spieler. Das Spiel wird in 15 Sekunden starten, lasst mich nur kurz die Regeln für die Neuen präsentieren:\n\n
+<b>Chamäleon - das Spiel</b> <i>(deutsche Anleitung, angepasst an den Telegram Bot)</i>\n\n
+• Nachdem das Spiel startet wird einer der Spieler das Chamäleon, die anderen sind ganz normale Spieler\n
+• Ein Thema und die zugehörige Wortliste wird den Spielern präsentiert, sowie ein Knopf unter dieser Nachricht\n
+• Wenn du ein Spieler bist und diesen Knopf drückst, wird dir eins der Wörter aus der Liste angezeigt (das geheime Wort) - alle Spieler bekommen natürlich das Gleiche angezeigt. Bist du das Chamäleon, wird dir das anstelle des Worts verraten\n
+• Nun fragt der Bot einen nach dem Anderem nach einer Umschreibung von dem geheimen Wort.\n
+• Wenn du ein Spieler bist, versuche das geheime Wort so zu umschreiben, dass das Chamäleon das Wort nicht herausfinden kann, aber die anderen Spieler wissen, dass du das geheime Wort kennst\n
+• Wenn du das Chamäleon bist, musst du eine Umschreibung nach bestem Wissen und Gewissen wählen/raten. Versuche dabei nicht aufzufallen ;P\n
+• Nachdem jeder ein Wort gesagt hat, beginnt eine Abstimmphase - jeder wählt den, von dem er denkt, dass er das Chamäleon ist. Die Rolle desjenigen, der die meiste Stimmen bekommen hat, wird aufgedeckt\n
+• Wenn es ein normaler Spieler ist, gewinnt das Chamäleon!
+• Wenn es das Chamäleon ist, wird es versuchen, das korrekte Wort zu erraten. Wenn das geratene Wort tatsächlich das richtige ist, gewinnt es; ansonsten die Spieler!"

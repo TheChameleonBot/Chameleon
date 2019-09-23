@@ -1,4 +1,4 @@
-from objects.deck import Deck
-from objects.group import Group
-from objects.player import Player
+from .deck import Deck
+from .group import Group
+from .player import Player
 __all__ = ["Deck", "Group", "Player"]

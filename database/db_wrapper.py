@@ -57,6 +57,15 @@ class Database:
         return self.db["groups"].find_one({"id": chat_id})["hardcore_game"]
 
     # get part player
+    def get_new_player(self, player_ids):
+        for player_id in player_ids:
+            player = self.db["players"].find_one({"id": player_id})
+            if player:
+                if player["games_played"] == 0:
+                    return True
+            else:
+                return True
+        return False
 
     def get_language_player(self, user_id):
         player = self.db["players"].find_one({"id": user_id})

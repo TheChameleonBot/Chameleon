@@ -10,8 +10,9 @@ from database import database
 from objects import Deck
 from strings import get_string
 from utils.helpers import is_admin
-from utils.specific_helpers.game_helpers import wordlist, vote_buttons, vote_text, draw_buttons, word_buttons
+from utils.specific_helpers.game_helpers import wordlist, vote_buttons, draw_buttons, word_buttons
 from utils.specific_helpers.group_helpers import no_game
+from utils.helpers import player_mention_string
 
 
 def message(update: Update, context: CallbackContext):
@@ -65,7 +66,7 @@ def message(update: Update, context: CallbackContext):
         chat_data["voted"] = []
         words = wordlist(players)
         text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").format(
-            vote_text(chat_data["players"]))
+            player_mention_string(chat_data["players"]))
         buttons = vote_buttons(chat_data["players"], chat_data["game_id"])
         v_message = update.effective_message.reply_html(text, reply_markup=InlineKeyboardMarkup(buttons), quote=False)
         if chat_data["pin"]:
@@ -140,12 +141,12 @@ def vote(update: Update, context: CallbackContext):
         buttons = vote_buttons(players, chat_data["game_id"])
         words = wordlist(players)
         text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").\
-            format(vote_text(voters))
+            format(player_mention_string(voters))
         query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
     else:
         words = wordlist(players)
         text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").\
-            format(vote_text(voters))
+            format(player_mention_string(voters))
         query.edit_message_text(text, parse_mode=ParseMode.HTML)
         votes = []
         for player in players:

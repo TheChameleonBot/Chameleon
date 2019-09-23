@@ -1,5 +1,5 @@
 import random
-from database import database
+import database
 
 
 def word_list(words):
@@ -17,7 +17,7 @@ def word_list(words):
 
 class Deck:
     def __init__(self, deck_name):
-        deck = database.get_deck(deck_name)
+        deck = database.database.get_deck(deck_name)
         self.topic = random.choice(list(deck))
         self.words = deck[self.topic]
         self.word_list = word_list(self.words)

@@ -1,4 +1,3 @@
-from telegram.utils.helpers import mention_html
 from telegram import InlineKeyboardButton, KeyboardButton
 from utils.helpers import build_menu
 
@@ -11,13 +10,6 @@ def wordlist(players):
         else:
             break
     return words
-
-
-def vote_text(players):
-    text = ""
-    for player in players:
-        text += f"{mention_html(player['user_id'], player['first_name'])}" + "\n"
-    return text
 
 
 def vote_buttons(players, game_id):
