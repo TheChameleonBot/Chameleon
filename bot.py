@@ -63,7 +63,7 @@ def main():
     # take care of errors
     dp.add_error_handler(dev.error_handler)
     # start bot
-    updater.start_polling()
+    updater.start_polling(clean=True)
     updater.idle()
 
 
