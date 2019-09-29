@@ -4,6 +4,7 @@ from telegram.ext import CallbackContext
 from database import database
 from strings import get_languages, get_string
 from utils.specific_helpers import private_helpers
+from constants import DECKS_LINK, TRANSLATION_CHAT_LINK, TRANSLATIONS_LINK, HTML_STYLE_LINK
 
 
 def change_language(update: Update, context: CallbackContext):
@@ -31,3 +32,27 @@ def selected_language(update: Update, context: CallbackContext):
     languages = get_languages()
     new_language = languages[selected_lang]
     query.edit_message_text(get_string(selected_lang, "private_language_selected").format(new_language))
+
+
+def deck(update: Update, context: CallbackContext):
+    user_data = context.user_data
+    if "lang" not in user_data:
+        user_data["lang"] = database.get_language_player(update.effective_user.id)
+    lang = user_data["lang"]
+    here = get_string(lang, "here")
+    decks_link = f"<a href=\"{DECKS_LINK}\">{here}</a>"
+    group_link = f"<a href=\"{TRANSLATION_CHAT_LINK}\">{here}</a>"
+    update.effective_message.reply_html(get_string(lang, "deck").format(decks_link, group_link))
+
+
+def translation(update: Update, context: CallbackContext):
+    user_data = context.user_data
+    if "lang" not in user_data:
+        user_data["lang"] = database.get_language_player(update.effective_user.id)
+    lang = user_data["lang"]
+    here = get_string(lang, "here")
+    translations_link = f"<a href=\"{TRANSLATIONS_LINK}\">{here}</a>"
+    html_style_link = f"<a href=\"{HTML_STYLE_LINK}\">{here}</a>"
+    group_link = f"<a href=\"{TRANSLATION_CHAT_LINK}\">{here}</a>"
+    update.effective_message.reply_html(get_string(lang, "translation").format(translations_link, html_style_link,
+                                                                               group_link))

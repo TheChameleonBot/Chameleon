@@ -54,6 +54,9 @@ def main():
     # change private language of a user
     dp.add_handler(CommandHandler("language", private.change_language, Filters.private))
     dp.add_handler(CallbackQueryHandler(private.selected_language, pattern="privatelanguage"))
+    # more private commands
+    dp.add_handler(CommandHandler("translation", private.translation, Filters.private))
+    dp.add_handler(CommandHandler("deck", private.deck, Filters.private))
     # dev tools
     dp.add_handler(CommandHandler("id", dev.reply_id))
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),
