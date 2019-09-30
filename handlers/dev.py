@@ -1,3 +1,7 @@
+import json
+import os
+from json import JSONDecodeError
+
 from telegram import Update, ParseMode
 from telegram.ext import CallbackContext, Updater
 from telegram.utils.helpers import mention_html
@@ -33,7 +37,7 @@ def real_shutdown(args):
     updater.stop()
 
 
-def yaml_file(update: Update, context: CallbackContext):
+def upload(update: Update, context: CallbackContext):
     if not is_admin(context.bot, update.effective_user.id, update.effective_chat):
         update.effective_message.reply_text("Sorry, admins only ;P")
         return
@@ -42,9 +46,17 @@ def yaml_file(update: Update, context: CallbackContext):
         return
     file = update.effective_message.reply_to_message.document
     file_name = file.file_name
-    if not file_name.endswith(".yaml"):
+    if file_name.endswith(".yaml"):
+        yaml_file(file, update, context.bot)
+    elif file_name.endswith(".json"):
+        json_file(file, update)
+    else:
         update.effective_message.reply_text("You need to reply to a .yaml file... idiot")
         return
+
+
+def yaml_file(file, update: Update, bot):
+    file_name = file.file_name
     file.get_file().download("./strings/" + file_name)
     returned = new_strings(file_name)
     if "error" in returned:
@@ -65,7 +77,7 @@ def yaml_file(update: Update, context: CallbackContext):
             text += "\nThe bot will fallback to the english original in those cases until you update your file"
         else:
             text += "\nNothing special happened :)"
-        context.bot.send_document(TRANSLATION_CHANNEL_ID, file.file_id, caption=text, parse_mode=ParseMode.HTML)
+        bot.send_document(TRANSLATION_CHANNEL_ID, file.file_id, caption=text, parse_mode=ParseMode.HTML)
     else:
         text = "Hey there, thanks for submitting your file"
         if returned["missing_strings"]:
@@ -79,11 +91,45 @@ def yaml_file(update: Update, context: CallbackContext):
         update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
 
-def json_file(update: Update, _):
-    file = update.message.document
-    file.get_file().download("./decks/" + file.file_name)
+def json_file(file, update):
+    temp_name = "./decks/" + "temp_" + file.file_name
+    file.get_file().download(temp_name)
+    try:
+        new_deck = json.load(open(temp_name))
+    except JSONDecodeError as e:
+        text = f"This json file is no valid json, I got the following error: <code>{str(e)}</code>"
+        update.effective_message.reply_html(text)
+        return
+    if not isinstance(new_deck, dict):
+        update.effective_message.reply_text("This json file is not a dictionary!")
+        return
+    stripped_keys = []
+    stripped_items = []
+    for key in new_deck:
+        if not isinstance(new_deck[key], list):
+            stripped_keys.append(key)
+            new_deck.pop(key, None)
+            continue
+        temp_list = new_deck[key]
+        for item in new_deck[key]:
+            if not isinstance(item, str):
+                stripped_items.append(str(item))
+                temp_list.remove(item)
+        if stripped_items:
+            new_deck[key] = temp_list
+    text = "Hey there, thanks for submitting your file"
+    if stripped_keys:
+        stripped = "<code>{}</code>".format('\n'.join(stripped_keys))
+        text += f"\nUnfortunately, I had to remove those keys from your dictionary, since their values " \
+                f"aren't lists:\n{stripped}"
+    if stripped_items:
+        stripped = "<code>{}</code>".format('\n'.join(stripped_items))
+        text += f"\nUnfortunately, I had to remove those items from your lists, since they aren't strings:\n{stripped}"
+    if text == "Hey there, thanks for submitting your file":
+        text += "\nNo error happend, good for you!"
+    update.effective_message.reply_html(text)
+    os.rename(temp_name, "./decks/" + file.file_name)
     database.reload_decks()
-    update.effective_message.reply_text("Done")
 
 
 def error_handler(update: Update, context: CallbackContext):

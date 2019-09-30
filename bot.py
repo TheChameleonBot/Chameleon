@@ -2,7 +2,7 @@ from telegram.ext import (Updater, CommandHandler, CallbackQueryHandler, Filters
 import functools
 import logging
 
-from config import BOT_TOKEN, ADMINS
+from config import BOT_TOKEN
 from constants import TRANSLATION_CHAT_ID
 from handlers import group, game, dev, group_settings, private
 
@@ -63,8 +63,7 @@ def main():
     dp.add_handler(CommandHandler("id", dev.reply_id))
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),
                                   Filters.user(208589966)))
-    dp.add_handler(CommandHandler("translation", dev.yaml_file, Filters.chat(TRANSLATION_CHAT_ID)))
-    dp.add_handler(MessageHandler(Filters.document.mime_type("text/plain") & Filters.user(ADMINS), dev.json_file))
+    dp.add_handler(CommandHandler("upload", dev.upload, Filters.chat(TRANSLATION_CHAT_ID)))
     # take care of errors
     dp.add_error_handler(dev.error_handler)
     # start bot
