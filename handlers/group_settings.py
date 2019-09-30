@@ -1,5 +1,5 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
-from telegram.error import Unauthorized
+from telegram.error import Unauthorized, BadRequest
 from telegram.ext import CallbackContext
 
 from constants import TRANSLATION_CHAT_LINK
@@ -20,8 +20,16 @@ def admins_only(func):
         else:
             lang = user_data["lang"]
         query = update.callback_query
-        chat_id = query.data.split("_")[1]
-        chat = context.bot.get_chat(chat_id)
+        chat_id = int(query.data.split("_")[1])
+        try:
+            chat = context.bot.get_chat(chat_id)
+        except BadRequest:
+            new_chat_id = database.get_new_id(chat_id)
+            if new_chat_id:
+                chat = context.bot.get_chat(chat_id)
+            else:
+                query.edit_message_text(get_string(lang, "group_not_found"))
+                return
         if not helpers.is_admin(context.bot, update.effective_user.id, chat):
             query.edit_message_text(get_string(lang, "no_admin_settings"))
             return
@@ -74,6 +82,9 @@ def start(update: Update, context: CallbackContext):
         update.effective_message.reply_text(get_string(lang, "no_admin_settings"))
         return
     buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
+    if not buttons:
+        context.bot.send_message(user_id, get_string(lang, "group_not_found"))
+        return
     context.bot.send_message(user_id, get_string(lang, "group_setting_text"),
                              reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
 

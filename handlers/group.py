@@ -167,3 +167,10 @@ def greeting(update: Update, context: CallbackContext):
     lang = database.get_language_chat(update.effective_chat.id)
     context.chat_data["lang"] = lang
     update.effective_message.reply_text(get_string(lang, "greeting"))
+
+
+def change_id(update: Update, _):
+    message = update.effective_message
+    old_id = message.migrate_from_chat_id
+    new_id = update.effective_chat.id
+    database.change_id(old_id, new_id)

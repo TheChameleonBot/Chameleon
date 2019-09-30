@@ -9,6 +9,12 @@ def group_settings_buttons(settings, chat_id, refresh_id=0):
     buttons = []
     refresh_button = []
     group_settings = database.get_all_settings(chat_id)
+    if not group_settings:
+        new_id = database.get_new_id(chat_id)
+        if new_id:
+            group_settings = database.get_all_settings(chat_id)
+        else:
+            return None
     for setting in settings:
         if setting == "language":
             buttons.append(InlineKeyboardButton(f"{settings[setting]}: {get_language(group_settings['lang'])}",

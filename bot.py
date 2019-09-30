@@ -51,6 +51,8 @@ def main():
     dp.add_handler(CallbackQueryHandler(group_settings.pin, pattern=r"(?=.*groupsetting)(?=.*pin)"))
     # group hardcore
     dp.add_handler(CallbackQueryHandler(group_settings.hardcore_game, pattern=r"(?=.*groupsetting)(?=.*hardcore)"))
+    # group changes id
+    dp.add_handler(MessageHandler(Filters.status_update.migrate, group.change_id))
     # change private language of a user
     dp.add_handler(CommandHandler("language", private.change_language, Filters.private))
     dp.add_handler(CallbackQueryHandler(private.selected_language, pattern="privatelanguage"))

@@ -56,6 +56,9 @@ class Database:
     def get_hardcore_game_setting(self, chat_id):
         return self.db["groups"].find_one({"id": chat_id})["hardcore_game"]
 
+    def get_new_id(self, chat_id):
+        return self.db["groups"].find_one({"old_id": chat_id})["id"]
+
     # get part player
     def get_new_player(self, player_ids):
         for player_id in player_ids:
@@ -147,6 +150,9 @@ class Database:
         else:
             self.db["groups"].update_one({"id": chat_id}, {"$set": {"hardcore_game": True}})
             return True
+
+    def insert_group_new_id(self, old_id, new_id):
+        self.db["groups"].update_one({"id": old_id}, {"$set": {"id": new_id, "old_id": old_id}})
 
     # insert part player
 
