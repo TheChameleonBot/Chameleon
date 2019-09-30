@@ -1,6 +1,7 @@
 # put the people who worked on the translation here if you/they want to.
 authors:
   - Appfel
+  - der grpßartige, einzigartige @Poolitzer, der den Bot entwickelt
 # put the name of your language here, in their native translation
 language: "Deutsch"# send when the bot gets added to a group
 greeting: "Hello there. I am The Chameleon bot, a telegram bot which brings the game The Chameleon in your group! In order to change my settings, you can run /settings (admin restricted in bigger groups). Or just hit /start to start a game with me :)"
@@ -120,8 +121,8 @@ admin_blocked_bot: "Solange du mich blockierst, weigere ich mich strikt!"
 # the setting message admins of groups greet greeted with in PM
 group_setting_text: "Hallo! Du möchtest die Einstellungen füe die Gruppe ändern? Klingt gut! Lass mich dir \"kurz\" erklären, was was ist:\n\n
 <b>Aktualisieren</b>: Aktualisiere diese Einstellungen. Kann man benutzen, wenn man vermutet, dass andere Admins die Einstellungen verändert haben. Muss man aber nicht.\n\nn
-<b>Sprache</b>: Ändere meine Sprache. Du spricht eine tolle Sprache und möchtest die Sprache mir beibringen? Okay, schau mal im @TheChameleonSupport vorbei\n\n
-<b>Stapel</b>: Der Stapel an Themen, die ich verwende. Du hast einen Themenvorschlag? Gut, schau in @TheChameleonSupport vorbei.\n\n
+<b>Sprache</b>: Ändere meine Sprache. Du spricht eine tolle Sprache und möchtest die Sprache mir beibringen? Okay, sende mir einfach /translation\n\n
+<b>Stapel</b>: Der Stapel an Themen, die ich verwende. Du hast einen Themenvorschlag? Gut, benutze einfach /deck\n\n
 <b>Weniger</b>: Bei drei Spielern bekommt das Chamäleon 2 Möglichkeiten, das Wort zu erraten. Wenn aktiv.\n\n
 <b>Mehr</b>: Bei 7 oder 8 Spielern wird, wenn aktiv, die Wortliste verschwinden, wenn jeder seinen Tipp abgegeben hat. Das Chamäleon hat es dann schwerer, das korrekte Wort zu erraten\n\n
 <b>Wettbewerb</b>: Wenn aktiv endet das Spiel nicht nach einer Runde, sondern wir machen einen Turnier.\n• Chamäleon wird nicht demaskiert: 2 Punkte für das Chamäleon\n• Chamäleon wird entdeckt, aber errät das Wort: 1 Punkt für das Chamäleon\n• Chamäleon wird demaskiert und errät das Wort nicht: 2 Punkte für die anderen Spieler\n\n
@@ -140,9 +141,9 @@ group_setting_buttons:
 # shown to the user when he presses refresh in the settings
 group_setting_refresh: "Die Einstellungen wurden aktualisiert!"
 # change language of a group
-group_setting_languages: "Die aktuelle Sprache in der Gruppe ist <b>{0}</b>. Wähle eine andere Sprache aus - oder die Gleiche. Mir doch egal.. Falls du einen Fehler melden oder eine Sprache übersetzen möchtest, trete unser Übersetzungsgruppe bei: {1}"
+group_setting_languages: "Die aktuelle Sprache in der Gruppe ist <b>{0}</b>. Wähle eine andere Sprache aus - oder die Gleiche. Mir doch egal.. Falls du einen Fehler melden oder eine Sprache übersetzen möchtest, haue /translation (und nein, hit mit hauen zu übersetzen ist kein Fehler, aber man könnte auch <b>drücken</b> sagen)"
 # change deck of a group
-group_setting_decks: "Der aktuell gewählte Stapel ist <b>{0}</b>. Wähle einen Stapel zum Wechseln aus oder wähle den Gleichen und ändere nichts. Falls du selber ein Deck kreieren (oder übersetzen) möchtest, tritt unserer Übersetzungsgruppe bei: {1}"
+group_setting_decks: "Der aktuell gewählte Stapel ist <b>{0}</b>. Wähle einen Stapel zum Wechseln aus oder wähle den Gleichen und ändere nichts. Falls du selber ein Deck kreieren (oder übersetzen) möchtest, nutze /deck"
 # activate fewer setting of group
 group_setting_fewer_activate: "Die Option \"Weniger\" ist aktiviert. Das Chamäleon hat bei 3 Spielern mehr als eine Chance."
 # deactivate fewer setting of group
@@ -177,6 +178,7 @@ private_language: "Hallo! Aktuell spreche ich {0}. Über die Buttons unten lerne
 private_language_selected: "Okay, from now an spreche ich {0} mit dir"
 # if a random idiot presses buttons
 user_not_in_game: "Hey, du musst in dem Spiel sein, um das zu tun. Ja, auch du, Phillip! Vielleicht in der nächsten Runde?"
+# wusstest du, dass ich (Appfel) Ostereier liebe? Du hast eins gefunden. Schreibe mir eine PM mit "ChamäleonEi", ich würde mich freuen!
 # the rules, presented when someone hasen't played the game yet
 rules: "Oh hey, wir haben neue Spieler. Das Spiel wird in 15 Sekunden starten, lasst mich nur kurz die Regeln für die Neuen präsentieren:\n\n
 <b>Chamäleon - das Spiel</b> <i>(deutsche Anleitung, angepasst an den Telegram Bot)</i>\n\n
@@ -189,3 +191,13 @@ rules: "Oh hey, wir haben neue Spieler. Das Spiel wird in 15 Sekunden starten, l
 • Nachdem jeder ein Wort gesagt hat, beginnt eine Abstimmphase - jeder wählt den, von dem er denkt, dass er das Chamäleon ist. Die Rolle desjenigen, der die meiste Stimmen bekommen hat, wird aufgedeckt\n
 • Wenn es ein normaler Spieler ist, gewinnt das Chamäleon!
 • Wenn es das Chamäleon ist, wird es versuchen, das korrekte Wort zu erraten. Wenn das geratene Wort tatsächlich das richtige ist, gewinnt es; ansonsten die Spieler!"
+# used in the strings below
+here: "hier"
+# the deck command reply
+# {0} and {1} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+deck: "Stapel sind Sammlungen von \"Karten\". Du kannst neue Stapel hinzufügen oder bestehende bearbeiten, indem du die json-Datei nutzt. Solltest du dich an einen neuen Stapel wagen bedenke bitte den Stapel-Namen als Dateinamen festzulegen. Es sollte schön kurz sein und der erste Buchstabe sollte groß sein, da es als Knöpfchen angezeigt wird und es dann besser aussieht. Dass du dich mit gutem Aussehen nicht auskennst ist klar, mach es trotzdem, bitte! NureinWort! In der Datei legst du \"keys\" an, welche das Thema sind und dann legst du die 16 Wörter fest. 16 sind nicht Pflicht, sind aber die beste Anzahl. Du möchtest schonmal fertige Stapel sehen? Bitte {0} lang. Und um mit uns zu sprechen bitte mal {1} reinschauen, um Fragen zu klären oder eine fertige Datei von uns zerpflüc... äh ich meine eine fertige Datei hinzuzufügen."
+# the translation command reply
+# {0} - {2} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+translation: "Man kann den Bot übersetzen. Nicht so gut wie für Deutsch, aber immerhin ;-) Wir arbeiten mit .yaml Dateien, die man in jedem poppeligen Textverarbeitungsprogramm bearbeiten kann. Aber ich mag Notepad++ oder Sublime Text ganz gerne :-) Sag bitte meinen Entwicklern nicht, dass ich Lieblingsprogramme habe! Egal. Wenn du diese schier unmögliche Aufgabe, ja man könnte auch Herausforderung sagen, haben wir {0} fertige Übersetzungen. Lade eine bestehende Version, am Besten en.yaml (immer aktuell), übersetze es mit dem ISO 639-1 Code (ja, auch ich hasse Poolitzer dafür! Schau einfach mal bei Ecosia nach, ist dann recht easy). Ein anderer ISO 639 code wäre auch möglich. Stelle sicher, dass das Programm YAML erkannt hat, dann sind die Texte in Anführungszeichen oder Gänsefüßchen hervorgehoben, die sind zu übersetzen. Wenn du etwas tatsächlich in Anführungszeichen brauchst nutze <code>\\\"</code>. Die Akkoladen (besser bekannt als geschweifte Klammern) bitte beibehalten, das wird dann im Ergebnis ersetzt. Formatierungen in Telegram funktionieren mit HTML Tags, siehe {1}. Wenn du fertig und zufrieden bist melde dich {2}, wir helfen dir bei Fragen oder mit dem hinzufügen zum Bot. Oder wir machen deine Arbeit runter..."
+# if the group id is not known. Can happen if someone obfuscates the start command or the groups id changed while the bot is offline
+group_not_found: "Hey, tut mir leid, aber ich kann diese gruppen id nicht in meiner datenbank finden. Entweder will mich einer von uns beiden, der kein bot ist, verarschen; oder ich war einfach offline. Anyway, sende einfach /settings in der Gruppe, das sollte das Problem ein für alle mal lösen."
