@@ -3,6 +3,7 @@ import string
 
 from telegram import (Update, InlineKeyboardMarkup, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove,
                       ChatPermissions, InlineKeyboardButton)
+from telegram.error import BadRequest
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
 
@@ -340,7 +341,10 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
             context.bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
             if chat_data["pin"]:
                 if isinstance(chat_data["pin"], int):
-                    context.bot.pin_chat_message(chat_id, chat_data["pin"], True)
+                    try:
+                        context.bot.pin_chat_message(chat_id, chat_data["pin"], True)
+                    except BadRequest:
+                        context.bot.unpin_chat_message(chat_id)
                 else:
                     context.bot.unpin_chat_message(chat_id)
             chat_data.clear()
