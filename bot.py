@@ -59,6 +59,7 @@ def main():
     # more private commands
     dp.add_handler(CommandHandler("translation", private.translation, Filters.private))
     dp.add_handler(CommandHandler("deck", private.deck, Filters.private))
+    dp.add_handler(CommandHandler("start", private.start, Filters.private), 1)
     # dev tools
     dp.add_handler(CommandHandler("id", dev.reply_id))
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),

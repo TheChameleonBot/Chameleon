@@ -56,3 +56,12 @@ def translation(update: Update, context: CallbackContext):
     group_link = f"<a href=\"{TRANSLATION_CHAT_LINK}\">{here}</a>"
     update.effective_message.reply_html(get_string(lang, "translation").format(translations_link, html_style_link,
                                                                                group_link))
+
+
+def start(update: Update, context: CallbackContext):
+    user_data = context.user_data
+    if "lang" not in user_data:
+        user_data["lang"] = database.get_language_player(update.effective_user.id)
+    if context.args:
+        return
+    update.effective_message.reply_text(get_string(user_data["lang"], "greeting_private"))
