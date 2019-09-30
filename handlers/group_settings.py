@@ -76,15 +76,28 @@ def start(update: Update, context: CallbackContext):
         lang = user_data["lang"]
     if not context.args:
         return
-    chat_id = int(context.args[0])
-    chat = context.bot.get_chat(chat_id)
+    # not necessary, but pycharm won't believe me that...
+    chat_id = 0
+    try:
+        chat_id = int(context.args[0])
+        chat = context.bot.get_chat(chat_id)
+    except ValueError:
+        context.bot.send_message(user_id, get_string(lang, "group_not_found"))
+        return
+    except BadRequest:
+        try:
+            new_id = database.get_new_id(chat_id)
+            if new_id:
+                chat = context.bot.get_chat(int(new_id))
+            else:
+                raise BadRequest
+        except BadRequest:
+            context.bot.send_message(user_id, get_string(lang, "group_not_found"))
+            return
     if not helpers.is_admin(context.bot, update.effective_user.id, chat):
         update.effective_message.reply_text(get_string(lang, "no_admin_settings"))
         return
     buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    if not buttons:
-        context.bot.send_message(user_id, get_string(lang, "group_not_found"))
-        return
     context.bot.send_message(user_id, get_string(lang, "group_setting_text"),
                              reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
 
