@@ -237,16 +237,6 @@ def hardcore_game(update: Update, context: CallbackContext):
 
 
 @admins_only
-def back(update: Update, context: CallbackContext):
-    query = update.callback_query
-    chat_id = int(query.data.split("_")[1])
-    lang = context.user_data["lang"]
-    buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    query.edit_message_text(get_string(lang, "group_setting_text"), reply_markup=InlineKeyboardMarkup(buttons),
-                            parse_mode=ParseMode.HTML)
-
-
-@admins_only
 def refresh(update: Update, context: CallbackContext):
     query = update.callback_query
     chat_id = int(query.data.split("_")[1])
