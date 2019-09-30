@@ -81,7 +81,7 @@ def yaml_file(update: Update, context: CallbackContext):
 
 def json_file(update: Update, _):
     file = update.message.document
-    file.get_file().download("./cards/" + file.file_name)
+    file.get_file().download("./decks/" + file.file_name)
     database.reload_decks()
     update.effective_message.reply_text("Done")
 
