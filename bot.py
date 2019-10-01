@@ -64,6 +64,9 @@ def main():
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),
                                   Filters.user(208589966)))
     dp.add_handler(CommandHandler("upload", dev.upload, Filters.chat(TRANSLATION_CHAT_ID)))
+    # help commands
+    dp.add_handler(CommandHandler("help", group.help_message, Filters.group))
+    dp.add_handler(CommandHandler("help", private.help_message, Filters.private))
     # take care of errors
     dp.add_error_handler(dev.error_handler)
     # start bot

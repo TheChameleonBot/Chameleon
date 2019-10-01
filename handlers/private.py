@@ -65,3 +65,10 @@ def start(update: Update, context: CallbackContext):
     if context.args:
         return
     update.effective_message.reply_text(get_string(user_data["lang"], "greeting_private"))
+
+
+def help_message(update: Update, context: CallbackContext):
+    user_data = context.user_data
+    if "lang" not in user_data:
+        user_data["lang"] = database.get_language_player(update.effective_user.id)
+    update.effective_message.reply_text(get_string(user_data["lang"], "help_private"))

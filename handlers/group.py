@@ -174,3 +174,9 @@ def change_id(update: Update, _):
     old_id = message.migrate_from_chat_id
     new_id = update.effective_chat.id
     database.change_id(old_id, new_id)
+
+
+def help_message(update: Update, context: CallbackContext):
+    if "lang" not in context.chat_data:
+        context.chat_data["lang"] = database.get_language_chat(update.effective_chat.id)
+    update.effective_message.reply_text(get_string(context.chat_data["lang"], "help_group"))

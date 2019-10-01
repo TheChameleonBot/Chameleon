@@ -207,3 +207,7 @@ translation: "You can translate the whole bot :O The files are .yaml files, they
 group_not_found: "Hey, I am sorry, but I can't find your group in my database. Either you are playing tricks here, or its my fault because I was offline. In that case, run /settings from the group chat again :)"
 # start message in private
 greeting_private: "Hey there, I am the Chameleon Bot :) You can play the Chameleon Game with me, just add me to your group. If you want to change the language I speak to you in private, hit /language. And don't forget to smile. At least once in a while."
+# help message in group.
+help_group: "Hey there, you want some help, great. I basically only have two commands in groups you should need:\n/start - start a game\n/settings - [admins only in bigger groups] change the settings of me in the group\n\nApart from that, I also respond to those commands:\n/abort_game - [admins only in bigger groups] abort a game if there is one running right now\n/reload_admins - since admins are cached for an hour, you might want to run this if the bot doesn't recognize you as an admin, or isn't supposed to do so anymore :O\n/id - show the groups id"
+# help message in private.
+help_private: "Hey there, you want some help, great. I respond to the following commands in private:\n/language - change the language I speak to you in the private chat\n/translation - show you a help message how to do translations\n/deck - show you how to add your own deck"
