@@ -29,6 +29,9 @@ def main():
     dp.add_handler(CallbackQueryHandler(game.vote, pattern="vote"))
     dp.add_handler(CallbackQueryHandler(game.draw, pattern="draw"))
     dp.add_handler(MessageHandler(Filters.group & Filters.text, game.guess), 1)
+    # nextgame waitlist
+    dp.add_handler(CommandHandler("nextgame", group.nextgame_command, Filters.group))
+    dp.add_handler(CommandHandler("start", group.nextgame_start, Filters.private), 2)
     # group menu
     dp.add_handler(CommandHandler("settings", group_settings.group_setting, Filters.group))
     dp.add_handler(CommandHandler("start", group_settings.start, Filters.private))

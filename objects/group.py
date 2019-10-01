@@ -11,3 +11,4 @@ class Group:
         self.hardcore_game = False
         self.games_played = 0
         self.tournaments_played = 0
+        self.nextgame = []

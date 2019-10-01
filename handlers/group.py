@@ -1,4 +1,5 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram.error import Unauthorized
 from telegram.ext import CallbackContext, Dispatcher, Job
 
 from strings import get_string
@@ -48,6 +49,17 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
                "players": [{"user_id": user_id, "first_name": first_name}], "lang": lang, "message": message.message_id,
                "left_players": {}, "settings": wanted_settings}
     chat_data.update(payload)
+    chat_link = f"<a href={update.effective_chat.link}>{update.effective_chat.title}</a>" if update.effective_chat.link\
+        else f"<b>{update.effective_chat.title}</b>"
+    for player_id in database.get_nextgame_ids(chat_id):
+        if player_id == user_id:
+            continue
+        try:
+            context.bot.send_message(player_id, get_string(lang, "nextgame").format(chat_link),
+                                     parse_mode=ParseMode.HTML)
+        except Unauthorized:
+            database.remove_group_nextgame(chat_id, [player_id])
+            database.insert_player_pm(user_id, False)
 
 
 def player_join(update: Update, context: CallbackContext):
@@ -145,11 +157,13 @@ def timer(context):
     if not len(data["players"]) == MAX_PLAYERS:
         context.bot.edit_message_reply_markup(chat_id, data["message"], reply_markup=None)
     if len(data["players"]) >= 3:
-        if database.get_new_player([all_player["user_id"] for all_player in data["players"]]):
+        player_ids = [all_player["user_id"] for all_player in data["players"]]
+        if database.get_new_player(player_ids):
             context.bot.send_message(chat_id, get_string(lang, "rules"), parse_mode=ParseMode.HTML)
             context.job_queue.run_once(delay, 15, [context, data, chat_id, dp])
         else:
             group_helpers.yes_game(context, data, chat_id, dp)
+        database.remove_group_nextgame(chat_id, player_ids)
     else:
         text = get_string(lang, "game_failed")
         context.bot.send_message(chat_id, text, reply_to_message_id=data["message"])
@@ -180,3 +194,54 @@ def help_message(update: Update, context: CallbackContext):
     if "lang" not in context.chat_data:
         context.chat_data["lang"] = database.get_language_chat(update.effective_chat.id)
     update.effective_message.reply_text(get_string(context.chat_data["lang"], "help_group"))
+
+
+def nextgame_command(update: Update, context: CallbackContext):
+    user_id = update.effective_user.id
+    chat_id = update.effective_chat.id
+    pm = database.get_pm_player(user_id)
+    new = database.insert_group_nextgame(chat_id, user_id)
+    if "lang" not in context.chat_data:
+        context.chat_data["lang"] = database.get_language_chat(chat_id)
+    lang = context.chat_data["lang"]
+    chat_link = f"<a href={update.effective_chat.link}>{update.effective_chat.title}</a>" if update.effective_chat.link\
+        else f"<b>{update.effective_chat.title}</b>"
+    if pm:
+        try:
+            if new:
+                context.bot.send_message(user_id, get_string(lang, "nextgame_added").format(chat_link),
+                                         parse_mode=ParseMode.HTML)
+            else:
+                context.bot.send_message(user_id, get_string(lang, "nextgame_removed").format(chat_link),
+                                         parse_mode=ParseMode.HTML)
+        except Unauthorized:
+            update.effective_message.reply_text(get_string(lang, "nextgame_block"))
+            database.insert_player_pm(user_id, False)
+    else:
+        button = [[InlineKeyboardButton(get_string(lang, "no_pm_settings_button"),
+                                        url=f"https://t.me/thechameleonbot?start=nextgame_{chat_id}")]]
+        update.effective_message.reply_text(get_string(lang, "nextgame_pm"), reply_markup=InlineKeyboardMarkup(button))
+
+
+def nextgame_start(update: Update, context: CallbackContext):
+    user_id = update.effective_user.id
+    database.insert_player_pm(user_id, True)
+    context.args = context.args[0].split("_") if context.args else None
+    if not context.args or context.args[0] != "nextgame":
+        return
+    try:
+        chat_id = int(context.args[1])
+        new_id = database.get_new_id(chat_id)
+        if new_id:
+            chat_id = new_id
+        lang = database.get_language_chat(chat_id)
+    except ValueError:
+        context.bot.send_message(user_id, get_string("en", "group_not_found"))
+        return
+    new = database.insert_group_nextgame(chat_id, user_id)
+    if new:
+        context.bot.send_message(user_id, get_string(lang, "nextgame_added").format(""),
+                                 parse_mode=ParseMode.HTML)
+    else:
+        context.bot.send_message(user_id, get_string(lang, "nextgame_removed").format(""),
+                                 parse_mode=ParseMode.HTML)

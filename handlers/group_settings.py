@@ -58,28 +58,30 @@ def group_setting(update: Update, context: CallbackContext):
         # this means the bot was blocked wtf
         except Unauthorized:
             update.effective_message.reply_text(get_string(lang, "admin_blocked_bot"))
+            database.insert_player_pm(user_id, False)
     else:
         button = [[InlineKeyboardButton(get_string(lang, "no_pm_settings_button"),
-                                        url=f"https://t.me/thechameleonbot?start={chat_id}")]]
+                                        url=f"https://t.me/thechameleonbot?start=settings_{chat_id}")]]
         update.effective_message.reply_text(get_string(lang, "no_pm_settings"),
                                             reply_markup=InlineKeyboardMarkup(button))
 
 
 def start(update: Update, context: CallbackContext):
     user_id = update.effective_user.id
-    database.insert_player_pm(user_id)
+    database.insert_player_pm(user_id, True)
     user_data = context.user_data
     if "lang" not in user_data:
         lang = database.get_language_player(user_id)
         user_data["lang"] = lang
     else:
         lang = user_data["lang"]
-    if not context.args:
+    context.args = context.args[0].split("_") if context.args else None
+    if not context.args or context.args[0] != "settings":
         return
     # not necessary, but pycharm won't believe me that...
     chat_id = 0
     try:
-        chat_id = int(context.args[0])
+        chat_id = int(context.args[1])
         chat = context.bot.get_chat(chat_id)
     except ValueError:
         context.bot.send_message(user_id, get_string(lang, "group_not_found"))

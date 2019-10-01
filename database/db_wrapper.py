@@ -57,7 +57,12 @@ class Database:
         return self.db["groups"].find_one({"id": chat_id})["hardcore_game"]
 
     def get_new_id(self, chat_id):
-        return self.db["groups"].find_one({"old_id": chat_id})["id"]
+        existing = self.db["groups"].find_one({"old_id": chat_id})
+        if existing:
+            return existing["id"]
+
+    def get_nextgame_ids(self, chat_id):
+        return self.db["groups"].find_one({"id": chat_id})["nextgame"]
 
     # get part player
     def get_new_player(self, player_ids):
@@ -154,10 +159,20 @@ class Database:
     def insert_group_new_id(self, old_id, new_id):
         self.db["groups"].update_one({"id": old_id}, {"$set": {"id": new_id, "old_id": old_id}})
 
+    def insert_group_nextgame(self, chat_id, player_id):
+        result = self.db["groups"].update_one({"id": chat_id}, {"$addToSet": {"nextgame": player_id}})
+        if result.modified_count == 0:
+            self.db["groups"].update_one({"id": chat_id}, {"$pull": {"nextgame": player_id}})
+            return False
+        return True
+
+    def remove_group_nextgame(self, chat_id, player_ids):
+        self.db["groups"].update_one({"id": chat_id}, {"$pull": {"nextgame": {"$in": player_ids}}})
+
     # insert part player
 
-    def insert_player_pm(self, user_id):
-        self.db["players"].update_one({"id": user_id}, {"$set": {"pm": True}})
+    def insert_player_pm(self, user_id, boolean):
+        self.db["players"].update_one({"id": user_id}, {"$set": {"pm": boolean}})
 
     def insert_player_lang(self, user_id, lang):
         self.db["players"].update_one({"id": user_id}, {"$set": {"lang": lang}})
