@@ -39,8 +39,7 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
         else:
             wanted_settings.append(get_string(lang, "deactivated"))
     text = get_string(lang, "start_game").format(mention, mention, *wanted_settings)
-    message = update.message.reply_html(text,
-                                        reply_markup=InlineKeyboardMarkup(button))
+    message = update.effective_message.reply_html(text, reply_markup=InlineKeyboardMarkup(button))
     payload = {"dp": dp, "players": [{"user_id": user_id, "first_name": first_name}], "message": message.message_id,
                "lang": lang, "chat_id": chat_id, "known_players": [], "tutorial": False,
                "starter": {"user_id": user_id, "first_name": first_name}, "group_settings": group_settings}

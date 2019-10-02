@@ -22,7 +22,7 @@ def message(update: Update, context: CallbackContext):
     if "chameleon" not in chat_data or "voted" in chat_data:
         return
     if not chat_data["hardcore_game"]:
-        if update.message.text.startswith("!"):
+        if update.effective_message.text.startswith("!"):
             return
     user_id = update.effective_user.id
     if user_id not in [user["user_id"] for user in chat_data["players"]]:
@@ -340,7 +340,7 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
                                                                          "\n".join(contestant_mentions_points))
             context.bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
             if chat_data["pin"]:
-                if isinstance(chat_data["pin"], int):
+                if not isinstance(chat_data["pin"], bool):
                     try:
                         context.bot.pin_chat_message(chat_id, chat_data["pin"], True)
                     except BadRequest:
@@ -390,8 +390,11 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
     else:
         database.end_game(chat_id, player_ids, chameleon_id, winner_ids, chat_data["starter"]["user_id"])
         if chat_data["pin"]:
-            if isinstance(chat_data["pin"], int):
-                context.bot.pin_chat_message(chat_id, chat_data["pin"], True)
+            if not isinstance(chat_data["pin"], bool):
+                try:
+                    context.bot.pin_chat_message(chat_id, chat_data["pin"], True)
+                except BadRequest:
+                    context.bot.unpin_chat_message(chat_id)
             else:
                 context.bot.unpin_chat_message(chat_id)
         chat_data.clear()
