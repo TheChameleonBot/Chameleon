@@ -53,8 +53,9 @@ def main():
     dp.add_handler(CallbackQueryHandler(group_settings.pin, pattern=r"(?=.*groupsetting)(?=.*pin)"))
     # group restrict
     dp.add_handler(CallbackQueryHandler(group_settings.restrict, pattern=r"(?=.*groupsetting)(?=.*restrict)"))
-    # group changes id
+    # group changes
     dp.add_handler(MessageHandler(Filters.status_update.migrate, group.change_id))
+    dp.add_handler(MessageHandler(Filters.status_update.new_chat_title, group.change_title))
     # change private language of a user
     dp.add_handler(CommandHandler("language", private.change_language, Filters.private))
     dp.add_handler(CallbackQueryHandler(private.selected_language, pattern="privatelanguage"))
@@ -62,6 +63,8 @@ def main():
     dp.add_handler(CommandHandler("translation", private.translation, Filters.private))
     dp.add_handler(CommandHandler("deck", private.deck, Filters.private))
     dp.add_handler(CommandHandler("start", private.start, Filters.private), 1)
+    dp.add_handler(CommandHandler("settings_help", private.settings_help))
+    dp.add_handler(CallbackQueryHandler(private.settings_help_edit, pattern="settingshelp"))
     # dev tools
     dp.add_handler(CommandHandler("id", dev.reply_id))
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),

@@ -48,12 +48,14 @@ def group_setting(update: Update, context: CallbackContext):
     user_lang = database.get_language_player(user_id)
     pm = database.get_pm_player(user_id)
     context.user_data["lang"] = user_lang
+    database.insert_group_title(chat_id, update.effective_chat.title, update.effective_chat.link)
     if pm:
         try:
             # yes, its not a string, I don't change the functions name for this you fucker
+            chat_link = helpers.chat_link(update.effective_chat.title, update.effective_chat.link)
             buttons = group_settings_helpers.group_settings_buttons(get_string(user_lang, "group_setting_buttons"),
                                                                     chat_id)
-            context.bot.send_message(user_id, get_string(user_lang, "group_setting_text"),
+            context.bot.send_message(user_id, get_string(user_lang, "group_setting_text").format(chat_link),
                                      reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
         # this means the bot was blocked wtf
         except Unauthorized:
@@ -96,11 +98,13 @@ def start(update: Update, context: CallbackContext):
         except BadRequest:
             context.bot.send_message(user_id, get_string(lang, "group_not_found"))
             return
+    database.insert_group_title(chat_id, chat.title, chat.link)
     if not helpers.is_admin(context.bot, update.effective_user.id, chat):
         update.effective_message.reply_text(get_string(lang, "no_admin_settings"))
         return
     buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    context.bot.send_message(user_id, get_string(lang, "group_setting_text"),
+    chat_link = helpers.chat_link(chat.title, chat.link)
+    context.bot.send_message(user_id, get_string(lang, "group_setting_text").format(chat_link),
                              reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
 
 
@@ -133,9 +137,7 @@ def select_language(update: Update, context: CallbackContext):
     lang = context.user_data["lang"]
     database.insert_group_lang(chat_id, selected_lang)
     # yes, its not a string, I don't change the functions name for this you fucker
-    buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    text = get_string(lang, "group_setting_text")
-    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    edit(query, chat_id, lang)
 
 
 @admins_only
@@ -158,10 +160,7 @@ def select_deck(update: Update, context: CallbackContext):
     selected_deck = data[2]
     lang = context.user_data["lang"]
     database.insert_group_deck(chat_id, selected_deck)
-    # yes, its not a string, I don't change the functions name for this you fucker
-    buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    text = get_string(lang, "group_setting_text")
-    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    edit(query, chat_id, lang)
 
 
 @admins_only
@@ -174,9 +173,7 @@ def fewer(update: Update, context: CallbackContext):
         query.answer(get_string(lang, "group_setting_fewer_activate"))
     else:
         query.answer(get_string(lang, "group_setting_fewer_deactivate"))
-    buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    text = get_string(lang, "group_setting_text")
-    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    edit(query, chat_id, lang)
 
 
 @admins_only
@@ -189,9 +186,7 @@ def more(update: Update, context: CallbackContext):
         query.answer(get_string(lang, "group_setting_more_activate"))
     else:
         query.answer(get_string(lang, "group_setting_more_deactivate"))
-    buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    text = get_string(lang, "group_setting_text")
-    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    edit(query, chat_id, lang)
 
 
 @admins_only
@@ -204,9 +199,7 @@ def tournament(update: Update, context: CallbackContext):
         query.answer(get_string(lang, "group_setting_tournament_activate"))
     else:
         query.answer(get_string(lang, "group_setting_tournament_deactivate"))
-    buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    text = get_string(lang, "group_setting_text")
-    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    edit(query, chat_id, lang)
 
 
 @admins_only
@@ -225,9 +218,7 @@ def pin(update: Update, context: CallbackContext):
     else:
         database.insert_group_pin(chat_id)
         query.answer(get_string(lang, "group_setting_pin_deactivate"))
-    buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    text = get_string(lang, "group_setting_text")
-    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    edit(query, chat_id, lang)
 
 
 @admins_only
@@ -246,9 +237,7 @@ def restrict(update: Update, context: CallbackContext):
     else:
         database.insert_group_restrict(chat_id)
         query.answer(get_string(lang, "group_setting_restrict_deactivate"))
-    buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
-    text = get_string(lang, "group_setting_text")
-    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    edit(query, chat_id, lang)
 
 
 @admins_only
@@ -257,8 +246,13 @@ def refresh(update: Update, context: CallbackContext):
     chat_id = int(query.data.split("_")[1])
     refresh_id = int(query.data.split("_")[3]) + 1
     lang = context.user_data["lang"]
-    query.answer(get_string(lang, "group_setting_refresh"))
+    edit(query, chat_id, lang, refresh_id)
+
+
+def edit(query, chat_id, lang, refresh_id=0):
     buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id,
                                                             refresh_id)
-    query.edit_message_text(get_string(lang, "group_setting_text"), reply_markup=InlineKeyboardMarkup(buttons),
-                            parse_mode=ParseMode.HTML)
+    chat_details = database.get_group_title(chat_id)
+    chat_link = helpers.chat_link(chat_details["title"], chat_details["link"])
+    text = get_string(lang, "group_setting_text".format(chat_link))
+    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)

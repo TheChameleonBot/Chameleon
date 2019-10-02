@@ -30,3 +30,7 @@ def player_mention_string(players):
     for player in players:
         text += f"{mention_html(player['user_id'], player['first_name'])}" + "\n"
     return text
+
+
+def chat_link(title, link):
+    return f"<a href={link}>{title}</a>" if link else f"<b>{title}</b>"

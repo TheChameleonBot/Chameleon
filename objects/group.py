@@ -2,6 +2,8 @@ class Group:
     def __init__(self, group_id):
         self.id = group_id
         self.old_id = None
+        self.title = ""
+        self.link = None
         self.lang = "en"
         self.deck = "Standard"
         self.fewer = True

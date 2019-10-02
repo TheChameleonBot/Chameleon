@@ -1,4 +1,4 @@
-from telegram import Update, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardMarkup, ParseMode
 from telegram.ext import CallbackContext
 
 from database import database
@@ -72,3 +72,25 @@ def help_message(update: Update, context: CallbackContext):
     if "lang" not in user_data:
         user_data["lang"] = database.get_language_player(update.effective_user.id)
     update.effective_message.reply_text(get_string(user_data["lang"], "help_private"))
+
+
+def settings_help(update: Update, context: CallbackContext):
+    user_data = context.user_data
+    if "lang" not in user_data:
+        user_data["lang"] = database.get_language_player(update.effective_user.id)
+    lang = user_data["lang"]
+    buttons = private_helpers.help_buttons(get_string(lang, "group_setting_buttons"), None)
+    update.effective_message.reply_text(get_string(lang, "settings_help"),
+                                        reply_markup=InlineKeyboardMarkup(buttons))
+
+
+def settings_help_edit(update: Update, context: CallbackContext):
+    user_data = context.user_data
+    if "lang" not in user_data:
+        user_data["lang"] = database.get_language_player(update.effective_user.id)
+    lang = user_data["lang"]
+    query = update.callback_query
+    chosen = query.data.split("_")[1]
+    buttons = private_helpers.help_buttons(get_string(lang, "group_setting_buttons"), chosen)
+    query.edit_message_text(get_string(lang, f"{chosen}_help"), reply_markup=InlineKeyboardMarkup(buttons),
+                            parse_mode=ParseMode.HTML)

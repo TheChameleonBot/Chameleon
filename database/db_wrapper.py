@@ -64,6 +64,12 @@ class Database:
     def get_nextgame_ids(self, chat_id):
         return self.db["groups"].find_one({"id": chat_id})["nextgame"]
 
+    def get_group_title(self, chat_id):
+        to_return = {"title": "", "link": ""}
+        group = self.db["groups"].find_one({"id": chat_id})
+        to_return.update({"title": group["title"], "link": group["link"]})
+        return to_return
+
     # get part player
     def get_new_player(self, player_ids):
         for player_id in player_ids:
@@ -168,6 +174,9 @@ class Database:
 
     def remove_group_nextgame(self, chat_id, player_ids):
         self.db["groups"].update_one({"id": chat_id}, {"$pull": {"nextgame": {"$in": player_ids}}})
+
+    def insert_group_title(self, chat_id, title, link):
+        self.db["groups"].update_one({"id": chat_id}, {"$set": {"title": title, "link": link}})
 
     # insert part player
 

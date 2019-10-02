@@ -5,6 +5,7 @@ from telegram.ext import CallbackContext, Dispatcher, Job
 from strings import get_string
 from telegram.utils.helpers import mention_html
 
+from utils import helpers
 from utils.specific_helpers import group_helpers
 from database import database
 from constants import TIME, MAX_PLAYERS
@@ -203,8 +204,8 @@ def nextgame_command(update: Update, context: CallbackContext):
     if "lang" not in context.chat_data:
         context.chat_data["lang"] = database.get_language_chat(chat_id)
     lang = context.chat_data["lang"]
-    chat_link = f"<a href={update.effective_chat.link}>{update.effective_chat.title}</a>" if update.effective_chat.link\
-        else f"<b>{update.effective_chat.title}</b>"
+    chat_link = helpers.chat_link(update.effective_chat.title, update.effective_chat.link)
+    database.insert_group_title(chat_id, update.effective_chat.title, update.effective_chat.link)
     if pm:
         try:
             if new:
@@ -237,10 +238,19 @@ def nextgame_start(update: Update, context: CallbackContext):
     except ValueError:
         context.bot.send_message(user_id, get_string("en", "group_not_found"))
         return
+    chat_details = database.get_group_title(chat_id)
+    chat_link = helpers.chat_link(chat_details["title"], chat_details["link"])
     new = database.insert_group_nextgame(chat_id, user_id)
     if new:
-        context.bot.send_message(user_id, get_string(lang, "nextgame_added").format(""),
+        context.bot.send_message(user_id, get_string(lang, "nextgame_added").format(chat_link),
                                  parse_mode=ParseMode.HTML)
     else:
-        context.bot.send_message(user_id, get_string(lang, "nextgame_removed").format(""),
+        context.bot.send_message(user_id, get_string(lang, "nextgame_removed").format(chat_link),
                                  parse_mode=ParseMode.HTML)
+
+
+def change_title(update: Update, _):
+    chat_id = update.effective_chat.id
+    title = update.effective_message.new_chat_title
+    link = update.effective_chat.link
+    database.insert_group_title(chat_id, title, link)

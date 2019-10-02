@@ -122,15 +122,8 @@ no_pm_settings_button: "Start"
 # when an admin has PMed the bot, but blocked it (wtf??)
 admin_blocked_bot: "I can't send you a private message, since you blocked me. Please unblock me and try again."
 # the setting message admins of groups greet greeted with in PM
-group_setting_text: "Hey, you want to change the settings of how I work in your group, great. Let me explain the settings:\n\n
-<b>Refresh</b>: Refresh these settings. Use it in case you think another admin changed them.\n\n
-<b>Language</b>: Change the language of me in your group. If you want to learn more about how you can add your own language, hit /translation\n\n
-<b>Deck</b>: The deck of cards I use in your group. You can add your own, hit /deck to learn how.\n\n
-<b>Fewer</b>: If only three players are playing (and this is activated), the chameleon, if caught, gets two guesses.\n\n
-<b>More</b>: If 7 or 8 players are playing (and this is activated), the words vanish once everyone has said their word, making it harder for the chameleon to guess the correct one.\n\n
-<b>Tournament</b>: If this mode is activated, a scoring system is introduced. If the chameleon escapes undetected, it gets two points. If it gets caught and guesses the correct word, it gets one point. If it doesn't, the player get two points each. The first player making it to 5 points wins.\n\n
-<b>Pin</b>: Once activated, I will silently pin the word list so players can find it easier once a game is started. I will pin the old pinned message (if existing) silently again when the game ends. In order to activate this setting, you need to make me an admin with pin privileges.\n\n
-<b>Restricting</b>: Once activated, I will restrict everyone from writing except the person whose turn it is during the word saying phase. Everyone can write again after this phase is over. In order for this to work, I will promote those users to admins with add member rights, since admins aren't restricted. The original chat permissions are restored after the phase. In order to activate this setting, you need to make me an admin with add new admins and add members privileges."
+# {0} is the name of the group, a link if the group has an username
+group_setting_text: "Hey, you want to change the settings of how I work in the group {0}, great. To learn more about the settings, hit /settings_help. You can hit the refresh button to refresh these settings. Use it in case you think another admin changed them."
 # the buttons for group settings. Only translate the strings!
 group_setting_buttons:
   refresh: "Refresh"
@@ -210,7 +203,7 @@ greeting_private: "Hey there, I am the Chameleon Bot :) You can play the Chamele
 # help message in group.
 help_group: "Hey there, you want some help, great. I basically only have three commands in groups you could need:\n/start - start a game\n/settings - [admins only in bigger groups] change the settings of me in the group\n/nextgame - adds (or removes) you from the nextgame list of this group. If you are on it, I will notify you when a game starts\n\nApart from that, I also respond to those commands:\n/abort_game - [admins only in bigger groups] abort a game if there is one running right now\n/reload_admins - since admins are cached for an hour, you might want to run this if the bot doesn't recognize you as an admin, or isn't supposed to do so anymore :O\n/id - show the groups id"
 # help message in private.
-help_private: "Hey there, you want some help, great. I respond to the following commands in private:\n/language - change the language I speak to you in the private chat\n/translation - show you a help message how to do translations\n/deck - show you how to add your own deck"
+help_private: "Hey there, you want some help, great. I respond to the following commands in private:\n/language - change the language I speak to you in the private chat\n/settings_help - helps you understand the group settings\n/translation - show you a help message how to do translations\n/deck - show you how to add your own deck"
 # message which gets send to people in private when a new game is started and they are on the nextgame list
 # {0} group name
 nextgame: "Hello there. A new game just has started in {0} and I bet they would love to have you participating in the fun."
@@ -224,3 +217,13 @@ nextgame_removed: "You have been removed from the nextgame list of the chat {0}"
 nextgame_pm: "Hey. In order to use that command, you need to start me in private. Just hit the button below."
 # message which gets send to people in the group when they used /nextgame and blocked the bot (wtf)
 nextgame_block: "Ey. If you want me to PM you, you shouldn't have blocked me. Unblock me and try again..."
+# message which gets send if someone uses the /settings_help command
+settings_help: "Hey, since there are quite some settings for a group, they are split up. Just use the buttons below to navigate."
+# the following strings are explanations for the settings, triggered by the command above
+language_help: "<b>Language</b>: Change the language of me in your group. If you want to learn more about how you can add your own language, hit /translation"
+deck_help: "<b>Deck</b>: The deck of cards I use in your group. You can add your own, hit /deck to learn how."
+fewer_help: "<b>Fewer</b>: If only three players are playing (and this is activated), the chameleon, if caught, gets two guesses."
+more_help: "<b>More</b>: If 7 or 8 players are playing (and this is activated), the words vanish once everyone has said their word, making it harder for the chameleon to guess the correct one."
+tournament_help: "<b>Tournament</b>: If this mode is activated, a scoring system is introduced. If the chameleon escapes undetected, it gets two points. If it gets caught and guesses the correct word, it gets one point. If it doesn't, the player get two points each. The first player making it to 5 points wins."
+pin_help: "<b>Pin</b>: Once activated, I will silently pin the word list so players can find it easier once a game is started. I will pin the old pinned message (if existing) silently again when the game ends. In order to activate this setting, you need to make me an admin with pin privileges."
+restrict_help: "<b>Restricting</b>: Once activated, I will restrict everyone from writing except the person whose turn it is during the word saying phase. Everyone can write again after this phase is over. In order for this to work, I will promote those users to admins with add member rights, since admins aren't restricted. The original chat permissions are restored after the phase. In order to activate this setting, you need to make me an admin with add new admins and add members privileges."
