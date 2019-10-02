@@ -231,21 +231,21 @@ def pin(update: Update, context: CallbackContext):
 
 
 @admins_only
-def hardcore_game(update: Update, context: CallbackContext):
+def restrict(update: Update, context: CallbackContext):
     query = update.callback_query
     chat_id = int(query.data.split("_")[1])
     lang = context.user_data["lang"]
-    if not database.get_hardcore_game_setting(chat_id):
+    if not database.get_restrict_setting(chat_id):
         chat_member = context.bot.get_chat_member(chat_id, context.bot.id)
         if chat_member.can_invite_users and chat_member.can_promote_members and chat_member.can_restrict_members:
-            database.insert_group_hardcore_game(chat_id)
-            query.answer(get_string(lang, "group_setting_hardcore_activate"))
+            database.insert_group_restrict(chat_id)
+            query.answer(get_string(lang, "group_setting_restrict_activate"))
         else:
-            query.answer(get_string(lang, "group_setting_hardcore_required"), show_alert=True)
+            query.answer(get_string(lang, "group_setting_restrict_required"), show_alert=True)
             return
     else:
-        database.insert_group_hardcore_game(chat_id)
-        query.answer(get_string(lang, "group_setting_hardcore_deactivate"))
+        database.insert_group_restrict(chat_id)
+        query.answer(get_string(lang, "group_setting_restrict_deactivate"))
     buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
     text = get_string(lang, "group_setting_text")
     query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)

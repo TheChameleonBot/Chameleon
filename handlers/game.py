@@ -21,7 +21,7 @@ def message(update: Update, context: CallbackContext):
     # check if a game is running, could also be game_id or smth else
     if "chameleon" not in chat_data or "voted" in chat_data:
         return
-    if not chat_data["hardcore_game"]:
+    if not chat_data["restrict"]:
         if update.effective_message.text.startswith("!"):
             return
     user_id = update.effective_user.id
@@ -38,24 +38,24 @@ def message(update: Update, context: CallbackContext):
                 players[index]["word"] = word
                 try:
                     next_player = players[index + 1]
-                    if chat_data["hardcore_game"]:
-                        if not chat_data["hardcore_game"]["skip"]:
+                    if chat_data["restrict"]:
+                        if not chat_data["restrict"]["skip"]:
                             context.bot.promote_chat_member(chat_id, player["user_id"], can_invite_users=False)
                         if not is_admin(context.bot, next_player["user_id"], update.effective_chat):
                             context.bot.promote_chat_member(chat_id, next_player["user_id"], can_invite_users=True)
-                            chat_data["hardcore_game"]["skip"] = False
+                            chat_data["restrict"]["skip"] = False
                         else:
-                            chat_data["hardcore_game"]["skip"] = True
+                            chat_data["restrict"]["skip"] = True
                 except IndexError:
                     done = True
-                    if chat_data["hardcore_game"]:
-                        if not chat_data["hardcore_game"]["skip"]:
+                    if chat_data["restrict"]:
+                        if not chat_data["restrict"]["skip"]:
                             context.bot.promote_chat_member(chat_id, player["user_id"], can_invite_users=False)
-                        context.bot.set_chat_permissions(chat_id, chat_data["hardcore_game"]["initial_permissions"])
+                        context.bot.set_chat_permissions(chat_id, chat_data["restrict"]["initial_permissions"])
                     break
                 words = wordlist(players)
                 restricted = ""
-                if not chat_data["hardcore_game"]:
+                if not chat_data["restrict"]:
                     restricted = "\n\n" + get_string(lang, "say_word_not_restricted")
                 text = get_string(lang, "more_players_say_word")\
                     .format(mention_html(next_player["user_id"], next_player["first_name"]), words, restricted)
@@ -372,17 +372,17 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
                 context.bot.pin_chat_message(chat_id, send_message.message_id, True)
             user = chat_data["players"][0]
             text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
-            if not chat_data["hardcore_game"]:
+            if not chat_data["restrict"]:
                 text += "\n\n" + get_string(lang, "say_word_not_restricted")
             context.bot.send_message(chat_id, text, reply_to_message_id=send_message.message_id,
                                      parse_mode=ParseMode.HTML)
-            if chat_data["hardcore_game"]:
+            if chat_data["restrict"]:
                 context.bot.set_chat_permissions(chat_id, ChatPermissions(can_send_messages=False))
                 if not is_admin(context.bot, user["user_id"], context.bot.get_chat(chat_id)):
                     context.bot.promote_chat_member(chat_id, user["user_id"], can_invite_users=True)
-                    chat_data["hardcore_game"]["skip"] = False
+                    chat_data["restrict"]["skip"] = False
                 else:
-                    chat_data["hardcore_game"]["skip"] = True
+                    chat_data["restrict"]["skip"] = True
             chat_data["word_list"] = send_message.message_id
             # we dont care if other values exist or not, but this is needed in calculating of our points, so we pop it
             chat_data.pop("guesses", None)

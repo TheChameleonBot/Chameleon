@@ -140,7 +140,7 @@ group_setting_buttons:
   more: "More"
   tournament: "Tournament"
   pin: "Pin"
-  hardcore_game: "Restricting"
+  restrict: "Restrict"
 # shown to the user when he presses refresh in the settings
 group_setting_refresh: "The settings have been refreshed!"
 # change language of a group
@@ -168,11 +168,11 @@ group_setting_pin_deactivate: "The pin setting is deactivated!"
 # being an admin which can pin is required
 group_setting_pin_required: "I need to be an admin which can pin messages in order to activate this setting"
 # activate restrict mode of group
-group_setting_hardcore_activate: "The restrict mode is activated!"
+group_setting_restrict_activate: "The restrict mode is activated!"
 # deactivate restrict mode of group
-group_setting_hardcore_deactivate: "The restrict mode is deactivated!"
+group_setting_restrict_deactivate: "The restrict mode is deactivated!"
 # being an admin which can restrict member is required
-group_setting_hardcore_required: "I need to be an admin which can add members, promote admins and restrict members in order to activate this mode"
+group_setting_restrict_required: "I need to be an admin which can add members, promote admins and restrict members in order to activate this mode"
 # if an error happens somewhere, we tell the user about it
 error: "Hey. I regret to inform you that an error happened while I tried to handle your update. My developers will be notified."
 # if a user wants to change their language

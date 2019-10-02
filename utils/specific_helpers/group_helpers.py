@@ -28,7 +28,7 @@ def yes_game(context, data, chat_id, dp):
     chat_data.update({"chameleon": chameleon, "secret": deck.secret, "players": data["players"], "lang": lang,
                       "starter": data["starter"], "words": deck.words, "game_id": game_id,
                       "fewer": group_settings["fewer"], "tournament": group_settings["tournament"],
-                      "more": group_settings["more"], "pin": group_settings["pin"], "hardcore_game": {},
+                      "more": group_settings["more"], "pin": group_settings["pin"], "restrict": {},
                       "deck": group_settings["deck"], "tutorial": data["tutorial"]})
     text = get_string(lang, "game_succeed").format(deck.topic, deck.word_list)
     button = InlineKeyboardMarkup([[InlineKeyboardButton(get_string(lang, "play_button"),
@@ -42,18 +42,18 @@ def yes_game(context, data, chat_id, dp):
         context.bot.pin_chat_message(chat_id, message.message_id, True)
     user = data["players"][0]
     text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
-    if not group_settings["hardcore_game"]:
+    if not group_settings["restrict"]:
         text += "\n\n" + get_string(lang, "say_word_not_restricted")
     context.bot.send_message(chat_id, text, reply_to_message_id=message.message_id, parse_mode=ParseMode.HTML)
-    if group_settings["hardcore_game"]:
+    if group_settings["restrict"]:
         chat = context.bot.get_chat(chat_id)
-        chat_data["hardcore_game"]["initial_permissions"] = chat.permissions
+        chat_data["restrict"]["initial_permissions"] = chat.permissions
         context.bot.set_chat_permissions(chat_id, ChatPermissions(can_send_messages=False))
         if not is_admin(context.bot, user["user_id"], chat):
             context.bot.promote_chat_member(chat_id, user["user_id"], can_invite_users=True)
-            chat_data["hardcore_game"]["skip"] = False
+            chat_data["restrict"]["skip"] = False
         else:
-            chat_data["hardcore_game"]["skip"] = True
+            chat_data["restrict"]["skip"] = True
     chat_data["word_list"] = message.message_id
 
 

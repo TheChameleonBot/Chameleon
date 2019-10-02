@@ -53,8 +53,8 @@ class Database:
     def get_pin_setting(self, chat_id):
         return self.db["groups"].find_one({"id": chat_id})["pin"]
 
-    def get_hardcore_game_setting(self, chat_id):
-        return self.db["groups"].find_one({"id": chat_id})["hardcore_game"]
+    def get_restrict_setting(self, chat_id):
+        return self.db["groups"].find_one({"id": chat_id})["restrict"]
 
     def get_new_id(self, chat_id):
         existing = self.db["groups"].find_one({"old_id": chat_id})
@@ -147,13 +147,13 @@ class Database:
             self.db["groups"].update_one({"id": chat_id}, {"$set": {"pin": True}})
             return True
 
-    def insert_group_hardcore_game(self, chat_id):
+    def insert_group_restrict(self, chat_id):
         group = self.db["groups"].find_one({"id": chat_id})
-        if group["hardcore_game"]:
-            self.db["groups"].update_one({"id": chat_id}, {"$set": {"hardcore_game": False}})
+        if group["restrict"]:
+            self.db["groups"].update_one({"id": chat_id}, {"$set": {"restrict": False}})
             return False
         else:
-            self.db["groups"].update_one({"id": chat_id}, {"$set": {"hardcore_game": True}})
+            self.db["groups"].update_one({"id": chat_id}, {"$set": {"restrict": True}})
             return True
 
     def insert_group_new_id(self, old_id, new_id):

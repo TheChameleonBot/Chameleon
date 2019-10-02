@@ -8,7 +8,7 @@ class Group:
         self.more = True
         self.pin = False
         self.tournament = False
-        self.hardcore_game = False
+        self.restrict = False
         self.games_played = 0
         self.tournaments_played = 0
         self.nextgame = []

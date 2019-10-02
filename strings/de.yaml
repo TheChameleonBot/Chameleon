@@ -137,7 +137,7 @@ group_setting_buttons:
   more: "Mehr"
   tournament: "Wettbewerb"
   pin: "Anheften"
-  hardcore_game: "Beschränkt"
+  restrict: "Beschränkt"
 # shown to the user when he presses refresh in the settings
 group_setting_refresh: "Die Einstellungen wurden aktualisiert!"
 # change language of a group
@@ -163,11 +163,11 @@ group_setting_pin_deactivate: "Ich werde nichts anheften und stumm in meiner Eck
 # being an admin which can pin is required
 group_setting_pin_required: "Ich muss erstmal Admin sein und Nachrichten anheften dürfen, sonst wird das nichts!"
 # activate restrict mode of group
-group_setting_hardcore_activate: "Der beschränkte Modus ist aktiviert, Zensur im vollen Gange."
+group_setting_restrict_activate: "Der beschränkte Modus ist aktiviert, Zensur im vollen Gange."
 # deactivate restrict mode of group
-group_setting_hardcore_deactivate: "Der beschränkte Modus ist deaktiviert."
+group_setting_restrict_deactivate: "Der beschränkte Modus ist deaktiviert."
 # being an admin which can restrict member is required
-group_setting_hardcore_required: "Ich verlange sofort ein Admin zu sein, Mitglieder hinzufügen zu können, Admins ernennen zu dürfen und auch Mitglieder einschränken zu können."
+group_setting_restrict_required: "Ich verlange sofort ein Admin zu sein, Mitglieder hinzufügen zu können, Admins ernennen zu dürfen und auch Mitglieder einschränken zu können."
 # if an error happens somewhere, we tell the user about it
 error: "Es gab einen Fehler bei der Bearbeitung der Anfrage. Meine Eltern (die Entwickler) wurden informiert und holen mich gleich ab. Bis dahin können wir spielen."
 # if a user wants to change their language
