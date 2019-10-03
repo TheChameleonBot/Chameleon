@@ -55,7 +55,7 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
             continue
         try:
             context.bot.send_message(player_id, get_string(lang, "nextgame").format(chat_link),
-                                     parse_mode=ParseMode.HTML)
+                                     parse_mode=ParseMode.HTML, disable_web_page_preview=True)
         except Unauthorized:
             database.remove_group_nextgame(chat_id, [player_id])
             database.insert_player_pm(user_id, False)
@@ -210,10 +210,10 @@ def nextgame_command(update: Update, context: CallbackContext):
         try:
             if new:
                 context.bot.send_message(user_id, get_string(lang, "nextgame_added").format(chat_link),
-                                         parse_mode=ParseMode.HTML)
+                                         parse_mode=ParseMode.HTML, disable_web_page_preview=True)
             else:
                 context.bot.send_message(user_id, get_string(lang, "nextgame_removed").format(chat_link),
-                                         parse_mode=ParseMode.HTML)
+                                         parse_mode=ParseMode.HTML, disable_web_page_preview=True)
         except Unauthorized:
             update.effective_message.reply_text(get_string(lang, "nextgame_block"))
             database.insert_player_pm(user_id, False)
@@ -243,10 +243,10 @@ def nextgame_start(update: Update, context: CallbackContext):
     new = database.insert_group_nextgame(chat_id, user_id)
     if new:
         context.bot.send_message(user_id, get_string(lang, "nextgame_added").format(chat_link),
-                                 parse_mode=ParseMode.HTML)
+                                 parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     else:
         context.bot.send_message(user_id, get_string(lang, "nextgame_removed").format(chat_link),
-                                 parse_mode=ParseMode.HTML)
+                                 parse_mode=ParseMode.HTML, disable_web_page_preview=True)
 
 
 def change_title(update: Update, _):

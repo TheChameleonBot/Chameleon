@@ -90,7 +90,12 @@ class Database:
             return "en"
 
     def get_pm_player(self, user_id):
-        return self.db["players"].find_one({"id": user_id})["pm"]
+        # possible start point
+        player = self.db["players"].find_one({"id": user_id})
+        if not player:
+            self.db["players"].insert_one(vars(objects.Player(user_id)))
+            player = {"pm": "en"}
+        return player["pm"]
 
     # insert part groups
 

@@ -93,4 +93,4 @@ def settings_help_edit(update: Update, context: CallbackContext):
     chosen = query.data.split("_")[1]
     buttons = private_helpers.help_buttons(get_string(lang, "group_setting_buttons"), chosen)
     query.edit_message_text(get_string(lang, f"{chosen}_help"), reply_markup=InlineKeyboardMarkup(buttons),
-                            parse_mode=ParseMode.HTML)
+                            parse_mode=ParseMode.HTML, disable_web_page_preview=True)

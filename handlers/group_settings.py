@@ -56,7 +56,8 @@ def group_setting(update: Update, context: CallbackContext):
             buttons = group_settings_helpers.group_settings_buttons(get_string(user_lang, "group_setting_buttons"),
                                                                     chat_id)
             context.bot.send_message(user_id, get_string(user_lang, "group_setting_text").format(chat_link),
-                                     reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+                                     reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML,
+                                     disable_web_page_preview=True)
         # this means the bot was blocked wtf
         except Unauthorized:
             update.effective_message.reply_text(get_string(lang, "admin_blocked_bot"))
@@ -105,7 +106,8 @@ def start(update: Update, context: CallbackContext):
     buttons = group_settings_helpers.group_settings_buttons(get_string(lang, "group_setting_buttons"), chat_id)
     chat_link = helpers.chat_link(chat.title, chat.link)
     context.bot.send_message(user_id, get_string(lang, "group_setting_text").format(chat_link),
-                             reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+                             reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML,
+                             disable_web_page_preview=True)
 
 
 def admins_reload(update: Update, context: CallbackContext):
@@ -255,4 +257,5 @@ def edit(query, chat_id, lang, refresh_id=0):
     chat_details = database.get_group_title(chat_id)
     chat_link = helpers.chat_link(chat_details["title"], chat_details["link"])
     text = get_string(lang, "group_setting_text").format(chat_link)
-    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML,
+                            disable_web_page_preview=True)
