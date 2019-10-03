@@ -254,5 +254,5 @@ def edit(query, chat_id, lang, refresh_id=0):
                                                             refresh_id)
     chat_details = database.get_group_title(chat_id)
     chat_link = helpers.chat_link(chat_details["title"], chat_details["link"])
-    text = get_string(lang, "group_setting_text".format(chat_link))
+    text = get_string(lang, "group_setting_text").format(chat_link)
     query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)

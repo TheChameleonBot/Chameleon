@@ -187,7 +187,7 @@ def change_id(update: Update, _):
     message = update.effective_message
     old_id = message.migrate_from_chat_id
     new_id = update.effective_chat.id
-    database.change_id(old_id, new_id)
+    database.insert_group_new_id(old_id, new_id)
 
 
 def help_message(update: Update, context: CallbackContext):
