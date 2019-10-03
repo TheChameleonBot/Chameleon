@@ -188,7 +188,7 @@ rules: "<b>Chameleon - the game</b> <i>(english rules, trimmed to the telegram b
 • If it is an ordinary player, the chameleon wins!
 • If it is the chameleon, it will try to guess the secret word. If its guess is indeed correct, it still wins; otherwise the player do!"
 # introduction when there is a new player, prepended to the rules
-rules_prepend: "Oh hello, we have new player(s). The game will start in 15 seconds, let me quickly present the new one(s) the rules:\n\n"
+rules_prepend: "Oh hello, we have new player(s). The game will start in 30 seconds, let me quickly present the new one(s) the rules:\n\n"
 # used in the strings below
 here: "here"
 # the deck command reply

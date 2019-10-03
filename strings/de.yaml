@@ -183,7 +183,7 @@ rules: "<b>Chamäleon - das Spiel</b> <i>(deutsche Anleitung, angepasst an den T
 • Nachdem jeder ein Wort gesagt hat, beginnt eine Abstimmphase - jeder wählt den, von dem er denkt, dass er das Chamäleon ist. Die Rolle desjenigen, der die meiste Stimmen bekommen hat, wird aufgedeckt\n
 • Wenn es ein normaler Spieler ist, gewinnt das Chamäleon!
 • Wenn es das Chamäleon ist, wird es versuchen, das korrekte Wort zu erraten. Wenn das geratene Wort tatsächlich das richtige ist, gewinnt es; ansonsten die Spieler!"
-rules_prepend: "Oh hey, wir haben neue Spieler. Das Spiel wird in 15 Sekunden starten, lasst mich nur kurz die Regeln für die Neuen präsentieren:\n\n"
+rules_prepend: "Oh hey, wir haben neue Spieler. Das Spiel wird in 31 Sekunden starten, lasst mich nur kurz die Regeln für die Neuen präsentieren:\n\n"
 # used in the strings below
 here: "hier"
 # the deck command reply
