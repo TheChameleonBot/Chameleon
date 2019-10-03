@@ -176,9 +176,8 @@ private_language: "Hey. Your current language is {0}, select the one you want fr
 private_language_selected: "Great, {0} it is from now on!"
 # if a random idiot presses buttons
 user_not_in_game: "Hey, you have to be in the game to do this. Maybe next round?"
-# the rules, presented when someone hasen't played the game yet
-rules: "Oh hello, we have new player(s). The game will start in 15 seconds, let me quickly present the new one(s) the rules:\n\n
-<b>Chameleon - the game</b> <i>(english rules, trimmed to the telegram bot)</i>\n\n
+# the rules, presented when someone hasen't played the game yet or runs /game_rules
+rules: "<b>Chameleon - the game</b> <i>(english rules, trimmed to the telegram bot)</i>\n\n
 • After the game starts, one players gets to be the chameleon, the other one are simple players\n
 • A topic and a belonging word list is presented, with a button attached to it\n
 • If you are a player and press this button, one of the words of this list is presented to you (called the secret word) - everybody gets the same ofc. If you are the chameleon, you will be informed about this fact instead\n
@@ -188,6 +187,8 @@ rules: "Oh hello, we have new player(s). The game will start in 15 seconds, let 
 • After everyone said a word, everybody gets to vote on who they think is the chameleon. The role of the one with the most votes gets unmasked\n
 • If it is an ordinary player, the chameleon wins!
 • If it is the chameleon, it will try to guess the secret word. If its guess is indeed correct, it still wins; otherwise the player do!"
+# introduction when there is a new player, prepended to the rules
+rules_prepend: "Oh hello, we have new player(s). The game will start in 15 seconds, let me quickly present the new one(s) the rules:\n\n"
 # used in the strings below
 here: "here"
 # the deck command reply

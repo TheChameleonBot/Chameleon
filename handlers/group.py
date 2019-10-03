@@ -159,7 +159,8 @@ def timer(context):
     if len(data["players"]) >= 3:
         player_ids = [all_player["user_id"] for all_player in data["players"]]
         if database.get_new_player(player_ids):
-            context.bot.send_message(chat_id, get_string(lang, "rules"), parse_mode=ParseMode.HTML)
+            text = get_string(lang, "rules_prepend") + get_string(lang, "rules")
+            context.bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
             context.job_queue.run_once(delay, 15, [context, data, chat_id, dp])
         else:
             group_helpers.yes_game(context, data, chat_id, dp)
@@ -254,3 +255,15 @@ def change_title(update: Update, _):
     title = update.effective_message.new_chat_title
     link = update.effective_chat.link
     database.insert_group_title(chat_id, title, link)
+
+
+def game_rules(update: Update, context: CallbackContext):
+    if update.effective_chat.type == "private":
+        if "lang" not in context.user_data:
+            context.user_data["lang"] = database.get_language_player(update.effective_user.id)
+        lang = context.user_data["lang"]
+    else:
+        if "lang" not in context.chat_data:
+            context.chat_data["lang"] = database.get_language_chat(update.effective_chat.id)
+        lang = context.chat_data["lang"]
+    update.effective_message.reply_html(get_string(lang, "rules"))

@@ -29,9 +29,12 @@ def main():
     dp.add_handler(CallbackQueryHandler(game.vote, pattern="vote"))
     dp.add_handler(CallbackQueryHandler(game.draw, pattern="draw"))
     dp.add_handler(MessageHandler(Filters.group & Filters.text, game.guess), 1)
-    # nextgame waitlist
+    # nextgame list
     dp.add_handler(CommandHandler("nextgame", group.nextgame_command, Filters.group))
     dp.add_handler(CommandHandler("start", group.nextgame_start, Filters.private), 2)
+    # general group commands
+    # this one is also for private, yes. Not gonna make two callback for that
+    dp.add_handler(CommandHandler("game_rules", group.game_rules))
     # group menu
     dp.add_handler(CommandHandler("settings", group_settings.group_setting, Filters.group))
     dp.add_handler(CommandHandler("start", group_settings.start, Filters.private))

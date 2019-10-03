@@ -136,14 +136,12 @@ def error_handler(update: Update, context: CallbackContext):
     chat = update.effective_chat
     if chat.type == "private":
         if "lang" not in context.user_data:
-            lang = database.get_language_player(update.effective_user.id)
-        else:
-            lang = context.user_data["lang"]
+            context.user_data["lang"] = database.get_language_player(update.effective_user.id)
+        lang = context.user_data["lang"]
     else:
         if "lang" not in context.chat_data:
-            lang = database.get_language_chat(update.effective_chat.id)
-        else:
-            lang = context.chat_data["lang"]
+            context.chat_data["lang"] = database.get_language_chat(update.effective_chat.id)
+        lang = context.chat_data["lang"]
     if update.callback_query:
         update.callback_query.answer(get_string(lang, "error"), show_alert=True)
     else:
