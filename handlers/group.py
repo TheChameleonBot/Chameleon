@@ -49,8 +49,7 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
                "players": [{"user_id": user_id, "first_name": first_name}], "lang": lang, "message": message.message_id,
                "left_players": {}, "settings": wanted_settings}
     chat_data.update(payload)
-    chat_link = f"<a href={update.effective_chat.link}>{update.effective_chat.title}</a>" if update.effective_chat.link\
-        else f"<b>{update.effective_chat.title}</b>"
+    chat_link = helpers.chat_link(update.effective_chat.title, update.effective_chat.link)
     for player_id in database.get_nextgame_ids(chat_id):
         if player_id == user_id:
             continue
