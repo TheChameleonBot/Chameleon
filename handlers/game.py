@@ -381,7 +381,7 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
             chameleon = random.choice(list(chat_data["players"]))
             chat_data["players"] = chat_data["players"][1:] + [chat_data["players"][0]]
             game_id = ''.join(random.choices(string.ascii_lowercase, k=10))
-            chat_data.update({"chameleon": chameleon, "secret": deck.secret, "game_id": game_id})
+            chat_data.update({"chameleon": chameleon, "secret": deck.secret, "game_id": game_id, "words": deck.words})
             contestant_mentions_points = []
             for player in players:
                 contestant_mentions_points.append(f"{mention_html(player['user_id'], player['first_name'])}: "

@@ -33,4 +33,4 @@ def player_mention_string(players):
 
 
 def chat_link(title, link):
-    return f"<a href={link}>{title}</a>" if link else f"<b>{title}</b>"
+    return f"<a href=\"{link}\">{title}</a>" if link else f"<b>{title}</b>"
