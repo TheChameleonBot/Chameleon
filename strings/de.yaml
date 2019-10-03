@@ -111,7 +111,7 @@ group_start_shutdown: "Das würde ich an deiner Stelle nicht versuchen! Mein jä
 # when a non admin tries to change group settings
 no_admin_settings: "Computer sagt neeeiiiin!\nZum ändern der Einstellungen musst du Admin sein."
 # when a cache reload is issued
-reload_admins: "Die Liste der Admins wurde aktualisiert, jetzt musst du nur noch einer sein."
+admins_reload: "Die Liste der Admins wurde aktualisiert, jetzt musst du nur noch einer sein."
 # when an admin has not PMed the bot yet
 no_pm_settings: "Ich würde dich gerne besser kennen lernen. Drücke auf den Knopf. Vorher können wir keinen Einstellungen besprechen"
 # the button mentioned above

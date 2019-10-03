@@ -35,7 +35,7 @@ def main():
     # group menu
     dp.add_handler(CommandHandler("settings", group_settings.group_setting, Filters.group))
     dp.add_handler(CommandHandler("start", group_settings.start, Filters.private))
-    dp.add_handler(CommandHandler("reload_admins", group_settings.reload_admins))
+    dp.add_handler(CommandHandler("admins_reload", group_settings.admins_reload))
     dp.add_handler(CallbackQueryHandler(group_settings.refresh, pattern="(?=.*groupsetting)(?=.*refresh)"))
     # group language
     dp.add_handler(CallbackQueryHandler(group_settings.change_language, pattern=r"(?=.*groupsetting)(?=.*language)"))
