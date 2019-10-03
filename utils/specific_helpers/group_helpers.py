@@ -2,6 +2,7 @@ import random
 import string
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, ChatPermissions
+from telegram.error import BadRequest
 from telegram.utils.helpers import mention_html
 
 from database import database
@@ -35,25 +36,40 @@ def yes_game(context, data, chat_id, dp):
                                                          callback_data="word" + game_id)]])
     message = context.bot.send_message(chat_id, text, reply_to_message_id=data["message"], reply_markup=button,
                                        parse_mode=ParseMode.HTML)
+    chat = None
+    if group_settings["pin"] or group_settings["restrict"]:
+        chat = context.bot.get_chat(chat_id)
     if group_settings["pin"]:
-        pinned_message = context.bot.get_chat(chat_id).pinned_message
+        pinned_message = chat.pinned_message
         if pinned_message:
             chat_data["pin"] = pinned_message.message_id
-        context.bot.pin_chat_message(chat_id, message.message_id, True)
+        try:
+            context.bot.pin_chat_message(chat_id, message.message_id, True)
+        except BadRequest as e:
+            if e.message == "Not enough rights to pin a message":
+                chat_data["pin"] = False
+                database.insert_group_pin(chat_id)
+                e.message += "handled in ghelper L48"
+                raise e
     user = data["players"][0]
     text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
     if not group_settings["restrict"]:
         text += "\n\n" + get_string(lang, "say_word_not_restricted")
     context.bot.send_message(chat_id, text, reply_to_message_id=message.message_id, parse_mode=ParseMode.HTML)
     if group_settings["restrict"]:
-        chat = context.bot.get_chat(chat_id)
         chat_data["restrict"]["initial_permissions"] = chat.permissions
-        context.bot.set_chat_permissions(chat_id, ChatPermissions(can_send_messages=False))
-        if not is_admin(context.bot, user["user_id"], chat):
-            context.bot.promote_chat_member(chat_id, user["user_id"], can_invite_users=True)
-            chat_data["restrict"]["skip"] = False
-        else:
-            chat_data["restrict"]["skip"] = True
+        try:
+            context.bot.set_chat_permissions(chat_id, ChatPermissions(can_send_messages=False))
+            if not is_admin(context.bot, user["user_id"], chat):
+                context.bot.promote_chat_member(chat_id, user["user_id"], can_invite_users=True)
+                chat_data["restrict"]["skip"] = False
+            else:
+                chat_data["restrict"]["skip"] = True
+        except BadRequest as e:
+            chat_data["restrict"] = False
+            database.insert_group_restrict(chat_id)
+            e.message += "handled in ghelper L68"
+            raise e
     chat_data["word_list"] = message.message_id
 
 

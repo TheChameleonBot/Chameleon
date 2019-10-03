@@ -24,7 +24,7 @@ def main():
     dp.add_handler(CallbackQueryHandler(group.player_join, pattern="join"))
     # game running
     dp.add_handler(CommandHandler("abort_game", game.abort_game, Filters.group))
-    dp.add_handler(MessageHandler(Filters.group & Filters.text, game.message))
+    dp.add_handler(MessageHandler(Filters.group & Filters.text & Filters.update.message, game.message))
     dp.add_handler(CallbackQueryHandler(game.secret_word, pattern="word"))
     dp.add_handler(CallbackQueryHandler(game.vote, pattern="vote"))
     dp.add_handler(CallbackQueryHandler(game.draw, pattern="draw"))

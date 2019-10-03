@@ -39,19 +39,31 @@ def message(update: Update, context: CallbackContext):
                 try:
                     next_player = players[index + 1]
                     if chat_data["restrict"]:
-                        if not chat_data["restrict"]["skip"]:
-                            context.bot.promote_chat_member(chat_id, player["user_id"], can_invite_users=False)
-                        if not is_admin(context.bot, next_player["user_id"], update.effective_chat):
-                            context.bot.promote_chat_member(chat_id, next_player["user_id"], can_invite_users=True)
-                            chat_data["restrict"]["skip"] = False
-                        else:
-                            chat_data["restrict"]["skip"] = True
+                        try:
+                            if not chat_data["restrict"]["skip"]:
+                                context.bot.promote_chat_member(chat_id, player["user_id"], can_invite_users=False)
+                            if not is_admin(context.bot, next_player["user_id"], update.effective_chat):
+                                context.bot.promote_chat_member(chat_id, next_player["user_id"], can_invite_users=True)
+                                chat_data["restrict"]["skip"] = False
+                            else:
+                                chat_data["restrict"]["skip"] = True
+                        except BadRequest as e:
+                            chat_data["restrict"] = False
+                            database.insert_group_restrict(chat_id)
+                            e.message += "handled in game, L50"
+                            raise e
                 except IndexError:
                     done = True
                     if chat_data["restrict"]:
-                        if not chat_data["restrict"]["skip"]:
-                            context.bot.promote_chat_member(chat_id, player["user_id"], can_invite_users=False)
-                        context.bot.set_chat_permissions(chat_id, chat_data["restrict"]["initial_permissions"])
+                        try:
+                            if not chat_data["restrict"]["skip"]:
+                                context.bot.promote_chat_member(chat_id, player["user_id"], can_invite_users=False)
+                            context.bot.set_chat_permissions(chat_id, chat_data["restrict"]["initial_permissions"])
+                        except BadRequest as e:
+                            chat_data["restrict"] = False
+                            database.insert_group_restrict(chat_id)
+                            e.message += "handled in game, L62"
+                            raise e
                     break
                 words = wordlist(players)
                 restricted = ""
@@ -71,7 +83,12 @@ def message(update: Update, context: CallbackContext):
         buttons = vote_buttons(chat_data["players"], chat_data["game_id"])
         v_message = update.effective_message.reply_html(text, reply_markup=InlineKeyboardMarkup(buttons), quote=False)
         if chat_data["pin"]:
-            context.bot.pin_chat_message(chat_id, v_message.message_id, True)
+            try:
+                context.bot.pin_chat_message(chat_id, v_message.message_id, True)
+            except BadRequest as e:
+                chat_data["pin"] = False
+                e.message += "handled in game L88"
+                raise e
 
 
 def secret_word(update: Update, context: CallbackContext):
@@ -343,8 +360,14 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
                 if not isinstance(chat_data["pin"], bool):
                     try:
                         context.bot.pin_chat_message(chat_id, chat_data["pin"], True)
-                    except BadRequest:
-                        context.bot.unpin_chat_message(chat_id)
+                    except BadRequest as e:
+                        if e.message != "Not enough rights to pin a message":
+                            context.bot.unpin_chat_message(chat_id)
+                            e.message += "handled in game L363"
+                        else:
+                            chat_data["pin"] = False
+                            e.message += "handled in game L363, 2"
+                        raise e
                 else:
                     context.bot.unpin_chat_message(chat_id)
             chat_data.clear()
@@ -393,8 +416,14 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
             if not isinstance(chat_data["pin"], bool):
                 try:
                     context.bot.pin_chat_message(chat_id, chat_data["pin"], True)
-                except BadRequest:
-                    context.bot.unpin_chat_message(chat_id)
+                except BadRequest as e:
+                    if e.message != "Not enough rights to pin a message":
+                        context.bot.unpin_chat_message(chat_id)
+                        e.message += "handled in game L419"
+                    else:
+                        chat_data["pin"] = False
+                        e.message += "handled in game L419, 2"
+                    raise e
             else:
                 context.bot.unpin_chat_message(chat_id)
         chat_data.clear()
