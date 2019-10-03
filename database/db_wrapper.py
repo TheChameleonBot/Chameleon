@@ -94,7 +94,7 @@ class Database:
         player = self.db["players"].find_one({"id": user_id})
         if not player:
             self.db["players"].insert_one(vars(objects.Player(user_id)))
-            player = {"pm": "en"}
+            player = {"pm": False}
         return player["pm"]
 
     # insert part groups

@@ -371,6 +371,7 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
                 else:
                     context.bot.unpin_chat_message(chat_id)
             chat_data.clear()
+            chat_data["lang"] = lang
         # that means we dont, lets play another round
         else:
             chat_data["tournament"] = tournament
@@ -427,6 +428,7 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
             else:
                 context.bot.unpin_chat_message(chat_id)
         chat_data.clear()
+        chat_data["lang"] = lang
 
 
 def abort_game(update: Update, context: CallbackContext):
@@ -447,3 +449,4 @@ def abort_game(update: Update, context: CallbackContext):
         potential_job[0].schedule_removal()
     chat_data.clear()
     update.effective_message.reply_text(get_string(lang, "abort_game"))
+    chat_data["lang"] = lang
