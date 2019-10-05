@@ -1,0 +1,230 @@
+# put the people who worked on the translation here if you/they want to.
+authors:
+  - "@niekg"
+# put the name of your language here, in their native translation
+language: "Nederlands"
+# send when the bot gets added to a group
+greeting: "Hallo daar. Ik ben De Kameleon bot, een telegram bot die het spel De Kameleon naar jouw groep brengt! Om de instellingen aan te passen, kan je /settings gebruiken (alleen voor admins in grotere groepen). Of begin gewoon een spel met met met /start :)"
+# when a game is started with /start in a group.
+# {0} mention of the player who started the game, {1} list of mentions for joined player, {2-7} settings, either the deck name or activate or deactivate (see below)
+start_game: "{0} heeft een spel gestart. Je speelt met de volgende instellingen:\n\n<b>Speelset:</b> {2}\n<b>Minder:</b> {3}\n<b>Meer: </b>{4}\n<b>Vastzetten: </b>{5}\n<b>Toernooi: </b>{6}\n<b>Beperkt: </b>{7}\n\nDoe mee!\n\n#Spelers:\n{1}"
+# the button beneath the message above
+start_button: "Speel mee / verlaat spel"
+# if the setting above is activated
+activated: "Ingeschakeld"
+# if the setting above is deactivated
+deactivated: "Uitgeschakeld"
+# the pop-up a player gets when pressing on the button above
+player_joins_query: "Je doet nu mee aan het spel!"
+player_leaves_query: "Je hebt het spel verlaten!"
+# the pop-up a player gets when he presses the button above but no join process is running (might happen when the bot has an unexpected shutdown)
+join_no_game_running: "Het spijt me, deze knop is hier beland terwijl die er niet had moeten zijn. Gebruik /start om een nieuw spel te starten."
+# the text appearing in the group once a player leaves/joins and the timer "runs out"
+# {0} mention of player(s)
+player_joins_text: "{0} doet nu mee. "
+player_leaves_text: "{0} heeft het spel verlaten. "
+# the text in addition to the one above
+# {0} if more then three players, start from below; otherwise fail
+player_action_text: "Als niemand er bij komt of weggaat binnen 30 seconden, zal de timer aflopen en het spel {0}"
+# see above
+start: "beginnen :)"
+fail: "worden geannuleerd :("
+# the message when someone presses /start while a game is running
+game_running: "Er is al een spel bezig, wacht tot het afgelopen is."
+# the message when a game failed (30 second timer runs out and not three people joined)
+game_failed: "Helaas, niet genoeg spelers."
+# the message when a game starts
+# {0} the topic/dictionary key, {1} the list of the words
+game_succeed: "Spel begonnen!\n<b>Onderwerp:</b>\n{0}\n<b>Woorden:</b>\n{1}"
+# the button beneath the message above
+play_button: "Toon het geheime woord"
+# the pop-up the chameleon gets when pressing the button above
+player_is_chameleon: "Jij bent de Kameleon. Succes!"
+# the pop-up the ordinary player gets when pressing the button above
+# {0} the secret word
+secret_word: "Het geheime woord is {0}"
+# the pop-up the player gets when pressing the button above and this game is not running (might happen when the bot has an unexpected shutdown)
+wrong_game: "Sorry, je huidige spel lijkt een ander spel te zijn dan dit spel. Zoek alsjeblieft het meest recente bericht met deze knop(pen) en druk daar op :)"
+# the message appearing after the message above, asking for the first word
+# {0} mention of the player
+first_player_say_word: "{0}, je bent als eerst aan de beurt om me een woord te geven. Doe dit nu."
+# the message asking every player to send a message, one after another
+# {0} mention of the player, {1} word list, consisting of the player name: players word(s), {2} the message below or nothing
+more_players_say_word: "Bedankt. Nu is het jouw beurt, {0}. {2}\n\nHuidige woordenlijst:\n{1}"
+# this will get attached to the previous two messages in case the game is not in restricted mote
+say_word_not_restricted: "Je kan een gesprek dat je nu eventueel hebt voortzetten door ! voor je bericht te zetten, dan zal ik het niet als je antwoord zien."
+# the message before the voting, showing the final word list
+# {0} final word list
+final_word_list: "Definitieve woordenlijst! Nu moeten we stemmen op wie we denken dat de Kameleon is om hem of haar te ontmaskeren.\n\n{0}"
+# the message asking to vote, buttons with the names beneath
+# {0} vote list, consisting of mentions of the players: number of votes
+vote_list: "Vergeet niet, je kan maar één keer stemmen en je kan je stem later niet aanpassen.\nMensen die nog niet hebben gestemd:\n\n{0}"
+# the pop-up for a successful vote
+voted: "Je stem is geregistreerd :)"
+# the pop-up for someone trying to vote again
+already_voted: "Je hebt al gestemd!"
+# the pop-up for someone pressing his own name (no suicide here) while voting
+vote_yourself: "Je kan niet op jezelf stemmen!"
+# when a draw happens after everyone votes, the first player who had to say a word can decide who gets unmasked. Buttons with player names are attached
+# {0} mention of the starter, the player who has to said the first word
+draw: "{0}, er is gelijkspel. Gezien jij een nadeel had omdat je het eerste woord moest zeggen, mag jij kiezen wie er ontmaskerd wordt."
+# if someone who is not the starter (see above) presses one of the buttons
+not_starter: "Jij zei niet het eerste woord, dacht je echt dat dat zou werken? :("
+# if the chameleon wasn't found
+# {0} mention of the player unmasks, {1} mention of the chameleon, {2} secret word
+chameleon_not_found: "{1} is ontmaskerd maar is <b>niet</b> de Kameleon, dat is {1}! De Kameleon wint het spel! Het geheime woord was <b>{2}</b>."
+# if the chameleon was found
+# {0} mention of the chameleon
+chameleon_found: "{0} is ontmaskerd en is de Kameleon! Je kan nu het geheime woord proberen te raden. Om jullie huidige gesprek voort te zetten, zet je een ! voor je bericht, dan tel ik het niet als gok."
+# if the chameleon was found and only three players are there (and this is activated in the setting)
+# {0} mention of the chameleon
+chameleon_found_fewer: "{0} is ontmaskerd en is de Kameleon! Omdat er maar 3 spelers zijn op het moment, krijg je twee gokken (groepsbeheerders kunnen dat uitzetten in de instellingen)."
+# if the chameleon was found and 7 or 8 players are there
+# {0} mention of the chameleon
+chameleon_found_more: "{0} is ontmaskerd en is de Kameleon! Omdat er meer dan zes spelers zijn, is de woordenlijst niet zichtbaar, dus let op je spelling! (groepsbeheerders kunnen dat uitzetten in de instellingen)"
+# if the chameleon guesses wrong and has a second guess
+# {0} mention of the chameleon
+chameleon_guess_wrong_fewer: "Sorry {0}, dat was een onjuiste gok. Probeer het nog eens ;)"
+# if the chameleon guesses wrong
+# {0} mention of the chameleon, {1} secret word
+chameleon_guess_wrong: "Sorry {0}, dat was een onjuiste gok, het zou <b>{1}</b> geweest zijn. De Kameleon verliest, de spelers winnen!"
+# if the chameleon guesses correctly
+# {0} mention of the chameleon
+chameleon_guess_right: "Gefeliciteerd {0}, dit was de juiste gok! De Kameleon wint, de spelers verliezen!"
+# when a tournament ends, but no winner yet, so another round is started
+tournament_end: "Het spel is afgelopen, maar er is nog geen winnaar van het toernooi, dus er is een nieuw spel begonnen. Huidige toernooipunten:\n{0}\n<b>Onderwerp:</b>\n{1}\n<b>Woorden:</b>\n{2}"
+# when a tournament ends and there is only one winner
+# {0} winner mention, {1} winner points, {2} other player mentions + points
+tournament_end_one: "Het toernooi is afgelopen \\o/\n\nDe winnaar is {0} met <b>{1}</b> punten.\n\nAndere spelers:\n{2}"
+# when a tournament ends with several winners
+# {0} winner mentions + points, {1} other player mentions + points
+tournament_end_several: "Het toernooi is afgelopen \\o/\n\nDe winnaars zijn:\n{0}\n\nAndere spelers:\n{2}"
+# when an admin aborts a running/starting game
+abort_game: "Spel succesvol beëindigd."
+# when someone tries to to abort a game when none is running/starting
+no_game_running: "Sorry, er is geen spel bezig, dus je kan het ook niet stoppen"
+# when a non admin tries to abort a running/starting game
+no_admin_abort: "Je moet een beheerder zijn om een spel te kunnen stoppen"
+# when a shutdown gets initiated, this message is send to the active players as a warning
+init_shutdown: "Mijn excuses voor het ongemak, ik ga helaas afsluiten over 5 minuten. Dat betekent dat je je \"voortgang\" verliest als het huidige spel niet afmaakt. Kijk in @TheChameleon voor meer informatie."
+# when a shutdown gets initiated and players are still playing (smh)
+run_shutdown: "De 5 minuten zijn voorbij, het spijt me dat jullie je voortgang verloren zijn :("
+# when a shutdown is initiated and players want to start a new game
+group_start_shutdown: "Mijn excuses voor het ongemak, maar ik moet helaas afsluiten. Zie @TheChameleon voor meer informatie."
+# when a non admin tries to change group settings
+no_admin_settings: "Je moet een beheerder zijn om groepsinstellingen aan te passen. Als je een beheerder bent en dit bericht krijgt, gebruik dan /admins_reload."
+# when a cache reload is issued
+admins_reload: "De beheerderslijst is vernieuwd!"
+# when an admin has not PMed the bot yet
+no_pm_settings: "Je moet me een privébericht sturen om de groepsinstellingen te wijzigen. Druk hiervoor op de knop hieronder."
+# the button mentioned above
+no_pm_settings_button: "Start"
+# when an admin has PMed the bot, but blocked it (wtf??)
+admin_blocked_bot: "Ik kan je geen bericht sturen, omdat je me geblokkeerd hebt. Probeer het opnieuw nadat je me gedeblokkeerd hebt."
+# the setting message admins of groups greet greeted with in PM
+# {0} is the name of the group, a link if the group has an username
+group_setting_text: "Hey, je wil de instellingen wijzigen van hoe ik werk in de groep {0}, prima. Om meer te leren over de instellingen, gebruik /settings_help. Je kan de vernieuw-knop gebruiken om deze instellingen te verversen. Gebruik dit als je denkt dat een andere beheerder de instellingen heeft aangepast."
+# the buttons for group settings. Only translate the strings!
+group_setting_buttons:
+  refresh: "Vernieuw"
+  language: "Taal"
+  deck: "Speelset"
+  fewer: "Minder"
+  more: "Meer"
+  tournament: "Toernooi"
+  pin: "Vastzetten"
+  restrict: "Beperkte modus"
+# shown to the user when he presses refresh in the settings
+group_setting_refresh: "De instellingen zijn vernieuwd!"
+# change language of a group
+# {0} is the current language
+group_setting_languages: "De huidige taal van je groep is <b>{0}</b>. Selecteer de taal die je wilt gebruiken.\n\nAls je een nieuwe vertaling wil toevoegen of een typfout wil melden, gebruik dan /translation"
+# change deck of a group
+# {0} is the current deck
+group_setting_decks: "De huidige speelset van je groep is <b>{0}</b>. Selecteer de set die je wil gebruiken.\n\nAls je een nieuwe set wil maken of een typfout wil melden, gebruik dan /deck"
+# activate fewer setting of group
+group_setting_fewer_activate: "De 'minder' optie is aangezet!"
+# deactivate fewer setting of group
+group_setting_fewer_deactivate: "De 'minder' optie is uitgezet!"
+# activate more setting of group
+group_setting_more_activate: "De 'meer' optie is aangezet!"
+# deactivate more setting of group
+group_setting_more_deactivate: "De 'meer' optie is uitgezet!"
+# activate tournament mode of group
+group_setting_tournament_activate: "De toernooimodus is aangezet!"
+# deactivate tournament mode of group
+group_setting_tournament_deactivate: "De toernooimodus is uitgezet!"
+# activate pin setting of group
+group_setting_pin_activate: "De 'vastzetten' optie is aangezet!"
+# deactivate pin setting of group
+group_setting_pin_deactivate: "De 'vastzetten' optie is uitgezet!"
+# being an admin which can pin is required
+group_setting_pin_required: "Ik moet een beheerder zijn met rechten om berichten vast te zetten om deze optie te activeren."
+# activate restrict mode of group
+group_setting_restrict_activate: "De beperkte modus is aangezet!"
+# deactivate restrict mode of group
+group_setting_restrict_deactivate: "De beperkte modus is uitgezet!"
+# being an admin which can restrict member is required
+group_setting_restrict_required: "Ik moet een beheerder zijn die leden kan toevoegen, mensen beheerder kan maken en leden kan beperken om deze modus aan te zetten"
+# if an error happens somewhere, we tell the user about it
+error: "Hey. Er is helaas een fout opgetreden bij het verwerken van je update. Mijn ontwikkelaars zullen op de hoogte worden gesteld."
+# if a user wants to change their language
+# {0} name of their current language
+private_language: "Hey. Je huidige taal is {0}, selecteer de taal die je wil met de knoppen hieronder :)"
+# if a user changed their language
+# {0} name of their selected language
+private_language_selected: "Prima, vanaf nu is het {0}!"
+# if a random idiot presses buttons
+user_not_in_game: "Hey, je moet meedoen aan het spel om dit te kunnen doen. Misschien de volgende ronde?"
+# the rules, presented when someone hasen't played the game yet or runs /game_rules
+rules: "<b>Kameleon - het spel</b> <i>(Nederlandse regels, verkort voor de telegram bot)</i>\n\n
+* Waneer het spel begint, wordt één persoon de kameleon, de anderen zijn gewone spelers\n
+* Een onderwerp en bijbehorende woordenlijst wordt getoond, met een knop er bij\n
+* Als je een speler bent en op deze knop drukt, wordt een van de woorden aan jou getoond (het \"geheime woord\") - alle spelers krijgen hetzelfde te zien. Als je de kameleon bent, word je in plaats daarvan hierover geïnformeerd.\n
+* Nu vraagt de bot de deelnemers een voor een om een beschrijving van het geheime woord.\n
+* Als je een speler bent, probeer dan het geheime woord zo te beschrijven dat de kameleon het niet kan raden, maar dat de andere spelers wel zeker weten dat jij niet de kameleon bent.\n
+* Als je de kameleon bent, moet je een beschrijving kiezen gebaseerd op je beperkte kennis. Probeer op te gaan in de groep met je keuze!\n
+* Wanneer iedereen een woord heeft gezegd, mag iedereen stemmen op wie zij denken dat de kameleon is. De rol van de persoon met de meeste stemmen wordt ontmaskerd.\n
+* Als het een gewone speler is, wint de kameleon!
+* Als het de kameleon is, mag die proberen het geheime woord te raden. Als die gok juist is, wint die nog steeds; anders winnen de gewone spelers!"
+# introduction when there is a new player, prepended to the rules
+rules_prepend: "Oh hallo, we hebben een of meer nieuwe spelers. Het spel zal over 30 seconden beginnen, hier zijn voor de nieuwe speler(s) nog even snel de regels:\n\n"
+# used in the strings below
+here: "hier"
+# the deck command reply
+# {0} and {1} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+deck: "Speelsets zijn verzamelingen van \"kaarten\". Je kan nieuwe sets maken of bestaande kiezen. Het zijn bestanden in json-formaat. Als je een nieuwe set maakt, onthoud dan dat je het onderwerp/de naam van de set bepaalt met de naam van het json-bestand. Houd het kort en begin het met een hoofdletter, omdat het als \"InlineKeyboardButton\" wordt getoond en er zo beter uit ziet. Slechts één woord. In het json-bestand bepaal je attributen, welke de onderwerpen zijn van de woorden, en dan maak je een lijst met passende woorden. Alleen strings zijn toegestaan in de lijst. Aangeraden is 16 woorden per onderwerp, maar dit is niet verplicht. Je kan {0} naar voorbeelden kijken en ons {1} opzoeken als je vragen hebt of een bestand wil insturen."
+# the translation command reply
+# {0} - {2} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+translation: "Je kan de hele bot vertalen :O De bestanden zijn .yaml-bestanden, die zou je moeten kunnen bewerken in elke simpele tekstverwerker, maar Notepad++ is een aanrader :) Als je deze uitdaging aan gaat, kan je {0} bestaande vertalingen vinden. Wanneer je het basisbestand hebt gedownload (en (Engels) wordt aangeraden, omdat dit altijd de meest recente versie is), hernoem het naar de ISO 639-1 code van jouw taal. De code van twee letters is aanbevolen, maar niet verplicht. Vertaal de delen tussen de aanhalingstekens. Als je aanhalingstekens wil gebruiken in je vertalingen, doe dat dan zo: <code>\\\"</code>. Laat de accolades staan en verander het getal niet. De opmaak van Telegram ondersteunt html tags, die werken zoals {1} beschreven staat. Wanneer je klaar bent, zoek ons {2} op om het bestand in te sturen of eventuele vragen te stellen."
+# if the group id is not known. Can happen if someone obfuscates the start command or the groups id changed while the bot is offline
+group_not_found: "Hey, het spijt me, maar ik kan je groep niet vinden in mijn database. Misschien haal je een grap met me uit, of het is mijn fout omdat ik offline was. In dat geval, gebruik nogmaals /settings in de groepschat :)"
+# start message in private
+greeting_private: "Hoi, ik ben de Kameleon Bot :) Je kan het Kameleon Spel met me spelen, voeg me daarvoor toe aan je groep. Als je de taal wil aanpassen die ik in privéberichten gebruik, gebruik dan /language. En vergeet niet te lachen, ten minste af en toe :)"
+# help message in group.
+help_group: "Hoi, je wil wat hulp, prima. Ik heb eigenlijk maar drie commando's in groepen die je nodig kan hebben:\n/start - start een spel\n/settings - [alleen voor beheerders in grotere groepen] verander mijn instellingen in de groep\n/nextgame - voegt je toe aan (of verwijdert je uit) de 'nieuw spel lijst' van deze groep. Als je hier in staat, laat ik het je weten wanneer er een nieuw spel begint\n\nLos daarvan, luister ik ook naar deze commando's:\n/abort_game - [alleen voor beheerders in grotere groepen] stop een spel als er een bezig is\n/admins_reload - omdat beheerders eens per uur worden opgehaald, kun je dit proberen als de bot je niet ziet als beheerder, of juist wel wanneer dat niet zou moeten :O\n/id - toont de groeps-ID\n\nAls je menselijke hulp nodig hebt met iets, neem een kijkje in @TheChameleonSupport. We helpen je graag."
+# help message in private.
+help_private: "Hoi, je wil wat hulp, prima. Ik luister naar de volgende commando's in privégesprekken:\n/language - verandert de taal die ik spreek onze privéchat\n/settings_help - helpt je de groepsinstellingen te begrijpen\n/translation - toont een bericht over hoe je vertalingen kan toevoegen\n/deck - toont hoe je je eigen kaartensets kan toevoegen\n\nAls je menselijke hulp nodig hebt met iets, neem een kijkje in @TheChameleonSupport. We helpen je graag."
+# message which gets send to people in private when a new game is started and they are on the nextgame list
+# {0} group name
+nextgame: "Hallo daar. Een nieuw spel is zojuist begonnen in {0} en ze zouden het hartstikke leuk vinden als je meedoet."
+# message which gets send to people in private which used the /nextgame command and weren't in the list before
+# {0} group name
+nextgame_added: "Hey. Je bent toegevoegd aan de nieuw-spel-lijst van de groep {0}, ik zal het laten weten wanneer er een nieuw spel begint. Zodra je meedoet aan een succesvol spel, zal ik je van de lijst afhalen (zodat ik je niet onnodig spam :). Als je jezelf van de lijst wil halen, stuur dan nogmaals /nextgame in de groep, dan haal ik je er af."
+# message which gets send to people in private which used the /nextgame command and were in the list before
+# {0} group name
+nextgame_removed: "Je bent verwijderd van de nieuw-spel-lijst van de groep {0}"
+# message which gets send to people in the group when they used /nextgame and haven't pmed the bot yet
+nextgame_pm: "Hey. Om dat commando te kunnen gebruiken, moet je eerst een privégesprek beginnen. Klik daarvoor op de knop hieronder."
+# message which gets send to people in the group when they used /nextgame and blocked the bot (wtf)
+nextgame_block: "Hey. Als je wil dat ik je een privébericht stuur, moet je me niet hebben geblokkeerd. Deblokkeer me en probeer het nog eens..."
+# message which gets send if someone uses the /settings_help command
+settings_help: "Hey, gezien er best veel instellingen zijn voor een groep, zijn ze opgesplitst. Gebruik de knoppen hieronder om te navigeren."
+# the following strings are explanations for the settings, triggered by the command above
+language_help: "<b>Taal</b>: Verander de taal die ik gebruik in je groep. Als je meer wil weten over hoe je je eigen taal kan toevoegen, gebruik /translation"
+deck_help: "<b>Speelset</b>: De set van kaarten die ik gebruik in je groep. Je kan je eigen sets toevoegen, gebruik /deck om hier meer over te leren."
+fewer_help: "<b>Minder</b>: Als er maar drie spelers meedoen (en dit is ingeschakeld), dan mag de kameleon twee keer raden als hij ontmaskerd is."
+more_help: "<b>Meer</b>: Als 7 of 8 spelers meedoen (en dit is ingeschakeld), verdwijnen de woorden zodra iedereen een woord heeft gezegd, waardoor het moeilijker wordt voor de kameleon om het juiste woord te raden."
+tournament_help: "<b>Toernooi</b>: Als dit is ingeschakeld, wordt er een puntensysteem gebruikt. Als de kameleon onopgemerkt ontsnapt, krijgt deze twee punten. Als de kameleon ontmaskerd wordt en het juiste woord raadt, krijgt hij of zij één punt. Anders krijgen de gewone spelers elk twee punten. De eerste speler met vijf punten wint."
+pin_help: "<b>Vastzetten</b>: Als dit aan staat, zal ik stilletjes de woordenlijst vastzetten zodat spelers deze makkelijk kunnen vinden wanneer een spel bezig is. Ik zal het eventuele vorige vastgezette bericht terugzetten wanneer het spel klaar is. Om dit te activeren, moet je me groepsbeheerder maken met vastzet-rechten."
+restrict_help: "<b>Beperkte modus</b>: Als dit aan staat, zal ik ervoor zorgen dat niemand berichten kan sturen behalve degene wiens beurt het is tijdens de woorden-zeg-fase. Na deze fase kan iedereen weer praten. Om dit te laten werken, maak ik de persoon die aan de beurt is een beheerder met rechten om leden toe te voegen, omdat beheerders niet beperkt zijn. De originele rechten van de groep zullen worden hersteld na deze fase. Om deze optie aan te kunnen zetten, moet ik beheerder zijn met rechten om nieuwe beheerders te maken, mensen te beperken en nieuwe leden toe te voegen. Je kan hier lezen waarom: https://t.me/TheChameleonSupport/8"
