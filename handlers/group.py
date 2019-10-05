@@ -160,6 +160,7 @@ def timer(context):
         if database.get_new_player(player_ids):
             text = get_string(lang, "rules_prepend") + get_string(lang, "rules")
             context.bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
+            dp.chat_data[chat_id]["players"] = True
             context.job_queue.run_once(delay, 31, [context, data, chat_id, dp])
         else:
             group_helpers.yes_game(context, data, chat_id, dp)
