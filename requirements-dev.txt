@@ -1,0 +1,3 @@
+flake8>=3.7.8
+flake8-print
+pre-commit
