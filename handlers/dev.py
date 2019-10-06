@@ -17,10 +17,9 @@ def shutdown(update: Update, context: CallbackContext, updater: Updater):
     database.init_shutdown()
     dp = updater.dispatcher
     for chat_id in dp.chat_data:
-        if dp.chat_data[chat_id]:
-            if "players" in dp.chat_data[chat_id]:
-                lang = dp.chat_data[chat_id]["lang"]
-                context.bot.send_message(chat_id, get_string(lang, "init_shutdown"))
+        if dp.chat_data[chat_id] and "players" in dp.chat_data[chat_id]:
+            lang = dp.chat_data[chat_id]["lang"]
+            context.bot.send_message(chat_id, get_string(lang, "init_shutdown"))
     update.message.reply_text("Shutdown initiated, see you in t-5 min")
     t = Timer(5 * 60, real_shutdown, [[updater, update.effective_user.id]])
     t.start()
@@ -31,7 +30,7 @@ def real_shutdown(args):
     dp = updater.dispatcher
     bot = dp.bot
     for chat_id in dp.chat_data:
-        if "players" in dp.chat_data[chat_id]:
+        if dp.chat_data[chat_id] and "players" in dp.chat_data[chat_id]:
             lang = database.get_language_chat(chat_id)
             bot.send_message(chat_id, get_string(lang, "run_shutdown"))
     bot.send_message(args[1], "Shutdown done")
