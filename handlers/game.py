@@ -237,8 +237,11 @@ def who_wins(context, chat_id, unmasked_id):
         elif len(players) > 5:
             if chat_data["more"]:
                 text = get_string(lang, "chameleon_found_more")
-                context.bot.edit_message_text(get_string(lang, "game_succeed").format("hidden", "hidden"),
-                                              chat_id, chat_data["word_list"])
+                button = InlineKeyboardMarkup([[InlineKeyboardButton(get_string(lang, "play_button"),
+                                                                     callback_data="word" + chat_data["game_id"])]])
+                hidden = get_string(lang, "hidden")
+                context.bot.edit_message_text(get_string(lang, "game_succeed").format(hidden, hidden),
+                                              chat_id, chat_data["word_list"], reply_markup=button)
                 buttons = None
         if not text:
             text = get_string(lang, "chameleon_found")

@@ -81,6 +81,8 @@ chameleon_found_fewer: "{0} wurde als Chamäleon demaskiert. Aber hat sich gut g
 chameleon_found_more: "{0} wurde demaskiert und war Chamäleon. Aber bei mehr als 6 Spielern weißt du ja, was das Wort ist, jetzt musst du es nur noch korrekt und ohne Liste schreiben. Haha!"
 # if the chameleon guesses wrong and has a second guess
 # {0} mention of the chameleon
+# this replaces the word/topic from the list
+hidden: "Versteck, nätsch. Dachtest du wirklich das klappt, CHhamäleon?"
 chameleon_guess_wrong_fewer: "Ähm, nein {0}! Das war falsch! Ich gebe dir ausnahmsweise noch eine Chance!"
 # if the chameleon guesses wrong
 # {0} mention of the chameleon

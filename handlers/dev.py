@@ -31,7 +31,7 @@ def real_shutdown(args):
     dp = updater.dispatcher
     bot = dp.bot
     for chat_id in dp.chat_data:
-        if dp.chat_data[chat_id]:
+        if "players" in dp.chat_data[chat_id]:
             lang = database.get_language_chat(chat_id)
             bot.send_message(chat_id, get_string(lang, "run_shutdown"))
     bot.send_message(args[1], "Shutdown done")

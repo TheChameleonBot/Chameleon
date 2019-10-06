@@ -82,6 +82,8 @@ chameleon_found_fewer: "{0} was unmasked and they are the Chameleon! Since there
 # if the chameleon was found and 7 or 8 players are there
 # {0} mention of the chameleon
 chameleon_found_more: "{0} was unmasked and they are the Chameleon! Since there are more then six players, the word list is not visible, so watch your spelling! (group admins can turn that off in the settings)"
+# this replaces the word/topic from the list
+hidden: "hidden"
 # if the chameleon guesses wrong and has a second guess
 # {0} mention of the chameleon
 chameleon_guess_wrong_fewer: "Sorry {0}, this was wrong guess. Try again ;)"
