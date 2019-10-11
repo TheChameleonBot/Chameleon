@@ -10,12 +10,12 @@ def language_buttons(languages):
     return build_menu(buttons, 3)
 
 
-def help_buttons(settings, chosen):
+def help_buttons(settings, chosen, refresh_id=0):
     buttons = []
     for setting in settings:
         if setting == "refresh":
             continue
-        data = f"settingshelp_{setting}"
+        data = f"settingshelp_{setting}_{refresh_id}"
         if setting == chosen:
             buttons.append(InlineKeyboardButton(f"[{settings[setting]}]", callback_data=data))
         else:

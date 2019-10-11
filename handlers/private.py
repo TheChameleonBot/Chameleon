@@ -90,7 +90,11 @@ def settings_help_edit(update: Update, context: CallbackContext):
         user_data["lang"] = database.get_language_player(update.effective_user.id)
     lang = user_data["lang"]
     query = update.callback_query
-    chosen = query.data.split("_")[1]
-    buttons = private_helpers.help_buttons(get_string(lang, "group_setting_buttons"), chosen)
+    data = query.data.split("_")
+    chosen = data[1]
+    refresh_id = 1
+    if int(data[2]) != 0:
+        refresh_id = 0
+    buttons = private_helpers.help_buttons(get_string(lang, "group_setting_buttons"), chosen, refresh_id)
     query.edit_message_text(get_string(lang, f"{chosen}_help"), reply_markup=InlineKeyboardMarkup(buttons),
                             parse_mode=ParseMode.HTML, disable_web_page_preview=True)

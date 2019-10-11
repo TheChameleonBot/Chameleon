@@ -5,7 +5,7 @@ from utils.helpers import build_menu
 from strings import get_language
 
 
-def group_settings_buttons(settings, chat_id, refresh_id=0):
+def group_settings_buttons(settings, chat_id, ref=0):
     buttons = []
     refresh_button = []
     group_settings = database.get_all_settings(chat_id)
@@ -18,20 +18,19 @@ def group_settings_buttons(settings, chat_id, refresh_id=0):
     for setting in settings:
         if setting == "language":
             buttons.append(InlineKeyboardButton(f"{settings[setting]}: {get_language(group_settings['lang'])}",
-                                                callback_data=f"groupsettings_{str(chat_id)}_{setting}"))
+                                                callback_data=f"groupsettings_{str(chat_id)}_{setting}_{ref}"))
         elif setting == "deck":
             buttons.append(InlineKeyboardButton(f"{settings[setting]}: {group_settings['deck']}",
-                                                callback_data=f"groupsettings_{str(chat_id)}_{setting}"))
+                                                callback_data=f"groupsettings_{str(chat_id)}_{setting}_{ref}"))
         elif setting == "refresh":
             refresh_button.append(InlineKeyboardButton(f"{settings[setting]} 🔄",
-                                                       callback_data=f"groupsettings_{str(chat_id)}_{setting}_"
-                                                                     f"{refresh_id}"))
+                                                       callback_data=f"groupsettings_{str(chat_id)}_{setting}_{ref}"))
         elif group_settings[setting]:
             buttons.append(InlineKeyboardButton(f"{settings[setting]} ✅",
-                                                callback_data=f"groupsettings_{str(chat_id)}_{setting}"))
+                                                callback_data=f"groupsettings_{str(chat_id)}_{setting}_{ref}"))
         else:
             buttons.append(InlineKeyboardButton(f"{settings[setting]} ❌",
-                                                callback_data=f"groupsettings_{str(chat_id)}_{setting}"))
+                                                callback_data=f"groupsettings_{str(chat_id)}_{setting}_{ref}"))
     return build_menu(buttons, 2, header_buttons=refresh_button)
 
 

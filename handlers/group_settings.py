@@ -181,14 +181,18 @@ def fewer(update: Update, context: CallbackContext):
 @admins_only
 def more(update: Update, context: CallbackContext):
     query = update.callback_query
-    chat_id = int(query.data.split("_")[1])
+    data = query.data.split("_")
+    chat_id = int(data[1])
+    refresh_id = 1
+    if int(data[3]) != 0:
+        refresh_id = 0
     lang = context.user_data["lang"]
     more_setting = database.insert_group_more(chat_id)
     if more_setting:
         query.answer(get_string(lang, "group_setting_more_activate"))
     else:
         query.answer(get_string(lang, "group_setting_more_deactivate"))
-    edit(query, chat_id, lang)
+    edit(query, chat_id, lang, refresh_id)
 
 
 @admins_only
@@ -207,7 +211,11 @@ def tournament(update: Update, context: CallbackContext):
 @admins_only
 def pin(update: Update, context: CallbackContext):
     query = update.callback_query
-    chat_id = int(query.data.split("_")[1])
+    data = query.data.split("_")
+    chat_id = int(data[1])
+    refresh_id = 1
+    if int(data[3]) != 0:
+        refresh_id = 0
     lang = context.user_data["lang"]
     if not database.get_pin_setting(chat_id):
         can_pin = context.bot.get_chat_member(chat_id, context.bot.id).can_pin_messages
@@ -220,13 +228,17 @@ def pin(update: Update, context: CallbackContext):
     else:
         database.insert_group_pin(chat_id)
         query.answer(get_string(lang, "group_setting_pin_deactivate"))
-    edit(query, chat_id, lang)
+    edit(query, chat_id, lang, refresh_id)
 
 
 @admins_only
 def restrict(update: Update, context: CallbackContext):
     query = update.callback_query
-    chat_id = int(query.data.split("_")[1])
+    data = query.data.split("_")
+    chat_id = int(data[1])
+    refresh_id = 1
+    if int(data[3]) != 0:
+        refresh_id = 0
     lang = context.user_data["lang"]
     if not database.get_restrict_setting(chat_id):
         chat_member = context.bot.get_chat_member(chat_id, context.bot.id)
@@ -239,14 +251,17 @@ def restrict(update: Update, context: CallbackContext):
     else:
         database.insert_group_restrict(chat_id)
         query.answer(get_string(lang, "group_setting_restrict_deactivate"))
-    edit(query, chat_id, lang)
+    edit(query, chat_id, lang, refresh_id)
 
 
 @admins_only
 def refresh(update: Update, context: CallbackContext):
     query = update.callback_query
-    chat_id = int(query.data.split("_")[1])
-    refresh_id = int(query.data.split("_")[3]) + 1
+    data = query.data.split("_")
+    chat_id = int(data[1])
+    refresh_id = 1
+    if int(data[3]) != 0:
+        refresh_id = 0
     lang = context.user_data["lang"]
     edit(query, chat_id, lang, refresh_id)
 
