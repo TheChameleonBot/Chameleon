@@ -35,6 +35,9 @@ def message(update: Update, context: CallbackContext):
         if "word" not in player:
             if user_id == player["user_id"]:
                 word = update.effective_message.text
+                word.replace("<", "&lt;")
+                word.replace(">", "&gt;")
+                word.replace("&", "&amp;")
                 players[index]["word"] = word
                 try:
                     next_player = players[index + 1]

@@ -57,10 +57,12 @@ def upload(update: Update, context: CallbackContext):
 
 def yaml_file(file, update: Update, bot):
     file_name = file.file_name
-    file.get_file().download("./strings/" + file_name)
+    temp_name = "./strings/" + "temp_" + file_name
+    file.get_file().download(temp_name)
     returned = new_strings(file_name)
     if "error" in returned:
         update.effective_message.reply_text(f"An error happened with this file: {returned['error']}")
+        os.remove(temp_name)
     elif file_name[:-5] == "en":
         text = "Hello translators. The english file received an update."
         if returned["new_strings"]:
@@ -89,6 +91,7 @@ def yaml_file(file, update: Update, bot):
         if text == "Hey there, thanks for submitting your file":
             text += "\nNo errors in your file, good job!"
         update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
+    os.rename(temp_name, "./strings/" + file.file_name)
 
 
 def json_file(file, update):
@@ -99,6 +102,7 @@ def json_file(file, update):
     except JSONDecodeError as e:
         text = f"This json file is no valid json, I got the following error: <code>{str(e)}</code>"
         update.effective_message.reply_html(text)
+        os.remove(temp_name)
         return
     if not isinstance(new_deck, dict):
         update.effective_message.reply_text("This json file is not a dictionary!")

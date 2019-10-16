@@ -12,10 +12,7 @@ class Database:
         self.db = MongoClient()
         self.db = self.db["chameleonbot"]
         self.cards = {}
-        for filename in os.listdir('./decks'):
-            if filename.endswith(".json"):
-                deck_name = filename[:-5]
-                self.cards[deck_name] = json.load(open('./decks/' + filename))
+        self.reload_decks()
         self.shutdown = False
 
     # get part group
@@ -197,7 +194,6 @@ class Database:
     # reload part
 
     def reload_decks(self):
-        self.cards = {}
         for filename in os.listdir('./decks'):
             if filename.endswith(".json"):
                 deck_name = filename[:-5]
