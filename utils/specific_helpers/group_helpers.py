@@ -22,7 +22,7 @@ def yes_game(context, data, chat_id, dp):
     chat_data = dp.chat_data[chat_id]
     lang = data["lang"]
     group_settings = data["group_settings"]
-    deck = Deck(group_settings["deck"])
+    deck = Deck(*group_settings["deck"].split("_"))
     chameleon = random.choice(list(data["players"]))
     random.shuffle(data["players"])
     game_id = ''.join(random.choices(string.ascii_lowercase, k=10))

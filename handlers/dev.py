@@ -106,10 +106,22 @@ def json_file(file, update):
         return
     if not isinstance(new_deck, dict):
         update.effective_message.reply_text("This json file is not a dictionary!")
+        os.remove(temp_name)
+        return
+    try:
+        if not isinstance(new_deck["language"], str) or not isinstance(new_deck["name"], str):
+            update.effective_message.reply_text("language and name needs to be strings!")
+            os.remove(temp_name)
+            return
+    except KeyError as e:
+        update.effective_message.reply_text(f"Hey, you need to include {e} in your file in order to submit a deck")
+        os.remove(temp_name)
         return
     stripped_keys = []
     stripped_items = []
     for key in new_deck:
+        if key == "language" or key == "name":
+            continue
         if not isinstance(new_deck[key], list):
             stripped_keys.append(key)
             new_deck.pop(key, None)

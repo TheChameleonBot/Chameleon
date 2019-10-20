@@ -98,7 +98,7 @@ tournament_end: "Het spel is afgelopen, maar er is nog geen winnaar van het toer
 tournament_end_one: "Het toernooi is afgelopen \\o/\n\nDe winnaar is {0} met <b>{1}</b> punten.\n\nAndere spelers:\n{2}"
 # when a tournament ends with several winners
 # {0} winner mentions + points, {1} other player mentions + points
-tournament_end_several: "Het toernooi is afgelopen \\o/\n\nDe winnaars zijn:\n{0}\n\nAndere spelers:\n{2}"
+tournament_end_several: "Het toernooi is afgelopen \\o/\n\nDe winnaars zijn:\n{0}\n\nAndere spelers:\n{1}"
 # when an admin aborts a running/starting game
 abort_game: "Spel succesvol beëindigd."
 # when someone tries to to abort a game when none is running/starting

@@ -2,7 +2,6 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMo
 from telegram.error import Unauthorized, BadRequest
 from telegram.ext import CallbackContext
 
-from constants import TRANSLATION_CHAT_LINK
 from database import database
 from strings import get_string, get_languages
 from utils import group_settings_helpers, helpers
@@ -126,7 +125,7 @@ def change_language(update: Update, context: CallbackContext):
     current_language = languages[current_lang]
     lang = context.user_data["lang"]
     buttons = group_settings_helpers.language_buttons(languages, chat_id)
-    query.edit_message_text(get_string(lang, "group_setting_languages").format(current_language, TRANSLATION_CHAT_LINK),
+    query.edit_message_text(get_string(lang, "group_setting_languages").format(current_language),
                             reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
 
 
@@ -147,10 +146,26 @@ def change_deck(update: Update, context: CallbackContext):
     query = update.callback_query
     chat_id = int(query.data.split("_")[1])
     lang = context.user_data["lang"]
-    current_deck = database.get_deck_chat(chat_id)
-    deck = list(database.cards.keys())
-    buttons = group_settings_helpers.deck_buttons(deck, chat_id)
-    text = get_string(lang, "group_setting_decks").format(current_deck, TRANSLATION_CHAT_LINK)
+    context.user_data["deck"] = database.get_deck_chat(chat_id)
+    deck = context.user_data["deck"]
+    deck_languages = database.get_deck_languages()
+    buttons = group_settings_helpers.deck_languages_buttons(deck_languages, chat_id)
+    text = get_string(lang, "group_setting_deck_language").format(deck.split("_")[0])
+    query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+
+
+@admins_only
+def select_deck_language(update: Update, context: CallbackContext):
+    query = update.callback_query
+    data = query.data.split("_")
+    chat_id = int(data[1])
+    selected_language = data[2]
+    lang = context.user_data["lang"]
+    deck = context.user_data["deck"]
+    context.user_data["selected_lang"] = selected_language
+    decks = database.get_decks(selected_language)
+    buttons = group_settings_helpers.deck_buttons(decks, chat_id)
+    text = get_string(lang, "group_setting_decks").format(deck.split("_")[1])
     query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
 
 
@@ -159,7 +174,7 @@ def select_deck(update: Update, context: CallbackContext):
     query = update.callback_query
     data = query.data.split("_")
     chat_id = int(data[1])
-    selected_deck = data[2]
+    selected_deck = f"{context.user_data['selected_lang']}_{data[2]}"
     lang = context.user_data["lang"]
     database.insert_group_deck(chat_id, selected_deck)
     edit(query, chat_id, lang)
@@ -263,6 +278,7 @@ def refresh(update: Update, context: CallbackContext):
     if int(data[3]) != 0:
         refresh_id = 0
     lang = context.user_data["lang"]
+    query.answer(get_string(lang, "group_setting_refresh"))
     edit(query, chat_id, lang, refresh_id)
 
 

@@ -5,7 +5,7 @@ class Group:
         self.title = ""
         self.link = None
         self.lang = "en"
-        self.deck = "Standard"
+        self.deck = "English_Standard"
         self.fewer = True
         self.more = True
         self.pin = False

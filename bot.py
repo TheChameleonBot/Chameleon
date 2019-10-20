@@ -45,7 +45,8 @@ def main():
     dp.add_handler(CallbackQueryHandler(group_settings.select_language, pattern=r"grouplanguage"))
     # group deck
     dp.add_handler(CallbackQueryHandler(group_settings.change_deck, pattern=r"(?=.*groupsetting)(?=.*deck)"))
-    dp.add_handler(CallbackQueryHandler(group_settings.select_deck, pattern=r"deck"))
+    dp.add_handler(CallbackQueryHandler(group_settings.select_deck_language, pattern=r"0deck"))
+    dp.add_handler(CallbackQueryHandler(group_settings.select_deck, pattern=r"1deck"))
     # group fewer
     dp.add_handler(CallbackQueryHandler(group_settings.fewer, pattern=r"(?=.*groupsetting)(?=.*fewer)"))
     # group more

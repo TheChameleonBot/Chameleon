@@ -97,7 +97,7 @@ tournament_end: "Der Wettkampf endet ohne Sieger. Auch mal schön. Oder wollt ih
 tournament_end_one: "Der Wettkampf endet \\o/\n\nAlle sind Gewinner, aber {0} hat mit <b>{1}</b> Punkten am meisten gewonnen.\n\nEine Teilnahmeurkunde bekommen:\n{2}"
 # when a tournament ends with several winners
 # {0} winner mentions + points, {1} other player mentions + points
-tournament_end_several: "Der Wettkampf endet und es gibt mehrere Gewinner \\o/\n\nGewonnen haben:\n{0}\n\nVöllig verloren haben:\n{2}"
+tournament_end_several: "Der Wettkampf endet und es gibt mehrere Gewinner \\o/\n\nGewonnen haben:\n{0}\n\nVöllig verloren haben:\n{1}"
 # when an admin aborts a running/starting game
 abort_game: "Ein laufendes Spiel beenden ist unfair dem Chamäleon gegenüber. Aber du chef, ich nix."
 # when someone tries to to abort a game when none is running/starting

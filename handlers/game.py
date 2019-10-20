@@ -384,7 +384,7 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
             for player in chat_data["players"]:
                 player.pop("word", None)
                 player.pop("votes", None)
-            deck = Deck(chat_data["deck"])
+            deck = Deck(*chat_data["deck"].split("_"))
             chameleon = random.choice(list(chat_data["players"]))
             chat_data["players"] = chat_data["players"][1:] + [chat_data["players"][0]]
             game_id = ''.join(random.choices(string.ascii_lowercase, k=10))

@@ -28,8 +28,14 @@ class Database:
     def get_deck_chat(self, chat_id):
         return self.db["groups"].find_one({"id": chat_id})["deck"]
 
-    def get_deck(self, deck_name):
-        return self.cards[deck_name]
+    def get_deck(self, deck_language, deck_name):
+        return self.cards[deck_language][deck_name]
+
+    def get_deck_languages(self):
+        return self.cards.keys()
+
+    def get_decks(self, deck_language):
+        return self.cards[deck_language].keys()
 
     def get_fewer_setting(self, chat_id):
         return self.db["groups"].find_one({"id": chat_id})["fewer"]
@@ -196,8 +202,14 @@ class Database:
     def reload_decks(self):
         for filename in os.listdir('./decks'):
             if filename.endswith(".json"):
-                deck_name = filename[:-5]
-                self.cards[deck_name] = json.load(open('./decks/' + filename))
+                temp = json.load(open('./decks/' + filename))
+                language = temp["language"]
+                name = temp["name"]
+                [temp.pop(key) for key in ["name", "language"]]
+                if language in self.cards:
+                    self.cards[language][name] = temp
+                else:
+                    self.cards[language] = {name: temp}
 
 
 database = Database()

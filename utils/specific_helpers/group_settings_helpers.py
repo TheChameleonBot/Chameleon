@@ -42,8 +42,15 @@ def language_buttons(languages, chat_id):
     return build_menu(buttons, 3)
 
 
+def deck_languages_buttons(languages, chat_id):
+    buttons = []
+    for language in languages:
+        buttons.append(InlineKeyboardButton(language, callback_data=f"0deck_{str(chat_id)}_{language}"))
+    return build_menu(buttons, 3)
+
+
 def deck_buttons(deck, chat_id):
     buttons = []
     for deck_name in deck:
-        buttons.append(InlineKeyboardButton(deck_name, callback_data=f"deck_{str(chat_id)}_{deck_name}"))
+        buttons.append(InlineKeyboardButton(deck_name, callback_data=f"1deck_{str(chat_id)}_{deck_name}"))
     return build_menu(buttons, 3)

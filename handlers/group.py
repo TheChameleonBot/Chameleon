@@ -29,12 +29,11 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
     button = [[InlineKeyboardButton(get_string(lang, "start_button"), callback_data="join")]]
     mention = mention_html(user_id, first_name)
     group_settings = database.get_all_settings(chat_id)
+    settings = ["deck", "fewer", "more", "pin", "tournament", "restrict"]
     wanted_settings = []
-    for setting in group_settings:
-        if setting == "lang":
-            continue
+    for setting in settings:
         if setting == "deck":
-            wanted_settings.append(group_settings[setting])
+            wanted_settings.append(f"{group_settings[setting]}")
         elif group_settings[setting]:
             wanted_settings.append(get_string(lang, "activated"))
         else:
