@@ -43,7 +43,7 @@ def real_shutdown(args):
 
 def change_handlers(dp):
     dp.handlers.clear()
-    dp.handlers[0] = [CommandHandler("upload", upload, Filters.chat(TRANSLATION_CHAT_ID))]
+    dp.handlers = {0: [CommandHandler("upload", upload, Filters.chat(TRANSLATION_CHAT_ID))], 1: [], 2: []}
 
 
 def upload(update: Update, context: CallbackContext):
