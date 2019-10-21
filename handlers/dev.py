@@ -3,11 +3,11 @@ import os
 from json import JSONDecodeError
 
 from telegram import Update, ParseMode
-from telegram.ext import CallbackContext, Updater
+from telegram.ext import CallbackContext, Updater, CommandHandler, Filters
 from telegram.utils.helpers import mention_html
 from threading import Timer
 
-from constants import TRANSLATION_CHANNEL_ID
+from constants import TRANSLATION_CHANNEL_ID, TRANSLATION_CHAT_ID
 from database import database
 from strings import get_string, new_strings
 from utils.helpers import is_admin
@@ -16,25 +16,34 @@ from utils.helpers import is_admin
 def shutdown(update: Update, context: CallbackContext, updater: Updater):
     database.init_shutdown()
     dp = updater.dispatcher
+    skip = True
     for chat_id in dp.chat_data:
         if dp.chat_data[chat_id] and "players" in dp.chat_data[chat_id]:
+            skip = False
             lang = dp.chat_data[chat_id]["lang"]
             context.bot.send_message(chat_id, get_string(lang, "init_shutdown"))
-    update.message.reply_text("Shutdown initiated, see you in t-5 min")
-    t = Timer(5 * 60, real_shutdown, [[updater, update.effective_user.id]])
-    t.start()
+    if not skip:
+        t = Timer(5 * 60, real_shutdown, [[dp, update.effective_user.id]])
+        t.start()
+    else:
+        change_handlers(dp)
+    update.message.reply_text(f"Shutdown initiated, {'see you in t-5 min' if not skip else 'upload activated'}")
 
 
 def real_shutdown(args):
-    updater = args[0]
-    dp = updater.dispatcher
+    dp = args[0]
     bot = dp.bot
     for chat_id in dp.chat_data:
         if dp.chat_data[chat_id] and "players" in dp.chat_data[chat_id]:
             lang = database.get_language_chat(chat_id)
             bot.send_message(chat_id, get_string(lang, "run_shutdown"))
-    bot.send_message(args[1], "Shutdown done")
-    updater.stop()
+    change_handlers(dp)
+    bot.send_message(args[1], "Shutdown done, upload activated")
+
+
+def change_handlers(dp):
+    dp.handlers.clear()
+    dp.handlers[0] = [CommandHandler("upload", upload, Filters.chat(TRANSLATION_CHAT_ID))]
 
 
 def upload(update: Update, context: CallbackContext):
