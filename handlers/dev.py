@@ -1,5 +1,7 @@
 import json
 import os
+import sys
+import traceback
 from json import JSONDecodeError
 
 from telegram import Update, ParseMode
@@ -183,9 +185,10 @@ def error_handler(update: Update, context: CallbackContext):
     # but only one where you have an empty payload by now: A poll (buuuh)
     if update.poll:
         payload += f' with the poll id {update.poll.id}.'
+    trace = "".join(traceback.format_tb(sys.exc_info()[2]))
     text = f"Oh no. The error <code>{context.error}</code> happened{payload}. The type of the chat is " \
            f"<code>{chat.type}</code>. The current user data is <code>{context.user_data}</code>, the chat data " \
-           f"<code>{context.chat_data}</code>."
+           f"<code>{context.chat_data}</code>.\nThe full traceback:\n\n<code>{trace}</code>"
     context.bot.send_message(208589966, text, parse_mode=ParseMode.HTML)
     raise
 
