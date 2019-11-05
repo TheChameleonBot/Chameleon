@@ -1,9 +1,10 @@
 # put the people who worked on the translation here if you/they want to.
 authors:
   - Appfel
-  - der grpßartige, einzigartige @Poolitzer, der den Bot entwickelt
+  - der großartige, einzigartige @Poolitzer, der den Bot entwickelt
 # put the name of your language here, in their native translation
-language: "Deutsch"# send when the bot gets added to a group
+language: "Deutsch"
+# send when the bot gets added to a group
 greeting: "Hello there. I am The Chameleon bot, a telegram bot which brings the game The Chameleon in your group! In order to change my settings, you can run /settings (admin restricted in bigger groups). Or just hit /start to start a game with me :)"
 # when a game is started with /start in a group.
 # {0} mention of the player who started the game, {1} list of mentions for joined player
@@ -138,6 +139,8 @@ group_setting_refresh: "Die Einstellungen wurden aktualisiert!"
 # change language of a group
 group_setting_languages: "Die aktuelle Sprache in der Gruppe ist <b>{0}</b>. Wähle eine andere Sprache aus - oder die Gleiche. Mir doch egal.. Falls du einen Fehler melden oder eine Sprache übersetzen möchtest, haue /translation (und nein, hit mit hauen zu übersetzen ist kein Fehler, aber man könnte auch <b>drücken</b> sagen)"
 # change deck of a group
+# {0} is the current language
+group_setting_deck_language: "Wähle den Stapel aus, den du möchtest. Starte mit der Sprache, in der der Stapel sein soll, <b>{0}</b> ist die aktuell ausgewählte."
 group_setting_decks: "Der aktuell gewählte Stapel ist <b>{0}</b>. Wähle einen Stapel zum Wechseln aus oder wähle den Gleichen und ändere nichts. Falls du selber ein Deck kreieren (oder übersetzen) möchtest, nutze /deck"
 # activate fewer setting of group
 group_setting_fewer_activate: "Die Option \"Weniger\" ist aktiviert. Das Chamäleon hat bei 3 Spielern mehr als eine Chance."
@@ -190,7 +193,7 @@ rules_prepend: "Oh hey, wir haben neue Spieler. Das Spiel wird in 31 Sekunden st
 here: "hier"
 # the deck command reply
 # {0} and {1} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
-deck: "Stapel sind Sammlungen von \"Karten\". Du kannst neue Stapel hinzufügen oder bestehende bearbeiten, indem du die json-Datei nutzt. Solltest du dich an einen neuen Stapel wagen, bedenke bitte, den Stapel-Namen als Dateinamen festzulegen. Es sollte schön kurz sein und der erste Buchstabe sollte groß sein, da es als Knöpfchen angezeigt wird und es dann besser aussieht. Dass du dich mit gutem Aussehen nicht auskennst, ist klar, mach es trotzdem, bitte! NureinWort! In der Datei legst du \"keys\" an, welche das Thema sind und dann legst du die 16 Wörter in einer Liste fest. 16 sind nicht Pflicht, sind aber die beste Anzahl. Es müssen aber schon Wörter sein, keine Zahlen, Listen oder anderer Mist. Reine Wörter. Du möchtest schonmal fertige Stapel sehen? Bitte {0} lang. Und um mit uns zu sprechen bitte mal {1} reinschauen, um Fragen zu klären oder eine fertige Datei von uns zerpflüc... äh ich meine eine fertige Datei hinzuzufügen."
+deck: "Stapel sind Sammlungen von \"Karten\". Du kannst selber neue Stapel hinzufügen oder bestehende bearbeiten, sie basieren auf einfachen JSON-Datein. Solltest du dich an einen neuen Stapel wagen, musst du zwei Keys festlegen: language und name. Language ist die Sprache, in dem der Stapel ist. Benutz dafür den Namen der Sprache in ihrer eigenen Schreibweise. Name ist der Name des Stapels, er sollte schön kurz sein. Bei beiden bitte den erste Buchstabe groß machen, da es als Knöpfchen angezeigt wird und es dann besser aussieht. Dass du dich mit gutem Aussehen nicht auskennst, ist klar, mach es trotzdem, bitte! NureinWort! In der Datei legst du dann mehr \"keys\" an, welche ein Thema sind und dann legst du 16 dazu passende Wörter in einer Liste fest. 16 sind nicht Pflicht, sind aber die beste Anzahl. Es müssen aber schon Wörter sein, keine Zahlen, Listen oder anderer Mist. Reine Wörter. Du möchtest schonmal fertige Stapel sehen? Bitte {0} lang. Und um mit uns zu sprechen bitte mal {1} reinschauen, um Fragen zu klären oder eine fertige Datei von uns zerpflücken zu... äh ich meine eine fertige Datei hinzuzufügen."
 # the translation command reply
 # {0} - {2} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
 translation: "Man kann den Bot übersetzen. Nicht so gut wie für Deutsch, aber immerhin ;-) Wir arbeiten mit .yaml Dateien, die man in jedem poppeligen Textverarbeitungsprogramm bearbeiten kann. Aber ich mag Notepad++ oder Sublime Text ganz gerne :-) Sag bitte meinen Entwicklern nicht, dass ich Lieblingsprogramme habe! Egal. Wenn du diese schier unmögliche Aufgabe, ja man könnte auch Herausforderung sagen, haben wir {0} fertige Übersetzungen. Lade eine bestehende Version, am Besten en.yaml (immer aktuell), übersetze es mit dem ISO 639-1 Code (ja, auch ich hasse Poolitzer dafür! Schau einfach mal bei Ecosia nach, ist dann recht easy). Ein anderer ISO 639 code wäre auch möglich. Stelle sicher, dass das Programm YAML erkannt hat, dann sind die Texte in Anführungszeichen oder Gänsefüßchen hervorgehoben, die sind zu übersetzen. Wenn du etwas tatsächlich in Anführungszeichen brauchst nutze <code>\\\"</code>. Die Akkoladen (besser bekannt als geschweifte Klammern) bitte beibehalten, das wird dann im Ergebnis ersetzt. Formatierungen in Telegram funktionieren mit HTML Tags, siehe {1}. Wenn du fertig und zufrieden bist melde dich {2}, wir helfen dir bei Fragen oder mit dem Hinzufügen zum Bot. Oder wir machen deine Arbeit runter. Eher letzteres..."
@@ -219,7 +222,7 @@ nextgame_block: "Hey. Wenn du willst, dass ich dich private benachrichtige, soll
 settings_help: "Na duu. Ich weiß, so viele Einstellungen, so wenig Zeit. Daher habe ich es dir einfach gemacht: Wähle unten die Einstellung aus, die dich interessiert. Fertig."
 # the following strings are explanations for the settings, triggered by the command above
 language_help: "<b>Sprache</b>: Ändere meine Sprache. Du spricht eine tolle Sprache und möchtest diese mir beibringen? Okay, sende mir einfach /translation. Zack. So einfach. Toll, was?"
-deck_help: "<b>Stapel</b>: Der Stapel an Themen, die ich verwende. Du hast einen Themenvorschlag? Gut, benutze einfach /deck, da erkläre ich dir, wie's geht."
+deck_help: "<b>Stapel</b>: Der Stapel an Themen, die ich verwende. Ich wähle für jedes Spiel zufällig ein Thema aus, zu dem dann (meistens 16) Wörter gehören, von denen ich dann eins zum geheimen Wort mache. Du hast einen Themenvorschlag? Gut, benutze einfach /deck, da erkläre ich dir, wie's geht."
 fewer_help: "<b>Weniger</b>: Bei drei Spielern bekommt das Chamäleon 2 Möglichkeiten, das Wort zu erraten. Wenn aktiv."
 more_help: "<b>Mehr</b>: Bei 7 oder 8 Spielern wird, wenn aktiv, die Wortliste verschwinden, wenn jeder seinen Tipp abgegeben hat. Das Chamäleon hat es dann schwerer, das korrekte Wort zu erraten"
 tournament_help: "<b>Wettbewerb</b>: Wenn aktiv, endet das Spiel nicht nach einer Runde, sondern wir machen einen Turnier.\n• Chamäleon wird nicht demaskiert: 2 Punkte für das Chamäleon\n• Chamäleon wird entdeckt, aber errät das Wort: 1 Punkt für das Chamäleon\n• Chamäleon wird demaskiert und errät das Wort nicht: 2 Punkte für die anderen Spieler"
