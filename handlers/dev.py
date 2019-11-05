@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 import sys
 import traceback
 from json import JSONDecodeError
@@ -103,6 +104,7 @@ def yaml_file(file, update: Update, bot):
             text += "\nNo errors in your file, good job!"
         update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
     os.rename(temp_name, "./strings/" + file.file_name)
+    github("./strings/" + file.file_name)
 
 
 def json_file(file, update):
@@ -157,6 +159,13 @@ def json_file(file, update):
     update.effective_message.reply_html(text)
     os.rename(temp_name, "./decks/" + file.file_name)
     database.reload_decks()
+    github("./strings/" + file.file_name)
+
+
+def github(file):
+    subprocess.call(["git", "add", file])
+    subprocess.call(["git", "commit", "-m", "\"updating strings via /upload command\""])
+    subprocess.call(["git", "push"])
 
 
 def error_handler(update: Update, context: CallbackContext):
