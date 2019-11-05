@@ -60,19 +60,20 @@ class String:
         for string in self.languages["en"]:
             try:
                 translated_string = new_language[string]
-                original_string = self.languages["en"][string]
-                if isinstance(original_string, dict):
-                    if set(original_string) != set(translated_string):
-                        missing_strings.append(string)
-                        new_language.pop(string, None)
-                elif isinstance(original_string, str):
-                    translated_argument = [tup[1] for tup in Formatter().parse(translated_string) if tup[1] is not None]
-                    original_argument = [tup[1] for tup in Formatter().parse(original_string) if tup[1] is not None]
-                    if translated_argument != original_argument:
-                        missing_arguments.append(string)
-                        new_language.pop(string, None)
             except KeyError:
                 missing_strings.append(string)
+                continue
+            original_string = self.languages["en"][string]
+            if isinstance(original_string, dict):
+                if set(original_string) != set(translated_string):
+                    missing_strings.append(string)
+                    new_language.pop(string, None)
+            elif isinstance(original_string, str):
+                translated_argument = [tup[1] for tup in Formatter().parse(translated_string) if tup[1] is not None]
+                original_argument = [tup[1] for tup in Formatter().parse(original_string) if tup[1] is not None]
+                if translated_argument != original_argument:
+                    missing_arguments.append(string)
+                    new_language.pop(string, None)
         if missing_arguments:
             with open(r"./strings/" + filename, 'w') as outfile:
                 yaml.dump(new_language, outfile, default_flow_style=False, sort_keys=False)
