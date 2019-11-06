@@ -6,8 +6,8 @@ language: "English"
 # send when the bot gets added to a group
 greeting: "Hello there. I am The Chameleon bot, a telegram bot which brings the game The Chameleon in your group! In order to change my settings, you can run /settings (admin restricted in bigger groups). Or just hit /start to start a game with me :)"
 # when a game is started with /start in a group.
-# {0} mention of the player who started the game, {1} list of mentions for joined player, {2-7} settings, either the deck name or activate or deactivate (see below)
-start_game: "{0} started a game. You are playing with the following settings:\n\n<b>Deck:</b> {2}\n<b>Fewer:</b> {3}\n<b>More: </b>{4}\n<b>Pin: </b>{5}\n<b>Tournament: </b>{6}\n<b>Restricting: </b>{7}\n\nLet's join!\n\n#Players:\n{1}"
+# {0} mention of the player who started the game, {1} list of mentions for joined player, {2-8} settings, either the deck name or activate or deactivate (see below)
+start_game: "{0} started a game. You are playing with the following settings:\n\n<b>Deck:</b> {2}\n<b>Fewer:</b> {3}\n<b>More: </b>{4}\n<b>Pin: </b>{5}\n<b>Tournament: </b>{6}\n<b>Restricting: </b>{7}\n<b>Exclamation: </b>{8}\n\nLet's join!\n\n#Players:\n{1}"
 # the button beneath the message above
 start_button: "Join/Leave"
 # if the setting above is activated
@@ -52,7 +52,8 @@ first_player_say_word: "{0}, you are the first one to give me a word. Please do 
 # {0} mention of the player, {1} word list, consisting of the player name: players word(s), {2} the message below or nothing
 more_players_say_word: "Thanks. Now, its your turn, {0}.{2}\n\nCurrent word list:\n{1}"
 # this will get attached to the previous two messages in case the game is not in restricted mote
-say_word_not_restricted: "You can continue the conversation you may having right now with adding ! to the beginning of your message, I won't count it as your entry then"
+exclamation_deactivated: "Add ! to the beginning of your message, I won't count it as your entry then"
+exclamation_activated: "Do not add ! to the beginning of your message, I won't count it as your entry then"
 # the message before the voting, showing the final word list
 # {0} final word list
 final_word_list: "Final word list, we have to go to vote whose role (Chameleon or not) is to unmask then:\n\n{0}"
@@ -75,7 +76,7 @@ not_starter: "You did not say the first word, did you really think that would wo
 chameleon_not_found: "{0} was unmasked and they are <b>not</b> the Chameleon, {1} is! The Chameleon wins the game! The secret word was <b>{2}</b>."
 # if the chameleon was found
 # {0} mention of the chameleon
-chameleon_found: "{0} was unmasked and they are the Chameleon! You can try to guess the secret word now, finish your current conversation with adding ! to the beginning of your message, I won't count this as a guess then."
+chameleon_found: "{0} was unmasked and they are the Chameleon! You can try to guess the secret word now."
 # if the chameleon was found and only three players are there (and this is activated in the setting)
 # {0} mention of the chameleon
 chameleon_found_fewer: "{0} was unmasked and they are the Chameleon! Since there are ony three players right now, you get two guesses (group admins can turn that off in the settings)."
@@ -135,6 +136,7 @@ group_setting_buttons:
   more: "More"
   tournament: "Tournament"
   pin: "Pin"
+  exclamation: "Exclamation"
   restrict: "Restrict"
 # shown to the user when he presses refresh in the settings
 group_setting_refresh: "The settings have been refreshed!"
@@ -170,6 +172,10 @@ group_setting_restrict_activate: "The restrict mode is activated!"
 group_setting_restrict_deactivate: "The restrict mode is deactivated!"
 # being an admin which can restrict member is required
 group_setting_restrict_required: "I need to be an admin which can add members, promote admins and restrict members in order to activate this mode"
+# activate exclamation setting of group
+group_setting_exclamation_activate: "Activated, entries with a prepending ! are counted."
+# deactivate exclamation setting of group
+group_setting_exclamation_deactivate: "Deactivated, entries without a prepending ! are counted."
 # if an error happens somewhere, we tell the user about it
 error: "Hey. I regret to inform you that an error happened while I tried to handle your update. My developers will be notified."
 # if a user wants to change their language
@@ -180,7 +186,7 @@ private_language: "Hey. Your current language is {0}, select the one you want fr
 private_language_selected: "Great, {0} it is from now on!"
 # if a random idiot presses buttons
 user_not_in_game: "Hey, you have to be in the game to do this. Maybe next round?"
-# the rules, presented when someone hasen't played the game yet or runs /game_rules
+# the rules, presented when someone hasn't played the game yet or runs /game_rules
 rules: "<b>Chameleon - the game</b> <i>(english rules, trimmed to the telegram bot)</i>\n\n
 • After the game starts, one players gets to be the chameleon, the other one are simple players\n
 • A topic and a belonging word list is presented, with a button attached to it\n
@@ -231,4 +237,5 @@ fewer_help: "<b>Fewer</b>: If only three players are playing (and this is activa
 more_help: "<b>More</b>: If 7 or 8 players are playing (and this is activated), the words vanish once everyone has said their word, making it harder for the chameleon to guess the correct one."
 tournament_help: "<b>Tournament</b>: If this mode is activated, a scoring system is introduced. If the chameleon escapes undetected, it gets two points. If it gets caught and guesses the correct word, it gets one point. If it doesn't, the player get two points each. The first player making it to 5 points wins."
 pin_help: "<b>Pin</b>: Once activated, I will silently pin the word list so players can find it easier once a game is started. I will pin the old pinned message (if existing) silently again when the game ends. In order to activate this setting, you need to make me an admin with pin privileges."
-restrict_help: "<b>Restricting</b>: Once activated, I will restrict everyone from writing except the person whose turn it is during the word saying phase. Everyone can write again after this phase is over. In order for this to work, I will promote those users to admins with add member rights, since admins aren't restricted. The original chat permissions are restored after the phase. In order to activate this setting, you need to make me an admin with add new admins, restrict members and add members privileges. You can read up here if you want to know why: https://t.me/TheChameleonSupport/8"
+restrict_help: "<b>Restricting</b>: Once activated, I will restrict everyone from writing except the person whose turn it is during the word saying phase. Everyone can write again after this phase is over. In order for this to work, I will promote those users to admins with add member rights, since admins aren't restricted. The original chat permissions are restored after the phase. In order to activate this setting, you need to make me an admin with add new admins, restrict members and add members privileges. You can read up here if you want to know why: https://t.me/TheChameleonSupport/8\n<i>Attention:</i> Every message counts as word entry in the say-a-word-phase. The exclamation setting is completely ignored."
+exclamation_help: "<b>Exclamation Mark</b>: The exclamation mark is a crucial part of the way your group plays this game. In the standard setting, this is deactivated, meaning that messages without a prepending exclamation mark are counted, while messages beginning with one are ignored. While it feels more natural, this behaviour can lead to false entries, when people continue a conversation they are having. You can change this to activated, which flips that behaviour around. Only messages with a prepending exclamation mark are counted. This feels a bit weird, but effectively eliminates the possibility of false entries.\n<i>Attention:</i> This setting is ignored when the game is in restricted mode, where it is not possible to have a conversation while the game is in the entry phase."
