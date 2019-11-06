@@ -52,8 +52,8 @@ first_player_say_word: "{0}, you are the first one to give me a word. Please do 
 # {0} mention of the player, {1} word list, consisting of the player name: players word(s), {2} the message below or nothing
 more_players_say_word: "Thanks. Now, its your turn, {0}.{2}\n\nCurrent word list:\n{1}"
 # this will get attached to the previous two messages in case the game is not in restricted mote
-exclamation_deactivated: "Add ! to the beginning of your message, I won't count it as your entry then"
-exclamation_activated: "Do not add ! to the beginning of your message, I won't count it as your entry then"
+exclamation_deactivated: "In order to continue your conversation, add ! to the beginning of your message, I won't count it as your entry then"
+exclamation_activated: "In order to continue your conversation, do not add ! to the beginning of your message, I won't count it as your entry then"
 # the message before the voting, showing the final word list
 # {0} final word list
 final_word_list: "Final word list, we have to go to vote whose role (Chameleon or not) is to unmask then:\n\n{0}"
