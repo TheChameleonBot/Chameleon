@@ -57,6 +57,8 @@ def main():
     dp.add_handler(CallbackQueryHandler(group_settings.pin, pattern=r"(?=.*groupsetting)(?=.*pin)"))
     # group restrict
     dp.add_handler(CallbackQueryHandler(group_settings.restrict, pattern=r"(?=.*groupsetting)(?=.*restrict)"))
+    # group exclamation
+    dp.add_handler(CallbackQueryHandler(group_settings.exclamation, pattern=r"(?=.*groupsetting)(?=.*exclamation)"))
     # group changes
     dp.add_handler(MessageHandler(Filters.status_update.migrate, group.change_id))
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_title, group.change_title))

@@ -170,6 +170,15 @@ class Database:
             self.db["groups"].update_one({"id": chat_id}, {"$set": {"restrict": True}})
             return True
 
+    def insert_group_exclamation(self, chat_id):
+        group = self.db["groups"].find_one({"id": chat_id})
+        if group["exclamation"]:
+            self.db["groups"].update_one({"id": chat_id}, {"$set": {"exclamation": False}})
+            return False
+        else:
+            self.db["groups"].update_one({"id": chat_id}, {"$set": {"exclamation": True}})
+            return True
+
     def insert_group_new_id(self, old_id, new_id):
         self.db["groups"].update_one({"id": old_id}, {"$set": {"id": new_id, "old_id": old_id}})
 

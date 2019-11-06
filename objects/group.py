@@ -11,6 +11,7 @@ class Group:
         self.pin = False
         self.tournament = False
         self.restrict = False
+        self.exclamation = False
         self.games_played = 0
         self.tournaments_played = 0
         self.nextgame = []

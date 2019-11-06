@@ -28,8 +28,8 @@ def draw_buttons(same_voters, game_id):
     return build_menu(buttons, 3)
 
 
-def word_buttons(words):
+def word_buttons(words, exclamation_mark=False):
     buttons = []
     for word in words:
-        buttons.append(KeyboardButton(word))
+        buttons.append(KeyboardButton(f"{'!' if exclamation_mark else ''}{word}"))
     return build_menu(buttons, 4)

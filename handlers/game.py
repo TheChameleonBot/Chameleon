@@ -21,9 +21,20 @@ def message(update: Update, context: CallbackContext):
     # check if a game is running, could also be game_id or smth else
     if "chameleon" not in chat_data or "voted" in chat_data:
         return
+    # this means every message counts anyway
     if not chat_data["restrict"]:
         if update.effective_message.text.startswith("!"):
-            return
+            # if the exclamation setting is deactivated, every message starting with an ! is ignored
+            if not chat_data["exclamation"]:
+                return
+            else:
+                # if the exclamation setting is activated, only messages starting with an ! are valid
+                # lets remove the !
+                update.effective_message.text = update.effective_message.text[1:]
+        else:
+            # if the exclamation setting is activated, only messages starting with an ! are valid
+            if chat_data["exclamation"]:
+                return
     user_id = update.effective_user.id
     if user_id not in [user["user_id"] for user in chat_data["players"]]:
         return
@@ -71,7 +82,10 @@ def message(update: Update, context: CallbackContext):
                 words = wordlist(players)
                 restricted = ""
                 if not chat_data["restrict"]:
-                    restricted = "\n\n" + get_string(lang, "say_word_not_restricted")
+                    if chat_data["exclamation"]:
+                        restricted += "\n\n" + get_string(lang, "exclamation_activated")
+                    else:
+                        restricted += "\n\n" + get_string(lang, "exclamation_deactivated")
                 text = get_string(lang, "more_players_say_word")\
                     .format(mention_html(next_player["user_id"], next_player["first_name"]), words, restricted)
                 update.effective_message.reply_html(text)
@@ -229,8 +243,9 @@ def who_wins(context, chat_id, unmasked_id):
     chat_data = context.chat_data
     players = chat_data["players"]
     lang = chat_data["lang"]
-    buttons = word_buttons(chat_data["words"])
+    buttons = word_buttons(chat_data["words"], chat_data["exclamation"])
     if unmasked_id == chat_data["chameleon"]["user_id"]:
+        chameleon_found = True
         text = None
         chat_data["guesses"] = 1
         if len(players) == 3:
@@ -248,7 +263,10 @@ def who_wins(context, chat_id, unmasked_id):
                 buttons = None
         if not text:
             text = get_string(lang, "chameleon_found")
-        chameleon_found = True
+        if chat_data["exclamation"]:
+            text += "\n\n" + get_string(lang, "exclamation_activated")
+        else:
+            text += "\n\n" + get_string(lang, "exclamation_deactivated")
     else:
         text = get_string(lang, "chameleon_not_found")
         chameleon_found = False
@@ -282,7 +300,17 @@ def guess(update: Update, context: CallbackContext):
     lang = chat_data["lang"]
     word = update.effective_message.text
     if word.startswith("!"):
-        return
+        # if the exclamation setting is deactivated, every message starting with an ! is ignored
+        if not chat_data["exclamation"]:
+            return
+        else:
+            # if the exclamation setting is activated, only messages starting with an ! are valid
+            # lets remove the !
+            word = word[1:]
+    else:
+        # if the exclamation setting is activated, only messages starting with an ! are valid
+        if chat_data["exclamation"]:
+            return
     chameleon_mention = mention_html(chameleon_id, chat_data["chameleon"]["first_name"])
     if word.lower() == chat_data["secret"].lower():
         text = get_string(lang, "chameleon_guess_right").format(chameleon_mention)
@@ -403,7 +431,10 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
             user = chat_data["players"][0]
             text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
             if not chat_data["restrict"]:
-                text += "\n\n" + get_string(lang, "say_word_not_restricted")
+                if chat_data["exclamation"]:
+                    text += "\n\n" + get_string(lang, "exclamation_activated")
+                else:
+                    text += "\n\n" + get_string(lang, "exclamation_deactivated")
             context.bot.send_message(chat_id, text, reply_to_message_id=send_message.message_id,
                                      parse_mode=ParseMode.HTML)
             if chat_data["restrict"]:

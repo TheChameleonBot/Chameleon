@@ -30,7 +30,8 @@ def yes_game(context, data, chat_id, dp):
                       "starter": data["starter"], "words": deck.words, "game_id": game_id,
                       "fewer": group_settings["fewer"], "tournament": group_settings["tournament"],
                       "more": group_settings["more"], "pin": group_settings["pin"], "restrict": {},
-                      "deck": group_settings["deck"], "tutorial": data["tutorial"]})
+                      "deck": group_settings["deck"], "tutorial": data["tutorial"],
+                      "exclamation": group_settings["exclamation"]})
     text = get_string(lang, "game_succeed").format(deck.topic, deck.word_list)
     button = InlineKeyboardMarkup([[InlineKeyboardButton(get_string(lang, "play_button"),
                                                          callback_data="word" + game_id)]])
@@ -54,7 +55,10 @@ def yes_game(context, data, chat_id, dp):
     user = data["players"][0]
     text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
     if not group_settings["restrict"]:
-        text += "\n\n" + get_string(lang, "say_word_not_restricted")
+        if group_settings["exclamation"]:
+            text += "\n\n" + get_string(lang, "exclamation_activated")
+        else:
+            text += "\n\n" + get_string(lang, "exclamation_deactivated")
     context.bot.send_message(chat_id, text, reply_to_message_id=message.message_id, parse_mode=ParseMode.HTML)
     if group_settings["restrict"]:
         chat_data["restrict"]["initial_permissions"] = chat.permissions

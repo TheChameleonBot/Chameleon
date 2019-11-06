@@ -164,7 +164,7 @@ def json_file(file, update):
 
 def github(file):
     subprocess.call(["git", "add", file])
-    subprocess.call(["git", "commit", "-m", "\"updating strings via /upload command\""])
+    subprocess.call(["git", "commit", "-m", "updating file via /upload command"])
     subprocess.call(["git", "push"])
 
 

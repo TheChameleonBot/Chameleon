@@ -270,6 +270,23 @@ def restrict(update: Update, context: CallbackContext):
 
 
 @admins_only
+def exclamation(update: Update, context: CallbackContext):
+    query = update.callback_query
+    data = query.data.split("_")
+    chat_id = int(data[1])
+    refresh_id = 1
+    if int(data[3]) != 0:
+        refresh_id = 0
+    lang = context.user_data["lang"]
+    exclamation_setting = database.insert_group_exclamation(chat_id)
+    if exclamation_setting:
+        query.answer(get_string(lang, "group_setting_exclamation_activate"))
+    else:
+        query.answer(get_string(lang, "group_setting_exclamation_deactivate"))
+    edit(query, chat_id, lang, refresh_id)
+
+
+@admins_only
 def refresh(update: Update, context: CallbackContext):
     query = update.callback_query
     data = query.data.split("_")
