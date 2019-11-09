@@ -8,7 +8,7 @@ language: "Deutsch"
 greeting: "Halo! I bims 1 Chamilioen Bot... Oh, entschuldigung! Mein Sprachchip... Hallo, ich bin der Chamäleon Bot, ein Telegram Bot der das tolle Spiel Chamäleon in deine Gruppe bringt! Um Einstellungen zu ändern nutze den Befehl /settings (in großen Gruppen Admins vorbehalten). Oder nutze /start um ein Spiel zu starten! Ich freue mich schon drauf 🙂"
 # when a game is started with /start in a group.
 # {0} mention of the player who started the game, {1} list of mentions for joined player
-start_game: "{0} hat ein Spiel gestartet. Ihr spielt mit den folgenden Einstellungen:\n\n<b>📇 Stapel:</b> {2}\n<b>➖ Weniger:</b> {3}\n<b>➕ Mehr:</b> {4}\n<b>📎 Anheften:</b> {5}\n<b>🏁 Wettbewerb:</b> {6}\n<b>🚫 Beschränkt:</b> {7}\n<b>❗️ Ausrufezeichen:</b>\n\nSo lasset die Spiele beginnen!\n\n#Mitspieler:\n{1}"
+start_game: "{0} hat ein Spiel gestartet. Ihr spielt mit den folgenden Einstellungen:\n\n<b>📇 Stapel:</b> {2}\n<b>➖ Weniger:</b> {3}\n<b>➕ Mehr:</b> {4}\n<b>📎 Anheften:</b> {5}\n<b>🏁 Wettbewerb:</b> {6}\n<b>🚫 Beschränkt:</b> {7}\n<b>❗️ Ausrufezeichen:</b> {8}\n\nSo lasset die Spiele beginnen!\n\n#Mitspieler:\n{1}"
 # the button beneath the message above
 start_button: "Auf-/Abspringen"
 # if the setting above is activated
