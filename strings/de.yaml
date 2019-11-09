@@ -1,7 +1,7 @@
 # put the people who worked on the translation here if you/they want to.
 authors:
-  - Appfel
-  - der großartige, einzigartige @Poolitzer, der den Bot entwickelt
+  - "Appfel"
+  - "der großartige, einzigartige @Poolitzer, der den Bot entwickelt"
 # put the name of your language here, in their native translation
 language: "Deutsch"
 # send when the bot gets added to a group
