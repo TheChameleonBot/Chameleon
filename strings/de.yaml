@@ -22,8 +22,8 @@ player_leaves_query: "Du bist abgesprungen und hast damit bereits verloren!"
 join_no_game_running: "Ernsthaft? Wer ist für den Müll zuständig? Der Button funktioniert nicht mehr. Nutze /start für ein neues Spiel. Ich räume das hier mal weg! Alles muss man selbst machen..."
 # the text appearing in the group once a player leaves/joins and the timer "läuft ab"
 # {0} mention of player(s)
-player_joins_text: "Jetzt im Spiel: {0}"
-player_leaves_text: "{0} ist ein Feigling und spielt nicht mehr mit."
+player_joins_text: "Jetzt im Spiel: {0} "
+player_leaves_text: "{0} ist ein Feigling und spielt nicht mehr mit. "
 # the text in addition to the one above
 player_action_text: "Wenn niemand in den nächsten 30 Sekunden auf- oder abspringt wird {0}!"
 start: "ein episches Spiel starten 🙂"
