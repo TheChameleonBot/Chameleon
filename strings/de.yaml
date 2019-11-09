@@ -5,16 +5,16 @@ authors:
 # put the name of your language here, in their native translation
 language: "Deutsch"
 # send when the bot gets added to a group
-greeting: "Hello there. I am The Chameleon bot, a telegram bot which brings the game The Chameleon in your group! In order to change my settings, you can run /settings (admin restricted in bigger groups). Or just hit /start to start a game with me :)"
+greeting: "Halo! I bims 1 Chamilioen Bot... Oh, entschuldigung! Mein Sprachchip... Hallo, ich bin der Chamäleon Bot, ein Telegram Bot der das tolle Spiel Chamäleon in deine Gruppe bringt! Um Einstellungen zu ändern nutze den Befehl /settings (in großen Gruppen Admins vorbehalten). Oder nutze /start um ein Spiel zu starten! Ich freue mich schon drauf 🙂"
 # when a game is started with /start in a group.
 # {0} mention of the player who started the game, {1} list of mentions for joined player
-start_game: "{0} hat ein Spiel gestartet. Ihr spielt mit den folgenden Einstellungen:\n\n<b>Stapel:</b> {2}\n<b>Weniger:</b> {3}\n<b>Mehr:</b> {4}\n<b>Anheften:</b> {5}\n<b>Wettbewerb:</b> {6}\n<b>Beschränkt:</b> {7}\n\nSo lasset die Spiele beginnen!\n\n#Mitspieler:\n{1}"
+start_game: "{0} hat ein Spiel gestartet. Ihr spielt mit den folgenden Einstellungen:\n\n<b>📇 Stapel:</b> {2}\n<b>➖ Weniger:</b> {3}\n<b>➕ Mehr:</b> {4}\n<b>📎 Anheften:</b> {5}\n<b>🏁 Wettbewerb:</b> {6}\n<b>🚫 Beschränkt:</b> {7}\n<b>❗️ Ausrufezeichen:</b>\n\nSo lasset die Spiele beginnen!\n\n#Mitspieler:\n{1}"
 # the button beneath the message above
 start_button: "Auf-/Abspringen"
 # if the setting above is activated
-activated: "Aktiviert"
+activated: "✅ Aktiviert"
 # if the setting above is deactivated
-deactivated: "Deaktiviert"
+deactivated: "❌ Deaktiviert"
 # the pop-up a player gets when pressing on the button above
 player_joins_query: "Du bist aufgesprungen und spielst mit!"
 player_leaves_query: "Du bist abgesprungen und hast damit bereits verloren!"
@@ -22,20 +22,19 @@ player_leaves_query: "Du bist abgesprungen und hast damit bereits verloren!"
 join_no_game_running: "Ernsthaft? Wer ist für den Müll zuständig? Der Button funktioniert nicht mehr. Nutze /start für ein neues Spiel. Ich räume das hier mal weg! Alles muss man selbst machen..."
 # the text appearing in the group once a player leaves/joins and the timer "läuft ab"
 # {0} mention of player(s)
-player_joins_text: "{0} spielt jetzt mit. "
-player_leaves_text: "{0} ist ein Feigling. "
+player_joins_text: "Jetzt im Spiel: {0}"
+player_leaves_text: "{0} ist ein Feigling und spielt nicht mehr mit."
 # the text in addition to the one above
-player_action_text: "Wenn niemand in den nächsten 30 Sekunden auf- oder abspringt werden wir weiter sehen und das Spiel {0}!"
-start: "fängt an :)"
-fail: "scheitert endgültig :("
-say_word_not_restricted: "In so einem Spiel zählt jedes Wort. Aber eine Diskussion ist auch nicht unwichtig! Fangt eure Nachrichten mit ! an und ich werde die mal ignorieren. Aber ich halte mir giftige Antworten vor."
+player_action_text: "Wenn niemand in den nächsten 30 Sekunden auf- oder abspringt wird {0}!"
+start: "ein episches Spiel starten 🙂"
+fail: "wird das Spiel leider nicht zustande kommen können und das Oberchamäleon ganz traurig! 🙁"
 # the message when someone presses /start while a game is running
 game_running: "Es läuft schon ein Spiel. Warte, bis es endet! Anfänger..."
 # the message when a game failed (30 second timer runs out and not three people joined)
-game_failed: "Ein Satz mit x: es sind nicht genug Spieler. Tut mir Leid! xD"
+game_failed: "Ein Satz mit x: es sind nicht genug Spieler. Tut mir nicht Leid! xD"
 # the message when a game starts
 # {0} the topic/dictionary key, {1} the list of the words
-game_succeed: "Das Spiel beginnt! Wopop!\n<b>Thema:</b>\n{0}\n<b>Wörter:</b>\n{1}"
+game_succeed: "Das Spiel beginnt! 🎉\n<b>Thema:</b>\n{0}\n<b>Wörter:</b>\n{1}"
 # the button beneath the message above
 play_button: "Zeige mir das geheime Wort"
 # the pop-up the chameleon gets when pressing the button above
@@ -51,6 +50,8 @@ first_player_say_word: "{0}, du darfst anfangen und das Wort beschreiben. Bitte 
 # the message asking every player to send a message, one after another
 # {0} mention of the player, {1} word list, consisting of the player name: players word(s)
 more_players_say_word: "Danke! und nun {0} bitte.{2}\n\nBisher haben wir diese Beschreibungen:\n{1}"
+exclamation_deactivated: "Bitte schreibe vor jede Nachricht ein ! Ausrufezeichen, die ich nicht als Antwort zählen soll. Flirtversuche also mit ! am Anfang."
+exclamation_activated: "Schreibe vor die Antwort ein ! Ausrufezeichen, Nachrichten ohne Ausrufezeichen am Anfang werde ich gekonnt ignorieren."
 # the message before the voting, showing the final word list
 # {0} final word list
 final_word_list: "Die endgültige Liste. Wir sollten jetzt das Chanmäleon demaskieren.\n\n{0}"
@@ -127,13 +128,14 @@ group_setting_text: "Hallo! Du möchtest die Einstellungen für die Gruppe {0} �
 # the buttons for group settings. Only translate the strings!
 group_setting_buttons:
   refresh: "Aktualisieren"
-  language: "Sprache"
-  deck: "Stapel"
-  fewer: "Weniger"
-  more: "Mehr"
-  tournament: "Wettbewerb"
-  pin: "Anheften"
-  restrict: "Beschränkt"
+  language: "🌐 Sprache"
+  deck: "📇 Stapel"
+  fewer: "➖ Weniger"
+  more: "➕ Mehr"
+  tournament: "🏁 Wettbewerb"
+  pin: "📎 Anheften"
+  exclamation: "❗️ Exclamation"
+  restrict: "🚫 Beschränkt"
 # shown to the user when he presses refresh in the settings
 group_setting_refresh: "Die Einstellungen wurden aktualisiert!"
 # change language of a group
@@ -166,6 +168,10 @@ group_setting_restrict_activate: "Der beschränkte Modus ist aktiviert, Zensur i
 group_setting_restrict_deactivate: "Der beschränkte Modus ist deaktiviert."
 # being an admin which can restrict member is required
 group_setting_restrict_required: "Ich verlange sofort ein Admin zu sein, Mitglieder hinzufügen zu können, Admins ernennen zu dürfen und auch Mitglieder einschränken zu können."
+# activate exclamation setting of group
+group_setting_exclamation_activate: "Aktiviert, Nachrichten mit vorangestelltem Ausrufezeichen werden als Antwort gezählt."
+# deactivate exclamation setting of group
+group_setting_exclamation_deactivate: "Deaktiviert, Antworten mit vorangestelltem Ausrufezeichen werden ignoriert."
 # if an error happens somewhere, we tell the user about it
 error: "Es gab einen Fehler bei der Bearbeitung der Anfrage. Meine Eltern (die Entwickler) wurden informiert und holen mich gleich ab. Bis dahin können wir spielen."
 # if a user wants to change their language
@@ -217,14 +223,15 @@ nextgame_removed: "Und damit wurdest du aus der Nextgame-Liste der Gruppe {0} en
 # message which gets send to people in the group when they used /nextgame and haven't pmed the bot yet
 nextgame_pm: "Hey, damit ich dich anspammen... ich meine benachrichtigen darf, musst du mich zuerst anschreiben. Drücke einfach auf das Knöpfchen unter mir und wir sind alle happy."
 # message which gets send to people in the group when they used /nextgame and blocked the bot (wtf)
-nextgame_block: "Hey. Wenn du willst, dass ich dich private benachrichtige, solltest du mich nicht blockieren :( Entsperre mich und probiere nochmal."
+nextgame_block: "Hey. Wenn du willst, dass ich dich private benachrichtige, solltest du mich nicht blockieren 😒 Entsperre mich und probiere nochmal."
 # message which gets send if someone uses the /settings_help command
 settings_help: "Na duu. Ich weiß, so viele Einstellungen, so wenig Zeit. Daher habe ich es dir einfach gemacht: Wähle unten die Einstellung aus, die dich interessiert. Fertig."
 # the following strings are explanations for the settings, triggered by the command above
-language_help: "<b>Sprache</b>: Ändere meine Sprache. Du spricht eine tolle Sprache und möchtest diese mir beibringen? Okay, sende mir einfach /translation. Zack. So einfach. Toll, was?"
-deck_help: "<b>Stapel</b>: Der Stapel an Themen, die ich verwende. Ich wähle für jedes Spiel zufällig ein Thema aus, zu dem dann (meistens 16) Wörter gehören, von denen ich dann eins zum geheimen Wort mache. Du hast einen Themenvorschlag? Gut, benutze einfach /deck, da erkläre ich dir, wie's geht."
-fewer_help: "<b>Weniger</b>: Bei drei Spielern bekommt das Chamäleon 2 Möglichkeiten, das Wort zu erraten. Wenn aktiv."
-more_help: "<b>Mehr</b>: Bei 7 oder 8 Spielern wird, wenn aktiv, die Wortliste verschwinden, wenn jeder seinen Tipp abgegeben hat. Das Chamäleon hat es dann schwerer, das korrekte Wort zu erraten"
-tournament_help: "<b>Wettbewerb</b>: Wenn aktiv, endet das Spiel nicht nach einer Runde, sondern wir machen einen Turnier.\n• Chamäleon wird nicht demaskiert: 2 Punkte für das Chamäleon\n• Chamäleon wird entdeckt, aber errät das Wort: 1 Punkt für das Chamäleon\n• Chamäleon wird demaskiert und errät das Wort nicht: 2 Punkte für die anderen Spieler"
-pin_help: "<b>Anheften</b>: Wenn aktiv, werde ich die Wörterliste leise anheften, sodass sie leichter zu finden ist. Natürlich hefte ich nach dem Spiel etwaige Nachrichten wieder an. Dafür möchte ich bitte Admin mit der Lizenz zum töt... äh anheften sein."
-restrict_help: "<b>Beschränkt(er Modus)</b>: Wenn aktiv, werde ich alle Spieler, die gerade nicht an der Reihe sind, am schreiben hindern. Dazu wird der jeweilige Spieler Admin und kann Spieler hinzufügen. Ist die Raterunde zuende, darf jeder schreiben, um zu diskutieren, dabei werden die vorherigen Rechte wiederhergestellt. Damit das alles klappt, benötige ich Adminrechte und muss neue Admins ernennen, neue Nutzer hinzufügen und bannen dürfen. Ja, das ist viel auf einmal, aber besser geht es nicht; sorry. Hier gibt es eine Erklärung dafür: https://t.me/TheChameleonSupport/8"
+language_help: "<b>🌐 Sprache</b>: Ändere meine Sprache. Du spricht eine tolle Sprache und möchtest diese mir beibringen? Okay, sende mir einfach /translation. Zack. So einfach. Toll, was?"
+deck_help: "<b>📇 Stapel</b>: Der Stapel an Themen, die ich verwende. Ich wähle für jedes Spiel zufällig ein Thema aus, zu dem dann (meistens 16) Wörter gehören, von denen ich dann eins zum geheimen Wort mache. Du hast einen Themenvorschlag? Gut, benutze einfach /deck, da erkläre ich dir, wie's geht."
+fewer_help: "<b>➖ Weniger</b>: Bei drei Spielern bekommt das Chamäleon 2 Möglichkeiten, das Wort zu erraten. Wenn aktiv."
+more_help: "<b>➕ Mehr</b>: Bei 7 oder 8 Spielern wird, wenn aktiv, die Wortliste verschwinden, wenn jeder seinen Tipp abgegeben hat. Das Chamäleon hat es dann schwerer, das korrekte Wort zu erraten"
+tournament_help: "<b>🏁 Wettbewerb</b>: Wenn aktiv, endet das Spiel nicht nach einer Runde, sondern wir machen einen Turnier.\n• Chamäleon wird nicht demaskiert: 2 Punkte für das Chamäleon\n• Chamäleon wird entdeckt, aber errät das Wort: 1 Punkt für das Chamäleon\n• Chamäleon wird demaskiert und errät das Wort nicht: 2 Punkte für die anderen Spieler"
+pin_help: "<b>📎 Anheften</b>: Wenn aktiv, werde ich die Wörterliste leise anheften, sodass sie leichter zu finden ist. Natürlich hefte ich nach dem Spiel etwaige Nachrichten wieder an. Dafür möchte ich bitte Admin mit der Lizenz zum töt... äh anheften sein."
+restrict_help: "<b>🚫 Beschränkt(er Modus)</b>: Wenn aktiv, werde ich alle Spieler, die gerade nicht an der Reihe sind, am schreiben hindern. Dazu wird der jeweilige Spieler Admin und kann Spieler hinzufügen. Ist die Raterunde zuende, darf jeder schreiben, um zu diskutieren, dabei werden die vorherigen Rechte wiederhergestellt. Damit das alles klappt, benötige ich Adminrechte und muss neue Admins ernennen, neue Nutzer hinzufügen und bannen dürfen. Ja, das ist viel auf einmal, aber besser geht es nicht; sorry. Hier gibt es eine Erklärung dafür: https://t.me/TheChameleonSupport/8\n<i>Vorsicht:</i> Jedes Wort wird als Antwort gezählt, die Ausrufezeichen Einstellung wird komplett ignoriert."
+exclamation_help: "<b>❗️ Ausrufezeichen</b>: Das Ausrufezeichen ist ein fundermentaler Bestandteil des Spiels. Normalerweise ist diese Funktionion deaktiviert und Nachrichten mit vorangestelltem Ausrufezeichen werden ignoriert. Schreibt man kein Ausrufezeichen an den Anfang der Nachricht wird die Nachricht als Antwort gezählt. Um aber Verwirrung bei der Diskussion und dem Off-Topic Geplapper zu verhindern kann man diese Funktion aktivieren, was die Option umdreht. Nachrichten mit Ausrufezeichen am Anfang werden als Antwort gezählt, ansonsten wird die Nachricht vom Bot ignoriert. Das soll verhindern, dass Nachrichten als Antwort gezählt werden, die eigentlich keine waren.\n<i>Uffpasse!</i> Im beschränkten Modus wird diese Einstellung ignoriert, da dann eh nur der tippen kann, der dran ist."
