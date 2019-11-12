@@ -27,7 +27,7 @@ player_leaves_text: "{0} ist ein Feigling und spielt nicht mehr mit. "
 # the text in addition to the one above
 player_action_text: "Wenn niemand in den nächsten 30 Sekunden auf- oder abspringt wird {0}!"
 start: "ein episches Spiel starten 🙂"
-fail: "wird das Spiel leider nicht zustande kommen können und das Oberchamäleon ganz traurig! 🙁"
+fail: "das Spiel leider nicht zustande kommen können und das Oberchamäleon ganz traurig! 🙁"
 # the message when someone presses /start while a game is running
 game_running: "Es läuft schon ein Spiel. Warte, bis es endet! Anfänger..."
 # the message when a game failed (30 second timer runs out and not three people joined)
