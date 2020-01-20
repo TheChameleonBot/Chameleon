@@ -54,7 +54,7 @@ exclamation_deactivated: "Bitte schreibe vor jede Nachricht ein ! Ausrufezeichen
 exclamation_activated: "Schreibe vor die Antwort ein ! Ausrufezeichen, Nachrichten ohne Ausrufezeichen am Anfang werde ich gekonnt ignorieren."
 # the message before the voting, showing the final word list
 # {0} final word list
-final_word_list: "Die endgültige Liste. Wir sollten jetzt das Chanmäleon demaskieren.\n\n{0}"
+final_word_list: "Die endgültige Liste. Wir sollten jetzt das Chamäleon demaskieren.\n\n{0}"
 # the message asking to vote, buttons with the names beneath
 # {0} vote list, consisting of mentions of the players: number of votes
 vote_list: "Denk dran: du kannst einmal wählen. Mit Permanentmarker!\nDie Leute, die (immer) noch nicht gewählt haben:\n\n{0}"
@@ -101,7 +101,7 @@ tournament_end_one: "Der Wettkampf endet \\o/\n\nAlle sind Gewinner, aber {0} ha
 # {0} winner mentions + points, {1} other player mentions + points
 tournament_end_several: "Der Wettkampf endet und es gibt mehrere Gewinner \\o/\n\nGewonnen haben:\n{0}\n\nVöllig verloren haben:\n{1}"
 # when an admin aborts a running/starting game
-abort_game: "Ein laufendes Spiel beenden ist unfair dem Chamäleon gegenüber. Aber du chef, ich nix."
+abort_game: "Ein laufendes Spiel beenden ist unfair dem Chamäleon gegenüber. Aber du Chef, ich nix."
 # when someone tries to to abort a game when none is running/starting
 no_game_running: "Das <b>nicht laufende</b> Spiel wird unterbrochen. Merkste selber, wa?"
 # when a non admin tries to abort a running/starting game
