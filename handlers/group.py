@@ -1,5 +1,5 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
-from telegram.error import Unauthorized
+from telegram.error import Unauthorized, BadRequest
 from telegram.ext import CallbackContext, Dispatcher, Job
 
 from strings import get_string
@@ -8,7 +8,7 @@ from telegram.utils.helpers import mention_html
 from utils import helpers
 from utils.specific_helpers import group_helpers
 from database import database
-from constants import TIME, MAX_PLAYERS
+from constants import TIME, MAX_PLAYERS, START_TIME
 
 
 def start(update: Update, context: CallbackContext, dp: Dispatcher):
@@ -43,7 +43,7 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
     payload = {"dp": dp, "players": [{"user_id": user_id, "first_name": first_name}], "message": message.message_id,
                "lang": lang, "chat_id": chat_id, "known_players": [], "tutorial": False,
                "starter": {"user_id": user_id, "first_name": first_name}, "group_settings": group_settings}
-    context.job_queue.run_repeating(timer, TIME, context=payload, name=chat_id)
+    context.job_queue.run_repeating(timer, START_TIME, context=payload, name=chat_id)
     payload = {"starter": {"user_id": user_id, "first_name": first_name},
                "players": [{"user_id": user_id, "first_name": first_name}], "lang": lang, "message": message.message_id,
                "left_players": {}, "settings": wanted_settings}
@@ -58,6 +58,10 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
         except Unauthorized:
             database.remove_group_nextgame(chat_id, [player_id])
             database.insert_player_pm(user_id, False)
+        except BadRequest as e:
+            if e.message == "Chat not found":
+                database.remove_group_nextgame(chat_id, [player_id])
+                database.insert_player_pm(user_id, False)
 
 
 def player_join(update: Update, context: CallbackContext):
@@ -142,10 +146,18 @@ def timer(context):
             else:
                 text = get_string(lang, "player_leaves_text")\
                     .format(group_helpers.players_mentions(left_player).replace("\n", ", "))
+            if context.job.interval == START_TIME:
+                long = True
+            else:
+                long = False
             if len(data["players"]) >= 3:
                 text += get_string(lang, "player_action_text").format(get_string(lang, "start"))
+                if long:
+                    context.job.interval = TIME
             else:
-                text += get_string(lang, "player_action_text").format(get_string(lang, "fail"))
+                text += get_string(lang, "player_action_text").format(get_string(lang, "fail")).replace("30", "60")
+                if not long:
+                    context.job.interval = START_TIME
             context.bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
             data["known_players"] = known_players
             return

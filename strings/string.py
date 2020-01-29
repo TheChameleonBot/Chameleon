@@ -19,7 +19,7 @@ class String:
         for filename in os.listdir(r"./strings"):
             if filename.endswith(".yaml"):
                 language_name = filename[:-5]
-                self.languages[language_name] = yaml.safe_load(open(r"./strings/" + filename))
+                self.languages[language_name] = yaml.safe_load(open(r"./strings/" + filename, encoding="utf8"))
 
     def new_strings(self, filename):
         try:
