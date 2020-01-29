@@ -98,7 +98,8 @@ def message(update: Update, context: CallbackContext):
         text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").format(
             player_mention_string(chat_data["players"]))
         buttons = vote_buttons(chat_data["players"], chat_data["game_id"])
-        v_message = update.effective_message.reply_html(text, reply_markup=InlineKeyboardMarkup(buttons), quote=False)
+        v_message = update.effective_message.reply_html(text, reply_markup=InlineKeyboardMarkup(buttons),
+                                                        reply_to_message_id=chat_data["word_list"])
         if chat_data["pin"]:
             try:
                 context.bot.pin_chat_message(chat_id, v_message.message_id, True)

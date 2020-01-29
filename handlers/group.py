@@ -55,13 +55,17 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
         try:
             context.bot.send_message(player_id, get_string(lang, "nextgame").format(chat_link),
                                      parse_mode=ParseMode.HTML, disable_web_page_preview=True)
-        except Unauthorized:
+        except Unauthorized as e:
             database.remove_group_nextgame(chat_id, [player_id])
             database.insert_player_pm(user_id, False)
+            e.message += "handled in group no PM"
+            raise e
         except BadRequest as e:
             if e.message == "Chat not found":
                 database.remove_group_nextgame(chat_id, [player_id])
                 database.insert_player_pm(user_id, False)
+                e.message += "handled in group no PM"
+                raise e
 
 
 def player_join(update: Update, context: CallbackContext):
