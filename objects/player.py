@@ -5,6 +5,7 @@ class Player:
         self.games_won = 0
         self.games_played = games_played
         self.been_chameleon = 0
+        self.chameleon_won = 0
         self.games_started = 0
         self.starter = 0
         self.pm = pm

@@ -108,7 +108,11 @@ class Database:
             updated = self.db["players"].find_one_and_update({"id": player}, {"$inc": {"games_played": 1}})
             if not updated:
                 self.db["players"].insert_one(vars(objects.Player(player, 1)))
-        self.db["players"].update_one({"id": chameleon}, {"$inc": {"been_chameleon": 1}})
+        if len(winners) == 1:
+            # means chameleon won
+            self.db["players"].update_one({"id": chameleon}, {"$inc": {"been_chameleon": 1, "chameleon_won": 1}})
+        else:
+            self.db["players"].update_one({"id": chameleon}, {"$inc": {"been_chameleon": 1}})
         self.db["players"].update_many({"id": {"$in": winners}}, {"$inc": {"games_won": 1}})
         if starter:
             self.db["players"].update_one({"id": starter}, {"$inc": {"games_started": 1}})
