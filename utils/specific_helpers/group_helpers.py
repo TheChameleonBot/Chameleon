@@ -87,3 +87,12 @@ def no_game(update, context, text):
         lang = database.get_language_chat(chat_id)
     query.answer(get_string(lang, text), show_alert=True)
     query.edit_message_reply_markup(None)
+
+
+def name_generator(first_name):
+    first_name.replace("<", "&lt;")
+    first_name.replace(">", "&gt;")
+    first_name.replace("&", "&amp;")
+    if len(first_name) > 20:
+        first_name = first_name[:17] + "..."
+    return first_name

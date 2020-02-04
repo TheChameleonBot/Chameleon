@@ -9,6 +9,7 @@ from utils import helpers
 from utils.specific_helpers import group_helpers
 from database import database
 from constants import TIME, MAX_PLAYERS, START_TIME
+from utils.specific_helpers.group_helpers import name_generator
 
 
 def start(update: Update, context: CallbackContext, dp: Dispatcher):
@@ -24,7 +25,7 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
     elif "players" in chat_data:
         update.effective_message.reply_text(get_string(lang, "game_running"))
         return
-    first_name = update.effective_user.first_name
+    first_name = name_generator(update.effective_user.first_name)
     user_id = update.effective_user.id
     button = [[InlineKeyboardButton(get_string(lang, "start_button"), callback_data="join")]]
     mention = mention_html(user_id, first_name)
@@ -71,7 +72,7 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
 def player_join(update: Update, context: CallbackContext):
     query = update.callback_query
     chat_data = context.chat_data
-    first_name = update.effective_user.first_name
+    first_name = name_generator(update.effective_user.first_name)
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
     # somehow, this callback button is there, but we aren't in join mode, so we handle this now :D
@@ -84,7 +85,8 @@ def player_join(update: Update, context: CallbackContext):
         player_id = player["user_id"]
         # player leaves
         if user_id == player_id:
-            chat_data["players"].remove({"user_id": user_id, "first_name": first_name})
+            # we do this so player can change their name between joining and leaving
+            chat_data["players"].remove({"user_id": user_id, "first_name": chat_data["players"][user_id]["first_name"]})
             # we need them in here so we can mention them later. Looks stupid, I know
             chat_data["left_players"][user_id] = first_name
             query.answer(get_string(chat_data["lang"], "player_leaves_query"))
