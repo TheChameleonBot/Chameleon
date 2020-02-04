@@ -90,9 +90,9 @@ def no_game(update, context, text):
 
 
 def name_generator(first_name):
-    first_name.replace("<", "&lt;")
-    first_name.replace(">", "&gt;")
-    first_name.replace("&", "&amp;")
+    first_name = first_name.replace("<", "&lt;")
+    first_name = first_name.replace(">", "&gt;")
+    first_name = first_name.replace("&", "&amp;")
     if len(first_name) > 20:
         first_name = first_name[:17] + "..."
     return first_name
