@@ -49,7 +49,7 @@ def message(update: Update, context: CallbackContext):
                 word = update.effective_message.text
                 if len(word) > 103:
                     if update.effective_message.link:
-                        word = f"<a \"href\"={update.effective_message.link}>{word[:100]}...</a>"
+                        word = f"<a href=\"{update.effective_message.link}\">{word[:100]}...</a>"
                     else:
                         word = f"{escape(word[:100])}..."
                 else:
