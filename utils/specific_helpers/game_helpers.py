@@ -1,3 +1,4 @@
+from html import escape
 from telegram import InlineKeyboardButton, KeyboardButton
 from utils.helpers import build_menu
 
@@ -6,7 +7,7 @@ def wordlist(players):
     words = ""
     for player in players:
         if "word" in player:
-            words += f"<b>{player['first_name']}</b>: {player['word']}\n"
+            words += f"<b>{escape(player['first_name'])}</b>: {player['word']}\n"
         else:
             break
     return words

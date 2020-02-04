@@ -1,5 +1,6 @@
 import random
 import string
+from html import escape
 
 from telegram import (Update, InlineKeyboardMarkup, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove,
                       ChatPermissions, InlineKeyboardButton)
@@ -46,9 +47,13 @@ def message(update: Update, context: CallbackContext):
         if "word" not in player:
             if user_id == player["user_id"]:
                 word = update.effective_message.text
-                word.replace("<", "&lt;")
-                word.replace(">", "&gt;")
-                word.replace("&", "&amp;")
+                if len(word) > 103:
+                    if update.effective_message.link:
+                        word = f"<a \"href\"={update.effective_message.link}>{word[:100]}...</a>"
+                    else:
+                        word = f"{escape(word[:100])}..."
+                else:
+                    word = escape(word)
                 players[index]["word"] = word
                 try:
                     next_player = players[index + 1]

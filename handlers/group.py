@@ -86,7 +86,7 @@ def player_join(update: Update, context: CallbackContext):
         # player leaves
         if user_id == player_id:
             # we do this so player can change their name between joining and leaving
-            chat_data["players"].remove({"user_id": user_id, "first_name": chat_data["players"][user_id]["first_name"]})
+            chat_data["players"].remove({"user_id": user_id, "first_name": player["first_name"]})
             # we need them in here so we can mention them later. Looks stupid, I know
             chat_data["left_players"][user_id] = first_name
             query.answer(get_string(chat_data["lang"], "player_leaves_query"))
