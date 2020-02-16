@@ -164,7 +164,12 @@ def timer(context):
                 text += get_string(lang, "player_action_text").format(get_string(lang, "fail")).replace("30", "60")
                 if not long:
                     context.job.interval = START_TIME
-            context.bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
+            try:
+                context.bot.send_message(chat_id, text, parse_mode=ParseMode.HTML)
+            except Unauthorized:
+                dp.chat_data[chat_id].clear()
+                context.job.schedule_removal()
+                return
             data["known_players"] = known_players
             return
     # game either ends/starts
