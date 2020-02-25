@@ -4,6 +4,7 @@ import subprocess
 import sys
 import traceback
 from json import JSONDecodeError
+import logging
 
 from telegram import Update, ParseMode
 from telegram.ext import CallbackContext, Updater, CommandHandler, Filters
@@ -14,6 +15,9 @@ from constants import TRANSLATION_CHANNEL_ID, TRANSLATION_CHAT_ID
 from database import database
 from strings import get_string, new_strings
 from utils.helpers import is_admin
+
+
+logger = logging.getLogger(__name__)
 
 
 def shutdown(update: Update, context: CallbackContext, updater: Updater):
@@ -169,6 +173,13 @@ def github(file):
 
 
 def error_handler(update: Update, context: CallbackContext):
+    if not update:
+        text = "Hey jo, error outside of update, The full traceback:\n\n < code > {trace} < / code > "
+        context.bot.send_message(208589966, text, parse_mode=ParseMode.HTML)
+        return
+    # trying to hunt down a bug here
+    if update.effective_message:
+        logger.info(f"This is the message received: {update.effective_message.text}")
     chat = update.effective_chat
     if chat.type == "private":
         if "lang" not in context.user_data:
