@@ -265,7 +265,7 @@ def who_wins(context, chat_id, unmasked_id):
                                                                      callback_data="word" + chat_data["game_id"])]])
                 hidden = get_string(lang, "hidden")
                 context.bot.edit_message_text(get_string(lang, "game_succeed").format(hidden, hidden),
-                                              chat_id, chat_data["word_list"], reply_markup=button)
+                                              chat_id, chat_data["word_list"], reply_markup=button, parse_mod="HTML")
                 buttons = None
         if not text:
             text = get_string(lang, "chameleon_found")
