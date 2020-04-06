@@ -5,6 +5,6 @@ TRANSLATION_CHAT_ID = -345152063
 TRANSLATION_CHAT_LINK = "https://t.me/joinchat/DG7UjlZfggQcMH2TEDCMyQ"
 TRANSLATION_CHANNEL_ID = -1001489252776
 TRANSLATION_CHANNEL_LINK = "https://t.me/joinchat/AAAAAEomeO5_PZuVTaHOQg"
-DECKS_LINK = "https://github.com/TheChameleonBot/Chameleon/tree/master/cards"
+DECKS_LINK = "https://github.com/TheChameleonBot/Chameleon/tree/master/decks"
 TRANSLATIONS_LINK = "https://github.com/TheChameleonBot/Chameleon/tree/master/strings"
 HTML_STYLE_LINK = "https://core.telegram.org/bots/api#html-style"
