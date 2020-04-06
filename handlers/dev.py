@@ -163,7 +163,7 @@ def json_file(file, update):
     update.effective_message.reply_html(text)
     os.rename(temp_name, "./decks/" + file.file_name)
     database.reload_decks()
-    github("./strings/" + file.file_name)
+    github("./decks/" + file.file_name)
 
 
 def github(file):
