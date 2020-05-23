@@ -94,6 +94,9 @@ chameleon_guess_wrong: "Sorry {0}, this was the wrong guess, <b>{1}</b> would ha
 # if the chameleon guesses correctly
 # {0} mention of the chameleon
 chameleon_guess_right: "Good job {0}, this was the right guess! The Chameleon wins, the players lose!"
+# if the chameleon guesses wrongly, but the spellchecker corrects it to the right word (comes in handy by games where the keyboard isn't given
+# {0} mention of the chameleon
+chameleon_guess_corrected: "Good job {0}, this was the right... well, to be honest, it wasn't actually the right guess. But my internal spellchecker made it to the right one. You are welcome, you still won. Yaayyy :)"
 # when a tournament ends, but no winner yet, so another round is started
 tournament_end: "The game ended, but there is no winner of the tournament yet, so a new one has started. Current tournament points:\n{0}\n<b>Topic:</b>\n{1}\n<b>Words:</b>\n{2}"
 # when a tournament ends and there is only one winner
