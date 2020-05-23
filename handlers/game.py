@@ -1,6 +1,7 @@
 import random
 import string
 from html import escape
+import logging
 
 from telegram import (Update, InlineKeyboardMarkup, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove,
                       ChatPermissions, InlineKeyboardButton)
@@ -15,6 +16,9 @@ from utils.helpers import is_admin
 from utils.specific_helpers.game_helpers import wordlist, vote_buttons, draw_buttons, word_buttons
 from utils.specific_helpers.group_helpers import no_game
 from utils.helpers import player_mention_string
+
+
+logger = logging.getLogger(__name__)
 
 
 def message(update: Update, context: CallbackContext):
@@ -70,7 +74,7 @@ def message(update: Update, context: CallbackContext):
                             chat_data["restrict"] = False
                             database.insert_group_restrict(chat_id)
                             e.message += "handled in game, L50"
-                            raise e
+                            logger.info(e.message)
                 except IndexError:
                     done = True
                     if chat_data["restrict"]:
@@ -82,7 +86,7 @@ def message(update: Update, context: CallbackContext):
                             chat_data["restrict"] = False
                             database.insert_group_restrict(chat_id)
                             e.message += "handled in game, L62"
-                            raise e
+                            logger.info(e.message)
                     break
                 words = wordlist(players)
                 restricted = ""
@@ -111,7 +115,7 @@ def message(update: Update, context: CallbackContext):
             except BadRequest as e:
                 chat_data["pin"] = False
                 e.message += "handled in game L88"
-                raise e
+                logger.info(e.message)
 
 
 def secret_word(update: Update, context: CallbackContext):
@@ -265,7 +269,7 @@ def who_wins(context, chat_id, unmasked_id):
                                                                      callback_data="word" + chat_data["game_id"])]])
                 hidden = get_string(lang, "hidden")
                 context.bot.edit_message_text(get_string(lang, "game_succeed").format(hidden, hidden),
-                                              chat_id, chat_data["word_list"], reply_markup=button, parse_mod="HTML")
+                                              chat_id, chat_data["word_list"], reply_markup=button, parse_mode="HTML")
                 buttons = None
         if not text:
             text = get_string(lang, "chameleon_found")
@@ -407,7 +411,7 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
                         else:
                             chat_data["pin"] = False
                             e.message += "handled in game L363, 2"
-                        raise e
+                        logger.info(e.message)
                 else:
                     context.bot.unpin_chat_message(chat_id)
             chat_data.clear()
@@ -467,7 +471,7 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
                     else:
                         chat_data["pin"] = False
                         e.message += "handled in game L419, 2"
-                    raise e
+                    logger.info(e.message)
             else:
                 context.bot.unpin_chat_message(chat_id)
         chat_data.clear()

@@ -1,3 +1,5 @@
+import logging
+
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import Unauthorized, BadRequest
 from telegram.ext import CallbackContext, Dispatcher, Job
@@ -10,6 +12,8 @@ from utils.specific_helpers import group_helpers
 from database import database
 from constants import TIME, MAX_PLAYERS, START_TIME
 from utils.specific_helpers.group_helpers import name_generator
+
+logger = logging.getLogger(__name__)
 
 
 def start(update: Update, context: CallbackContext, dp: Dispatcher):
@@ -60,13 +64,13 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
             database.remove_group_nextgame(chat_id, [player_id])
             database.insert_player_pm(user_id, False)
             e.message += "handled in group no PM"
-            raise e
+            logger.info(e.message)
         except BadRequest as e:
             if e.message == "Chat not found":
                 database.remove_group_nextgame(chat_id, [player_id])
                 database.insert_player_pm(user_id, False)
                 e.message += "handled in group no PM"
-                raise e
+                logger.info(e.message)
 
 
 def player_join(update: Update, context: CallbackContext):

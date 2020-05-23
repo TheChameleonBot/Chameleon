@@ -1,5 +1,6 @@
 import random
 import string
+import logging
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, ChatPermissions
 from telegram.error import BadRequest
@@ -9,6 +10,8 @@ from database import database
 from objects import Deck
 from strings import get_string
 from utils.helpers import is_admin
+
+logger = logging.getLogger(__name__)
 
 
 def players_mentions(players):
@@ -51,7 +54,7 @@ def yes_game(context, data, chat_id, dp):
                 chat_data["pin"] = False
                 database.insert_group_pin(chat_id)
                 e.message += "handled in ghelper L48"
-                raise e
+                logger.info(e.message)
     user = data["players"][0]
     text = get_string(lang, "first_player_say_word").format(mention_html(user["user_id"], user["first_name"]))
     if not group_settings["restrict"]:
@@ -73,7 +76,7 @@ def yes_game(context, data, chat_id, dp):
             chat_data["restrict"] = False
             database.insert_group_restrict(chat_id)
             e.message += "handled in ghelper L68"
-            raise e
+            logger.info(e.message)
     chat_data["word_list"] = message.message_id
 
 
