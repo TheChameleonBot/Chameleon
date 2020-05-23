@@ -8,6 +8,7 @@ from telegram import (Update, InlineKeyboardMarkup, ParseMode, ReplyKeyboardMark
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
+from spellchecker import SpellChecker
 
 from database import database
 from objects import Deck
@@ -19,6 +20,7 @@ from utils.helpers import player_mention_string
 
 
 logger = logging.getLogger(__name__)
+spell = SpellChecker()
 
 
 def message(update: Update, context: CallbackContext):
@@ -326,6 +328,17 @@ def guess(update: Update, context: CallbackContext):
         text = get_string(lang, "chameleon_guess_right").format(chameleon_mention)
         game_end(context, text, update.effective_chat.id, chameleon_id, [chameleon_id], lang)
     else:
+        # we try to guess a better spelled name
+        spell_fix = spell.correction(word.lower())
+        # this means there is a correction
+        if spell_fix != word.lower():
+            # we go through all possible candidates
+            for fix in spell.candidates(word.lower()):
+                if fix.lower() == chat_data["secret"].lower():
+                    text = get_string(lang, "chameleon_guess_corrected").format(chameleon_mention)
+                    game_end(context, text, update.effective_chat.id, chameleon_id, [chameleon_id], lang)
+                    # the return is important
+                    return
         if chat_data["guesses"] == 1:
             text = get_string(lang, "chameleon_guess_wrong").format(chameleon_mention, chat_data["secret"])
             players = []
