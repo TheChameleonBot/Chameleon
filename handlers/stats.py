@@ -126,7 +126,7 @@ def group_stats(update: Update, context: CallbackContext):
         group_games.append(update.effective_chat.id)
         position = group_games.index(update.effective_chat.id) + 1
         group_tournaments.append(update.effective_chat.id)
-    amount = len(players_games)
+    amount = len(group_games)
     second_position = group_tournaments.index(update.effective_chat.id) + 1
     text = get_string(chat_data["lang"], "group_stats").format(stats["games"], stats["tournaments"], position, amount,
                                                                second_position)
