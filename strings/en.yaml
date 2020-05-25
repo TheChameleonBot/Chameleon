@@ -250,7 +250,7 @@ private_stats_title: "Get your statistic"
 # this will be the description
 private_stats_description: "Just press me. Doesn't matter what you type"
 # this will be the actual message when they press on the result
-private_stats_text: "<b>Statistics for {0}</b>\n\nGames played: {1} ({11} place of {17} players)\nGames won: {2} ({3}% of all games played)\nGames lost: {4}\nFirst player: {5} ({6}% of the games played)\n\nTournaments played: {12}\nTournaments won: {13} ({14}% of all tournaments)\nTournaments lost: {15}\n\nWas chameleon: {7} ({8}% of the games played)\nWon as chameleon: {9} ({10}% of the time playing as chameleon, {16}% of the general wins)"
+private_stats_text: "<b>Statistics for {0}</b>\n\nGames played: {1} ({11} place of {17} players)\nGames won: {2} ({3}% of all games played)\nGames lost: {4}\nFirst player: {5} ({6}% of the games played)\n\nTournaments played: {12} ({18} place)\nTournaments won: {13} ({14}% of all tournaments)\nTournaments lost: {15}\n\nWas chameleon: {7} ({8}% of the games played)\nWon as chameleon: {9} ({10}% of the time playing as chameleon, {16}% of the general wins)"
 # these are for people playing before the 4. February, where chameleon won was introduced
 # this will be added to the inline message
 private_old_stats: "\n\nP.S.: You played the game before the 4th of February 2020, so your overall stats are a bit different. Please run /stats in PM with me to learn more about this."
@@ -259,4 +259,4 @@ private_old_button: "/stats"
 # and this to the /stats command
 private_old_stats_command: "\n\n\nYou have played this game for a long time now. In fact, before the 4th of February 2020 at least. This means, your actual stats are a bit higher then what just were shown. This happened because won as chameleon was introduced on that date, and to keep the rest of the stats together with that new field, a straight cut to your numbers were made. But the old ones are saved and can be presented now:\nBefore the 4th, you:\n\nPlayed {0} games (so overall {1} games)\nWon {2} games (so {3}% before the 4th, overall {4} - {5}%)\nLost {6} games ({7} games overall)\nWere the first player {8} times ({9}% before the 4th, {10} times overall - {11}%)\nAnd you were the chameleon {12} times ({13}% before, {14} times overall - {15}%)\n\nAs you can see, tournaments are not affected (they are counted separately, so you see the whole number), neither are the games started."
 # about groups stats
-group_stats: "This group played {0} games and {1} tournaments \\o/"
+group_stats: "This group played {0} games ({2} place of {3} groups) and {1} tournaments ({4} place) \\o/"
