@@ -113,9 +113,17 @@ class Database:
             return False
         return player
 
-    def get_players_sorted(self):
+    def get_player_games(self):
         return self.db["players"].find().sort("games_played", -1)
 
+    def get_player_tournaments(self):
+        return self.db["players"].find().sort("tournaments_played", -1)
+
+    def get_groups_games(self):
+        return self.db["groups"].find().sort("games_played", -1)
+
+    def get_groups_tournaments(self):
+        return self.db["groups"].find().sort("tournaments_played", -1)
     # insert part groups
 
     def end_game(self, chat_id, players, chameleon, winners, starter=False):

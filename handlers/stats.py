@@ -8,14 +8,27 @@ from telegram.utils.helpers import mention_html
 from database import database
 from strings import get_string
 
-players_sorted = []
+players_games = []
+players_tournaments = []
+group_games = []
+group_tournaments = []
 
 
 def reload_sorted_players(_):
-    players_sorted.clear()
-    players = database.get_players_sorted()
+    for name in [players_games, players_tournaments, group_games, group_tournaments]:
+        name.clear()
+    players = database.get_player_games()
     for player in players:
-        players_sorted.append(player["id"])
+        players_games.append(player["id"])
+    players = database.get_player_tournaments()
+    for player in players:
+        players_tournaments.append(player["id"])
+    groups = database.get_groups_games()
+    for group in groups:
+        group_games.append(group["id"])
+    groups = database.get_groups_tournaments()
+    for group in groups:
+        group_tournaments.append(group["id"])
 
 
 def percentage(part, whole):
@@ -36,12 +49,18 @@ def stats_arguments(player, update):
     tour_lost = player["tournaments_played"] - player["tournaments_won"]
     won_cham_towon_per = percentage(player["chameleon_won"], player["games_won"])
     # we need the plus one cause indexes start at one, :)
-    position = players_sorted.index(player["id"]) + 1
-    amount = len(players_sorted)
+    try:
+        position = players_games.index(player["id"]) + 1
+    except ValueError:
+        players_games.append(player["id"])
+        position = players_games.index(player["id"]) + 1
+        players_tournaments.append(player["id"])
+    amount = len(players_games)
+    second_position = players_tournaments.index(player["id"]) + 1
     arguments = [player["games_played"], player["games_won"], won_per, games_lost, player["starter"], first_per,
                  player["been_chameleon"], cham_per, player["chameleon_won"], won_cham_per, position,
                  player["tournaments_played"], player["tournaments_won"], won_tour_per, tour_lost, won_cham_towon_per,
-                 amount]
+                 amount, second_position]
     all_arguments = [player_mention] + arguments
     return all_arguments
 
@@ -101,5 +120,14 @@ def group_stats(update: Update, context: CallbackContext):
     if "lang" not in chat_data:
         chat_data["lang"] = database.get_language_chat(update.effective_chat.id)
     stats = database.get_group_stats(update.effective_chat.id)
-    text = get_string(chat_data["lang"], "group_stats").format(stats["games"], stats["tournaments"])
+    try:
+        position = group_games.index(update.effective_chat.id) + 1
+    except ValueError:
+        group_games.append(update.effective_chat.id)
+        position = group_games.index(update.effective_chat.id) + 1
+        group_tournaments.append(update.effective_chat.id)
+    amount = len(players_games)
+    second_position = group_tournaments.index(update.effective_chat.id) + 1
+    text = get_string(chat_data["lang"], "group_stats").format(stats["games"], stats["tournaments"], position, amount,
+                                                               second_position)
     update.effective_message.reply_text(text)
