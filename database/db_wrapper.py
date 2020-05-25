@@ -73,6 +73,12 @@ class Database:
         to_return.update({"title": group["title"], "link": group["link"]})
         return to_return
 
+    def get_group_stats(self, chat_id):
+        to_return = {"games": 0, "tournaments": 0}
+        group = self.db["groups"].find_one({"id": chat_id})
+        to_return.update({"games": group["games_played"], "tournaments": group["tournaments_played"]})
+        return to_return
+
     # get part player
     def get_new_player(self, player_ids):
         for player_id in player_ids:
@@ -99,6 +105,16 @@ class Database:
             self.db["players"].insert_one(vars(objects.Player(user_id)))
             player = {"pm": False}
         return player["pm"]
+
+    def get_player(self, user_id):
+        player = self.db["players"].find_one({"id": user_id})
+        # this should never happen, but just in case
+        if not player:
+            return False
+        return player
+
+    def get_players_sorted(self):
+        return self.db["players"].find().sort("games_played", -1)
 
     # insert part groups
 

@@ -1,10 +1,10 @@
-from telegram.ext import (Updater, CommandHandler, CallbackQueryHandler, Filters, MessageHandler)
+from telegram.ext import (Updater, CommandHandler, CallbackQueryHandler, Filters, MessageHandler, InlineQueryHandler)
 import functools
 import logging
 
 from config import BOT_TOKEN
 from constants import TRANSLATION_CHAT_ID
-from handlers import group, game, dev, group_settings, private
+from handlers import group, game, dev, group_settings, private, stats
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO, filename="log.log")
@@ -19,6 +19,8 @@ def main():
     dp.add_handler(MessageHandler(Filters.group & (Filters.status_update.chat_created | Filters.status_update.
                                                    new_chat_members),
                                   group.greeting))
+    # deeplinking handler, making sure it can catch updates before the other ones
+    dp.add_handler(CommandHandler("start", stats.private_stats_command, filters=Filters.regex("stats")))
     # a group starts a game
     dp.add_handler(CommandHandler("start", functools.partial(group.start, dp=dp), filters=Filters.group))
     dp.add_handler(CallbackQueryHandler(group.player_join, pattern="join"))
@@ -71,6 +73,10 @@ def main():
     dp.add_handler(CommandHandler("start", private.start, Filters.private), 1)
     dp.add_handler(CommandHandler("settings_help", private.settings_help, Filters.private))
     dp.add_handler(CallbackQueryHandler(private.settings_help_edit, pattern="settingshelp"))
+    # stats
+    dp.add_handler(InlineQueryHandler(stats.private_stats))
+    dp.add_handler(CommandHandler("stats", stats.private_stats_command, filters=Filters.private))
+    dp.add_handler(CommandHandler("stats", stats.group_stats, filters=Filters.group))
     # dev tools
     dp.add_handler(CommandHandler("id", dev.reply_id))
     dp.add_handler(CommandHandler("shutdown", functools.partial(dev.shutdown, updater=updater),
@@ -83,6 +89,7 @@ def main():
     dp.add_error_handler(dev.error_handler)
     # start bot
     updater.start_polling(clean=True)
+    updater.job_queue.run_repeating(stats.reload_sorted_players, 60*60*24, name="reload_sorted", first=0)
     updater.idle()
 
 
