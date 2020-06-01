@@ -6,6 +6,7 @@ from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
 
 from database import database
+from handlers.dev import backup
 from strings import get_string
 
 players_games = []
@@ -14,7 +15,7 @@ group_games = []
 group_tournaments = []
 
 
-def reload_sorted_players(_):
+def reload_sorted_players(context):
     for name in [players_games, players_tournaments, group_games, group_tournaments]:
         name.clear()
     players = database.get_player_games()
@@ -29,6 +30,8 @@ def reload_sorted_players(_):
     groups = database.get_groups_tournaments()
     for group in groups:
         group_tournaments.append(group["id"])
+    # since this job runs once per day, we call the backup function from here
+    backup(context.bot)
 
 
 def percentage(part, whole):

@@ -1,8 +1,10 @@
+import io
 import json
 import os
 import subprocess
 import sys
 import traceback
+from datetime import datetime
 from json import JSONDecodeError
 import logging
 
@@ -11,7 +13,7 @@ from telegram.ext import CallbackContext, Updater, CommandHandler, Filters
 from telegram.utils.helpers import mention_html
 from threading import Timer
 
-from constants import TRANSLATION_CHANNEL_ID, TRANSLATION_CHAT_ID
+from constants import TRANSLATION_CHANNEL_ID, TRANSLATION_CHAT_ID, BACKUP_CHANNEL
 from database import database
 from strings import get_string, new_strings
 from utils.helpers import is_admin
@@ -28,7 +30,11 @@ def shutdown(update: Update, context: CallbackContext, updater: Updater):
         if dp.chat_data[chat_id] and "players" in dp.chat_data[chat_id]:
             skip = False
             lang = dp.chat_data[chat_id]["lang"]
-            context.bot.send_message(chat_id, get_string(lang, "init_shutdown"))
+            try:
+                context.bot.send_message(chat_id, get_string(lang, "init_shutdown"))
+            except Exception as e:
+                context.bot.send_message(208589966, f"Chat {chat_id} didn't get the shutdown message because "
+                                                    f"{e.__dict__}")
     if not skip:
         t = Timer(5 * 60, real_shutdown, [[dp, update.effective_user.id]])
         t.start()
@@ -215,3 +221,10 @@ def error_handler(update: Update, context: CallbackContext):
 
 def reply_id(update, _):
     update.effective_message.reply_text(f"{update.effective_chat.id}")
+
+
+def backup(bot):
+    run = subprocess.run(["mongodump", "-dgifsupportbot", "--gzip", "--archive"], capture_output=True)
+    output = io.BytesIO(run.stdout)
+    time = datetime.now().strftime("%d-%m-%Y")
+    bot.send_document(BACKUP_CHANNEL, output, filename=f"{time}.archive.gz")
