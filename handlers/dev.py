@@ -224,7 +224,7 @@ def reply_id(update, _):
 
 
 def backup(bot):
-    run = subprocess.run(["mongodump", "-dgifsupportbot", "--gzip", "--archive"], capture_output=True)
+    run = subprocess.run(["mongodump", "-dchameleonbot", "--gzip", "--archive"], capture_output=True)
     output = io.BytesIO(run.stdout)
     time = datetime.now().strftime("%d-%m-%Y")
     bot.send_document(BACKUP_CHANNEL, output, filename=f"{time}.archive.gz")
