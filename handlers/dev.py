@@ -183,9 +183,6 @@ def error_handler(update: Update, context: CallbackContext):
         text = "Hey jo, error outside of update, The full traceback:\n\n < code > {trace} < / code > "
         context.bot.send_message(208589966, text, parse_mode=ParseMode.HTML)
         return
-    # trying to hunt down a bug here
-    if update.effective_message:
-        logger.info(f"This is the message received: {update.effective_message.text}")
     chat = update.effective_chat
     if chat.type == "private":
         if "lang" not in context.user_data:
