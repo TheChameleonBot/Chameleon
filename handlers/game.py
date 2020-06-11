@@ -498,7 +498,13 @@ def abort_game(update: Update, context: CallbackContext):
         lang = database.get_language_chat(chat_id)
         update.effective_message.reply_text(get_string(lang, "no_game_running"))
         return
-    lang = chat_data["lang"]
+    # sometimes a keyerror happens here. That can have different reasons, but this being an important command, I decided
+    # to throw in an try expect
+    try:
+        lang = chat_data["lang"]
+    except KeyError:
+        lang = "en"
+        chat_data["lang"] = "en"
     # little admin check
     if not is_admin(context.bot, update.effective_user.id, update.effective_chat):
         update.effective_message.reply_text(get_string(lang, "no_admin_abort"))
