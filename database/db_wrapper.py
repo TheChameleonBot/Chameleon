@@ -239,7 +239,7 @@ class Database:
     def reload_decks(self):
         for filename in os.listdir('./decks'):
             if filename.endswith(".json"):
-                temp = json.load(open('./decks/' + filename))
+                temp = json.load(open('./decks/' + filename, encoding="UTF-8"))
                 language = temp["language"]
                 name = temp["name"]
                 [temp.pop(key) for key in ["name", "language"]]
