@@ -1,4 +1,6 @@
 import logging
+import random
+import string
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import Unauthorized, BadRequest
@@ -31,7 +33,8 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
         return
     first_name = name_generator(update.effective_user.first_name)
     user_id = update.effective_user.id
-    button = [[InlineKeyboardButton(get_string(lang, "start_button"), callback_data="join")]]
+    game_id = ''.join(random.choices(string.ascii_lowercase, k=10))
+    button = [[InlineKeyboardButton(get_string(lang, "start_button"), callback_data="join_" + game_id)]]
     mention = mention_html(user_id, first_name)
     group_settings = database.get_all_settings(chat_id)
     settings = ["deck", "fewer", "more", "pin", "tournament", "restrict", "exclamation"]
@@ -47,11 +50,12 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
     message = update.effective_message.reply_html(text, reply_markup=InlineKeyboardMarkup(button))
     payload = {"dp": dp, "players": [{"user_id": user_id, "first_name": first_name}], "message": message.message_id,
                "lang": lang, "chat_id": chat_id, "known_players": [], "tutorial": False,
-               "starter": {"user_id": user_id, "first_name": first_name}, "group_settings": group_settings}
+               "starter": {"user_id": user_id, "first_name": first_name}, "group_settings": group_settings,
+               "game_id": game_id}
     context.job_queue.run_repeating(timer, START_TIME, context=payload, name=chat_id)
     payload = {"starter": {"user_id": user_id, "first_name": first_name},
                "players": [{"user_id": user_id, "first_name": first_name}], "lang": lang, "message": message.message_id,
-               "left_players": {}, "settings": wanted_settings}
+               "left_players": {}, "settings": wanted_settings, "game_id": game_id}
     chat_data.update(payload)
     chat_link = helpers.chat_link(update.effective_chat.title, update.effective_chat.link)
     for player_id in database.get_nextgame_ids(chat_id):
@@ -79,9 +83,18 @@ def player_join(update: Update, context: CallbackContext):
     first_name = name_generator(update.effective_user.first_name)
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
-    # somehow, this callback button is there, but we aren't in join mode, so we handle this now :D
+    # check if the chat data is from a different state
     if "message" not in chat_data:
-        group_helpers.no_game(update, context, "join_no_game_running")
+        # this means there is no game starting/running
+        if "game_id" not in chat_data:
+            group_helpers.no_game(update, context, "join_no_game_running")
+            return
+        # this means there is a game starting, but the button wasn't removed yet
+        if chat_data["game_id"] == query.data.split("_")[1]:
+            query.answer(get_string(chat_data["lang"], "join_while_starting"))
+            return
+        # if we are here, there is a newer game running and someone hit the button of an old one
+        group_helpers.no_game(update, context, "join_old_button")
         return
     starter = mention_html(chat_data["starter"]["user_id"], chat_data["starter"]["first_name"])
     remove = False
@@ -177,7 +190,6 @@ def timer(context):
             data["known_players"] = known_players
             return
     # game either ends/starts
-    dp.chat_data[chat_id].clear()
     context.job.schedule_removal()
     if not len(data["players"]) == MAX_PLAYERS:
         context.bot.edit_message_reply_markup(chat_id, data["message"], reply_markup=None)
@@ -192,6 +204,7 @@ def timer(context):
             group_helpers.yes_game(context, data, chat_id, dp)
         database.remove_group_nextgame(chat_id, player_ids)
     else:
+        dp.chat_data[chat_id].clear()
         text = get_string(lang, "game_failed")
         context.bot.send_message(chat_id, text, reply_to_message_id=data["message"])
 

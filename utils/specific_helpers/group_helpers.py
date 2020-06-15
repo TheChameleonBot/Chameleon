@@ -1,5 +1,4 @@
 import random
-import string
 import logging
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, ChatPermissions
@@ -23,21 +22,21 @@ def players_mentions(players):
 
 def yes_game(context, data, chat_id, dp):
     chat_data = dp.chat_data[chat_id]
+    chat_data.clear()
     lang = data["lang"]
     group_settings = data["group_settings"]
     deck = Deck(*group_settings["deck"].split("_"))
     chameleon = random.choice(list(data["players"]))
     random.shuffle(data["players"])
-    game_id = ''.join(random.choices(string.ascii_lowercase, k=10))
     chat_data.update({"chameleon": chameleon, "secret": deck.secret, "players": data["players"], "lang": lang,
-                      "starter": data["starter"], "words": deck.words, "game_id": game_id,
+                      "starter": data["starter"], "words": deck.words, "game_id": data["game_id"],
                       "fewer": group_settings["fewer"], "tournament": group_settings["tournament"],
                       "more": group_settings["more"], "pin": group_settings["pin"], "restrict": {},
                       "deck": group_settings["deck"], "tutorial": data["tutorial"],
                       "exclamation": group_settings["exclamation"]})
     text = get_string(lang, "game_succeed").format(deck.topic, deck.word_list)
     button = InlineKeyboardMarkup([[InlineKeyboardButton(get_string(lang, "play_button"),
-                                                         callback_data="word" + game_id)]])
+                                                         callback_data="word" + data["game_id"])]])
     message = context.bot.send_message(chat_id, text, reply_to_message_id=data["message"], reply_markup=button,
                                        parse_mode=ParseMode.HTML)
     chat = None
