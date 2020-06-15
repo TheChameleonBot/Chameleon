@@ -3,7 +3,7 @@ import random
 import string
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
-from telegram.error import Unauthorized, BadRequest
+from telegram.error import Unauthorized, BadRequest, RetryAfter
 from telegram.ext import CallbackContext, Dispatcher, Job
 
 from strings import get_string
@@ -55,7 +55,7 @@ def start(update: Update, context: CallbackContext, dp: Dispatcher):
     context.job_queue.run_repeating(timer, START_TIME, context=payload, name=chat_id)
     payload = {"starter": {"user_id": user_id, "first_name": first_name},
                "players": [{"user_id": user_id, "first_name": first_name}], "lang": lang, "message": message.message_id,
-               "left_players": {}, "settings": wanted_settings, "game_id": game_id}
+               "left_players": {}, "settings": wanted_settings, "game_id": game_id, "chat_id": chat_id}
     chat_data.update(payload)
     chat_link = helpers.chat_link(update.effective_chat.title, update.effective_chat.link)
     for player_id in database.get_nextgame_ids(chat_id):
@@ -106,14 +106,20 @@ def player_join(update: Update, context: CallbackContext):
             chat_data["players"].remove({"user_id": user_id, "first_name": player["first_name"]})
             # we need them in here so we can mention them later. Looks stupid, I know
             chat_data["left_players"][user_id] = first_name
-            query.answer(get_string(chat_data["lang"], "player_leaves_query"))
+            if "flood" in chat_data:
+                query.answer(get_string(chat_data["lang"], "player_leaves_query_flood"), show_alert=True)
+            else:
+                query.answer(get_string(chat_data["lang"], "player_leaves_query"))
             remove = True
             break
     if not remove:
         # if they left and rejoined before the timer run through, they are still in this dict. If not, nothing happens
         chat_data["left_players"].pop(user_id, None)
         chat_data["players"].append({"user_id": user_id, "first_name": first_name})
-        query.answer(get_string(chat_data["lang"], "player_joins_query"))
+        if "flood" in chat_data:
+            query.answer(get_string(chat_data["lang"], "player_joins_query_flood"), show_alert=True)
+        else:
+            query.answer(get_string(chat_data["lang"], "player_joins_query"))
     players = group_helpers.players_mentions(chat_data["players"])
     job = context.job_queue.get_jobs_by_name(chat_id)[0]
     job.context["players"] = chat_data["players"]
@@ -127,8 +133,30 @@ def player_join(update: Update, context: CallbackContext):
         setattr(new_context, "job", Job(timer, interval=42, name=chat_id, context=payload))
         timer(context)
         return
-    button = [[InlineKeyboardButton(get_string(chat_data["lang"], "start_button"), callback_data="join")]]
-    query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(button))
+    if "flood" in chat_data:
+        return
+    button = [[InlineKeyboardButton(get_string(chat_data["lang"], "start_button"), callback_data="join_" +
+                                                                                                 chat_data["game_id"])]]
+    try:
+        query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(button))
+    except RetryAfter as e:
+        context.job_queue.run_once(flood_error, e.retry_after + 2, context=chat_data, name="flood for " + chat_id)
+        chat_data["flood"] = True
+
+
+def flood_error(context):
+    data = context.job.context
+    # this means the join phase ended and a different call edited the function already
+    if "message" not in data:
+        return
+    starter = mention_html(data["starter"]["user_id"], data["starter"]["first_name"])
+    players = group_helpers.players_mentions(data["players"])
+    text = get_string(data["lang"], "start_game").format(starter, players, *data["settings"])
+    button = InlineKeyboardMarkup([[InlineKeyboardButton(get_string(data["lang"], "start_button"),
+                                                         callback_data="join_" + data["game_id"])]])
+    context.bot.edit_message_text(text, data["chat_id"], data["message"], parse_mode=ParseMode.HTML,
+                                  reply_markup=button)
+    del data["flood"]
 
 
 def timer(context):
