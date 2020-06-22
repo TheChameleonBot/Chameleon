@@ -121,7 +121,14 @@ def player_join(update: Update, context: CallbackContext):
         else:
             query.answer(get_string(chat_data["lang"], "player_joins_query"))
     players = group_helpers.players_mentions(chat_data["players"])
-    job = context.job_queue.get_jobs_by_name(chat_id)[0]
+    try:
+        job = context.job_queue.get_jobs_by_name(chat_id)[0]
+    except IndexError:
+        # this means the game already started, we are going to return, but quickly notify teh player they didnt made it
+        mention = mention_html(user_id, first_name)
+        context.bot.send_message(chat_id, get_string(chat_data["lang"], "player_joins_query").format(mention),
+                                 parse_mode="HTML")
+        return
     job.context["players"] = chat_data["players"]
     job.context["left_players"] = chat_data["left_players"]
     text = get_string(chat_data["lang"], "start_game").format(starter, players, *chat_data["settings"])
