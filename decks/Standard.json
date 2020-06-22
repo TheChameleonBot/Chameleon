@@ -1,7 +1,7 @@
 {
   "name": "Standard",
   "language": "English",
-  "Food (1)": [
+  "Food": [
     "Potatoes",
     "Fish",
     "Cake",
@@ -185,19 +185,19 @@
     "Eyes",
     "Nose",
     "Ears",
-    "Ankle",
+    "Heart",
     "Hands",
     "Feet",
     "Stomach",
-    "Toes",
-    "Fingers",
+    "Pelvis",
+    "Lungs",
     "Forehead",
     "Knees",
     "Elbows",
     "Mouth",
     "Eyelash",
-    "Nostrils",
-    "Palm"
+    "Appendix",
+    "Shoulders"
   ],
   "Jobs": [
     "Doctor",
@@ -255,8 +255,8 @@
   ],
   "In the heart of the Jungle": [
     "Monkey",
-    "Moose",
-    "Hare",
+    "Chameleon",
+    "Okapi",
     "Chimpanzee",
     "Bear",
     "Wolf",
@@ -333,7 +333,7 @@
     "Water Purifier",
     "Lawnmower",
     "Sewing Machine",
-    "Clothes Iron",
+    "Iron",
     "Toaster",
     "Vacuum Cleaner",
     "Washing Machine",
@@ -379,24 +379,6 @@
     "Need for Speed",
     "Street Fighter"
   ],
-  "Fashion Accessories": [
-    "Bracelet",
-    "Piercing",
-    "Handbag",
-    "Sandals",
-    "Hat",
-    "Tie",
-    "Cuff Links",
-    "Helmet",
-    "Wristwatch",
-    "Sunglasses",
-    "Belt",
-    "Hairband",
-    "Necklace",
-    "Ring",
-    "Scarf",
-    "Gloves"
-  ],
   "Historical Figures": [
     "Adolf Hitler",
     "Albert Einstein",
@@ -404,7 +386,7 @@
     "Charlie Chaplin",
     "Martin Luther King Jr.",
     "Marilyn Monroe",
-    "Genghis Khan",
+    "Gengis Khan",
     "Charles Darwin",
     "Mahatma Gandhi",
     "Mother Teresa",
@@ -419,7 +401,7 @@
     "Swimming",
     "Badminton",
     "Table Tennis",
-    "Curling",
+    "Golf",
     "Sailing",
     "Archery",
     "Bowling",
@@ -440,8 +422,8 @@
     "The Beatles",
     "Eminem",
     "Queen",
-    "Taylor Swift",
-    "Ariana Grande",
+    "Adele",
+    "Rihanna",
     "Beyonce",
     "The Backstreet Boys",
     "Ed Sheeran",
@@ -451,7 +433,7 @@
     "Marshmello",
     "Nicki Minaj"
   ],
-  "Movies (1)": [
+  "Films": [
     "Pirates of the Caribbean",
     "Jurassic Park",
     "The Godfather",
@@ -469,7 +451,7 @@
     "Mean Girls",
     "The Matrix"
   ],
-  "Movies (2)": [
+  "Films (2)": [
     "Back to the Future",
     "The Conjuring",
     "Transformers",
@@ -487,19 +469,19 @@
     "Indiana Jones",
     "Saw"
   ],
-  "Animated Movies": [
+  "Animated Films": [
     "Toy Story",
     "Inside Out",
     "Spirited Away",
     "Spider-man: Into the Spider-verse",
-    "Finding Nemo",
+    "Kung-Fu Panda",
     "Ratatouille",
     "How to train your Dragon",
     "The Lion King",
     "Frozen",
     "Shrek",
     "Tarzan",
-    "Bee Movie",
+    "Zootopia",
     "Up",
     "Monsters, Inc",
     "Wall-E",
