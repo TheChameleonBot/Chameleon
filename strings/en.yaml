@@ -260,3 +260,14 @@ private_old_button: "/stats"
 private_old_stats_command: "\n\n\nYou have played this game for a long time now. In fact, before the 4th of February 2020 at least. This means, your actual stats are a bit higher then what just were shown. This happened because won as chameleon was introduced on that date, and to keep the rest of the stats together with that new field, a straight cut to your numbers were made. But the old ones are saved and can be presented now:\nBefore the 4th, you:\n\nPlayed {0} games (so overall {1} games)\nWon {2} games (so {3}% before the 4th, overall {4} - {5}%)\nLost {6} games ({7} games overall)\nWere the first player {8} times ({9}% before the 4th, {10} times overall - {11}%)\nAnd you were the chameleon {12} times ({13}% before, {14} times overall - {15}%)\n\nAs you can see, tournaments are not affected (they are counted separately, so you see the whole number), neither are the games started."
 # about groups stats
 group_stats: "This group played {0} games ({2} place of {3} groups) and {1} tournaments ({4} place) \\o/"
+# when someone presses the join button while the game is starting
+join_while_starting: "Hey, the game has already begun, sorry. This button will be removed momentarily."
+# when someone presses an old join button while a different game is running
+join_old_button: "Hey, this is an old button, please use the one from the current game."
+# when someone leaves but the bot faces a flood error
+player_leaves_query_flood: "You left the game!\n\nI am facing a flood timeout and cant edit the message right now, but you did, believe me."
+# when someone joins but the bot faces a flood error
+player_joins_query_flood: "You joined the game!\n\nI am facing a flood timeout and cant edit the message right now, but you did, believe me."
+# when someone joins, already got the callback answered, but the game started before he was added to the list
+# {0} mention of the player
+player_joins_while_starting: "Hey, I am sorry, but you joined a second too late {0}, you missed the game."
