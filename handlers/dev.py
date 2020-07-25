@@ -33,8 +33,8 @@ def shutdown(update: Update, context: CallbackContext, updater: Updater):
             try:
                 context.bot.send_message(chat_id, get_string(lang, "init_shutdown"))
             except Exception as e:
-                context.bot.send_message(208589966, f"Chat {chat_id} didn't get the shutdown message because "
-                                                    f"{e.__dict__}")
+                update.message.reply_text(208589966, f"Chat {chat_id} didn't get the shutdown message because "
+                                                     f"{e.__dict__}")
     if not skip:
         t = Timer(5 * 60, real_shutdown, [[dp, update.effective_user.id]])
         t.start()
@@ -49,7 +49,10 @@ def real_shutdown(args):
     for chat_id in dp.chat_data:
         if dp.chat_data[chat_id] and "players" in dp.chat_data[chat_id]:
             lang = database.get_language_chat(chat_id)
-            bot.send_message(chat_id, get_string(lang, "run_shutdown"))
+            try:
+                bot.send_message(chat_id, get_string(lang, "run_shutdown"))
+            except Exception as e:
+                bot.send_message(args[1], f"{chat_id} still skipped because {e.__dict__}")
     change_handlers(dp)
     bot.send_message(args[1], "Shutdown done, upload activated")
 
