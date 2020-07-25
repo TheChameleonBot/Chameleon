@@ -147,7 +147,7 @@ def player_join(update: Update, context: CallbackContext):
     try:
         query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=InlineKeyboardMarkup(button))
     except RetryAfter as e:
-        context.job_queue.run_once(flood_error, e.retry_after + 2, context=chat_data, name="flood for " + chat_id)
+        context.job_queue.run_once(flood_error, e.retry_after + 2, context=chat_data, name="flood for " + str(chat_id))
         chat_data["flood"] = True
 
 
