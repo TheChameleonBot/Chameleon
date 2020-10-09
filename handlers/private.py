@@ -1,3 +1,5 @@
+import html
+
 from telegram import Update, InlineKeyboardMarkup, ParseMode
 from telegram.ext import CallbackContext
 
@@ -92,9 +94,11 @@ def settings_help_edit(update: Update, context: CallbackContext):
     query = update.callback_query
     data = query.data.split("_")
     chosen = data[1]
-    refresh_id = 1
-    if int(data[2]) != 0:
-        refresh_id = 0
-    buttons = private_helpers.help_buttons(get_string(lang, "group_setting_buttons"), chosen, refresh_id)
-    query.edit_message_text(get_string(lang, f"{chosen}_help"), reply_markup=InlineKeyboardMarkup(buttons),
+    help_text = get_string(lang, f"{chosen}_help")
+    if html.unescape(query.message.text_html) == help_text:
+        query.answer()
+        return
+    buttons = private_helpers.help_buttons(get_string(lang, "group_setting_buttons"), chosen)
+    query.edit_message_text(help_text, reply_markup=InlineKeyboardMarkup(buttons),
                             parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+    query.answer()

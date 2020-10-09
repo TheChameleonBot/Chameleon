@@ -2,6 +2,8 @@ from telegram import InlineKeyboardButton
 
 from utils.helpers import build_menu
 
+from random import randint
+
 
 def language_buttons(languages):
     buttons = []
@@ -10,7 +12,10 @@ def language_buttons(languages):
     return build_menu(buttons, 3)
 
 
-def help_buttons(settings, chosen, refresh_id=0):
+def help_buttons(settings, chosen):
+    # getting angry at the ios client because it allows users to spam the server so fast that its impossible to avoid
+    # re-editing the message with the same (though code wise different) content, thus resulting in a BadRequest
+    refresh_id = randint(0, 100000000000)
     buttons = []
     for setting in settings:
         if setting == "refresh":
