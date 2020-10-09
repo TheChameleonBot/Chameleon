@@ -1,0 +1,273 @@
+# put the people who worked on the translation here if you/they want to.
+authors:
+  - "@The_Question_Mark @BMRG14"
+# put the name of your language here, in their native translation
+language: "پارسی"
+# send when the bot gets added to a group
+greeting: "سلام. من ربات آفتاب‏ پرست هستم، یک ربات تلگرامی که بازی «آفتاب پرست» رو به گروه‌هاتون میاره! برای تغییر تنظیمات من می‌تونید دستور /settings (داخل گروه‏‌های بزرگ باید مدیر باشید) رو بفرستید یا برای شروع بازی با من روی /start بزنید :)"
+# when a game is started with /start in a group.
+# {0} mention of the player who started the game, {1} list of mentions for joined player, {2-8} settings, either the deck name or activate or deactivate (see below)
+start_game: "بازیکن {0} یک بازی شروع کرد. شما با این تنظیمات بازی خواهید کرد: \n\n<b>دسته:</b> {2}\n<b>کمتر:</b> {3}\n<b>بیشتر: </b>{4}\n<b>سنجاق: </b>{5}\n<b>مسابقه: </b>{6}\n<b>محدودیت: </b>{7}\n<b>علامت تعجب: </b>{8}\n\nوارد بازی بشید!\n\n#بازیکنان:\n{1}"
+# the button beneath the message above
+start_button: "ورود/خروج"
+# if the setting above is activated
+activated: "فعال"
+# if the setting above is deactivated
+deactivated: "غیر فعال"
+# the pop-up a player gets when pressing on the button above
+player_joins_query: "شما وارد بازی شدید!"
+player_leaves_query: "شما از بازی خارج شدید!"
+# the pop-up a player gets when he presses the button above but no join process is running (might happen when the bot has an unexpected shutdown)
+join_no_game_running: "این دکمه قرار نبود اینجا باشه. لطفا برای شروع بازی جدید دستور /start رو بفرستید."
+# the text appearing in the group once a player leaves/joins and the timer "runs out"
+# {0} mention of player(s)
+player_joins_text: "بازیکن {0} وارد بازی شد. "
+player_leaves_text: "بازیکن {0} از بازی خارج شد."
+# the text in addition to the one above
+# {0} if more then three players, start from below; otherwise fail
+player_action_text: "اگر هیچ بازیکنی در 30 ثانیه‌ی آینده به بازی وارد/خارج نشه، زمان وارد شدن به بازی تمام شده و بازی {0}"
+# see above
+start: "شروع خواهد شد :)"
+fail: "شروع نخواهد شد :("
+# the message when someone presses /start while a game is running
+game_running: "یک بازی در حال اجراست، لطفا منتظر بمانید تا تمام شود."
+# the message when a game failed (30 second timer runs out and not three people joined)
+game_failed: "بازیکنان کافی نیستند."
+# the message when a game starts
+# {0} the topic/dictionary key, {1} the list of the words
+game_succeed: "بازی شروع شد!\n<b>موضوع:</b>\n{0}\n<b>کلمات:</b>\n{1}"
+# the button beneath the message above
+play_button: "نمایش کلمه‌ی مخفی"
+# the pop-up the chameleon gets when pressing the button above
+player_is_chameleon: "تو آفتاب پرستی. موفق باشی!"
+# the pop-up the ordinary player gets when pressing the button above
+# {0} the secret word
+secret_word: "کلمه‌ی مخفی: {0}"
+# the pop-up the player gets when pressing the button above and this game is not running (might happen when the bot has an unexpected shutdown)
+wrong_game: "بازی در حال انجام شما با این بازی متفاوت است. لطفا آخرین پیام من رو با این دکمه(ها) پیدا کرده و دکمه‌ی زیرش رو انتخاب کنید :)"
+# the message appearing after the message above, asking for the first word
+# {0} mention of the player
+first_player_say_word: "بازیکن {0}، شما اولین کسی هستید که باید کلمه انتخاب کنه. لطفا شروع کنید."
+# the message asking every player to send a message, one after another
+# {0} mention of the player, {1} word list, consisting of the player name: players word(s), {2} the message below or nothing
+more_players_say_word: "متشکرم، حالا نوبت شماست، {0}.{2}\n\nلیست فعلی کلمات:\n{1}"
+# this will get attached to the previous two messages in case the game is not in restricted mote
+exclamation_deactivated: "برای ادامه‌ی مکالمه، به ابتدای پیام خود ! (علامت تعجب) اضافه کنید تا پیام رو به عنوان ورودی حساب نکنم"
+exclamation_activated: "برای ادامه‌ی مکالمه، به ابتدای پیام خود ! (علامت تعجب) اضافه نکنید تا پیام رو به عنوان ورودی حساب نکنم"
+# the message before the voting, showing the final word list
+# {0} final word list
+final_word_list: "لیست نهایی کلمات، بریم به یک بازیکن (آفتاب پرست یا بازیکن عادی) رای بدیم و نقابش رو برداریم:\n\n{0}"
+# the message asking to vote, buttons with the names beneath
+# {0} vote list, consisting of mentions of the players: number of votes
+vote_list: "حواستون باشه فقط یک بار می‌توانید رای بدید و امکان تغییر رای وجود نداره.\nبازیکنانی که هنوز رای نداده‌اند:\n\n{0}"
+# the pop-up for a successful vote
+voted: "رای شما ثبت شد :)"
+# the pop-up for someone trying to vote again
+already_voted: "قبلا رای دادید!"
+# the pop-up for someone pressing his own name (no suicide here) while voting
+vote_yourself: "نمی‌تونید به خودتون رای دهید!"
+# when a draw happens after everyone votes, the first player who had to say a word can decide who gets unmasked. Buttons with player names are attached
+# {0} mention of the starter, the player who has to said the first word
+draw: "بازیکن {0}، تعداد رای‌ها برابر شد. با توجه به اینکه شما به دلیل گفتن اولین کلمه ممکنه ضرر کرده باشید، می‌تونید تصمیم بگیرید که نقاب کی برداشته بشه"
+# if someone who is not the starter (see above) presses one of the buttons
+not_starter: "اولین کلمه رو شما نگفتید، واقعا فکر کردید حواسم نیست؟ :("
+# if the chameleon wasn't found
+# {0} mention of the player unmasks, {1} mention of the chameleon, {2} secret word
+chameleon_not_found: "بازیکن {0} نقابش برداشته شد و آفتاب پرست <b>نیست</b>، آفتاب پرست {1} بود و بازی رو برد! کلمه‌ی مخفی <b>{2}</b> بود."
+# if the chameleon was found
+# {0} mention of the chameleon
+chameleon_found: "بازیکن {0} نقابش برداشته شد و آفتاب پرست بود! می‌تونی تلاش کنی و کلمه‌ی مخفی رو حدس بزنی."
+# if the chameleon was found and only three players are there (and this is activated in the setting)
+# {0} mention of the chameleon
+chameleon_found_fewer: "بازیکن {0} نقابش برداشته شد و آفتاب پرست بود! از اونجایی که الان فقط 3 بازیکن داریم، می‌تونی دو بار حدس بزنی (مدیران گروه می‌تونن این قابلیت رو در تنظیمات غیر فعال کنن)"
+# if the chameleon was found and 7 or 8 players are there
+# {0} mention of the chameleon
+chameleon_found_more: "بازیکن {0} نقابش برداشته شد و آفتاب پرست بود! از اونجایی که الان بیشتر از 6 بازیکن داریم، لیست کلمات قابل دیدن نیست، پس به املای کلمه دقت کن! (مدیران گروه می‌تونن این قابلیت رو در تنظیمات غیر فعال کنن)"
+# this replaces the word/topic from the list
+hidden: "مخفی"
+# if the chameleon guesses wrong and has a second guess
+# {0} mention of the chameleon
+chameleon_guess_wrong_fewer: "متاسفم {0}، حدست اشتباه بود. دوباره تلاش کنید ;)"
+# if the chameleon guesses wrong
+# {0} mention of the chameleon, {1} secret word
+chameleon_guess_wrong: "متاسفم {0}، حدست اشتباه بود، کلمه‌ی درست <b>{1}</b> بود. آفتاب پرست باخت و بازیکنان برنده شدند!"
+# if the chameleon guesses correctly
+# {0} mention of the chameleon
+chameleon_guess_right: "آفرین {0}، حدست درست بود! آفتاب پرست برنده و بازیکنان باختند"
+# if the chameleon guesses wrongly, but the spellchecker corrects it to the right word (comes in handy by games where the keyboard isn't given
+# {0} mention of the chameleon
+chameleon_guess_corrected: "آفرین {0}، حدست درست بود... البته، اگه بخوام رو راست باشم، یه غلط املایی داشتی که غلط یاب داخلی من درستش کرد. قابلی نداشت، تو هنوزم برنده‌ای. هورا :)"
+# when a tournament ends, but no winner yet, so another round is started
+tournament_end: "بازی به پایان رسید، اما هنوز بازیکنی برنده‌ی مسابقه نشده، پس یک بازی جدید شروع میشه. امتیازات فعلی مسابقه:\n{0}\n<b>موضوع:</b>\n{1}\n<b>کلمات:</b>\n{2}"
+# when a tournament ends and there is only one winner
+# {0} winner mention, {1} winner points, {2} other player mentions + points
+tournament_end_one: "مسابقه به پایان رسید \\o/\n\nبازیکن {0} با <b>{1}</b> امتیاز برنده شد.\n\nدیگر شرکت کنندگان:\n{2}"
+# when a tournament ends with several winners
+# {0} winner mentions + points, {1} other player mentions + points
+tournament_end_several: "مسابقه به پایان رسید \\o/\n\nلیست برندگان:\n{0}\n\nدیگر شرکت کنندگان:\n{1}"
+# when an admin aborts a running/starting game
+abort_game: "بازی با موفقیت متوقف شد"
+# when someone tries to to abort a game when none is running/starting
+no_game_running: "شما نمی‌تونید یک بازی متوقف شده رو قطع کنید"
+# when a non admin tries to abort a running/starting game
+no_admin_abort: "برای قطع کردن یک بازی در حال اجرا باید مدیر باشید"
+# when a shutdown gets initiated, this message is send to the active players as a warning
+init_shutdown: "ببخشید ولی تا 5 دقیقه دیگه خاموش میشم. یعنی اگر بازی فعلی رو تموم نکنید، امتیازهای این بازی ذخیره نخواهند شد. برای کسب اطلاعات بیشتر به @TheChameleon مراجعه کنید."
+# when a shutdown gets initiated and players are still playing (smh)
+run_shutdown: "پنج دقیقه به پایان رسید، متاسفم که همه‌ی شما امتیازهاتون رو از دست دادید :("
+# when a shutdown is initiated and players want to start a new game
+group_start_shutdown: "ببخشید ولی باید خاموش بشم. لطفا برای کسب اطلاعات بیشتر به @TheChameleon مراجعه کنید."
+# when a non admin tries to change group settings
+no_admin_settings: "برای تغییر تنظیمات گروه باید مدیر باشید. اگر مدیر هستید و این پیام رو دریافت می‌کنید، دستور /admins_reload رو بفرستید."
+# when a cache reload is issued
+admins_reload: "لیست مدیران به روز رسانی شد!"
+# when an admin has not PMed the bot yet
+no_pm_settings: "برای تغییر تنظیمات گروه، باید در پیام خصوصی دستور /start رو به من ارسال کنید. برای این کار دکمه‌ی زیر رو انتخاب کنید."
+# the button mentioned above
+no_pm_settings_button: "شروع"
+# when an admin has PMed the bot, but blocked it (wtf??)
+admin_blocked_bot: "من نمی‌تونم به شما پیام خصوصی بفرستم، احتمالا منو بلاک کردید. لطفا من رو از مسدودیت خارج کرده و دوباره تلاش کنید."
+# the setting message admins of groups greet greeted with in PM
+# {0} is the name of the group, a link if the group has an username
+group_setting_text: "قصد دارید تنظیمات من در گروه {0} رو تغییر بدید؟ بسیار عالی. برای کسب اطلاعات بیشتر در مورد تنظیمات، دستور /settings_help رو بفرستید. اگر فکر می‌کنید مدیر دیگری تنظیمات رو تغییر داده، دکمه‌ی «بازنشانی» رو انتخاب کنید تا تنظیمات به حالت اصلی برگردند."
+# the buttons for group settings. Only translate the strings!
+group_setting_buttons:
+  refresh: "بازنشانی"
+  language: "زبان"
+  deck: "دسته"
+  fewer: "کمتر"
+  more: "بیشتر"
+  tournament: "مسابقه"
+  pin: "سنجاق"
+  exclamation: "علامت تعجب"
+  restrict: "محدودیت"
+# shown to the user when he presses refresh in the settings
+group_setting_refresh: "تنظیمات بازنشانی شدند!"
+# change language of a group
+# {0} is the current language
+group_setting_languages: "زبان فعلی گروه شما: <b>{0}</b>. زبان مورد نظر رو انتخاب کنید.\n\nدر صورتی که می‌خواهید زبانی رو ترجمه یا غلط املایی گزارش کنید، دستور /translation رو بفرستید."
+# change deck of a group
+# {0} is the current language
+group_setting_deck_language: "دسته‌ی مورد نظر رو انتخاب کنید. اولش اسم زبان مورد نظر رو بنویسید، زبان فعلی گروه شما: <b>{0}</b>"
+# {0} is the current deck
+group_setting_decks: "دسته‌ی فعلی گروه شما: <b>{0}</b>. دسته‌ی مورد نظر رو انتخاب کنید.\n\nدر صورتی که می‌خواهید دسته‌ی جدیدی بسازید یا غلط املایی گزارش کنید، دستور /deck رو بفرستید"
+# activate fewer setting of group
+group_setting_fewer_activate: "تنظیمات کمتر فعال شد!"
+# deactivate fewer setting of group
+group_setting_fewer_deactivate: "تنظیمات کمتر غیر فعال شد!"
+# activate more setting of group
+group_setting_more_activate: "تنظیمات بیشتر فعال شد!"
+# deactivate more setting of group
+group_setting_more_deactivate: "تنظیمات بیشتر غیر فعال شد!"
+# activate tournament mode of group
+group_setting_tournament_activate: "حالت مسابقه فعال شد!"
+# deactivate tournament mode of group
+group_setting_tournament_deactivate: "حالت مسابقه غیر فعال شد!"
+# activate pin setting of group
+group_setting_pin_activate: "تنظیمات سنجاق فعال شد!"
+# deactivate pin setting of group
+group_setting_pin_deactivate: "تنظیمات سنجاق غیر فعال شد!"
+# being an admin which can pin is required
+group_setting_pin_required: "برای فعال کردن این حالت، من باید (علاوه بر مدیر بودن) دسترسی سنجاق کردن پیام‌ها رو داشته باشم"
+# activate restrict mode of group
+group_setting_restrict_activate: "حالت محدودیت فعال شد!"
+# deactivate restrict mode of group
+group_setting_restrict_deactivate: "حالت محدودیت غیر فعال شد!"
+# being an admin which can restrict member is required
+group_setting_restrict_required: "برای فعال کردن این حالت، من باید (علاوه بر مدیر بودن) دسترسی‌های افزودن عضو، افزودن مدیر جدید و محدود کردن اعضا رو داشته باشم"
+# activate exclamation setting of group
+group_setting_exclamation_activate: "فعال شد، پیام‌هایی که با ! (علامت تعجب) شروع می‌شوند، شمرده خواهند شد."
+# deactivate exclamation setting of group
+group_setting_exclamation_deactivate: "غیر فعال شد، پیام‌هایی که با ! (علامت تعجب) شروع نمی‌شوند، شمرده خواهند شد."
+# if an error happens somewhere, we tell the user about it
+error: "متاسفانه هنگام انجام این تغییرات خطایی رخ داد. مشکل رو به توسعه‌دهندگانم اطلاع خواهم داد."
+# if a user wants to change their language
+# {0} name of their current language
+private_language: "زبان فعلی شما: {0}، با دکمه‌های زیر زبانی که می‌خواهید رو انتخاب کنید :)"
+# if a user changed their language
+# {0} name of their selected language
+private_language_selected: "بسیار عالی، زبان جدید شما: {0}"
+# if a random idiot presses buttons
+user_not_in_game: "شما باید در این بازی باشید تا بتونید این کار رو انجام بدید. می‌تونید منتظر دور بعدی بمونید؟"
+# the rules, presented when someone hasn't played the game yet or runs /game_rules
+rules: "<b>آفتاب پرست - بازی</b><i>(قوانین پارسی، خلاصه شده برای ربات تلگرام)</i>\n\n
+• بعد از اینکه بازی شروع شد، یکی از بازیکنان، آفتاب پرست و دیگران، بازیکن ساده میشن\n
+• یک موضوع و یک لیست از کلمه‌های مربوط به لیست نمایش داده شده و یک دکمه پایین آن خواهد بود\n
+• اگر شما بازیکن ساده باشید و دکمه رو بزنید، یکی از کلمه‌های لیست (کلمه‌ی مخفی) به شما نمایش داده می‌شود - البته همه‌ی بازیکن‌های ساده همین کلمه رو می‌بینند. ولی اگر آفتاب پرست باشید، به جای کلمه‌ی مخفی، جمله‌ای در مورد آفتاب پرست بودن خواهید دید\n
+• حالا ربات، نوبت به نوبت توصیفی درباره‌ی کلمه‌ی مخفی می‌پرسه.\n
+• اگر بازیکن ساده بودید، سعی کنید کلمه‌ی مخفی رو به روشی توصیف کنید که آفتاب پرست نتونه کلمه رو حدس بزنه، ولی بازیکنان دیگر بفهمن که شما آفتاب پرست نیستید\n
+• اگر آفتاب پرست بودید، باید بر اساس اطلاعات محدودی که دارید، توصیفی در مورد کلمه‌ی مخفی بدهید. سعی کنید با توصیف‌هاتون هم‌رنگ جماعت بشید!\n
+• بعد از اینکه همه توصیف‌هاشون رو گفتند، باید به کسی که فکر می‌کنن آفتاب پرسته، رای بدن. کسی که بیشترین رای رو بیاره، نقابش برداشته میشهn
+• اگر کسی که نقابش برداشته شد یک بازیکن ساده بود، آفتاب پرست برنده میشه!
+• اگر کسی که نقابش برداشته شد آفتاب پرست بود، باید کلمه‌ی مخفی رو حدس بزنه. اگر حدسش درست باشه، باز هم برنده میشه، در غیر این صورت بازیکنان دیگر برنده میشن!"
+# introduction when there is a new player, prepended to the rules
+rules_prepend: "سلام سلام، بازیکن(های) جدید داریم. بازی تا 30 ثانیه شروع میشه، اجازه بدید سریع قوانین رو به تازه وارد(ها) بفرستم:\n\n"
+# used in the strings below
+here: "اینجا"
+# the deck command reply
+# {0} and {1} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+deck: "دسته‌ها مجموعه‌ای از \"کارت‌ها\" هستند. می‌تونید دسته‌های جدید ساخته یا نمونه‌های موجود رو تغییر بدید. دسته‌ها درواقع فایل‌های ساده‌ی json هستند. در صورتی که می‌خواهید دسته جدیدی ایجاد کنید، حواستون باشه باید دو کلید رو تغییر بدید: زبان و نام. منظور از «زبان»، زبانیست که دسته در آن قرار دارد و «نام»، همان نام دسته‌ی شماست. جفتشون باید با حروف بزرگ باشن. در داخل فایل json، کلیدهایی تعریف می‌کنید که موضوع کلمات هستن و سپس لیستی از کلمات متناسب ایجاد می‌کنید. فقط حروف رشته‌ای (string) در لیست مجاز هستند. 16 کلمه در هر موضوع توصیه میشه، ولی اجباری نیست. می‌تونید نمونه‌های واقعی در {0} رو بررسی کنید و اگر سوالی دارید یا می‌خواهید فایل رو ارسال کنید، به {1} مراجعه کنید."
+# the translation command reply
+# {0} - {2} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+translation: "می‌تونید کل ربات رو ترجمه کنید :O فایل‌های ترجمه از نوع .yaml هستند. این فایل‌ها باید در هر نرم‌افزار ویرایشگر متن ساده‌ای قابل ویرایش باشن، اما من Notepad ++ رو پیشنهاد می‌کنم :) وقتی که فایل پایه رو دانلود کردید (توصیه میشه زبان en رو دانلود کنید، چون همیشه به‌روزترین زبانه)، نام فایل رو به کد ISO 639-1 زبان خود تغییر بدید. کد دو حرفی توصیه میشه، ولی اجباری نیست. قسمت‌های بین نقل و قول دو تایی رو ترجمه کنید. در صورتی که می‌خواهید از خود علامت نقل و قول در رشته‌های خود استفاده کنید، به این روش عمل کنید: <code>\\\"</code>. به آکولادها و اعداد داخل آن‌ها را دست نزنید. قالب‌بندی تلگرام با تگ‌های html پشتیبانی میشن و همونطور که در {1} شرح داده شده، کار می‌کنند. بعد از پایان ترجمه، به ما در {2} بپوندید و فایل رو ارسال کرده یا سوالتون رو بپرسید."
+# if the group id is not known. Can happen if someone obfuscates the start command or the groups id changed while the bot is offline
+group_not_found: "متاسفانه نمی‌تونم گروه شما رو در پایگاه داده‌ی خود پیدا کنم. یا شما یه حرکت اشتباه انجام دادید، یا مشکل از من بوده که آفلاین بودم. در این صورت، دوباره دستور /settings رو بفرستید :)"
+# start message in private
+greeting_private: "سلام، من ربات آفتاب پرست هستم :) می‌تونید با من آفتاب پرست بازی کنید، فقط کافیه من رو به گروهتون اضافه کنید. اگر قصد دارید زبانی که من در پیام خصوصی استفاده می‌کنم رو عوض کنید، دستور /language رو بفرستید و همچنین لبخند زدن رو فراموش نکنید. حداقل هر چند وقت یک بار :)"
+# help message in group.
+help_group: "سلام، به کمک نیاز دارید؟ بسیار عالی. من در اصل فقط سه دستور در گروه‌ها دارم که ممکنه بهشون نیاز پیدا کنید:\n/start - شروع یک بازی\n/settings - [فقط مخصوص مدیران در سوپر گروه‌ها] تغییر تنظیمات من در یک گروه\n/nextgame - افزودن (یا حذف) شما از لیست بازی بعدی گروه. اگر عضو بازی بعدی شده باشید، وقتی بازی شروع شد بهتون اطلاع خواهم داد\n\nجدا از اینا، من به این دستورات هم پاسخ میدم:\n/abort_game - [فقط مخصوص مدیران سوپر گروه‌ها] قطع کردن یک بازی اگر بازی‌ای در حال اجرا باشد\n/admins_reload - از آنجایی که مدیران در هر یک ساعت ذخیره می‌شوند، شاید ربات شما رو به عنوان مدیر نشناسد و نیاز باشه این دستور رو اجرا کنید :O\n/id - نمایش شناسه‌ی عددی گروه\n\nاگر در مورد هر چیزی به کمک انسانی نیاز دارید کافیست به ما در @TheChameleonSupport بپیوندید. ما خوشحال خواهیم شد که شما رو کمک کنیم."
+# help message in private.
+help_private: "سلام، به کمک نیاز دارید؟ بسیار عالی. من به این دستورات در گفتگوی خصوصی پاسخ میدم:\n/language تغییر زبانی که من در پیام خصوصی استفاده می‌کنم\n/settings_help - کمک به شما در مورد تنظیمات گروه\n/translation - نمایش یک پیام راهنما در مورد نحوه‌ی ترجمه کردن ربات\n/deck - نمایش یک پیام راهنما در مورد نحوه‌ی افزودن دسته‌ی خودتان\n\nاگر در مورد هر چیزی به کمک انسانی نیاز دارید، کافیه به ما در @TheChameleonSupport بپیوندید. خوشحال خواهیم شد که شما رو کمک کنیم."
+# message which gets send to people in private when a new game is started and they are on the nextgame list
+# {0} group name
+nextgame: "سلام. یک بازی جدید همین الان تو گروه {0} شروع شد و شرط می‌بندم که اونا خوشحال میشن که شما هم تو بازی شرکت کنید."
+# message which gets send to people in private which used the /nextgame command and weren't in the list before
+# {0} group name
+nextgame_added: "سلام. شما به لیست بازی بعدی گروه {0} اضافه شدید، وقتی بازی جدید شروع شد، بهتون اطلاع خواهم داد. به محض اینکه با موفقیت در یک بازی شرکت کنید، شما رو از این لیست حذف کرده و پیام‌های غیر ضروری بیشتری براتون نمی‌فرستم :) اگر می‌خواهید خودتون رو از لیست بازی بعدی حذف کنید، کافیه دستور /nextgame رو دوباره در گروه بفرستید"
+# message which gets send to people in private which used the /nextgame command and were in the list before
+# {0} group name
+nextgame_removed: "شما از لیست بازی بعدی گروه {0} حذف شدید"
+# message which gets send to people in the group when they used /nextgame and haven't pmed the bot yet
+nextgame_pm: "سلام، قبل از استفاده از این دستور، باید دستور /start رو به صورت پیام خصوصی برای من بفرستید. برای این کار دکمه‌ی زیر رو انتخاب کنید."
+# message which gets send to people in the group when they used /nextgame and blocked the bot (wtf)
+nextgame_block: "عی، اگر می‌خواهید من بهتون پیام بدم، نباید منو بلاک کنید. لطفا من رو از مسدودیت خارج و دوباره تلاش کنید..."
+# message which gets send if someone uses the /settings_help command
+settings_help: "از اونجایی که تنظیمات مخصوص گروه تعدادشون زیاده، اونا رو تقسیم به چند بخش کردیم. از دکمه‌های زیر برای دیدن دستورات دیگه استفاده کنید."
+# the following strings are explanations for the settings, triggered by the command above
+language_help: "<b>زبان</b>: زبان من در گروهتون رو تغییر بدید. اگر می‌خواهید درباره‌ی ترجمه ربات به زبان خودتون بدونید، دستور /translation رو بفرستید"
+deck_help: "<b>دسته</b>: دسته کارت‌هایی که در گروهتون ازشون استفاده می‌کنم. کارت‌ها معمولا شامل 16 کلمه متفاوت بوده و متعلق به یک موضوع خاص هستند. من یک موضوع رو به صورت تصادفی انتخاب کرده و یک کلمه‌ی مخفی رو هم به صورت تصادفی از اون موضوع برای هر راند تعیین می‌کنم. اگر می‌خواهید دسته‌ی خود رو اضافه کنید، دستور /deck رو بفرستید."
+fewer_help: "<b>کمتر</b>: اگر فقط سه بازیکن در حال بازی باشند (و این گزینه فعال باشد) زمانی که نقاب آفتاب پرست برداشته شود، می‌تواند دو بار برای حدس زدن کلمه‌ی مخفی تلاش کند."
+more_help: "<b>بیشتر</b>:اگر 7 یا 8 بازیکن در حال بازی باشند (و این گزینه فعال باشد)، زمانی که همه‌ی بازیکنان کلمه‌شون رو گفتند، لیست کلمات ناپدید می‌شود. این کار حدس زدن کلمه‌ی مخفی رو برای آفتاب پرست سخت‌تر می‌کند."
+tournament_help: "<b>مسابقه</b>: اگر این حالت فعال باشد، یک سیستم امتیازدهی شروع می‌شود. اگر آفتاب پرست نقابش برداشته نشود، دو امتیاز دریافت می‌کند. اگر شناسایی شود و کلمه‌ی مخفی رو درست حدس بزند، یک امتیاز دریافت می‌کند. در غیر این دو صورت، هر بازیکن دو امتیاز دریافت خواهد کرد. اولین بازیکنی که امتیازش به 5 برسد، برنده‌ی مسابقه می‌شود."
+pin_help: "<b>سنجاق</b>: اگر این حالت فعال باشد، به محض شروع بازی، به طور بی‌صدا لیست کلمات رو سنجاق می‌کنم تا بازیکنان راحت‌تر لیست رو پیدا کنند. بعد از اینکه بازی به اتمام رسید، دوباره به طور بی‌صدا پیام سنجاق شده‌ی قبلی رو (در صورت وجود) سنجاق می‌کنم. برای فعال‌سازی این حالت، باید من رو مدیر گروه کرده و دسترسی سنجاق کردن به من بدهید."
+restrict_help: "<b>محدودیت</b>: اگر این حالت فعال باشد، من همه رو به جز کسی که باید حرف بزند، از نوشتن محدود می‌کنم. بعد از اینکه نوبت اون شخص تمام شد، همه می‌تونن دوباره صحبت کنند. برای این کار، من شخصی که نوبتشه رو مدیر با دسترسی افزودن عضو می‌کنم (چون مدیران محدودیت نوشتن ندارند). بعد از اینکه بازی به اتمام رسید، بعد از هر مرحله، دسترسی‌های اصلی گروه بازیابی خواهند شد. برای فعال‌سازی این حالت، باید من رو مدیر گروه کرده و دسترسی‌های افزودن مدیر جدید، محدود کردن اعضا و افزودن عضو را به من بدهید. دلیلش رو می‌تونید اینجا مطالعه کنید: https://t.me/TheChameleonSupport/8\n<i>توجه:</i> در صورت فعال بودن این حالت، همه‌ی پیام‌ها به عنوان ورودی شمرده شده و تنظیمات علامت تعجب به طور کامل نادیده گرفته می‌شود."
+exclamation_help: "<b>علامت تعجب</b>: علامت تعجب بخش مهمی از نحوه‌ی بازی در گروه شماست. به طور پیشفرض، این حالت غیر فعال است، یعنی پیام‌هایی که با علامت تعجب شروع نمی‌شوند، به عنوان ورودی در نظر گرفته می‌شوند، ولی پیام‌هایی که با علامت تعجب شروع می‌شوند نادیده گرفته خواهند شد. این شکلی، بازی طبیعی‌تر شده و بازیکنان می‌تونن جلوی ورودی‌های نامرتبط رو بگیرند. با فعال کردن این حالت، همه چیز برعکس شده و فقط پیام‌هایی که با علامت تعجب شروع می‌شوند، به عنوان ورودی در نظر گرفته خواهند شد. این حالت یکم عجیبه، ولی به طور موثری جلوی ورودی‌های نادرست رو خواهد گرفت.\n<i>توجه:</i> وقتی حالت محدودیت فعال باشد، این تنظیمات نادیده گرفته می‌شوند."
+# the following strings are for stats
+# these will be for private persons, accessible with the inline mode of the bot
+# if someone who has not played the game yet tries to get their stats
+# this will be the title of the result
+private_stats_title: "آمار خود را دریافت کنید"
+# this will be the description
+private_stats_description: "فقط روی این گزینه کلیک کنید. متنی که نوشتید مهم نیست"
+# this will be the actual message when they press on the result
+private_stats_text: "<b>آمار {0}</b>\n\nتعداد بازی‌ها: {1} (رتبه‌ی {11} بین {17} بازیکن)\nتعداد بردها: {2} ({3} درصد از کل بازی‌ها)\nتعداد باخت‌ها: {4}\nاولین بازیکن: {5} ({6} درصد از کل بازی‌ها)\n\nتعداد مسابقات: {12} (رتبه‌ی {18})\nتعداد بردها در مسابقات: {13} ({14} درصد از کل مسابقات)\nتعداد باخت‌ها در مسابقات: {15}\n\nتعداد دفعات آفتاب پرست بودن: {7} ({8} درصد از کل بازی‌ها)\nتعداد بردها به عنوان آفتاب پرست: {9} ({10} درصد از بازی‌هایی که آفتاب پرست بودی، {16} درصد از کل بازی‌هایی که بردی)"
+# these are for people playing before the 4. February, where chameleon won was introduced
+# this will be added to the inline message
+private_old_stats: "\n\n پ.ن.: شما قبل از 4 فبریه 2020 هم چند بار بازی کردید، پس آمار کلی شما یکم فرق داره. برای کسب اطلاعات بیشتر لطفا دستور /stats رو در پیام خصوصی بفرستید."
+# this will be on the button under the inline result
+private_old_button: "آمار قدیمی"
+# and this to the /stats command
+private_old_stats_command: "\n\n\nشما مدت زمان زیادیه که با این ربات بازی می‌کنید. حتی قبل از 4 فبریه 2020 که باعث میشه آمار کلی شما یکم بیشتر از مقدارهای نمایش داده شده باشه. دلیل این اتفاق، اضافه شدن «تعداد بردها به عنوان آفتاب پرست» در این تاریخه و برای نگه داشتن آمار قدیمی همراه با آمار جدید، این سیستم طراحی شد. آمار قبلی شما به این صورته:\nقبل از 4 فبریه، شما:\n\n{0} بازی انجام دادید (پس در کل {1} بازی)\n{2} بازی بردید (پس {3}% تا قبل از 4 فبریه و در کل {4} - یعنی {5} درصد)\n{6} بازی باختید ({7} بازی در کل)\n{8} اولین بازیکن بودی ({9} درصد قبل از 4 فبریه، {10} بار در کل - {11} درصد)\n{12} بار آفتاب پرست بودی ({13} درصد قبل از 4 فبریه، {14} بار در کل - {15} درصد)\n\nهمانطور که می‌بینید، تعداد مسابقات و تعداد بازی‌های شروع شده تو این آمار تغییری نکردن (چون جداگانه شمرده می‌شدند)"
+# about groups stats
+group_stats: "این گروه {0} بازی انجام داده (رتبه‌ی {2} بین {3} گروه) و {1} مسابقه برگزار کرده (رتبه‌ی {4}) \\o/"
+# when someone presses the join button while the game is starting
+join_while_starting: "بازی از قبل شروع شده، متاسفم. این دکمه تا چند لحظه‌ی دیگه حذف خواهد شد."
+# when someone presses an old join button while a different game is running
+join_old_button: "این دکمه یکم قدیمیه، لطفا از دکمه‌ی بازی فعلی استفاده کنید."
+# when someone leaves but the bot faces a flood error
+player_leaves_query_flood: "شما از بازی خارج شدید!\n\nمن در حال حاضر محدودیت ارسال پیام دارم و نمی‌توانم پیامم رو ویرایش کنم، ولی بهتون اطمینان میدم که از بازی خارج شدید."
+# when someone joins but the bot faces a flood error
+player_joins_query_flood: "شما وارد بازی شدید!\n\nمن در حال حاضر محدودیت ارسال پیام دارم و نمی‌توانم پیامم رو ویرایش کنم، ولی بهتون اطمینان میدم که وارد بازی شدید."
+# when someone joins, already got the callback answered, but the game started before he was added to the list
+# {0} mention of the player
+player_joins_while_starting: "متاسفانه یکم دیر وارد بازی شدید {0}، این بازی رو از دست دادید."
