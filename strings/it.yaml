@@ -1,0 +1,264 @@
+# put the people who worked on the translation here if you/they want to.
+authors:
+  - "@poolitzer"
+# put the name of your language here, in their native translation
+language: "Italiano"
+# send when the bot gets added to a group
+greeting: "Ciao. Sono The Chameleon Bot, un bot di telegram che ha portato il gioco The Chameleon in questo gruppo! Per cambiare le mie impostazioni, puoi usare il comando /settings (nei supergruppi solo gli amministratori possono usarlo). Oppure usa il comando /start per iniziare una partita con me :)"
+# when a game is started with /start in a group.
+# {0} mention of the player who started the game, {1} list of mentions for joined player, {2-8} settings, either the deck name or activate or deactivate (see below)
+start_game: "{0} ha iniziato una partita. Stai giocando con le seguenti impostazioni:\n\n<b>Mazzo:</b> {2}\n<b>Fewer:</b> {3}\n<b>More: </b>{4}\n<b>Pin: </b>{5}\n<b>Torneo: </b>{6}\n<b>Restrizione: </b>{7}\n<b>Punto Esclamativo: </b>{8}\n\nIniziamo!\n\n#Giocatori:\n{1}"
+# the button beneath the message above
+start_button: "Partecipa/Abbandona"
+# if the setting above is activated
+activated: "Attivo"
+# if the setting above is deactivated
+deactivated: "Disattivo"
+# the pop-up a player gets when pressing on the button above
+player_joins_query: "Sei entrato in partita!"
+player_leaves_query: "Hai lasciato la partita!"
+# the pop-up a player gets when he presses the button above but no join process is running (might happen when the bot has an unexpected shutdown)
+join_no_game_running: "Scusa, questo pulsante non dovrebbe trovarsi qui. Per favore usa il comando /start per iniziare una partita."
+# the text appearing in the group once a player leaves/joins and the timer "runs out"
+# {0} mention of player(s)
+player_joins_text: "{0} è entrato in partita. "
+player_leaves_text: "{0} ha abbandonato la partita. "
+# the text in addition to the one above
+# {0} if more then three players, start from below; otherwise fail
+player_action_text: "Se nessuno entra o esce entro 30 secondi, il timer si azzererà e la partita {0}"
+# see above
+start: "inizia :)"
+fail: "termina :("
+# the message when someone presses /start while a game is running
+game_running: "Una partita è già in corso, per favore attendi finchè non finisce."
+# the message when a game failed (30 second timer runs out and not three people joined)
+game_failed: "Scusa, non ci sono abbastanza giocatori."
+# the message when a game starts
+# {0} the topic/dictionary key, {1} the list of the words
+game_succeed: "La partita è iniziata!\n<b>Tema:</b>\n{0}\n<b>Parole:</b>\n{1}"
+# the button beneath the message above
+play_button: "Mostra la parola segreta"
+# the pop-up the chameleon gets when pressing the button above
+player_is_chameleon: "Sei il camaleonte. Buona fortuna!"
+# the pop-up the ordinary player gets when pressing the button above
+# {0} the secret word
+secret_word: "La parola segreta è {0}"
+# the pop-up the player gets when pressing the button above and this game is not running (might happen when the bot has an unexpected shutdown)
+wrong_game: "Scusa, la partita a cui stai partecipando sembra non essere questa. Per favore trova l'ultimo mio messaggio con questo pulsante e premilo :)"
+# the message appearing after the message above, asking for the first word
+# {0} mention of the player
+first_player_say_word: "{0}, sei il primo a fornire una parola. Per favore scrivi la parola"
+# the message asking every player to send a message, one after another
+# {0} mention of the player, {1} word list, consisting of the player name: players word(s), {2} the message below or nothing
+more_players_say_word: "Grazie. Adesso, è il tuo turno, {0}.{2}\n\nLista parole attuale:\n{1}"
+# this will get attached to the previous two messages in case the game is not in restricted mote
+exclamation_deactivated: "Per continuare a conversare, aggiungi ! all'inizio del tuo messaggio. In questo modo non verrà conteggiato come parola"
+exclamation_activated: "Per inviare la tua risposta, per favore metti il ! all'inizio del tuo messaggio. Ogni altro messaggio verrà ignorato dal bot, così puoi continuare a conversare"
+# the message before the voting, showing the final word list
+# {0} final word list
+final_word_list: "Ultima lista parole, si deve votare il giocatore (Camaleonte o non) da smascherare:\n\n{0}"
+# the message asking to vote, buttons with the names beneath
+# {0} vote list, consisting of mentions of the players: number of votes
+vote_list: "Ricorda, puoi votare solo una volta e non puoi cambiare il tuo voto.\nGiocatori che non hanno ancora votato:\n\n{0}"
+# the pop-up for a successful vote
+voted: "Il tuo voto è stato registrato :)"
+# the pop-up for someone trying to vote again
+already_voted: "Hai già votato!"
+# the pop-up for someone pressing his own name (no suicide here) while voting
+vote_yourself: "Non puoi votare te stesso!"
+# when a draw happens after everyone votes, the first player who had to say a word can decide who gets unmasked. Buttons with player names are attached
+# {0} mention of the starter, the player who has to said the first word
+draw: "{0}, c'è un pareggio. Poichè hai lo svantaggio di aver iniziato per primo a fornire la parola, puoi decidere chi smascherare"
+# if someone who is not the starter (see above) presses one of the buttons
+not_starter: "Tu non hai iniziato per primo, non fare il furbo con me!"
+# if the chameleon wasn't found
+# {0} mention of the player unmasks, {1} mention of the chameleon, {2} secret word
+chameleon_not_found: "{0} è stato smascherato, ma <b>non</b> era lui, il Camaleonte è {1}! Il Camaleonte ha vinto! La parola segreta era <b>{2}</b>."
+# if the chameleon was found
+# {0} mention of the chameleon
+chameleon_found: "{0} è stato smascherato ed era il Camaleonte! Adesso puoi provare ad indovinare la parola segreta."
+# if the chameleon was found and only three players are there (and this is activated in the setting)
+# {0} mention of the chameleon
+chameleon_found_fewer: "{0} è stato smascherato ed era il Camaleonte! Poichè ci sono solo tre giocatori, hai due tentativi (gli admin possono disattivare questa modalità nelle impostazioni)."
+# if the chameleon was found and 7 or 8 players are there
+# {0} mention of the chameleon
+chameleon_found_more: "{0} è stato smascherato ed era il Camaleonte! Poichè ci sono più di 6 giocatori, la lista parole non è visibile (gli admin possono disattivare questa modalità nelle impostazioni)"
+# this replaces the word/topic from the list
+hidden: "nascosto"
+# if the chameleon guesses wrong and has a second guess
+# {0} mention of the chameleon
+chameleon_guess_wrong_fewer: "Scusa {0}, non hai indovinato. Riprova ;)"
+# if the chameleon guesses wrong
+# {0} mention of the chameleon, {1} secret word
+chameleon_guess_wrong: "Scusa {0}, non hai indovinato, la parola era <b>{1}</b>. Il camaleonte ha perso, i giocatori hanno vinto!"
+# if the chameleon guesses correctly
+# {0} mention of the chameleon
+chameleon_guess_right: "Ottimo lavoro {0}, hai indovinato la parola! Il camaleonte ha vinto, i giocatori hanno perso!"
+# if the chameleon guesses wrongly, but the spellchecker corrects it to the right word (comes in handy by games where the keyboard isn't given
+# {0} mention of the chameleon
+chameleon_guess_corrected: "Ottimo lavoro {0}, hai indovinato la parola... beh, ad essere onesti non era la parola che hai scritto. Il mio correttore automatico l'ha corretta per te. Prego, hai vinto! :P"
+# when a tournament ends, but no winner yet, so another round is started
+tournament_end: "La partita è conclusa, ma non c'è ancora un vincitore del torneo, dunque un'altra partita sta iniziando. Attuale punteggio del torneo:\n{0}\n<b>Tema:</b>\n{1}\n<b>Parole:</b>\n{2}"
+# when a tournament ends and there is only one winner
+# {0} winner mention, {1} winner points, {2} other player mentions + points
+tournament_end_one: "Il torneo si è concluso \\o/\n\nIl vincitore è {0} con <b>{1}</b> punti.\n\nAltri concorrenti:\n{2}"
+# when a tournament ends with several winners
+# {0} winner mentions + points, {1} other player mentions + points
+tournament_end_several: "Il torneo si è concluso \\o/\n\nI vincitori sono:\n{0}\n\nAltri concorrenti:\n{1}"
+# when an admin aborts a running/starting game
+abort_game: "Partita interrotta"
+# when someone tries to to abort a game when none is running/starting
+no_game_running: "Scusa, non puoi interrompere una partita non iniziata"
+# when a non admin tries to abort a running/starting game
+no_admin_abort: "Devi essere admin per interrompere una partita in corso"
+# when a shutdown gets initiated, this message is send to the active players as a warning
+init_shutdown: "Scusate per l'inconveniente, verrò spento tra 5 minuti. Questo significa che la partita a cui state giocando verrà annullata se non verrà finita in tempo. Per favore visita @TheChameleon per maggiori informazioni."
+# when a shutdown gets initiated and players are still playing (smh)
+run_shutdown: "Sono passati i 5 minuti, sono dispiaciuto la partita è stata annullata. :("
+# when a shutdown is initiated and players want to start a new game
+group_start_shutdown: "Scusa per l'inconveniente, ma devo spegnermi. Per favore visita @TheChameleon per maggiori informazioni."
+# when a non admin tries to change group settings
+no_admin_settings: "Devi essere admin per cambiare le impostazioni. Se sei già un admin e ricevi questo avviso, usa il comando /admins_reload."
+# when a cache reload is issued
+admins_reload: "Lista admin aggiornata!"
+# when an admin has not PMed the bot yet
+no_pm_settings: "Devi avviare il bot in privato per cambiare le impostazioni nel gruppo. Premi il pulsante sottostante"
+# the button mentioned above
+no_pm_settings_button: "Avvia"
+# when an admin has PMed the bot, but blocked it (wtf??)
+admin_blocked_bot: "Non posso inviarti un messaggio privato poichè mi hai bloccato. Per favore sbloccami e riprova."
+# the setting message admins of groups greet greeted with in PM
+# {0} is the name of the group, a link if the group has an username
+group_setting_text: "Ehi, vuoi cambiare le mie impostazioni nel tuo gruppo {0}, perfetto. Per capire meglio le mie impostazioni, usa il comando /settings_help. Puoi premere il pulsante aggiorna, per aggiornare le impostazioni. Usalo nel caso in cui pensi che un altro admin abbia cambiato le impostazioni."
+# the buttons for group settings. Only translate the strings!
+group_setting_buttons:
+  refresh: "Aggiorna"
+  language: "Lingua"
+  deck: "Mazzo"
+  fewer: "Fewer"
+  more: "More"
+  tournament: "Torneo"
+  pin: "Pin"
+  exclamation: "Punto Esclamativo"
+  restrict: "Restrizione"
+# shown to the user when he presses refresh in the settings
+group_setting_refresh: "Le impostazioni sono state aggiornate!"
+# change language of a group
+# {0} is the current language
+group_setting_languages: "La lingua attuale utilizzata nel gruppo è <b>{0}</b>. Seleziona la lingua che vuoi con cui vuoi giocare.\n\nNel caso in cui tu voglia tradurre il bot in un'altra lingua o segnalare un errore, usa il comando /translation"
+# change deck of a group
+# {0} is the current language
+group_setting_deck_language: "Seleziona il mazzo che vuoi usare. La scelta del mazzo dovrebbe essere consona alla lingua selezionata, <b>{0}</b> è la lingua selezionata nel tuo gruppo."
+# {0} is the current deck
+group_setting_decks: "Il mazzo attualmente in uso è <b>{0}</b>. Seleziona il mazzo da cambiare.\n\nNel caso in cui tu voglia creare un mazzo o segnalare un errore, usa il comando /deck"
+# activate fewer setting of group
+group_setting_fewer_activate: "L'impostazione fewer è attiva!"
+# deactivate fewer setting of group
+group_setting_fewer_deactivate: "L'impostazione fewer è disattiva!"
+# activate more setting of group
+group_setting_more_activate: "L'impostazione more è attiva!"
+# deactivate more setting of group
+group_setting_more_deactivate: "L'impostazione more è disattiva!"
+# activate tournament mode of group
+group_setting_tournament_activate: "La modalità torneo è attiva!"
+# deactivate tournament mode of group
+group_setting_tournament_deactivate: "La modalità torneo è disattiva!"
+# activate pin setting of group
+group_setting_pin_activate: "L'impostazione pin è attiva!"
+# deactivate pin setting of group
+group_setting_pin_deactivate: "L'impostazione pin è disattiva!"
+# being an admin which can pin is required
+group_setting_pin_required: "Necessito di essere admin nel gruppo per attivare l'impostazione pin"
+# activate restrict mode of group
+group_setting_restrict_activate: "La modalità restrizione è attiva!"
+# deactivate restrict mode of group
+group_setting_restrict_deactivate: "La modalità restrizione è disttiva!"
+# being an admin which can restrict member is required
+group_setting_restrict_required: "Necessito di essere admin, il quale può aggiungere membri, promuovere admin e limitare gli utenti, per attivare questa modalità"
+# activate exclamation setting of group
+group_setting_exclamation_activate: "Attivo, vengono considerati i messaggi preceduti dal !"
+# deactivate exclamation setting of group
+group_setting_exclamation_deactivate: "Disattivo, vengono considerati i messaggi non preceduti dal !"
+# if an error happens somewhere, we tell the user about it
+error: "Ehi. Mi dispiace informarti che ho riscontrato un errore nel gestire la tua richiesta. I miei sviluppatori saranno notificati."
+# if a user wants to change their language
+# {0} name of their current language
+private_language: "Ehi. La lingua attuale è {0}, seleziona la lingua che vuoi usare premendo i pulsanti sottostanti :)"
+# if a user changed their language
+# {0} name of their selected language
+private_language_selected: "Perfetto, {0} è da ora attivo!"
+# if a random idiot presses buttons
+user_not_in_game: "Ehi, devi partecipare alla partita per portelo fare!. Magari la prossima partita?"
+# the rules, presented when someone hasn't played the game yet or runs /game_rules
+rules: "<b>Chameleon - il gioco</b> <i>(regole italiane, semplificate per il bot telegram)</i>\n\n• Dopo l’inizio della partita, ad un giocatore viene assegnato il ruolo di Camaleonte, gli altri rimangono semplici giocatori.\n• Viene mostrato un tema ed una lista di parole con un bottone sottostante.\n• Se sei un semplice giocatore e premi il bottone, ti verrà mostrata una parola (la parola segreta) - tutti i giocatori eccetto il Camaleonte vedranno la stessa parola. Al Camaleonte invece, verrà notificato il suo ruolo.\n• Il bot chiederà ad ogni giocatori una descrizione della parola segreta.\n• Se sei un semplice giocatore, cerca di descrivere la parola in modo che il Camaleonte non possa indovinarla, facendo però capire agli altri giocatori che non sei il Camaleonte.\n• Se sei il Camaleonte devi descrivere la parola basandoti sulle risorse limitate che hai a tua disposizione. Prova a mimetizzarti con la tua scelta!\n• Dopo che tutti i giocatori avranno fatto una descrizione, i giocatori dovranno votare chi pensano sia il Camaleonte, il giocatore che ottiene più voti viene smascherato!\n• Se il giocatore smascherato è un semplice giocatore, il Camaleonte vince!\n• Se il giocatore smascherato è il Camaleonte, gli verrà data la possibilità di indovinare la parola segreta, se riuscirà a farlo, vincerà, altrimenti vinceranno gli altri giocatori."
+# introduction when there is a new player, prepended to the rules
+rules_prepend: "Salve, pare ci siano nuovi giocatori. La partita inizierà tra 30 secondi, lasciami presentare le regole:\n\n"
+# used in the strings below
+here: "qui"
+# the deck command reply
+# {0} and {1} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+deck: "I mazzi sono collezioni di 'carte'. Puoi creare nuovi mazzi o cambiare quelli esistenti. Sono semplici file json. Nel caso tu crei un nuovo mazzo, tieni presente che devi passare due chiavi: lingua e nome. Language è la lingua in cui si trova il mazzo, name il nome del tuo mazzo. Mettete entrambi in maiuscolo. All'interno del file json, si definiscono le chiavi, che sono l'argomento delle parole, e poi si crea una lista con le parole appropriate. Solo le stringhe sono permesse nella lista. 16 parole per argomento sono raccomandate, ma non richieste. Puoi guardare le implementazioni attuali {0} e unirti a noi {1} nel caso tu abbia domande o voglia inviare un file."
+# the translation command reply
+# {0} - {2} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+translation: "Puoi tradurre l'intero bot :O I file sono file .yaml, dovrebbero essere compatibili con ogni editor di testo, ti consiglio di usare Notepad ++ :) Se accetti davvero questa sfida, puoi trovare le traduzioni esistenti {0}. Una volta che hai scaricato il file di base (en è raccomandato, poiché è sempre il file più aggiornato), rinominalo con il codice ISO 639-1 della tua lingua. Quello di due lettere è raccomandato, ma non imposto. Traducete le parti tra le virgolette. Nel caso tu voglia usare effettivamente le virgolette nelle tue stringhe, fai l'escape in questo modo: <code>\\\"</code> . Lascia che le parentesi graffe rimangano e non cambiare il loro numero. La formattazione di Telegram è supportata dai tag html, funzionano come descritto {1}. Quando hai finito, unisciti a noi {2} per inviare questo file o per fare altre domande."
+# if the group id is not known. Can happen if someone obfuscates the start command or the groups id changed while the bot is offline
+group_not_found: "Ehi, mi dispiace, ma non riesco a trovare il tuo gruppo nel mio database. O stai smanettando qui, o è colpa mia perché ero offline. In questo caso, esegui di nuovo il comando /settings nel tuo gruppo :)"
+# start message in private
+greeting_private: "Ehi, sono The Chameleon Bot :) Puoi giocare al gioco The Chameleon con me, basta aggiungermi al tuo gruppo. Se vuoi cambiare la lingua con cui ti parlo in privato, premi /language. E non dimenticare di sorridere. Almeno una volta ogni tanto."
+# help message in group.
+help_group: "Ehi, vuoi un aiuto, bene. Fondamentalmente ho solo tre comandi nei gruppi di cui potresti aver bisogno:\n/start - inizia una partita\n/settings - [solo gli amministratori nei supergruppi] cambia le mie impostazioni nel gruppo\n/nextgame - ti aggiunge (o rimuove) dalla lista nextgame del gruppo. Oltre a questo, rispondo anche a questi comandi:\n/abort_game - [solo gli amministratori nei supergruppi] interrompe una partita se ce n'è una in corso\n/admins_reload - dato che gli admin sono memorizzati nella cache per un'ora, potresti volerlo eseguire se il bot non ti riconosce come admin, o non dovrebbe più farlo: O\n/id - mostra l'id del gruppo in cui lo usi. Nel caso tu abbia bisogno di un ulteriore aiuto, scrivici su @TheChameleonSupport. Saremo felici di aiutarti."
+# help message in private.
+help_private: "Ehi tu, vuoi un aiuto, bene. Rispondo ai seguenti comandi in privato:\n/language - cambia la lingua con cui ti parlo nella chat privata\n/settings_help - ti aiuta a capire le impostazioni del gruppo\n/translation - ti mostra un messaggio di aiuto su come fare le traduzioni\n/deck - ti mostra come aggiungere il tuo deck\n Nel caso tu abbia bisogno di un ulteriore aiuto, scrivici su @TheChameleonSupport. Saremo felici di aiutarti."
+# message which gets send to people in private when a new game is started and they are on the nextgame list
+# {0} group name
+nextgame: "Ehi tu. Una nuova partita è appena iniziata nel gruppo {0} e scommetto che vorresti partecipare alla partita."
+# message which gets send to people in private which used the /nextgame command and weren't in the list before
+# {0} group name
+nextgame_added: "Ehi. Sei stato aggiunto alla lista d'attesa nel gruppo {0}, Ti notificherò non appena inizerà una nuova partita. Appena parteciperai ad una nuova partita, ti rimuoverò da questa lista (così non ti invierò ulteriori messaggi non necessari) :). Nel caso tu voglia rimuoverti dalla partita, usa nuovamente il comando /nextgame nel gruppo, ti rimuoverò dalla partita."
+# message which gets send to people in private which used the /nextgame command and were in the list before
+# {0} group name
+nextgame_removed: "Sei stato rimosso dalla lista d'attesa del gruppo {0}"
+# message which gets send to people in the group when they used /nextgame and haven't pmed the bot yet
+nextgame_pm: "Ehi. Per usare questo comando, occore che tu mi scriva in privato. Premi il pulsante sottostante."
+# message which gets send to people in the group when they used /nextgame and blocked the bot (wtf)
+nextgame_block: "Ehi. Se vuoi che io ti scriva in privato, non dovresti bloccarmi. Sbloccami e riprova..."
+# message which gets send if someone uses the /settings_help command
+settings_help: "Ehi, dato che ci sono molte impostazioni, sono state suddivise. Usa i pulsanti sottostanti per interagire con me."
+# the following strings are explanations for the settings, triggered by the command above
+language_help: "<b>Lingua</b>: Cambia la lingua nel tuo gruppo. Se vuoi saperne di più su come puoi aggiungere la tua lingua, usa il comando /translation"
+deck_help: "<b>Mazzo</b>: Il mazzo di carte che uso nel tuo gruppo. Le carte includono normalmente 16 parole diverse, appartenenti ad un argomento. Scelgo a caso un argomento e da esso la parola segreta per un turno. Puoi aggiungere le tue, premi /deck per sapere come fare."
+fewer_help: "<b>Fewer</b>: Se solo tre giocatori stanno giocando (e questa impostazione è attiva), il Camaleonte, se preso, ottiene due tentativi per indovinare la parola segreta."
+more_help: "<b>More</b>: Se stanno giocando più di 6 giocatori (e questa impostazione è attiva), le parole svaniscono una volta che tutti hanno detto la loro parola, rendendo più difficile per il camaleonte indovinare quella corretta."
+tournament_help: "<b>Torneo</b>: Se questa modalità è attiva, viene introdotto un sistema di punteggio. Se il camaleonte vince senza essere scoperto, ottiene due punti. Se viene catturato e indovina la parola corretta, ottiene un punto. Se non lo fa, gli altri giocatori ottengono due punti ciascuno. Il primo giocatore che arriva a 5 punti vince."
+pin_help: "<b>Pin</b>: Una volta attivo, fisserò silenziosamente l'elenco delle parole in modo che i giocatori possano trovarlo più facilmente una volta iniziata la partita. Fisserò il vecchio messaggio fissato (se esistente) di nuovo, una volta finita la partita. Per attivare questa impostazione, è necessario che tu mi renda un amministratore con il permesso di fissare i messaggi."
+restrict_help: "<b>Restrizione</b>: Una volta attiva, rimuoverò il permesso scrivere a tutti tranne alla persona che deve fornire la parola. I giocatori potranno scrivere di quando questa fase finirà. Affinché questo funzioni, promuoverò questi utenti ad amministratori con il permesso di aggiungere membri, poiché gli amministratori non sono limitati. Una volta finita questa fase verranno ripristinati i vecchi permessi. Per attivare questa impostazione, dovete rendermi admin con i permessi di aggiungere nuovi admin, limitare i membri e aggiungere membri. Per conoscere altre informazioni correlate a questa impostazione: https://t.me/TheChameleonSupport/8\n<i>Attenzione:</i> Ogni messaggio conta come parola inserita nella fase in cui  si devono fornire le parole. L'impostazione del Punto Esclamativo viene completamente ignorata."
+exclamation_help: "<b>Punto Esclamativo</b>: Il punto esclamativo è una parte cruciale del modo in cui il tuo gruppo gioca a questo gioco. Nell'impostazione standard, questa impostazione è disattivata, ciò significa che i messaggi NON preceduti da un punto esclamativo (!) vengono considerati, mentre i messaggi che preceduti da punto esclamativo vengono ignorati. Anche se sembra più naturale, questo comportamento può portare ad errori (false parole), si verifica quando le persone continuano una conversazione all'interno del gruppo. Puoi attivare questa impostazione, invertendo dunque tale comportamento, ovvero, solo i messaggi preceduti da un punto esclamativo vengono conteggiati. Questo sembrerà un po' strano, ma elimina efficacemente la possibilità di inviare parole per errore.\n<i>Attenzione:</i> Questa impostazione viene ignorata quando la modalità ristretta è attiva, poichè non è possibile avere una conversazione mentre una partita è in corso."
+# the following strings are for stats
+# these will be for private persons, accessible with the inline mode of the bot
+# if someone who has not played the game yet tries to get their stats
+# this will be the title of the result
+private_stats_title: "Ottieni le tue statistiche"
+# this will be the description
+private_stats_description: "Premi qui. Non importa cosa scrivi"
+# this will be the actual message when they press on the result
+private_stats_text: "<b>Statistiche di {0}</b>\n\nPartite giocate: {1} ({11} posto {17} giocatori)\nPartite vinte: {2} ({3}% delle partite giocate)\nPartite perset: {4}\nPrimo giocatore: {5} ({6}% delle partite giocate)\n\nTornei giocati: {12} ({18} posto)\nTornei vinti: {13} ({14}% di tutti i tornei)\nTornei persi: {15}\n\nSei stato camaleonte: {7} ({8}% delle partite giocate)\nHai vinto da camaleonte: {9} ({10}% delle partite giocate da camaleonte, {16}% di tutte le vittorie)"
+# these are for people playing before the 4. February, where chameleon won was introduced
+# this will be added to the inline message
+private_old_stats: "\n\nP.S.: Hai giocato da prima del 4 Febbraio 2020, quindi le tue statistiche sono leggermente differenti. Per favore usa il comando /stats in privato con me per avere maggiori informazioni."
+# this will be on the button under the inline result
+private_old_button: "/statistiche"
+# and this to the /stats command
+private_old_stats_command: "\n\n\nHai giocato a questo gioco da molto tempo ormai. Infatti, da almeno prima del 4 febbraio 2020. Questo significa che le tue statistiche reali sono un po' più alte di quelle appena mostrate. Questo è successo perché la vittora da camaleonte è stata introdotta in quella data, e per mantenere il resto delle statistiche insieme a quel nuovo campo, è stato fatto un taglio netto alle tue vittorie. Ma le vecchie statistiche sono state salvate e possono essere presentate ora:\nPrima del 4, tu: \n hai giocato {0} partite (quindi complessivamente {1} partite)\n Hai vinto {2} partite (quindi {3}% prima del 4, complessivamente {4} - {5}%)\n Hai perso {6} partite ({7} partite complessivamente)\n Sei stato il primo giocatore {8} volte ({9}% prima del 4, {10} complessivamente - {11}%)\n E sei stato il camaleonte {12} volte ({13}% prima, {14} volte in totale - 15}%)\n Come puoi vedere, i tornei e le partite iniziate non sono influenzati (vengono contati separatamente, quindi vedi il numero intero)"
+# about groups stats
+group_stats: "Questo gruppo ha giocato {0} partite ({2} posto di {3} gruppi) e {1} tornei ({4} posto) \\o/"
+# when someone presses the join button while the game is starting
+join_while_starting: "Ehi, la partita è già iniziata, scusa. Questo pulsante verrà rimosso momentaneamente."
+# when someone presses an old join button while a different game is running
+join_old_button: "Ehi, questo è un vecchio pulsante, per favore usa il pulsante della partita corrente."
+# when someone leaves but the bot faces a flood error
+player_leaves_query_flood: "Hai lasciato il gioco!\n\nSono bloccato per flood e momentaneamente non posso modificare il messaggio, non è colpa tua, credimi."
+# when someone joins but the bot faces a flood error
+player_joins_query_flood: "Sei entrato in partita!\n\nSono bloccato per flood e momentaneamente non posso modificare il messaggio, non è colpa tua, credimi."
+# when someone joins, already got the callback answered, but the game started before he was added to the list
+# {0} mention of the player
+player_joins_while_starting: "Ehi, scusa, ma sei entrato in ritardo {0}, non puoi partecipare alla partita."
