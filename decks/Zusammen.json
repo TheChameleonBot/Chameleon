@@ -851,13 +851,13 @@
     "😤",
     "🤩",
     "😝",
-    "🥵",
-    "🥶",
+    "😇",
+    "😅",
     "🤮",
     "💃",
     "🕺",
-    "🦦",
-    "🦥"
+    "🐯",
+    "🦄"
   ],
   "Spiele": [
     "Carcassone",
@@ -932,5 +932,39 @@
       "Linz",
       "St. Pölten",
       "Eisenstadt",
-      "Klagenfurt"]
+      "Klagenfurt"
+  ],
+  "Disney vor 2000": [
+      "Arielle",
+      "Aladdin",
+      "Mulan",
+      "König der Löwen",
+      "Tarzan",
+      "Die Schöne und das Biest",
+      "Pocahontas",
+      "Das Dschungelbuch",
+      "Bernhard und Bianca",
+      "Peter Pan",
+      "Aristocats",
+      "Bambi",
+      "Robin Hood",
+      "Die Hexe und der Zauberer",
+      "Susi und Strolch",
+      "Cap und Capper",
+      "Alice im Wunderland"
+  ],
+  "Sehenswürdigkeiten Dresden": [
+    "Frauenkirche",
+    "Assi-Eck",
+    "Zwinger",
+    "Semperoper",
+    "Mathematisch-Physikalischer-Salon",
+    "Grünes Gewölbe",
+    "Blaues Wunder",
+    "Katys Garage",
+    "Augustusbrücke",
+    "Goldener Reiter",
+    "Hygienemuseum",
+    "Gläserne Manufaktur"
+  ]
 }
