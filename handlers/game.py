@@ -317,8 +317,8 @@ def guess(update: Update, context: CallbackContext):
             return
         else:
             # if the exclamation setting is activated, only messages starting with an ! are valid
-            # lets remove the !
-            word = word[1:]
+            # lets remove the ! and a potential following space
+            word = word[1:].strip()
     else:
         # if the exclamation setting is activated, only messages starting with an ! are valid
         if chat_data["exclamation"]:
