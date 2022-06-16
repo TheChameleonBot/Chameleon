@@ -102,6 +102,9 @@ tournament_end: "The game ended, but there is no winner of the tournament yet, s
 # when a tournament ends and there is only one winner
 # {0} winner mention, {1} winner points, {2} other player mentions + points
 tournament_end_one: "The tournament ended \\o/\n\nThe winner is {0} with <b>{1}</b> points.\n\nOther contestants:\n{2}"
+# when a tournament ends and there is only one winner, and no one else got points
+# {0} winner mention, {1} winner points, {2} other player mentions + points
+tournament_end_one_super_win: "The tournament ended \\o/\n\nThe winner is {0} with <b>{1}</b> points, while absolutely obliterating their competition! They all got big fat net Zero points, have a look at these losers:\n{2}"
 # when a tournament ends with several winners
 # {0} winner mentions + points, {1} other player mentions + points
 tournament_end_several: "The tournament ended \\o/\n\nThe winner are:\n{0}\n\nOther contestants:\n{1}"
