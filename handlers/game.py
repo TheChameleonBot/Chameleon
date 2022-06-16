@@ -392,13 +392,22 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
             if len(tournament_winners) == 1:
                 winner_mention = None
                 contestant_mentions_points = []
+                # this variable is used if one player was able to win when all others got 0 points
+                super_win = True
                 for player in players:
                     if player["user_id"] in tournament_winners:
                         winner_mention = mention_html(player["user_id"], player["first_name"])
                     else:
+                        # as soon as someone has more than one point they destroy the super win
+                        if tournament[player['user_id']] > 0:
+                            super_win = False
                         contestant_mentions_points.append(f"{mention_html(player['user_id'], player['first_name'])}: "
                                                           f"<b>{tournament[player['user_id']]}</b>")
-                text = get_string(lang, "tournament_end_one").format(winner_mention, tournament[tournament_winners[0]],
+                if super_win:
+                    text_string = "tournament_end_one_super_win"
+                else:
+                    text_string = "tournament_end_one"
+                text = get_string(lang, text_string).format(winner_mention, tournament[tournament_winners[0]],
                                                                      "\n".join(contestant_mentions_points))
             else:
                 winner_mention_points = []
