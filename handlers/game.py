@@ -18,9 +18,8 @@ from utils.specific_helpers.game_helpers import wordlist, vote_buttons, draw_but
 from utils.specific_helpers.group_helpers import no_game
 from utils.helpers import player_mention_string
 
-
 logger = logging.getLogger(__name__)
-spell = SpellChecker()
+spell = SpellChecker(['en', 'es', 'de', 'fr', 'pt', 'ru'])
 
 
 def message(update: Update, context: CallbackContext):
@@ -97,7 +96,7 @@ def message(update: Update, context: CallbackContext):
                         restricted += "\n\n" + get_string(lang, "exclamation_activated")
                     else:
                         restricted += "\n\n" + get_string(lang, "exclamation_deactivated")
-                text = get_string(lang, "more_players_say_word")\
+                text = get_string(lang, "more_players_say_word") \
                     .format(mention_html(next_player["user_id"], next_player["first_name"]), words, restricted)
                 update.effective_message.reply_html(text)
                 return
@@ -187,12 +186,12 @@ def vote(update: Update, context: CallbackContext):
     if len(players) is not len(chat_data["voted"]):
         buttons = vote_buttons(players, chat_data["game_id"])
         words = wordlist(players)
-        text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").\
+        text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list"). \
             format(player_mention_string(voters))
         query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
     else:
         words = wordlist(players)
-        text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list").\
+        text = get_string(lang, "final_word_list").format(words) + "\n" + get_string(lang, "vote_list"). \
             format(player_mention_string(voters))
         query.edit_message_text(text, parse_mode=ParseMode.HTML)
         votes = []
@@ -327,28 +326,39 @@ def guess(update: Update, context: CallbackContext):
     if word.lower() == chat_data["secret"].lower():
         text = get_string(lang, "chameleon_guess_right").format(chameleon_mention)
         game_end(context, text, update.effective_chat.id, chameleon_id, [chameleon_id], lang)
+        return
     else:
+        # this is questionable and should be behind a setting next time.
+        text = get_string(lang, "chameleon_guess_corrected").format(chameleon_mention)
+        if word.lower().strip() == chat_data["secret"].lower().strip():
+            game_end(context, text, update.effective_chat.id, chameleon_id, [chameleon_id], lang)
+            # the return is important
+            return
         # we try to guess a better spelled name
         spell_fix = spell.correction(word.lower())
         # this means there is a correction
-        if spell_fix != word.lower():
+        if spell_fix == chat_data["secret"].lower():
+            game_end(context, text, update.effective_chat.id, chameleon_id, [chameleon_id], lang)
+            # the return is important
+            return
+        else:
             # we go through all possible candidates
             for fix in spell.candidates(word.lower()):
                 if fix.lower() == chat_data["secret"].lower():
-                    text = get_string(lang, "chameleon_guess_corrected").format(chameleon_mention)
                     game_end(context, text, update.effective_chat.id, chameleon_id, [chameleon_id], lang)
                     # the return is important
                     return
-        if chat_data["guesses"] == 1:
-            text = get_string(lang, "chameleon_guess_wrong").format(chameleon_mention, chat_data["secret"])
-            players = []
-            for player in chat_data["players"]:
-                players.append(player["user_id"])
-            game_end(context, text, update.effective_chat.id, chameleon_id, players, lang)
-        else:
-            chat_data["guesses"] = 1
-            text = get_string(lang, "chameleon_guess_wrong_fewer").format(chameleon_mention)
-            update.effective_message.reply_html(text)
+    # this is only reached if nothing works before
+    if chat_data["guesses"] == 1:
+        text = get_string(lang, "chameleon_guess_wrong").format(chameleon_mention, chat_data["secret"])
+        players = []
+        for player in chat_data["players"]:
+            players.append(player["user_id"])
+        game_end(context, text, update.effective_chat.id, chameleon_id, players, lang)
+    else:
+        chat_data["guesses"] = 1
+        text = get_string(lang, "chameleon_guess_wrong_fewer").format(chameleon_mention)
+        update.effective_message.reply_html(text)
 
 
 def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
@@ -408,7 +418,7 @@ def game_end(context, text, chat_id, chameleon_id, winner_ids, lang):
                 else:
                     text_string = "tournament_end_one"
                 text = get_string(lang, text_string).format(winner_mention, tournament[tournament_winners[0]],
-                                                                     "\n".join(contestant_mentions_points))
+                                                            "\n".join(contestant_mentions_points))
             else:
                 winner_mention_points = []
                 contestant_mentions_points = []
