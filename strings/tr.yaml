@@ -1,0 +1,264 @@
+# put the people who worked on the translation here if you/they want to.
+authors:
+  - "@Remziye_Ertem"
+# put the name of your language here, in their native translation
+language: "Türkçe"
+# send when the bot gets added to a group
+greeting: "Selam. Ben The Chameleon botuyum, The Chameleon oyununu grubunuza getiren bir Telegram botuyum! Ayarlarımı değiştirmek için /settings (yönetici daha büyük gruplarda kısıtlanmıştır) komutunu çalıştırabilirsiniz ya da benimle bir oyun başlatmak için sadece basınız /start :)"
+# when a game is started with /start in a group.
+# {0} mention of the player who started the game, {1} list of mentions for joined player, {2-8} settings, either the deck name or activate or deactivate (see below)
+start_game: "{0} bir oyun başlattı. Ayarları takip ederek oynuyorsunuz:\n\n<b>Deck:</b> {2}\n<b>Fewer:</b> {3}\n<b>More: </b>{4}\n<b>Pin: </b>{5}\n<b>Tournament: </b>{6}\n<b>Restricting: </b>{7}\n<b>Exclamation: </b>{8}\n\nHadi katılalım!\n\n#Oyuncular:\n{1}"
+# the button beneath the message above
+start_button: "Katıl/Ayrıl"
+# if the setting above is activated
+activated: "Aktifleştirildi"
+# if the setting above is deactivated
+deactivated: "Devre dışı bırakıldı"
+# the pop-up a player gets when pressing on the button above
+player_joins_query: "Oyuna katıldın!"
+player_leaves_query: "Oyundan çıktın!"
+# the pop-up a player gets when he presses the button above but no join process is running (might happen when the bot has an unexpected shutdown)
+join_no_game_running: "Üzgünüm, bir şekilde bu düğme olmaması gerektiği halde burada. Bir oyun başlatmak için lütfen bunu çalıştırın /start."
+# the text appearing in the group once a player leaves/joins and the timer "biter"
+# {0} mention of player(s)
+player_joins_text: "{0} oyuna katıldı. "
+player_leaves_text: "{0} oyundan çıktı. "
+# the text in addition to the one above
+# {0} if more then three players, start from below; otherwise fail
+player_action_text: "30 saniye içinde kimse katılmazsa veya çıkmazsa, zamanlayıcı biter ve oyun {0}"
+# see above
+start: "Başlar :)"
+fail: "Başlamaz :("
+# the message when someone presses /start while a game is running
+game_running: "Bir oyun zaten çalışıyor, lütfen bitene kadar bekleyin."
+# the message when a game failed (30 second timer runs out and not three people joined)
+game_failed: "Yeterli oyuncu yok, üzgünüm."
+# the message when a game starts
+# {0} the topic/dictionary key, {1} the list of the words
+game_succeed: "Oyun başladı!\n<b>Konu:</b>\n{0}\n<b>Kelimeler:</b>\n{1}"
+# the button beneath the message above
+play_button: "Gizli sözcüğü göster"
+# the pop-up the chameleon gets when pressing the button above
+player_is_chameleon: "Sen Bukalemun'sun. Bol şans!"
+# the pop-up the ordinary player gets when pressing the button above
+# {0} the secret word
+secret_word: "Gizli kelime {0}"
+# the pop-up the player gets when pressing the button above and this game is not running (might happen when the bot has an unexpected shutdown)
+wrong_game: "Üzgünüm, şu anki oyunun bundan farklı görünüyor. Lütfen bu düğmelerle benden gelen en son mesajı bulun ve oraya basın :)"
+# the message appearing after the message above, asking for the first word
+# {0} mention of the player
+first_player_say_word: "{0}, bana bir kelime söyleyen ilk kişi sensin. Lütfen bunu yap."
+# the message asking every player to send a message, one after another
+# {0} mention of the player, {1} word list, consisting of the player name: players word(s), {2} the message below or nothing
+more_players_say_word: "Teşekkürler. Şimdi sıra sende, {0}.{2}\n\nGeçerli kelime listesi:\n{1}"
+# this will get attached to the previous two messages in case the game is not in restricted mote
+exclamation_deactivated: "Konuşmanıza devam etmek için mesajınızın başına bunu ! ekleyin. Aksi halde bunu girişiniz olarak saymayacağım."
+exclamation_activated: "Cevabınızı göndermek için lütfen mesajınızın önüne bunu ! koyun. Diğer mesajlar bot tarafından yok sayılacaktır, böylece konuşmaya devam edebilirsiniz"
+# the message before the voting, showing the final word list
+# {0} final word list
+final_word_list: "Son kelime listesi, rolü (Bukalemun ya da değil) maskesini düşürmek olan oylamaya gitmeliyiz, o zaman:\n\n{0}"
+# the message asking to vote, buttons with the names beneath
+# {0} vote list, consisting of mentions of the players: number of votes
+vote_list: "Unutmayın, sadece bir kez oy kullanabilirsiniz ve oyunuzu düzeltemezsiniz.\n Henüz oy vermemiş olan kişiler:\n\n{0}"
+# the pop-up for a successful vote
+voted: "Oyunuz kayıtlı :)"
+# the pop-up for someone trying to vote again
+already_voted: "Zaten oy verdin!"
+# the pop-up for someone pressing his own name (no suicide here) while voting
+vote_yourself: "Kendine oy veremezsin!"
+# when a draw happens after everyone votes, the first player who had to say a word can decide who gets unmasked. Buttons with player names are attached
+# {0} mention of the starter, the player who has to said the first word
+draw: "{0}, beraberlik oldu. İlk kelimeyi söylemek zorunda olduğunuz için bir dezavantajınız olduğundan kimin maskesinin düşeceğine siz karar verebilirsiniz."
+# if someone who is not the starter (see above) presses one of the buttons
+not_starter: "İlk kelimeyi söylemedin, gerçekten bunun işe yarayacağını düşündün mü? :("
+# if the chameleon wasn't found
+# {0} mention of the player unmasks, {1} mention of the chameleon, {2} secret word
+chameleon_not_found: "{0} maskesi kaldırıldı ve onlar Bukalemun <b>değil</b>, Bukalemun {1}! Bukalemun oyunu kazanıyor! Gizli kelime <b>{2}</b>."
+# if the chameleon was found
+# {0} mention of the chameleon
+chameleon_found: "{0} maskesi kaldırıldı ve onlar Bukalemun! Şimdi gizli kelimeyi tahmin etmeye çalışabilirsiniz."
+# if the chameleon was found and only three players are there (and this is activated in the setting)
+# {0} mention of the chameleon
+chameleon_found_fewer: "{0} maskesi kaldırıldı ve onlar Bukalemun! Şu anda sadece üç oyuncu olduğundan, iki tahmin alırsınız (grup yöneticileri bunu ayarlarda kapatabilir)."
+# if the chameleon was found and 7 or 8 players are there
+# {0} mention of the chameleon
+chameleon_found_more: "{0} maskesi kaldırıldı ve onlar Bukalemun! Altı oyuncudan daha fazlası olduğundan, kelime listesi görünmez, bu yüzden yazımınıza dikkat ediniz (grup yöneticileri bunu ayarlardan kapatabilir)."
+# this replaces the word/topic from the list
+hidden: "gizli"
+# if the chameleon guesses wrong and has a second guess
+# {0} mention of the chameleon
+chameleon_guess_wrong_fewer: "Üzgünüm {0}, bu yanlış tahmindi. Yeniden deneyin ;)"
+# if the chameleon guesses wrong
+# {0} mention of the chameleon, {1} secret word
+chameleon_guess_wrong: "Üzgünüm {0}, bu yanlış tahmindi, <b>{1}</b> o olurdu. Bukalemun kaybeder, oyuncular kazanır!"
+# if the chameleon guesses correctly
+# {0} mention of the chameleon
+chameleon_guess_right: "İyi iş {0}, bu doğru tahmindi! Bukalemun kazanır, oyuncular kaybeder!"
+# if the chameleon guesses wrongly, but the spellchecker corrects it to the right word (comes in handy by games where the keyboard isn't given
+# {0} mention of the chameleon
+chameleon_guess_corrected: "İyi iş {0}, bu doğruydu... Peki, dürüst olmak gerekirse, aslında doğru tahmin değildi. Ama iç yazım denetimim doğru olanı yaptı. Bir şey değil, yine de kazandın. Yaayyy :)"
+# when a tournament ends, but no winner yet, so another round is started
+tournament_end: "Oyun sona erdi, ancak turnuvanın kazananı henüz yok, bu yüzden yenisi başladı. Mevcut turnuva puanları:\n{0}\n<b>Konu:</b>\n{1}\n<b>Kelimeler:</b>\n{2}"
+# when a tournament ends and there is only one winner
+# {0} winner mention, {1} winner points, {2} other player mentions + points
+tournament_end_one: "Turnuva sona erdi \\o/\n\nKazanan {0} ile <b>{1}</b> Nokta.\n\nDiğer yarışmacılar:\n{2}"
+# when a tournament ends with several winners
+# {0} winner mentions + points, {1} other player mentions + points
+tournament_end_several: "Turnuva sona erdi \\o/\n\nKazananlar:\n{0}\n\nDiğer yarışmacılar:\n{1}"
+# when an admin aborts a running/starting game
+abort_game: "Oyun başarıyla durduruldu"
+# when someone tries to to abort a game when none is running/starting
+no_game_running: "Üzgünüm, çalışmayan bir oyunu iptal edemezsin"
+# when a non admin tries to abort a running/starting game
+no_admin_abort: "Çalışan bir oyunu iptal etmek için yönetici olmanız gerekir"
+# when a shutdown gets initiated, this message is send to the active players as a warning
+init_shutdown: "Rahatsızlık için üzgünüm ama 5 dakika içinde kapatacağım. Bu, mevcut oyunu bitirmezseniz \"ilerlemenizi\" kaybedeceğiniz anlamına geliyor. Daha fazla bilgi için lütfen @TheChameleon'a gidin."
+# when a shutdown gets initiated and players are still playing (smh)
+run_shutdown: "5 dakika bitti, ilerlemenizi kaybettiğiniz için üzgünüm :("
+# when a shutdown is initiated and players want to start a new game
+group_start_shutdown: "Rahatsızlık için üzgünüm ama kapatmam gerekiyor. Daha fazla bilgi için lütfen @TheChameleon'a gidin."
+# when a non admin tries to change group settings
+no_admin_settings: "Grup ayarlarını değiştirmek için yönetici olmanız gerekiryor. Yöneticiyseniz ve bu mesajı alıyorsanız, /admins_reload komutunu çalıştırın."
+# when a cache reload is issued
+admins_reload: "Yönetici listesi yeniden yüklendi!"
+# when an admin has not PMed the bot yet
+no_pm_settings: "Grup ayarlarını değiştirmek için beni özel olarak başlatmanız gerekiyor. Aşağıdaki düğmeye basmanız yeterli"
+# the button mentioned above
+no_pm_settings_button: "Başla"
+# when an admin has PMed the bot, but blocked it (wtf??)
+admin_blocked_bot: "Beni engellediğin için sana özelden bir mesaj gönderemem. Lütfen engelimi kaldırın ve yeniden deneyin."
+# the setting message admins of groups greet greeted with in PM
+# {0} is the name of the group, a link if the group has an username
+group_setting_text: "Hey, {0} grupta çalışma şeklimi değiştirmek istiyorsun, harika. Ayarlar hakkında daha fazla bilgi edinmek için /settings_help. Bu ayarları yenilemek için yenile düğmesine basabilirsiniz. Başka bir yöneticinin bunları değiştirdiğini düşünüyorsanız kullanın."
+# the buttons for group settings. Only translate the strings!
+group_setting_buttons:
+  refresh: "Yenile"
+  language: "Dil"
+  deck: "Deste"
+  fewer: "Daha az"
+  more: "Daha fazla"
+  tournament: "Turnuva"
+  pin: "Sabitle"
+  exclamation: "Ünlem"
+  restrict: "Kısıtla"
+# shown to the user when he presses refresh in the settings
+group_setting_refresh: "Ayarlar yenilendi!"
+# change language of a group
+# {0} is the current language
+group_setting_languages: "Grubunuzun geçerli dili <b>{0}</b>. Bir dili çevirmek veya yazım hatası bildirmek isterseniz, /translation"
+# change deck of a group
+# {0} is the current language
+group_setting_deck_language: "İstediğiniz desteyi seçin. Yazılması gereken dille başlayın, <b>{0}</b> grubunuzun şu anki dilidir."
+# {0} is the current deck
+group_setting_decks: "Grubunuzun geçerli destesi <b>{0}</b>. Değiştirilmesini istediğinizi seçin.\n\nBir deste oluşturmak veya yazım hatası bildirmek isterseniz, basın /deck"
+# activate fewer setting of group
+group_setting_fewer_activate: "Daha az ayar aktifleştirildi!"
+# deactivate fewer setting of group
+group_setting_fewer_deactivate: "Daha az ayar devre dışı bırakıldı!"
+# activate more setting of group
+group_setting_more_activate: "Daha fazla ayar aktifleştirildi!"
+# deactivate more setting of group
+group_setting_more_deactivate: "Daha fazla ayar devre dışı bırakıldı!"
+# activate tournament mode of group
+group_setting_tournament_activate: "Turnuva modu aktifleştirildi!"
+# deactivate tournament mode of group
+group_setting_tournament_deactivate: "Turnuva modu devre dışı bırakıldı!"
+# activate pin setting of group
+group_setting_pin_activate: "Sabitle ayarı aktifleştirildi!"
+# deactivate pin setting of group
+group_setting_pin_deactivate: "Sabitle ayarı devre dışı bırakıldı!"
+# being an admin which can pin is required
+group_setting_pin_required: "Bu ayarı aktifleştirmek için iletileri sabitleyebilen bir yönetici olmalıyım"
+# activate restrict mode of group
+group_setting_restrict_activate: "Kısıtlama modu aktifleştirildi!"
+# deactivate restrict mode of group
+group_setting_restrict_deactivate: "Kısıtlama modu devre dışı bırakıldı!"
+# being an admin which can restrict member is required
+group_setting_restrict_required: "Bu modu etkinleştirmek için üye ekleyebilen, yöneticileri terfi ettirebilen ve üyeleri kısıtlayabilen bir yönetici olmalıyım."
+# activate exclamation setting of group
+group_setting_exclamation_activate: "Aktifleştirildi, başında ! olan girişler kabul edilir."
+# deactivate exclamation setting of group
+group_setting_exclamation_deactivate: "Devre dışı bırakıldı, başında ! olmayan girişler kabul edilir."
+# if an error happens somewhere, we tell the user about it
+error: "Selam. Üzülerek belirtmem gerekir ki, ben güncellemenizi halletmeye çalışırken bir hata oluştu. Geliştiricilerim bilgilendirilecek."
+# if a user wants to change their language
+# {0} name of their current language
+private_language: "Selam. Geçerli diliniz {0}, aşağıdaki düğmelerden istediğiniz dili seçin :)"
+# if a user changed their language
+# {0} name of their selected language
+private_language_selected: "Harika, şu andan itibaren diliniz {0}!"
+# if a random idiot presses buttons
+user_not_in_game: "Bunu yapmak için oyunda olmalısın. Belki bir sonraki tur?"
+# the rules, presented when someone hasn't played the game yet or runs /game_rules
+rules: "<b>Bukalemun - oyun</b> <i>(Türkçe kurallar, Telegram botuna göre kırpıldı)</i>\n\n• Oyun başladıktan sonra, bir oyuncu bukalemun olur, diğerleri sıradan oyuncu olurlar\n• Bir konu ve ona bir ait kelime listesi, üzerine bir düğme eklenmiş olarak sunulur\n• Oyuncuysanız ve bu düğmeye basarsanız, bu listedeki kelimelerden biri size sunulur (gizli kelime denir) - herkes aynı şeyi alır elbette. Bukalemun iseniz, bunun yerine bu konuda bilgilendirileceksiniz\n• Sonra bot birbiri ardına gizli kelimenin tanımını sorar.\n• Eğer bir oyuncuysanız, gizli kelimeyi bukalemunun tahmin edemeyeceği şekilde tanımlamaya çalışın; ama diğer oyuncular sizin kesinlikle bukalemun olmadığınızı anlasın\n• Eğer Bukalemunsanız, çok sınırlı bilginize dayanarak bir tanım seçmelisiniz. Seçiminize uyum sağlamaya çalışın!\n• Herkes bir kelime söyledikten sonra, herkes Bukalemun olduğunu düşündüğü kişiye oy verir. En çok oyu alan oyuncunun maskesi düşer\n• Sıradan bir oyuncuysa Bukalemun kazanır!• Bukalemun ise, gizli kelimeyi tahmin etmeye çalışacaktır. Tahmini gerçekten doğruysa, kazanır; aksi takdirde oyuncu tahmin yapar!"
+# introduction when there is a new player, prepended to the rules
+rules_prepend: "Ah, merhaba, yeni oyuncu(larımz)muz var. Oyun 30 saniye içinde başlayacak, yeni oyuncu(lara)ya hemen kuralları sunayım:\n\n"
+# used in the strings below
+here: "burada"
+# the deck command reply
+# {0} and {1} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+deck: "Desteler, \"kartlar\" topluluğudur. Yeni desteler oluşturabilir veya mevcut desteleri değiştirebilirsiniz. Bunlar basit json dosyalarıdır. Yeni bir deste oluşturmanız durumunda, iki anahtarı geçmeniz gerektiğini unutmayın: dil ve ad. Dil, destenin içinde bulunduğu dildir, ad ise destenizin adıdır. İkisini de büyük harfle yazın. Json dosyasının içinde, kelimelerin konusu olan anahtarları tanımlarsınız ve ardından uygun kelimelerle bir liste oluşturursunuz. Listede yalnızca dizelere izin verilir. Konu başına 16 kelime önerilir, ancak zorunlu değildir. Sorularınız varsa veya bir dosya göndermek istiyorsanız, gerçek uygulamalara {0} bakabilir ve {1} üzerinden bize katılabilirsiniz."
+# the translation command reply
+# {0} - {2} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+translation: "Botun tamamını çevirebilirsiniz :O Dosyalar .yaml dosyalarıdır, her temel metin programında açılabilir olmaları gerekir, ancak Notepad ++ benden bir tavsiye  :) Bu zorluğu gerçekten üstlenirseniz, mevcut çevirileri bulabilirsiniz {0}. Temel dosyayı indirdikten sonra (her zaman en güncel dosya olduğundan İngilizce önerilir), kendi dilinizin ISO 639-1 koduyla yeniden adlandırın. İki harfli biri önerilir, ancak zorunlu değildir. Tırnak işareti içindeki parçaları çevirin. Cümlelerinizde gerçekten tırnak işareti kullanmak istiyorsanız, onlardan şu şekilde kaçının: <code>\\\"</code> . İçinde sayı bulunan parantezler kalsın ve numaralarını değiştirmeyin. Telegram biçimlendirmesi html etiketleriyle desteklenir, {1} açıklandığı gibi çalışırlar. Bitirdikten sonra, bu dosyayı göndermek veya başka sorular sormak için bize {2} katılın."
+# if the group id is not known. Can happen if someone obfuscates the start command or the groups id changed while the bot is offline
+group_not_found: "Hey, üzgünüm ama grubunuzu veri tabanımda bulamıyorum. Ya burada bir oyun oynuyorsunuz ya da bu benim hatam çünkü çevrimdışıydım. Bu durumda, grup sohbetinden tekrar çalıştırın /settings :)"
+# start message in private
+greeting_private: "Selam, ben Chameleon Botuyum :) Bukalemun Oyununu benimle oynayabilirsiniz, beni grubunuza eklemeniz yeterli. Sizinle özel olarak konuştuğum dili değiştirmek istiyorsanız, /language tuşuna basın. Ve gülümsemeyi de unutma. En azından arada bir."
+# help message in group.
+help_group: "Selam, biraz yardım istiyorsun, harika. Temelde gruplarda ihtiyacın olabilecek sadece üç komutum var:\n/start - bir oyun başlat\n/settings - [yalnızca daha büyük gruplardaki yöneticiler] gruptaki ayarlarımı değiştir\n/nextgame - sizi bu grubun bir sonraki oyun listesine ekler (veya çıkarır). Eğer listedeyseniz, oyun başladığında sana haber veririm\n\nBunun dışında şu komutlara da yanıt veririm:\n/abort_game - [yalnızca daha büyük gruplardaki yöneticiler] şu anda çalışan bir oyun varsa oyunu iptal eder\n/admins_reload - Yöneticiler bir saatliğine önbelleğe alındığından, bot sizi yönetici olarak tanımıyorsa veya artık bunu yapması gerekmiyorsa bunu çalıştırmak isteyebilirsiniz :O\n/id - grup kimliğini göster\n\nBir konuda insan yardımına ihtiyacınız olursa, @TheChameleonSupport'ta bize katılın. Size yardımcı olmaktan memnuniyet duyarız."
+# help message in private.
+help_private: "Selam, biraz yardım istiyorsun, harika. Aşağıdaki komutlara özel sohbette yanıt veriyorum:\n/language - özel sohbette seninle konuştuğum dili değiştirir\n/settings_help - grup ayarlarını anlamanıza yardımcı olur\n/translation - size çevirilerin nasıl yapıldığını gösteren bir yardım mesajı gösterir\n/deck - kendi destenizi nasıl ekleyeceğinizi gösterir\n\n Bir konuda insan yardımına ihtiyacınız olursa, @TheChameleonSupport'ta bize katılın. Size yardımcı olmaktan memnuniyet duyarız."
+# message which gets send to people in private when a new game is started and they are on the nextgame list
+# {0} group name
+nextgame: "Selam. {0} grubunda yeni bir oyun başladı ve bahse girerim bu eğlenceye katılmanızı çok isterler."
+# message which gets send to people in private which used the /nextgame komut ve daha önce listede yoktu
+# {0} group name
+nextgame_added: "Hey. {0} grubundan bir sonraki oyun listesine eklendiniz, yeni bir oyun başladığında sizi bilgilendireceğim. Başarılı bir oyuna katıldığınız anda sizi o listeden çıkaracağım (böylece sizi gereksiz yere spam yapmam :). Eğer sadece kendinizin çıkarılmasını istiyorsanız, grupta tekrar /nextgame komutunu gönderin, o zaman sizi çıkaracağım"
+# message which gets send to people in private which used the /nextgame command and were in the list before
+# {0} group name
+nextgame_removed: "{0} sohbetinin sonraki oyun listesinden çıkarıldınız"
+# message which gets send to people in the group when they used /nextgame and haven't pmed the bot yet
+nextgame_pm: "Hey, bu komutu kullanmak için beni özel olarak başlatmanız gerekiyor. Aşağıdaki düğmeye basmanız yeterli."
+# message which gets send to people in the group when they used /nextgame and blocked the bot (wtf)
+nextgame_block: "Eh, sana PM atmamı istiyorsan, beni engellememeliydin. Engelimi kaldırıp tekrar dene..."
+# message which gets send if someone uses the /settings_help command
+settings_help: "Hey, bir grup için oldukça fazla ayar olduğundan, bunlar bölünmüştür. Gezinmek için aşağıdaki düğmeleri kullanmanız yeterlidir."
+# the following strings are explanations for the settings, triggered by the command above
+language_help: "<b>Dil</b>: Grubunuzdaki benim dilimi değiştirin. Kendi dilinizi nasıl ekleyebileceğiniz hakkında daha fazla bilgi edinmek istiyorsanız /translation düğmesine basın."
+deck_help: "<b>Deste</b>: Grubunuzda kullandığım kart destesi. Kartlar normalde bir konuya ait 16 farklı kelime içerir. Rastgele bir konu ve ondan bir tur için gizli kelime seçiyorum. Kendinkini ekleyebilirsin, nasıl yapacağını öğrenmek için bas /deck ."
+fewer_help: "<b>Daha Az</b>: Yalnızca üç oyuncu oynuyorsa (ve bu aktifleştirilirse), bukalemun yakalanırsa iki tahmin alır."
+more_help: "<b>Daha Fazla</b>: 7 veya 8 oyuncu oynuyorsa (ve bu aktifleştirilirse), herkes kelimesini söyledikten sonra kelimeler kaybolur ve bukalemunun doğru olanı tahmin etmesini zorlaştırır."
+tournament_help: "<b>Turnuva</b>: Bu mod aktifleştirilirse puanlama sistemi devreye girer. Bukalemun fark edilmeden kaçarsa iki puan alır. Yakalanıp doğru kelimeyi tahmin ederse bir puan alır. Olmazsa, oyuncu ikişer puan alır. 5 puana ulaşan ilk oyuncu kazanır."
+pin_help: "<b>Sabitle</b>: Bir kez aktifleştirildiğinde, oyuncuların oyun başladığında daha kolay bulabilmesi için kelime listesini sessizce sabitleyeceğim. Oyun bittiğinde eski sabitlenmiş mesajı (varsa) sessizce tekrar sabitleyeceğim. Bu ayarı aktifleştirmek için beni sabitleme ayrıcalıklarına sahip bir yönetici yapmanız gerekiyor."
+restrict_help: "<b>Kısıtlama</b>: Aktifleştirildiğinde, kelime söyleme aşamasında sırası gelen kişi dışında herkesin yazmasını kısıtlayacağım. Bu aşama bittikten sonra herkes tekrar yazabilir. Bunun çalışması için, yöneticiler kısıtlanmadığından, bu kullanıcıları üye hakları ekleyen yöneticilere terfi ettireceğim. Aşamadan sonra orijinal sohbet izinleri geri yüklenir. Bu ayarı aktif hale getirmek için beni yeni yönetici ekleme, üye kısıtlama ve üye ayrıcalıkları ekleme izinleri ile birlikte yönetici yapmanız gerekmektedir. Nedenini öğrenmek istiyorsanız buradan okuyabilirsiniz: https://t.me/TheChameleonSupport/8\n<i>Dikkat:</i> Her mesaj bir kelime söyleme aşamasında kelime girişi olarak sayılır. Ünlem ayarı tamamen yok sayılır."
+exclamation_help: "<b>Ünlem İşareti</b>: Ünlem işareti, grubunuzun bu oyunu oynama biçiminin çok önemli bir parçasıdır. Standart ayarda, bu devre dışıdır, yani başında ünlem işareti olmayan meşajlar sayılır, ünlem işareti ile başlayan mesajlar yoksayılır. Daha doğal görünse de, bu davranış, insanların yaptıkları bir sohbete devam ederken yanlış girişlere yol açabilir. Bunu aktif hale getirebilirsin, bu da davranışı tersine çevirir. Yalnızca başında ünlem işareti olan mesajlar sayılır. Bu biraz garip geliyor, ancak yanlış giriş olasılığını etkin bir şekilde ortadan kaldırıyor.\n<i>Dikkat:</i> Bu ayar, oyun giriş aşamasındayken sohbet etmenin mümkün olmadığı kısıtlı moddayken yok sayılır."
+# the following strings are for stats
+# these will be for private persons, accessible with the inline mode of the bot
+# if someone who has not played the game yet tries to get their stats
+# this will be the title of the result
+private_stats_title: "İstatistiğinizi alınız"
+# this will be the description
+private_stats_description: "Sadece bana bas. Ne yazdığınız önemli değil"
+# this will be the actual message when they press on the result
+private_stats_text: "<b>{0} için istatistikler</b>\n\nOynanan oyunlar: {1} ({11} yeri {17} oyuncunun)\nKazanılan oyunlar: {2} (oynanılan tüm oyunlarda %{3})\nKaybedilen oyunlar: {4}\nİlk oyuncu: {5} (oynanılan oyunlarda %{6})\n\nOynanan turnuvalar: {12} (yer {18})\nKazanılan turnuvalar: {13} (tüm turnuvalarda %{14})\nKaybedilen turnuvalar: {15}\n\nBukalemundu: {7} (oynanılan oyunlarda %{8})\nBukalemun olarak kazanıldı: {9} (bukalemun olarak oynanan süre %{10}, genel kazancın yüzdesi %{16})"
+# these are for people playing before the 4. February, where chameleon won was introduced
+# this will be added to the inline message
+private_old_stats: "\n\nNot: Oyunu 4 Şubat 2020'den önce oynadınız, bu nedenle genel istatistikleriniz biraz farklı. Bu konuda daha fazla bilgi edinmek için lütfen /stats'ı benimle PM'de  çalıştırın."
+# this will be on the button under the inline result
+private_old_button: "/stats"
+# and this to the /stats command
+private_old_stats_command: "\n\n\nBu oyunu uzun süredir oynuyorsunuz. Aslında, en azından 4 Şubat 2020'den önce. Bu, gerçek istatistiklerinizin az önce gösterilenden biraz daha yüksek olduğu anlamına geliyor. Bu, o tarihte bukalemun tanıtıldığı için kazanıldığı için oldu ve istatistiklerin geri kalanını bu yeni alanla birlikte tutmak için sayılarınıza doğrudan bir kesim yapıldı. Ama eskiler kaydedildi ve şimdi sunulabilir:\n4'ünden önce, siz:\n\n{0} oyun oynadınz (toplam {1} oyun)\n{2} oyun kazandınız (4'ünden önce %{3} kadar, toplam {4} - %{5})\nKaybedilen {6} oyun (genel olarak {7} oyun)\nİlk oyuncu {8} kez (4'ünden önce %{9}, toplamda {10} kez - %{11})\nVe siz {12} kez bukalemun oldunuz (önceden %{13}, toplamda {14} kez - %{15})\n\nGördüğünüz gibi, turnuvalar etkilenmez (ayrı olarak sayılırlar, bu nedenle tam sayıyı görüyorsunuz), oyunlar da başlamadı."
+# about groups stats
+group_stats: "Bu grup {0} oyun ({2} yeri {3} grubun) ve {1} turnuva ({4} yer) oynadı \\o/"
+# when someone presses the join button while the game is starting
+join_while_starting: "Hey, oyun çoktan başladı, üzgünüm. Bu düğme kısa süre içinde kaldırılacak."
+# when someone presses an old join button while a different game is running
+join_old_button: "Hey, bu eski bir buton, lütfen mevcut oyundakini kullanın."
+# when someone leaves but the bot faces a flood error
+player_leaves_query_flood: "Oyundan çıktın!\n\nBir sel zaman aşımıyla karşı karşıyayım ve şu anda mesajı düzenleyemiyorum, ama yaptın, inan bana."
+# when someone joins but the bot faces a flood error
+player_joins_query_flood: "Oyuna katıldın!\n\nBir sel zaman aşımıyla karşı karşıyayım ve şu anda mesajı düzenleyemiyorum, ama yaptın, inan bana."
+# when someone joins, already got the callback answered, but the game started before he was added to the list
+# {0} mention of the player
+player_joins_while_starting: "Hey, üzgünüm ama bir saniye geç katıldın {0}, oyunu kaçırdın."
