@@ -966,5 +966,45 @@
   "Venditore di oli essenziali",
   "Hacker",
   "Spacciatore"
-  ]
+  ],
+"Personaggi di Super Mario": [
+  "Mario",
+  "Luigi",
+  "Bowser",
+  "Peach,",
+  "Daisy",
+  "Toad",
+  "Yoshi",
+  "Wario",
+  "Waluigi",
+  "Bowser Jr.",
+  "Toadette",
+  "Tipo Timido",
+  "Tantatalpa",
+  "Boo",
+  "Donkey Kong",
+  "Goomba",
+  "Koopa Troopa",
+  "Calamako"
+],
+"Attrazioni Italiane": [
+  "Fontana di Trevi",
+  "Ponte di Rialto",
+  "Duomo di Milano",
+  "Ponte Vecchio,",
+  "Acquario di Genova",
+  "Museo Egizio",
+  "Sassi di Matera",
+  "Trulli",
+  "Castello di Miramare",
+  "Museo delle Scienze",
+  "Torre di Pisa",
+  "Canal Grande",
+  "Colosseo",
+  "MUSE – Museo delle Scienze",
+  "FICO Eataly World",
+  "Castello di Gradara",
+  "Basilica di San Francesco d’Assisi",
+  "Castello di Rocca Calascio"
+]
 }
