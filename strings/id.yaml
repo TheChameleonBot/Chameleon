@@ -1,0 +1,276 @@
+# put the people who worked on the translation here if you/they want to.
+authors:
+  - ""
+# put the name of your language here, in their native translation
+language: "Bahasa Indonesia"
+# send when the bot gets added to a group
+greeting: "Halo, saya The Chameleon Bot, bot telegram yang membawakan gim The Chameleon untuk kalian! Jika ingin mengubah pengaturan, kamu bisa menggunakan /settings (hanya admin yang bisa melakukannya). Atau cukup ketuk /start untuk memulai permainan denganku :)"
+# when a game is started with /start in a group.
+# {0} mention of the player who started the game, {1} list of mentions for joined player, {2-8} settings, either the deck name or activate or deactivate (see below)
+start_game: "{0} memulai permainan. Anda sedang bermain dengan pengaturan tertentu:\n\n<b>Dek:</b> {2}\n<b>Sedikit:</b> {3}\n<b>Banyak: </b>{4}\n<b>Pin: </b>{5}\n<b>Turnamen: </b>{6}\n<b>Pembatasan: </b>{7}\n<b>Seruan: </b>{8}\n\nAyo bergabung!\n\n#Pemain:\n{1}"
+# the button beneath the message above
+start_button: "Bergabung/Pergi"
+# if the setting above is activated
+activated: "Dinyalakan/Aktif"
+# if the setting above is deactivated
+deactivated: "Dimatikan/Nonaktif"
+# the pop-up a player gets when pressing on the button above
+player_joins_query: "Kamu bergabung di permainan ini!"
+player_leaves_query: "Kamu keluar dari permainan ini!"
+# the pop-up a player gets when he presses the button above but no join process is running (might happen when the bot has an unexpected shutdown)
+join_no_game_running: "Mohon maaf, tombol ini digunakan saat tidak seharusnya. Mohon ketuk /start untuk memulai permainan."
+# the text appearing in the group once a player leaves/joins and the timer "runs out"
+# {0} mention of player(s)
+player_joins_text: "{0} bergabung dalam permainan. "
+player_leaves_text: "{0} keluar dari permainan. "
+# the text in addition to the one above
+# {0} if more then three players, start from below; otherwise fail
+player_action_text: "Jika tak ada yang bergabung atau meninggalkan permainan dalam 30 detik, waktunya akan terhenti dan permainannya {0}"
+# see above
+start: "mulai :)"
+fail: "gagal :("
+# the message when someone presses /start while a game is running
+game_running: "Permainan masih berjalan, tunggu hingga permainan berakhir."
+# the message when a game failed (30 second timer runs out and not three people joined)
+game_failed: "Tidak cukup pemain. Mohon maaf."
+# the message when a game starts
+# {0} the topic/dictionary key, {1} the list of the words
+game_succeed: "Permainannya dimulai!\n<b>Topik:</b>\n{0}\n<b>Kalimat:</b>\n{1}"
+# the button beneath the message above
+play_button: "Tunjukkan kata rahasianya!"
+# the pop-up the chameleon gets when pressing the button above
+player_is_chameleon: "Kamu adalah Sang Chameleon. Semoga beruntung!"
+# the pop-up the ordinary player gets when pressing the button above
+# {0} the secret word
+secret_word: "Kata rahasianya adalah {0}"
+# the pop-up the player gets when pressing the button above and this game is not running (might happen when the bot has an unexpected shutdown)
+wrong_game: "Mohon maaf, permainan kalian sebelumnya mungkin tidak seperti ini. Temukan pesan terakhir dariku dengan tombol ini dan tekanlah :)"
+# the message appearing after the message above, asking for the first word
+# {0} mention of the player
+first_player_say_word: "{0}, kamu orang pertama yang mendeskripsikan katanya. Mohon segera lakukan."
+# the message asking every player to send a message, one after another
+# {0} mention of the player, {1} word list, consisting of the player name: players word(s), {2} the message below or nothing
+more_players_say_word: "Terima kasih. Sekarang, ini bagianmu, {0}.{2}\n\nKata terakhir:\n{1}"
+# this will get attached to the previous two messages in case the game is not in restricted mote
+exclamation_deactivated: "Untuk melanjutkan percakapan kalian, tambahkan ! di awal kata. Aku takkan menghitungnya sebagai jawaban kalian."
+exclamation_activated: "Untuk mengirimkan jawaban, gunakan ! di awal kata. Pesan lainnya akan diabaikan oleh Bot, dan takkan dihitung sebagai jawaban kalian."
+# the message before the voting, showing the final word list
+# {0} final word list
+final_word_list: "Daftar kata akhir, kita harus memilih mana yang harus diungkap identitasnya (Baik Chameleon atau pun tidak):\n\n{0}"
+# the message asking to vote, buttons with the names beneath
+# {0} vote list, consisting of mentions of the players: number of votes
+vote_list: "Ingat, kalian hanya bisa memilih sekali saja dan tak bisa mengubah suara pilihan kalian.\nYang belum memberikan suara:\n\n{0}"
+# the pop-up for a successful vote
+voted: "Suaramu sudah dikirimkan! :)"
+# the pop-up for someone trying to vote again
+already_voted: "Kamu sudah memberikan suara!"
+# the pop-up for someone pressing his own name (no suicide here) while voting
+vote_yourself: "Kamu tidak dapat memberi suara pada dirimu sendiri!"
+# when a draw happens after everyone votes, the first player who had to say a word can decide who gets unmasked. Buttons with player names are attached
+# {0} mention of the starter, the player who has to said the first word
+draw: "{0}, terjadi adanya kesamaan jumlah suara. Since you had a disadvantage as you had to say the first word, you can decide who gets Karena kamu yang memberi kata pertama, kamu bisa memilih yang harus diungkap identitasnya"
+# if someone who is not the starter (see above) presses one of the buttons
+not_starter: "Kamu tidak memberikan kata pertamamu, apa itu akan bekerja? :("
+# if the chameleon wasn't found
+# {0} mention of the player unmasks, {1} mention of the chameleon, {2} secret word
+chameleon_not_found: "{0} terungkap dan dia <b>bukanlah</b> sang Chameleon, itu adalah {1}! Sang Chameleon memenangkan permainan! Kata rahasianya adalah <b>{2}</b>."
+# if the chameleon was found
+# {0} mention of the chameleon
+chameleon_found: "{0} terungkap dan dia adalah sang Chameleon! Kamu bisa mencoba menebak apa kata tersembunyinya."
+# if the chameleon was found and only three players are there (and this is activated in the setting)
+# {0} mention of the chameleon
+chameleon_found_fewer: "{0} terungkap dan dia adalah sang Chameleon! Karena hanya ada tiga orang pemain saja, kamu dapat menebak dua kali (admin grup dapat menonaktifkannya di pengaturan)."
+# if the chameleon was found and 7 or 8 players are there
+# {0} mention of the chameleon
+chameleon_found_more: "{0} terungkap dan dia adalah sang Chameleon! Karena ada lebih dari enam pemain, katanya jadi tidak terlihat, jadi berhati-hatilah saat menuliskan jawabannya! (admin grup dapat menonaktifkannya di pengaturan)."
+# this replaces the word/topic from the list
+hidden: "hidden"
+# if the chameleon guesses wrong and has a second guess
+# {0} mention of the chameleon
+chameleon_guess_wrong_fewer: "Mohon maaf {0}, kamu gagal menebaknya. Coba lagi ;)"
+# if the chameleon guesses wrong
+# {0} mention of the chameleon, {1} secret word
+chameleon_guess_wrong: "Mohon maaf {0}, kamu gagal menebaknya, <b>{1}</b>-lah jawabannya. Sang Chameleon kalah, para pemain menang!"
+# if the chameleon guesses correctly
+# {0} mention of the chameleon
+chameleon_guess_right: "Kerja bagus {0}, kamu pintar sekali menebaknya! Sang Chameleon menang, para pemain kalah!"
+# if the chameleon guesses wrongly, but the spellchecker corrects it to the right word (comes in handy by games where the keyboard isn't given
+# {0} mention of the chameleon
+chameleon_guess_corrected: "Kerja bagus {0}, pasti itu benar... sejujurnya, bukan tebakan bagus. Namun, karena aku baik hati, jadi aku beri kamu kesempatan. Kamu menang. Yaayyy :)"
+# when a tournament ends, but no winner yet, so another round is started
+tournament_end: "Permainannya berakhir, tak ada yang menang atau kalah, jadi permainan baru dimulai. Poin turnamen terbaru:\n{0}\n<b>Topik:</b>\n{1}\n<b>Kata:</b>\n{2}"
+# when a tournament ends and there is only one winner
+# {0} winner mention, {1} winner points, {2} other player mentions + points
+tournament_end_one: "Turnamennya berakhir \\o/\n\nPemenangnya adalah {0} dengan perolehan poin <b>{1}</b>.\n\nPeserta lainnya:\n{2}"
+# when a tournament ends and there is only one winner, and no one else got points
+# {0} winner mention, {1} winner points, {2} other player mentions + points
+tournament_end_one_super_win: "Turnamennya berakhir \\o/\n\nPemenangnya adalah {0} dengan perolehan poin <b>{1}</b>, benar-benar menghabiskan seluruh persaingan! Mereka semua dapat Nol poin, lihatlah yang kalah:\n{2}"
+# when a tournament ends with several winners
+# {0} winner mentions + points, {1} other player mentions + points
+tournament_end_several: "Turnamennya berakhir \\o/\n\nPemenangnya adalah:\n{0}\n\nPeserta lainnya:\n{1}"
+# when an admin aborts a running/starting game
+abort_game: "Permainan berhasil dihentikan"
+# when someone tries to to abort a game when none is running/starting
+no_game_running: "Mohon maaf, kamu tidak bisa menghentikan permainan yang tidak berjalan :)"
+# when a non admin tries to abort a running/starting game
+no_admin_abort: "You need to be an admin to abort a running game"
+# when a shutdown gets initiated, this message is send to the active players as a warning
+init_shutdown: "Mohon maaf atas ketidaknyamanannya, aku akan dimatikan dalam 5 menit. Ini berarti akan menghapuskan seluruh \"progress\" jikalau kalian tidak mengakhirinya. Untuk informasi lebih lanjut, @TheChameleon."
+# when a shutdown gets initiated and players are still playing (smh)
+run_shutdown: "5 menit sudah berakhir, mohon maaf atas kehilangan seluruh progress kalian :("
+# when a shutdown is initiated and players want to start a new game
+group_start_shutdown: "Mohon maaf atas ketidaknyamanannya, tetapi aku harus dimatikan. Untuk informasi lebih lanjut, @TheChameleon."
+# when a non admin tries to change group settings
+no_admin_settings: "Kamu harus menjadi admin terlebih dahulu untuk mengubah pengaturan grup. Jika kamu seorang admin dan mendapat pesan ini, mulai /admins_reload."
+# when a cache reload is issued
+admins_reload: "Daftar admin sudah dimuat ulang!"
+# when an admin has not PMed the bot yet
+no_pm_settings: "Kamu harus memulaiku di chat pribadi untuk pengaturan. Ketuk saja tombol ini"
+# the button mentioned above
+no_pm_settings_button: "Mulai"
+# when an admin has PMed the bot, but blocked it (wtf??)
+admin_blocked_bot: "Aku tak bisa mengirimmu pesan karena kamu memblokirku. Buka blokir aku dan kirimlah ulang."
+# the setting message admins of groups greet greeted with in PM
+# {0} is the name of the group, a link if the group has an username
+group_setting_text: "Hei, kau ingin mengubah pengaturan di grup {0}. Untuk mempelajari pengaturan, tekan /settings_help. Kamu bisa menekan tombol refresh untuk memulihkan pengaturan. Gunakan kalau kamu merasa pengaturannya diubah oleh admin lainnya."
+# the buttons for group settings. Only translate the strings!
+group_setting_buttons:
+  refresh: "Refresh/Pemulihan"
+  language: "Bahasa"
+  deck: "Dek"
+  fewer: "Lebih sedikit"
+  more: "Lebih banyak"
+  tournament: "Turnamen"
+  pin: "Pin"
+  exclamation: "Tanda seru"
+  restrict: "Pembatasan"
+# shown to the user when he presses refresh in the settings
+group_setting_refresh: "Pengaturan sudah dipulihkan!"
+# change language of a group
+# {0} is the current language
+group_setting_languages: "Bahasa yang kamu gunakan sekarang ini adalah <b>{0}</b>. Pilih salah satu jika kamu ingin mengubah bahasa tujuanmu.\n\nJika ingin menerjemahkan atau terdapat kesalahan pengetikan, ketuk /translation"
+# change deck of a group
+# {0} is the current language
+group_setting_deck_language: "Pilih dek yang kamu inginkan. Mulailah dengan bahasa yang dipilih, <b>{0}</b> adalah salah satu dari grupmu."
+# {0} is the current deck
+group_setting_decks: "Dek terakhir dari grupmu adalah <b>{0}</b>. Pilih salah satu jika ingin mengubah.\n\nJika ingin mengubah dek atau terdapat kesalahan pengetikan, ketuk /deck"
+# activate fewer setting of group
+group_setting_fewer_activate: "Pengaturan lebih sedikit diaktifkan!"
+# deactivate fewer setting of group
+group_setting_fewer_deactivate: "Pengaturan lebih sedikit dinonaktifkan!"
+# activate more setting of group
+group_setting_more_activate: "Pengaturan lebih banyak diaktifkan!"
+# deactivate more setting of group
+group_setting_more_deactivate: "Pengaturan lebih banyak dinonaktifkan!"
+# activate tournament mode of group
+group_setting_tournament_activate: "Mode turnamen diaktifkan!"
+# deactivate tournament mode of group
+group_setting_tournament_deactivate: "Mode turnamen dinonaktifkan!"
+# activate pin setting of group
+group_setting_pin_activate: "Pengaturan pin diaktifkan!"
+# deactivate pin setting of group
+group_setting_pin_deactivate: "Pengaturan pin dinonaktifkan!"
+# being an admin which can pin is required
+group_setting_pin_required: "Kamu harus menjadikanku admin terlebih dahulu agar bisa menyematkan pesan"
+# activate restrict mode of group
+group_setting_restrict_activate: "Mode batasan diaktifkan!"
+# deactivate restrict mode of group
+group_setting_restrict_deactivate: "Mode batasan dinonaktifkan!"
+# being an admin which can restrict member is required
+group_setting_restrict_required: "Kamu harus menjadikanku admin terlebih dahulu agar bisa menambahkan anggota, menjadikan admin dan membatasi anggota lainnya saat mode ini diaktifkan"
+# activate exclamation setting of group
+group_setting_exclamation_activate: "Diaktifkan, pengiriman pesan dengan ! akan terhitung sebagai jawaban."
+# deactivate exclamation setting of group
+group_setting_exclamation_deactivate: "Dinonaktifkan, pengiriman pesan dengan ! tidak akan terhitung sebagai jawaban."
+# if an error happens somewhere, we tell the user about it
+error: "Hei. Aku ingin memberitahu kalian bahwa botnya sedang dalam perbaikan. Mohon tunggu :)"
+# if a user wants to change their language
+# {0} name of their current language
+private_language: "Hei, bahasamu sekarang adalah {0}, pilih salah satu yang kamu mau :)"
+# if a user changed their language
+# {0} name of their selected language
+private_language_selected: "Bagus, {0} adalah bahasamu sekarang!"
+# if a random idiot presses buttons
+user_not_in_game: "Hei, kamu sedang tidak bermain sekarang. Mungkinkah ronde selanjutnya?"
+# the rules, presented when someone hasn't played the game yet or runs /game_rules
+rules: "<b>Chameleon - the game</b> <i>(english rules, trimmed to the telegram bot)</i>\n\n
+• Setelah permainan dimulai, salah satu pemain akan menjadi sang Chameleon, yang lainnya hanyalah pemain biasa\n
+• Sebuah topik dan kata-kata akan termuat di dalamnya, dengan tombol yang harus kalian ketuk\n
+• Jika kamu hanya pemain dan mengetuk tombolnya, salah satu katanya akan muncul (dinamakan kata rahasia) - semuanya pasti dapat hal yang sama juga (Kecuali, Chameleon). Jika kamu sang Chameleon, kamu harus menebak kata rahasianya :) Semoga beruntung, bestie\n
+• Sekarang botnya sudah memberikan kata-katanya, tebaklah.\n
+• Kalau kamu pemain, cobalah berikan deskripsi yang sangat susah sehingga sang Chameleon tak dapat menebaknya; tetapi pemain lain tahu kalau kata-katanya sama\n
+• Kalau kamu sang Chameleon, cobalah hubung-hubungkan petunjuknya seolah kamu seorang detektif. Nantinya, pasti akan ketemu jawabannya!\n
+• Setelah semuanya mengemukakan pendapat mereka, pilihlah yang sekiranya menurut kamu sang Chameleon. Peran dengan jumlah suara terbanyak akan diungkap identitasnya\n
+• Jika hanya pemain biasa, sang Chameleon menang!
+• Jika Chameleon, ia akan disuruh menebak apa kata tersembunyinya. Jika benar, tetap saja dia menang; selebihnya kalah!"
+# introduction when there is a new player, prepended to the rules
+rules_prepend: "Oh halo, kita kedatangan pemain baru. Biar kumulai dalam 30 detik lagi, biar kujelaskan aturan barunya sekarang:\n\n"
+# used in the strings below
+here: "di sini"
+# the deck command reply
+# {0} and {1} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+deck: "Dek adalah kumpulan dari \"kartu\". Kamu bisa membuatnya. Mereka adalah file json sederhana. Jika kamu membuat dek baru, perlu diingat bahwa kamu harus memasukkan dua kunci: bahasa dan nama. Bahasa adalah bahasa yang digunakan dek, nama adalah nama dekmu. Gunakan huruf besar untuk keduanya. Di dalam file json, kamu mendefinisikan kunci, yang merupakan topik kata-kata, dan kemudian membuat daftar dengan kata-kata yang sesuai. Hanya string yang diperbolehkan dalam daftar."
+# the translation command reply
+# {0} - {2} will be links, instead of the url will the translation of here be used. Tell the group if that's a problem
+translation: "Kamu bisa menerjemahkan seluruh botnya :O Failnya adalah .yaml, harusnya bisa digunakan dalam program lain, tetapi Notepad ++ direkomendasikan olehku :) Jika kamu ingin, terjemahkan saja seperti yang di sini {0}. Saat kamu sudah mengunduh failnya (disarankan bahasa inggris, karena yang selalu baru), gantilah dengan kode ISO 639-1 bahasamu. Jika sudah selesai, bergabunglah di sini {2} untuk mengirimkan fail terjemahan yang sudah kamu buat."
+# if the group id is not known. Can happen if someone obfuscates the start command or the groups id changed while the bot is offline
+group_not_found: "Hei, mohon maaf, aku tak bisa menemukan grupmu di dalam database-ku. Entah kamu mengotak-atiknya atau aku yang sedang tidak aktif. Dalam hal demikian, kirimkan /settings di grup kembali :)"
+# start message in private
+greeting_private: "Halo, aku Chameleon bot :) Kamu bisa bermain Chameleon denganku dengan menambahkanku ke dalam grupmu. Kalau ingin mengubah bahasa, ketiklah /language dan bahasamu akan berubah. Jangan lupa untuk tersenyum setiap hari, sayang, karena senyumanmu itu seindah mentari <3"
+# help message in group.
+help_group: "Hei, kamu butuh bantuan? Bagus. Pada dasarnya aku hanya punya tiga perintah utama yaitu:\n/start - untuk memulai permainan\n/settings - [HANYA ADMIN] mengubah pengaturan permainan\n/nextgame - menambahkan (atau mengurangkan) peserta dari daftar permainan selanjutnya. Kalau sudah di dalamnya, akan kami beritahu.\n\nSelain itu, aku juga punya perintah lainnya:\n/abort_game - [hanya admin] menghentikan permainan yang sedang berjalan\n/admins_reload - memuat ulang oleh admin :O\n/id - menunjukkan id grup\n\nKalau kamu butuh bantuan lainnya, beritahu kami pada @TheChameleonSupport. Kami senang membantu kalian :)"
+# help message in private.
+help_private: "Hei, kamu butuh bantuan? Bagus. Aku punya perintah untuk di sini:\n/language - mengubah bahasa pada chat\n/settings_help - membantumu untuk mengerti pengaturan\n/translation - untuk menerjemahkan\n/deck - untuk menambahkan dekmu sendiri\n\nKalau kamu butuh bantuan lainnya, beritahu kami pada @TheChameleonSupport. Kami senang membantu kalian :)"
+# message which gets send to people in private when a new game is started and they are on the nextgame list
+# {0} group name
+nextgame: "Halo! Permainan baru akan dimulai di {0} dan kuharap kamu bergabung di dalam permainan tersebut."
+# message which gets send to people in private which used the /nextgame command and weren't in the list before
+# {0} group name
+nextgame_added: "Hei. Kamu sudah ditambahkan ke dalam daftar nextgame di grup {0}, aku akan memberitahu sesekali saat permainannya dimulai. Walau kamu sudah bergabung, aku tetap akan memasukanmu di daftar itu (jadi akan kuspam berkali-kali hehehe). Kalau ingin menghapus dari daftar itu, ketiklah /nextgame dan aku akan menghapusmu dari daftarnya."
+# message which gets send to people in private which used the /nextgame command and were in the list before
+# {0} group name
+nextgame_removed: "Kamu berhasil dihapus dari daftar permainan selanjutnya di {0}"
+# message which gets send to people in the group when they used /nextgame and haven't pmed the bot yet
+nextgame_pm: "Hei. Agar perintahku dapat dijalankan, kirimkan aku PM. Maka akan segera kubuka."
+# message which gets send to people in the group when they used /nextgame and blocked the bot (wtf)
+nextgame_block: "Ey. Kalau kamu ingin dapat pesan dariku, bukalah bloknya. Buka bloknya dan coba lagi..."
+# message which gets send if someone uses the /settings_help command
+settings_help: "Hey, jika ada beberapa di pengaturan yang berpencar, gunakan perintah ini untuk mengarahkannya."
+# the following strings are explanations for the settings, triggered by the command above
+language_help: "<b>Bahasa</b>: Ubah bahasaku di grupmu. Kalau ingin tahu bagaimana cara menerjemahkannya, ketuk /translation"
+deck_help: "<b>Dek</b>: Kartu dek yang kugunakan di grupmu itu. Kartunya hanya terdapat 16 topik, dan dikocok menjadi satu topik. Aku memilih secara acak untuk topiknya. Kamu bisa menambahkan punyamu, ketuk /deck untuk lebih lanjut."
+fewer_help: "<b>Lebih sedikit</b>: Jika hanya tiga orang yang bermain (mode ini diaktifkan), sang Chameleon dapat dua kesempatan untuk menjawab."
+more_help: "<b>Lebih banyak</b>: Jika mode ini diaktifkan, sang Chameleon akan lebih sulit menebak kata rahasianya."
+tournament_help: "<b>Turnamen</b>: Jika ini diaktifkan, setiap pemain akan mendapatkan poin. Kalau Chameleonnya berhasil, dia akan mendapat 2 poin. Kalau kalah dan salah menebak, dapat satu poin. Kalau seri, semuanya akan dapat dua poin. Pemain yang pertama harus membuatnya menjadi 5 poin agar menang."
+pin_help: "<b>Pin/Pesan Sematan</b>: Saat diaktifkan, akan lebih mudah bagi para pemain untuk bergabung ke dalam permainan dengan melihat pesan yang telah kusematkan. Cara mengaktifkannya dengan gunakan perintah pengaturan padaku."
+restrict_help: "<b>Pembatasan</b>: Saat diaktifkan, semuanya tidak akan bisa mengirim kecuali orang yang kusuruh untuk memberikan petunjuknya. Semuanya bisa menulis kembali kalau sudah selesai."
+exclamation_help: "<b>Tanda Seru</b>: Kalau dimatikan, ! tidak akan terhitung sebagai jawaban. Kalau dinyalakan, ! akan terhitung sebagai jawaban."
+# the following strings are for stats
+# these will be for private persons, accessible with the inline mode of the bot
+# if someone who has not played the game yet tries to get their stats
+# this will be the title of the result
+private_stats_title: "Lihat statistikku"
+# this will be the description
+private_stats_description: "Ketuk saja aku untuk melihat statistiknya"
+# this will be the actual message when they press on the result
+private_stats_text: "<b>Statistik untuk {0}</b>\n\nPermainan dimainkan: {1} ({11} dari {17} pemain)\nPermainan dimenangkan: {2} ({3}% dari semua permainan)\nKekalahan: {4}\nPemain pertama: {5} ({6}% dari permainan dimainkan)\n\nTurnamen: {12} (posisi ke-{18})\nTurnamen dimenangkan: {13} ({14}% dari semua turnamen)\nKekalahan turnamen: {15}\n\nMenjadi Chameleon: {7} ({8}% dari permainan dimainkan)\nMenang menjadi Chameleon: {9} ({10}% dari semua saat menjadi Chameleon, {16}% dari kemenangan utama)"
+# these are for people playing before the 4. February, where chameleon won was introduced
+# this will be added to the inline message
+private_old_stats: "\n\nCatatan: Kamu bermain ini sebelum 4 Februari 2020, jadi stats keseluruhanmu agak berbeda. Mohon jalankan perintah /stats untuk informasi lebih lanjut."
+# this will be on the button under the inline result
+private_old_button: "/stats"
+# and this to the /stats command
+private_old_stats_command: "\n\n\nKamu memainkan ini sudah lama sekali. Tepatnya, sebelum 4 Februari 2020. Ini artinya stats-mu lebih tinggi daripada yang sebelumnya. Hal ini terjadi karena kemenangan sebagai Chameleon diperkenalkan pada tanggal tersebut, dan untuk menjaga agar statistik lainnya tetap sama dengan bidang baru tersebut, dilakukan pemotongan langsung ke nomormu. Tapi yang lama tetap disimpan dan dapat ditampilkan sekarang:\nSebelum 4 Februari, kamu:\n\nBermain {0} permainan (jadi, keseluruhannya ada {1} permainan)\nKemenangan {2} permainan (jadi {3}% sebelum tanggal 4, semuanya {4} - {5}%)\nKekalahan {6} permainan ({7} keseluruhannya)\nDi mana pemain pertama {8} kali ({9}% sebelum tanggal 4, {10} kali keseluruhannya - {11}%)\nDan menjadi Chameleon {12} kali ({13}% sebelumnya, {14} kali keseluruhannya - {15}%)\n\nSeperti yang kamu lihat, turnamen tidak terpengaruh (dihitung secara terpisah, jadi kamu melihat jumlah keseluruhan), begitu juga dengan permainan yang dimulai."
+# about groups stats
+group_stats: "Grup ini memainkan {0} permainan (posisi ke-{2} dari {3} grup) and {1} turnamen (posisi ke-{4}) \\o/"
+# when someone presses the join button while the game is starting
+join_while_starting: "Hei, permainan ini sudah dimulai sejak tadi."
+# when someone presses an old join button while a different game is running
+join_old_button: "Hei, ini tombol yang lama. Gunakan yang baru."
+# when someone leaves but the bot faces a flood error
+player_leaves_query_flood: "Kamu meninggalkan permainan!\n\nAku sedang menghadapi batas waktu banjir dan tidak dapat mengedit pesan sekarang, tetapi kamu melakukannya, percayalah."
+# when someone joins but the bot faces a flood error
+player_joins_query_flood: "Kamu bergabung dalam permainan!\n\nAku sedang menghadapi batas waktu banjir dan tidak dapat mengedit pesan sekarang, tetapi kamu melakukannya, percayalah."
+# when someone joins, already got the callback answered, but the game started before he was added to the list
+# {0} mention of the player
+player_joins_while_starting: "Hei, mohon maaf, kamu sangat-sangat terlambat {0}, kamu melewatkan permainannya."
