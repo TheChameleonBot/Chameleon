@@ -29,7 +29,14 @@ class Database:
         return self.db["groups"].find_one({"id": chat_id})["deck"]
 
     def get_deck(self, deck_language, deck_name):
-        return self.cards[deck_language][deck_name]
+        if deck_name == "all":
+            # put all decks for a language in one object for special key
+            return_deck = {}
+            for deck in get_decks(deck_language):
+                return_deck.update(deck)
+            return return_deck
+        else:
+            return self.cards[deck_language][deck_name]
 
     def get_deck_languages(self):
         return self.cards.keys()
@@ -237,16 +244,22 @@ class Database:
     # reload part
 
     def reload_decks(self):
+        deck_num = 0
         for filename in os.listdir('./decks'):
             if filename.endswith(".json"):
                 temp = json.load(open('./decks/' + filename, encoding="UTF-8"))
                 language = temp["language"]
                 name = temp["name"]
                 [temp.pop(key) for key in ["name", "language"]]
+                temp_deck = {}
+                # pack cards in an additional id key
+                for card in temp:
+                    temp_deck[deck_num] = temp
+                    deck_num += 1
                 if language in self.cards:
-                    self.cards[language][name] = temp
+                    self.cards[language][name] = temp_deck
                 else:
-                    self.cards[language] = {name: temp}
+                    self.cards[language] = {name: temp_deck}
 
 
 database = Database()

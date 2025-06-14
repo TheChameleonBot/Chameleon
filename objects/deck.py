@@ -18,7 +18,10 @@ def word_list(words):
 class Deck:
     def __init__(self, deck_language, deck_name):
         deck = database.database.get_deck(deck_language, deck_name)
-        self.topic = random.choice(list(deck))
+        choosen_deck = random.choice(list(deck))
+        # get the content of the dict since it is packed in an additional id key
+        # it only contains one key value pair
+        self.topic = choosen_deck[choosen_deck.keys()[0]]
         self.words = deck[self.topic]
         self.word_list = word_list(self.words)
         self.secret = random.choice(deck[self.topic])
