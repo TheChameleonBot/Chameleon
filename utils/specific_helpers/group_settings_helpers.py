@@ -51,6 +51,8 @@ def deck_languages_buttons(languages, chat_id):
 
 def deck_buttons(deck, chat_id):
     buttons = []
+    # add an "all" button. no pack should be called "all" now
+    buttons.append(InlineKeyboardButton("all", callback_data=f"1deck_{str(chat_id)}_all"))
     for deck_name in deck:
         buttons.append(InlineKeyboardButton(deck_name, callback_data=f"1deck_{str(chat_id)}_{deck_name}"))
     return build_menu(buttons, 3)
